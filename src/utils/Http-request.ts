@@ -1,11 +1,12 @@
 import axios from 'axios';
 import querystring from 'query-string';
 
+import { BASE_URL } from '@/contants/common.constants';
 import { ACCSESS_TOKEN, REFRESH_TOKEN, USER } from '@/contants/Storage';
 import storage from '@/utils/storage';
 
-const BASE_URL = 'https://app.dung.men';
 const { getItem, location, setItem, removeAll } = storage();
+
 const axiosClient = axios.create({
   baseURL: BASE_URL,
   headers: {

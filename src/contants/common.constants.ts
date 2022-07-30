@@ -1,3 +1,5 @@
+export const BASE_URL = 'https://app.dung.men';
+
 export interface QueryParams {
   page: number;
   search?: string;

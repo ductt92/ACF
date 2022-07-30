@@ -36,23 +36,20 @@ export default function LoginForm({
 
   return (
     <div>
-      <div className='w-[400px] rounded-lg bg-white p-10 drop-shadow-md'>
-        <div className='form__wrapper'>
+      <div className='w-[400px] rounded-lg border-[1px] bg-white p-10 drop-shadow-2xl'>
+        <p className='text-center text-2xl'>ACF Admin Login</p>
+        <div className='form__wrapper '>
           {errorMsg && <Alert message={errorMsg} type='error' showIcon />}
           <FormWrapper loading={loading}>
             <Form
-              className='flex-col'
+              className='flex-col gap-4'
               form={form}
               name='login_form'
               layout='inline'
               onFinish={handleOnFinish}
               autoComplete='off'
             >
-              <Form.Item
-                className='w-100 mt-10'
-                name='username'
-                rules={rules.username as never}
-              >
+              <Form.Item name='username' rules={rules.username as never}>
                 <Input
                   prefix={<UserOutlined />}
                   size='middle'
