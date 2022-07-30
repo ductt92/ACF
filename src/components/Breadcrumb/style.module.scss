@@ -1,0 +1,13 @@
+.breadcrumd {
+  border-bottom: 2px solid #ec3337;
+  margin-top: 1px;
+  &::after {
+    content: '';
+    width: 7px;
+    height: 9px;
+    background: url(/images/ic_mui.png) no-repeat right;
+    position: absolute;
+    top: 16px;
+    margin-left: 6px;
+  }
+}

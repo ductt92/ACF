@@ -1,0 +1,10 @@
+.inputType {
+  width: 315px;
+  height: 29px;
+  border: 1px solid #e1e2e1;
+  padding: 5px;
+  background: #fff !important;
+  @media screen and (max-width: 1200px) {
+    width: 100%;
+  }
+}

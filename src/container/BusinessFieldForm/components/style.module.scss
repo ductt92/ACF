@@ -1,0 +1,30 @@
+.listBusiness {
+  :global(.ant-menu) {
+    border: 1px solid #ccc !important;
+    :global(.ant-menu-item) {
+      padding-left: 10px !important;
+      border-top: 1px solid #bfbfbf;
+      margin: 0;
+      span {
+        font-weight: 700;
+        font-size: 14px;
+        &:hover {
+          color: #000 !important;
+        }
+      }
+      &::after {
+        border-right: 1px solid #ec3236 !important;
+      }
+    }
+    :global(.ant-menu-item-selected) {
+      background-color: #fff;
+      color: #ec3236;
+    }
+    :global(.ant-menu-submenu) {
+      padding-left: 10px !important;
+      :global(.ant-menu-submenu-title) {
+        padding-left: 0px !important;
+      }
+    }
+  }
+}

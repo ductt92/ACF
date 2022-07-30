@@ -1,0 +1,47 @@
+.wrappers {
+  clear: both;
+  display: block;
+  padding-top: 15px;
+  padding-bottom: 20px;
+  background: #1768b2 url(/images/bg-transparent.png);
+}
+
+.title {
+  color: #fff;
+  font-size: 22px;
+  margin-bottom: 20px;
+  padding-left: 10px;
+  float: none;
+  display: flex;
+  &::after {
+    content: '';
+    margin-top: 7px;
+    margin-left: 7px;
+    width: 43px;
+    height: 27px;
+    background: url(/images/ic_linhvuc_white.png) no-repeat;
+  }
+}
+.itemSlide {
+  width: 100%;
+  height: 50%;
+  background: #fff;
+  padding: 20px 10px;
+  text-align: center;
+  box-shadow: 0 1px 9px rgb(0 0 0 / 40%);
+}
+
+.wrappersSilder {
+  display: flex !important;
+  flex-direction: row;
+}
+
+.itemText {
+  display: inline-block;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 0 0 3px rgb(186 186 187 / 50%);
+}
