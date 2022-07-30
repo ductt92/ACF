@@ -1,0 +1,42 @@
+.messChat {
+  z-index: 9999;
+  background: url(/images/download.svg) center no-repeat #0084ff;
+  width: 60px;
+  height: 60px;
+  text-align: center;
+  bottom: 30px;
+  border: 0;
+  outline: 0;
+  border-radius: 60px;
+  box-shadow: 0 1px 6px rgb(0 0 0 / 6%), 0 2px 32px rgb(0 0 0 / 16%);
+  background-size: 80%;
+  transition: all 0.2s ease-in-out;
+  position: fixed;
+  right: 24px;
+  cursor: pointer;
+}
+.numberChat {
+  width: 20px;
+  height: 20px;
+  background: #c00;
+  color: #fff;
+  position: absolute;
+  z-index: 999999999;
+  text-align: center;
+  vertical-align: middle;
+  top: -2px;
+  left: -5px;
+  border-radius: 50%;
+}
+.titleChat {
+  width: 120px;
+  left: -140px;
+  top: 5px;
+  position: relative;
+  background: rgba(59, 89, 152, 0.8);
+  color: #fff;
+  padding: 5px 8px;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 13px;
+}

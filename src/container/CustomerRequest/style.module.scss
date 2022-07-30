@@ -1,0 +1,22 @@
+.inputRequest[type='text'] {
+  float: left;
+  width: 290px;
+  height: 41px;
+  border: none;
+  background: #fff;
+  font-size: 13px;
+  font-style: italic;
+  color: #757575;
+  padding-left: 17px;
+  padding-right: 17px;
+  font-weight: 500;
+  outline: 0;
+}
+.buttonRequest[type='button'] {
+  display: block;
+  width: 50px;
+  outline: 0;
+  border: none;
+  background: #fff url(/images/ic_s.png) no-repeat center;
+  height: 41px;
+}
