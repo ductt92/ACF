@@ -1,9 +1,9 @@
-import { NextPage } from 'next';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { NextComponentType } from 'next';
 import { AppProps } from 'next/app';
 import Head from 'next/head';
 import I18nProvider from 'next-translate/I18nProvider';
 import useTranslation from 'next-translate/useTranslation';
-import { ReactElement, ReactNode } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { Provider } from 'react-redux';
 import '@fontsource/roboto';
@@ -17,14 +17,11 @@ import HeaderHome from '@/container/HeaderHome';
 // import '~slick-carousel/slick/slick.css';
 // import '~slick-carousel/slick/slick-theme.css';
 import { store } from '@/store/store';
-
-type NextPageWithLayout = NextPage & {
-  getLayout?: (page: ReactElement) => ReactNode;
-};
-
-type AppPropsWithLayout = AppProps & {
-  Component: NextPageWithLayout;
-};
+interface CustomAppProps extends AppProps {
+  Component: NextComponentType & {
+    Layout?: any;
+  };
+}
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -33,9 +30,18 @@ const queryClient = new QueryClient({
     },
   },
 });
+const Noop = ({ children }: { children: JSX.Element }) => (
+  <>
+    {' '}
+    <HeaderHome />
+    {children}
+    <Footer />
+  </>
+);
 
-function MyApp({ Component, pageProps }: AppPropsWithLayout) {
-  const getLayout = Component.getLayout || ((page) => page);
+function MyApp({ Component, pageProps }: CustomAppProps) {
+  const Layout = Component.Layout || Noop;
+
   const { lang } = useTranslation('common');
 
   return (
@@ -50,11 +56,11 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
       </Head>
       <QueryClientProvider client={queryClient}>
         <Provider store={store}>
-          <I18nProvider lang={lang}>
-            <HeaderHome />
-            {getLayout(<Component {...pageProps} />)}
-            <Footer />
-          </I18nProvider>
+          <Layout>
+            <I18nProvider lang={lang}>
+              <Component {...pageProps} />
+            </I18nProvider>
+          </Layout>
         </Provider>
       </QueryClientProvider>
     </>
