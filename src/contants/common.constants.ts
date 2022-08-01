@@ -1,4 +1,4 @@
-export const BASE_URL = 'https://app.dung.men';
+export const BASE_URL = 'https://vt.vmodev.link';
 
 export interface QueryParams {
   page: number;

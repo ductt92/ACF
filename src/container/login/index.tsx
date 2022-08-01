@@ -3,6 +3,7 @@ import { useState } from 'react';
 
 import LoginForm, { FormValueType } from '@/components/LoginForm';
 
+import { ADMINISTATOR } from '@/contants/endpoint';
 import AuthenService from '@/services/Authen.service';
 
 export default function LoginFormContainer() {
@@ -20,7 +21,7 @@ export default function LoginFormContainer() {
         return setError('Login fail');
       }
       setLoading(false);
-      router.push('/');
+      router.push(ADMINISTATOR);
     } catch (error) {
       setError('Login fail');
       setLoading(false);

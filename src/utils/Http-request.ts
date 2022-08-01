@@ -2,7 +2,9 @@ import axios from 'axios';
 import querystring from 'query-string';
 
 import { BASE_URL } from '@/contants/common.constants';
+import { AUTH_REFRESH_TOKEN } from '@/contants/endpoint';
 import { ACCSESS_TOKEN, REFRESH_TOKEN, USER } from '@/contants/Storage';
+import { ILogin } from '@/services/Authen.type';
 import storage from '@/utils/storage';
 
 const { getItem, location, setItem, removeAll } = storage();
@@ -44,8 +46,7 @@ axiosClient.interceptors.response.use(
         }
         try {
           originalConfig.retry = true;
-          // eslint-disable-next-line
-          const res: any = await axiosClient.post(`auth/refresh-tokens`, {
+          const res: ILogin = await axiosClient.post(AUTH_REFRESH_TOKEN, {
             refreshToken: getItem(REFRESH_TOKEN),
           });
           setItem(ACCSESS_TOKEN, res.tokens.access.token);
