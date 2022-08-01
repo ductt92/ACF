@@ -3,6 +3,7 @@ import { Menu, MenuProps } from 'antd';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 
+import { ADMINISTATOR } from '@/contants/endpoint';
 import { routes } from '@/routes/routes';
 
 import HeaderMenu from './header-menu';
@@ -35,7 +36,7 @@ const MenuContainer = () => {
   };
 
   const handleRedirect: MenuProps['onClick'] = (e) => {
-    router.push(`/${e.key}`);
+    router.push(`${ADMINISTATOR}/${e.key}`);
   };
   const items: MenuItem[] = routes.map((v) =>
     getItem(v.title, v.path, v.icons)

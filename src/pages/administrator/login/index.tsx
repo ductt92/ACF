@@ -6,7 +6,7 @@ import BlankLayout from '@/layout/BlankLayout';
 
 const LoginPage = () => {
   return (
-    <div className='flex h-screen	w-screen flex-col items-center justify-center'>
+    <div className='bg-container flex	h-screen w-screen flex-col items-center justify-center '>
       <LoginFormContainer />
     </div>
   );
