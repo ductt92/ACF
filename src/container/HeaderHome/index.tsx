@@ -28,7 +28,7 @@ const HeaderHome = () => {
           {dataMenu.map((v, key) => {
             const depthLevel = 0;
             return (
-              <>
+              <div key={key}>
                 <li className='flex h-full flex-row border-l-[1px] border-white text-white'>
                   <div className='flex h-[42px] cursor-pointer items-center  font-bold text-white transition-none hover:bg-white hover:text-black sn:px-[20px]'>
                     <Menu
@@ -39,7 +39,7 @@ const HeaderHome = () => {
                     />
                   </div>
                 </li>
-              </>
+              </div>
             );
           })}
         </ul>

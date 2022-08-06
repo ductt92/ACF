@@ -11,7 +11,7 @@ export default function VSelect({ label, children, ...rest }: VSelectProps) {
     <div className='space-y-1'>
       <span className='text-sm'>{label}:</span>
       <Select
-        showSearch
+        // showSearch
         filterOption={(input, option) =>
           // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           //  @ts-ignore
