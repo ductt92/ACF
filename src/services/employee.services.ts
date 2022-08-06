@@ -1,15 +1,15 @@
 import { IStaff } from '@/contants/types';
 import HttpRequest from '@/utils/Http-request';
 
-type ResponseType = {
-  data: Array<IStaff>;
-  pagination?: {
-    currentPage: number;
-    pageSize: number;
-    totalCount: number;
-    totalPage: number;
-  };
-};
+// type ResponseType = {
+//   data: Array<IStaff>;
+//   pagination?: {
+//     currentPage: number;
+//     pageSize: number;
+//     totalCount: number;
+//     totalPage: number;
+//   };
+// };
 
 // type UserType = {
 //   id: string,
@@ -28,7 +28,7 @@ export const fetchUsers = async ({
   pageSize: number;
   search?: string;
 }) => {
-  const users: ResponseType = HttpRequest.get('staffs', {
+  const users = HttpRequest.get('staffs', {
     params: { page, pageSize, search },
   });
   return users;
