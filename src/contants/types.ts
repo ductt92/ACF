@@ -9,6 +9,11 @@ export enum TYPE_FIELD {
   IMAGE = 'image',
   LINK = 'link',
 }
+export enum GENDER {
+  MALE = 'Nam',
+  FEMALE = 'Nữ',
+  OTHER = 'Khác',
+}
 
 export interface IStaff {
   id?: string;

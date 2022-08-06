@@ -7,7 +7,7 @@ import VInput from '@/components/common/VInput';
 import VSelect from '@/components/common/VSelect';
 
 import { QUERY_EMPLOYEE } from '@/contants/query-key/employee.contants';
-import { IStaff } from '@/contants/types';
+import { GENDER, IStaff } from '@/contants/types';
 import { createStaffs } from '@/services/employee.services';
 
 interface IProps {
@@ -44,6 +44,11 @@ const ModalCreateEmployee = ({ onClose }: IProps) => {
       ...requestData,
     });
   };
+
+  const OpitionGender = Object.entries(GENDER).map(([key, value]) => ({
+    value: key,
+    label: value,
+  }));
 
   return (
     <Modal
@@ -84,9 +89,11 @@ const ModalCreateEmployee = ({ onClose }: IProps) => {
                 rules={[{ required: true, message: 'Vui lòng chọn' }]}
               >
                 <VSelect label='Giới tính' placeholder='Chọn giới tính'>
-                  <Option value='Nam'>Nam</Option>
-                  <Option value='Nữ'>Nữ</Option>
-                  <Option value='Khác'>Khác</Option>
+                  {OpitionGender.map((v, k) => (
+                    <Option key={k} value={v.value}>
+                      {v.label}
+                    </Option>
+                  ))}
                 </VSelect>
               </Form.Item>
 
