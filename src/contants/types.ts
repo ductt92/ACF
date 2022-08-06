@@ -10,9 +10,9 @@ export enum TYPE_FIELD {
   LINK = 'link',
 }
 export enum GENDER {
-  MALE = 'Nam',
-  FEMALE = 'Nữ',
-  OTHER = 'Khác',
+  Male = 'Nam',
+  Female = 'Nữ',
+  Other = 'Khác',
 }
 
 export interface IStaff {

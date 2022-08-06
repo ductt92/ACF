@@ -9,7 +9,7 @@ import VSelect from '@/components/common/VSelect';
 
 import { QUERY_EMPLOYEE } from '@/contants/query-key/employee.contants';
 import { GENDER, IStaff } from '@/contants/types';
-import { createStaffs } from '@/services/employee.services';
+import { updateStaff } from '@/services/employee.services';
 
 interface IProps {
   onClose: (value: boolean) => void;
@@ -21,7 +21,7 @@ const ModalEditEmployee = ({ onClose, value }: IProps) => {
   const { Option } = Select;
 
   const { mutate: mutateCreate, isLoading: isCreating } = useMutation(
-    createStaffs,
+    updateStaff,
     {
       onSuccess: () => {
         queryClient.invalidateQueries(QUERY_EMPLOYEE.GET_EMPLOYEE);
@@ -43,7 +43,10 @@ const ModalEditEmployee = ({ onClose, value }: IProps) => {
   const onSubmit = async () => {
     const requestData: IStaff = await form.validateFields();
     mutateCreate({
-      ...requestData,
+      id: value?.id || '',
+      data: {
+        ...requestData,
+      },
     });
   };
 
