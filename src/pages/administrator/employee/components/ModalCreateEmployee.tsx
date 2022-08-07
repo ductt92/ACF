@@ -1,4 +1,5 @@
 import { Button, Form, Modal, notification, Select } from 'antd';
+import dayjs from 'dayjs';
 import React from 'react';
 import { useMutation, useQueryClient } from 'react-query';
 
@@ -6,6 +7,7 @@ import VDatePicker from '@/components/common/VDatePicker';
 import VInput from '@/components/common/VInput';
 import VSelect from '@/components/common/VSelect';
 
+import { DEFAULT_DATE_FORMAT } from '@/contants/common.constants';
 import { QUERY_EMPLOYEE } from '@/contants/query-key/employee.contants';
 import { GENDER, IStaff } from '@/contants/types';
 import { createStaffs } from '@/services/employee.services';
@@ -42,6 +44,11 @@ const ModalCreateEmployee = ({ onClose }: IProps) => {
     const requestData: IStaff = await form.validateFields();
     mutateCreate({
       ...requestData,
+      dayOfBirth: dayjs(requestData.dayOfBirth).format(DEFAULT_DATE_FORMAT),
+      issueDate: dayjs(requestData.issueDate).format(DEFAULT_DATE_FORMAT),
+      insuranceParticipationDate: dayjs(
+        requestData.insuranceParticipationDate
+      ).format(DEFAULT_DATE_FORMAT),
     });
   };
 
@@ -279,9 +286,10 @@ const ModalCreateEmployee = ({ onClose }: IProps) => {
                   },
                 ]}
               >
-                <VInput
+                <VDatePicker
                   label='Ngày tham gia bảo hiểm'
                   placeholder='Nhập Ngày tham gia bảo hiểm'
+                  format='DD/MM/YYYY'
                 />
               </Form.Item>
             </div>

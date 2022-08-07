@@ -26,7 +26,7 @@ const ModalEditEmployee = ({ onClose, value }: IProps) => {
       onSuccess: () => {
         queryClient.invalidateQueries(QUERY_EMPLOYEE.GET_EMPLOYEE);
         notification.success({
-          message: 'Tạo mới tài khoản thành công',
+          message: 'Cập nhật tài khoản thành công',
           placement: 'top',
         });
         onClose(false);
@@ -55,6 +55,9 @@ const ModalEditEmployee = ({ onClose, value }: IProps) => {
       ...value,
       dayOfBirth: dayjs(value?.dayOfBirth || undefined),
       issueDate: dayjs(value?.issueDate || undefined),
+      insuranceParticipationDate: dayjs(
+        value?.insuranceParticipationDate || undefined
+      ),
     });
   }, [form, value]);
 
@@ -310,9 +313,10 @@ const ModalEditEmployee = ({ onClose, value }: IProps) => {
                     },
                   ]}
                 >
-                  <VInput
+                  <VDatePicker
                     label='Ngày tham gia bảo hiểm'
                     placeholder='Nhập Ngày tham gia bảo hiểm'
+                    format='DD/MM/YYYY'
                   />
                 </Form.Item>
               </div>

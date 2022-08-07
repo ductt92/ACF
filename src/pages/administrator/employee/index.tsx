@@ -82,7 +82,7 @@ const EmployeeContainer = () => {
       {isCreateEmployee && <ModalCreateEmployee onClose={setCreateEmployee} />}
 
       {isOpenEdit && (
-        <ModalEditEmployee value={employee} onClose={setCreateEmployee} />
+        <ModalEditEmployee value={employee} onClose={setIsOpenEdit} />
       )}
     </div>
   );

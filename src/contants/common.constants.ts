@@ -1,5 +1,7 @@
 export const BASE_URL = 'https://vt.vmodev.link';
 
+export const DEFAULT_DATE_FORMAT = 'YYYY-MM-DD';
+
 export interface QueryParams {
   page: number;
   search?: string;

@@ -23,7 +23,7 @@ export interface IStaff {
   departmentId: string;
   position?: string;
   gender?: string;
-  dayOfBirth?: Date;
+  dayOfBirth?: Date | string;
   placeOfBirth?: string;
   temporaryAddress?: string;
   permanentAddress?: string;
@@ -37,7 +37,7 @@ export interface IStaff {
   phoneNumber: string;
   phoneCode: string;
   peopleId: string;
-  issueDate?: Date;
+  issueDate?: Date | string;
   issuePlace?: string;
   region?: string;
   taxCode?: string;
@@ -46,8 +46,8 @@ export interface IStaff {
   socialInsuranceId?: string;
   healthInsuranceId?: string;
   unionBookNumber?: string;
-  insuranceParticipationDate?: Date;
-  issueInsuranceDate?: Date;
+  insuranceParticipationDate?: Date | string;
+  issueInsuranceDate?: Date | string;
 }
 
 export interface IUnits {
