@@ -1,5 +1,5 @@
 import { Button, Form, Modal, notification, Select } from 'antd';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useMutation, useQueryClient } from 'react-query';
 
 import VInput from '@/components/common/VInput';
@@ -41,6 +41,12 @@ const ModalCreateCustomer = ({ onClose }: IProps) => {
       },
     }
   );
+
+  useEffect(() => {
+    return () => {
+      form.resetFields();
+    };
+  }, [form]);
 
   const onSubmit = async () => {
     const requestData: ICustomer = await form.validateFields();
