@@ -16,8 +16,18 @@ export const fetchCustomer = async ({
   return customer;
 };
 
-// create thong tin nhan vien
 export const createCustomer = async (data: Partial<ICustomer>) => {
   const createStaff = HttpRequest.post('customer', { ...data });
   return createStaff;
+};
+
+export const updateCustomer = async ({
+  id,
+  data,
+}: {
+  id: string;
+  data: Partial<ICustomer>;
+}) => {
+  const updateStaff = HttpRequest.patch(`customer/${id}`, data);
+  return updateStaff;
 };

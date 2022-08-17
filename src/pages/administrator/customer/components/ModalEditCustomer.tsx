@@ -12,7 +12,7 @@ import {
   NetWorkCustomerType,
   ServiceEnum,
 } from '@/contants/types';
-import { createCustomer } from '@/services/customer.services';
+import { updateCustomer } from '@/services/customer.services';
 
 interface IProps {
   onClose: (value: boolean) => void;
@@ -24,12 +24,12 @@ const ModalEditCustomer = ({ onClose, value }: IProps) => {
   const { Option } = Select;
 
   const { mutate: mutateCreate, isLoading: isCreating } = useMutation(
-    createCustomer,
+    updateCustomer,
     {
       onSuccess: () => {
         queryClient.invalidateQueries(QUERY_CUSTOMER.GET_CUSTOMER);
         notification.success({
-          message: 'Tạo mới tài khoản thành công',
+          message: 'Cập nhật khách hàng thành công',
           placement: 'top',
         });
         onClose(false);
@@ -46,7 +46,8 @@ const ModalEditCustomer = ({ onClose, value }: IProps) => {
   const onSubmit = async () => {
     const requestData: ICustomer = await form.validateFields();
     mutateCreate({
-      ...requestData,
+      id: value?.id || '',
+      data: requestData,
     });
   };
 
@@ -72,9 +73,10 @@ const ModalEditCustomer = ({ onClose, value }: IProps) => {
   useEffect(() => {
     form.setFieldsValue({
       ...value,
-      typeCustomer:
-        CustomerType[value?.typeCustomer as unknown as 'DOMESTIC_COMPANY'],
     });
+    return () => {
+      form.resetFields();
+    };
   }, [form, value]);
 
   return (
@@ -293,7 +295,7 @@ const ModalEditCustomer = ({ onClose, value }: IProps) => {
               htmlType='submit'
               type='primary'
             >
-              Tạo mới khách hàng
+              Cập nhật khách hàng
             </Button>
           </div>
         </Form>
