@@ -12,4 +12,9 @@ export const routes: IRoutes[] = [
     path: `/employee`,
     icons: <TeamOutlined className='-translate-x-1 text-xl' />,
   },
+  {
+    title: 'Khách hàng',
+    path: `/customer`,
+    icons: <TeamOutlined className='-translate-x-1 text-xl' />,
+  },
 ];

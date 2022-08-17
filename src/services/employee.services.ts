@@ -40,7 +40,6 @@ export const createStaffs = async (data: Partial<IStaff>) => {
   return createStaff;
 };
 
-// update thong tin nhan vien
 export const updateStaff = async ({
   id,
   data,

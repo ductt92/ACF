@@ -2,7 +2,9 @@
 import { ColumnsType } from 'antd/lib/table';
 import dayjs from 'dayjs';
 
-export const EMPLOYEE_COLUMNS: ColumnsType<any> = [
+import { IStaff } from '../types';
+
+export const EMPLOYEE_COLUMNS: ColumnsType<IStaff> = [
   {
     title: 'Tên nhân viên',
     dataIndex: 'fullName',
@@ -217,11 +219,5 @@ export const EMPLOYEE_COLUMNS: ColumnsType<any> = [
         <span>{dayOfBirth && dayjs(dayOfBirth).format('DD/MM/YYYY')}</span>
       );
     },
-  },
-];
-
-export const dataMockEmployee = [
-  {
-    nameEmployee: 'a',
   },
 ];

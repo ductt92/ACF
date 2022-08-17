@@ -1,0 +1,3 @@
+export const QUERY_CUSTOMER = {
+  GET_CUSTOMER: 'GET_CUSTOMER',
+};
