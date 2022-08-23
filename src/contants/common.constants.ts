@@ -31,12 +31,12 @@ export const QUERY_PARAMS_2: QueryParams2 = {
   endDate: '',
 };
 export enum LevelStaff { // Trình độ nhân viên
-  MASTER = 'MASTER', // Thạc sĩ
-  UNIVERSITY = 'UNIVERSITY', // Đại học
-  COLLEGE = 'COLLEGE', // Cao đẳng
-  INTERMEDIATE = 'INTERMEDIATE', // Trung cấp
-  HIGH_SCHOOL = 'HIGH SCHOOL', // Trung học phổ thông
-  FREELANCE_WORKERS = 'FREELANCE_WORKERS', // Lao động tự do
+  MASTER = 'Thạc sĩ', //
+  UNIVERSITY = ' Đại học', // Đại học
+  COLLEGE = 'Cao đẳng', // Cao đẳng
+  INTERMEDIATE = 'Trung cấp', // Trung cấp
+  HIGH_SCHOOL = 'Trung học phổ thông', // Trung học phổ thông
+  FREELANCE_WORKERS = 'Lao động tự do', // Lao động tự do
 }
 
 export const DATA_POST_EN = [
