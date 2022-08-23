@@ -188,7 +188,7 @@ const ModalEditEmployee = ({ onClose, value }: IProps) => {
                 </Form.Item>
 
                 <Form.Item
-                  name='religion'
+                  name='nationality'
                   rules={[{ required: true, message: 'Vui lòng nhập' }]}
                 >
                   <VInput
@@ -223,9 +223,20 @@ const ModalEditEmployee = ({ onClose, value }: IProps) => {
                 </Form.Item>
                 <Form.Item
                   name='email'
-                  rules={[{ required: true, message: 'Vui lòng nhập Email' }]}
+                  rules={[
+                    {
+                      required: true,
+                      type: 'email',
+                      message: 'Vui lòng nhập Email',
+                    },
+                  ]}
                 >
-                  <VInput label='Email' placeholder='Nhập email' required />
+                  <VInput
+                    label='Email'
+                    placeholder='Nhập email'
+                    required
+                    type='email'
+                  />
                 </Form.Item>
 
                 <Form.Item

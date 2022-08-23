@@ -187,6 +187,13 @@ const ModalCreateEmployee = ({ onClose }: IProps) => {
                 name='religion'
                 rules={[{ required: true, message: 'Vui lòng nhập' }]}
               >
+                <VInput label='Tôn giáo' placeholder='Nhập tôn giáo' required />
+              </Form.Item>
+
+              <Form.Item
+                name='nationality'
+                rules={[{ required: true, message: 'Vui lòng nhập' }]}
+              >
                 <VInput
                   label='Quốc tịch'
                   placeholder='Nhập quốc tịch'
@@ -219,9 +226,23 @@ const ModalCreateEmployee = ({ onClose }: IProps) => {
               </Form.Item>
               <Form.Item
                 name='email'
-                rules={[{ required: true, message: 'Vui lòng nhập Email' }]}
+                rules={[
+                  {
+                    type: 'email',
+                    message: 'Vui lofnh nhập đúng định dạng email',
+                  },
+                  {
+                    required: true,
+                    message: 'Please input your E-mail!',
+                  },
+                ]}
               >
-                <VInput label='Email' placeholder='Nhập email' required />
+                <VInput
+                  label='Email'
+                  placeholder='Nhập email'
+                  required
+                  type='email'
+                />
               </Form.Item>
 
               <Form.Item
