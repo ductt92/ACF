@@ -1,4 +1,4 @@
-export const BASE_URL = 'https://vt.vmodev.link';
+export const BASE_URL = 'https://api.acf.vn';
 
 export const DEFAULT_DATE_FORMAT = 'YYYY-MM-DD';
 
