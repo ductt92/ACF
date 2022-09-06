@@ -46,9 +46,9 @@ const TrackForm = () => {
                     fontWeight: '500',
                   }}
                 />
-                <div className='h-[40px] w-full bg-[#ec3236] pt-[5px] text-center'>
+                <div className='h-[40px] w-full bg-yellow-primary pt-[5px] text-center'>
                   <input
-                    className='w-[80px] border-[1px] border-white bg-[#c30000] py-[4px] text-[16px] font-medium leading-[18px] text-white '
+                    className='w-[80px] cursor-pointer border-[1px] border-white py-[4px] text-[16px] font-medium leading-[18px] text-white'
                     type='button'
                     value={t('Search')}
                     onClick={handleFocus}
@@ -60,7 +60,7 @@ const TrackForm = () => {
                 <ul>
                   {dataMockDetails.map((value, key) => (
                     <li key={key} className='mb-2'>
-                      <span className='mr-2 inline-block h-[17px] w-[20px] items-center bg-[red] pb-1 text-center text-[11px] leading-[16px] text-white'>
+                      <span className='mr-2 inline-block h-[17px] w-[20px] items-center bg-yellow-primary pb-1 text-center text-[11px] leading-[16px] text-white'>
                         <PlusOutlined style={{ fontSize: '9px' }} />
                       </span>
                       <Link href={value.href} passHref>

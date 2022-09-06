@@ -117,42 +117,6 @@ export const DATA_MOCK_MENU_VI = [
     title: 'Hỗ trợ khách hàng',
     href: '/customer-supports',
     submenu: [
-      // {
-      //   title: 'Trung tâm chăm sóc khách hàng',
-      //   href: '/',
-      //   submenu: [
-      //     {
-      //       href: '/detail-post/huong-dan-gui-hang-hoa-buu-pham',
-      //       title: 'Hướng dẫn gửi hàng',
-      //     },
-      //     {
-      //       title: 'Hướng dẫn in vận đơn',
-      //       href: '/detail-post/huong-dan-in-van-don',
-      //     },
-      //     {
-      //       title: 'Tư vấn đóng gói',
-      //       href: '/detail-post/tu-van-dong-goi',
-      //     },
-      //     {
-      //       title: 'Các chính sách điều khoản',
-      //       href: '/detail-post/cac-dieu-kien-va-dieu-khoan-chap-nhan-hang-hoa',
-      //     },
-      //   ],
-      // },
-      // {
-      //   title: ' Khiếu nại và giải quyết khiếu nại',
-      //   href: '/conditional-good',
-      //   submenu: [
-      //     {
-      //       href: '/detail-post/hang-cam-gui-va-hang-co-dieu-kien',
-      //       title: 'Hàng gửi có điều kiện',
-      //     },
-      //     {
-      //       title: 'Hàng hóa nguy hiểm',
-      //       href: '/detail-post/hang-hoa-nguy-hiem',
-      //     },
-      //   ],
-      // },
       {
         title: 'Trung tâm chăm sóc khách hàng',
         href: '/detail-post/dich-vu-cham-soc-khach-hang',
@@ -346,28 +310,6 @@ export const DATA_MOCK_MENU_EN = [
     title: 'Customer supports',
     href: '/customer-supports',
     submenu: [
-      // {
-      //   title: 'International Export Services',
-      //   href: '/',
-      //   submenu: [
-      //     {
-      //       href: '/detail-post/huong-dan-gui-hang-hoa-buu-pham',
-      //       title: 'Instructions for sending goods',
-      //     },
-      //     {
-      //       title: 'Instructions for printing waybill',
-      //       href: '/detail-post/huong-dan-in-van-don',
-      //     },
-      //     {
-      //       title: 'Packing advice',
-      //       href: '/detail-post/tu-van-dong-goi',
-      //     },
-      //     {
-      //       title: 'Terms and policy',
-      //       href: '/detail-post/cac-dieu-kien-va-dieu-khoan-chap-nhan-hang-hoa',
-      //     },
-      //   ],
-      // },
       {
         title: 'Customer care center',
         href: '/conditional-good',
@@ -390,17 +332,6 @@ export const DATA_MOCK_MENU_EN = [
         title: 'Complaints and complaint handling',
         href: '/detail-post/dich-vu-cham-soc-khach-hang',
       },
-
-      // {
-      //   title: 'Complaints and resolutions',
-      //   href: '/detail-post/khieu-nai-va-giai-quyet',
-      //   submenu: [
-      //     {
-      //       href: '/detail-post/quy-dinh-ve-xu-ly-khieu-nai',
-      //       title: 'Complaint process',
-      //     },
-      //   ],
-      // },
     ],
   },
 
@@ -540,51 +471,52 @@ export const DATA_MOCK_FIELDS_EN = [
     title: 'AIR CARGO ',
     desc: 'Air Cargo Service',
     href: '/#',
-    src: '/images/hang-khong.png',
+    // src: '/images/hang-khong.png',
+    src: '/images/Air-Cargo.jpg',
   },
   {
     title: 'COURIER',
     desc: 'International Courier Service',
     href: '/#',
-    src: '/images/chuyen-phat-nhanh.png',
+    src: '/images/International.jpg',
   },
   {
     title: 'CUSTOMER',
     desc: 'Customs declaration service',
     href: '/#',
-    src: '/images/hai-quan.png',
+    src: '/images/Customs.jpg',
   },
   {
     title: 'FORWARDING',
     desc: 'Logistics and Shipping Services',
     href: '/#',
-    src: '/images/duong-bien.png',
+    src: '/images/Logistics.jpg',
   },
 ];
 export const DATA_MOCK_FIELDS_VI = [
   {
-    title: 'AIR CARGO ',
+    title: 'AIR CARGO',
     desc: 'Dịch vụ vận chuyển hàng không',
     href: '/detail-post/dich-vu-van-chuyen-duong-hang-khong',
-    src: '/images/hang-khong.png',
+    src: '/images/Air-Cargo.jpg',
   },
   {
     title: 'COURIER',
     desc: 'Dịch vụ chuyển phát nhanh Quốc tế',
     href: '/detail-post/dich-vu-hang-nhap-chuyen-phat-nhanh-quoc-te-ve-viet-nam',
-    src: '/images/chuyen-phat-nhanh.png',
+    src: '/images/International.jpg',
   },
   {
     title: 'CUSTOMER',
     desc: 'Dịch vụ khai báo Hải Quan',
     href: '/detail-post/khai-bao-hai-quan',
-    src: '/images/hai-quan.png',
+    src: '/images/Customs.jpg',
   },
   {
     title: 'FORWARDING',
     desc: 'Dịch vụ vận chuyển đường biển',
     href: '/detail-post/van-chuyen-duong-bien',
-    src: '/images/duong-bien.png',
+    src: '/images/Logistics.jpg',
   },
 ];
 
@@ -821,13 +753,6 @@ export const MOCK_DATA_LIST_BUSINESS_VI = [
 
 export const MOCK_DATA_POSTED_ARTICLES_EN = [
   {
-    id: '1',
-    img: '/images/mang-luoi-quoc-te.jpeg',
-    title: 'International Network',
-    disc: 'ACF represents Skynet in Vietnam and has an international ...',
-    slug: 'mang-luoi-quoc-te',
-  },
-  {
     id: '2',
     img: '/images/gia-tri-cot-loi.jpeg',
     title: 'About ACF',
@@ -844,13 +769,6 @@ export const MOCK_DATA_POSTED_ARTICLES_EN = [
 ];
 
 export const MOCK_DATA_POSTED_ARTICLES_VI = [
-  {
-    id: '1',
-    img: '/images/mang-luoi-quoc-te.jpeg',
-    title: 'Mạng lưới Quốc tế',
-    disc: 'ACF là đại diện tại Việt Nam của mạng lưới chuyển phát nhanh ...',
-    slug: 'mang-luoi-quoc-te',
-  },
   {
     id: '2',
     img: '/images/gia-tri-cot-loi.jpeg',
@@ -911,14 +829,6 @@ export const DATA_CUSTOMER_SUPPORT_EN = [
     time: '11/04/2019 09:36:16',
     title: 'CUSTOMER CARE SERVICES',
     desc: 'ACF always listens to all customers suggestions and wishes. We hope to give all our customers the ...',
-  },
-  {
-    id: 2,
-    img: '/images/CustomerS2.jpeg',
-    slug: 'dich-vu-hang-nhap-quoc-te',
-    time: '10/04/2019 14:33:34',
-    title: 'IMPORT SERVICES FROM OVERSEAS TO VIETNAM',
-    desc: 'ACF provide the import services from many country around the world to Vietnam convenient, quickly ...',
   },
 ];
 export const DATA_CONDTIONAL_LI = [
@@ -1152,14 +1062,6 @@ export const DATA_CUSTOMER_SUPPORT_VI = [
     title: 'DỊCH VỤ CHĂM SÓC KHÁCH HÀNG',
     desc: 'ACF luôn lắng nghe mọi góp ý và nguyện vọng của khách hàng. Chúng tôi mong muốn đem đến cho tất cả ...',
   },
-  {
-    id: 2,
-    img: '/images/CustomerS2.jpeg',
-    slug: 'dich-vu-hang-nhap-quoc-te',
-    time: '10/04/2019 14:33:34',
-    title: 'DỊCH VỤ HÀNG NHẬP QUỐC TẾ',
-    desc: 'ACF cung cấp dịch vụ hàng nhập quốc tế giúp cho việc gửi hàng hóa từ nhiều quốc gia trên thế giới ...',
-  },
 ];
 export const DATA_NETWORK_EN = [
   {
@@ -1187,14 +1089,6 @@ export const DATA_NETWORK_VI = [
     time: '11/04/2019 09:36:16',
     title: 'MẠNG LƯỚI QUỐC TẾ',
     desc: 'ACF là đại diện tại Việt Nam của mạng lưới chuyển phát nhanh Quốc tế Skynet. ACF có khả năng thực ...',
-  },
-  {
-    id: '2',
-    img: '/images/hang-khong.png',
-    slug: 'mang-luoi-trong-nuoc',
-    time: '10/04/2019 14:33:34',
-    title: 'DỊCH VỤ HÀNG NHẬP QUỐC TẾ',
-    desc: ' Với mạng lưới chuyển phát nhanh trong nước của ACF được phủ khắp khu vực các thành phố, quận, thị ...',
   },
 ];
 export const DATA_ABOUT_EN = [
@@ -1233,26 +1127,8 @@ export const DATA_ABOUT_VI = [
     desc: 'Với việc đầu tư mở rộng mạng lưới trên toàn quốc, phục vụ khách hàng với hệ thống máy móc, phần mềm ...',
   },
 ];
-export const DATA_RECRUITMENT_EN = [
-  {
-    id: '1',
-    img: '/images/recruitment1.jpeg',
-    slug: 'tuyen-dung-nhan-vien-sales-khach-hang-thuong-mai-dien-tu',
-    time: '19/03/2019 15:05:40',
-    title: 'RECRUITMENT OF B2C CUSTOMERS SELLER',
-    desc: 'ACF Announces Recruitment Recruitment B2C Customer Sales Staff. Attractive salary, benefits...',
-  },
-];
-export const DATA_RECRUITMENT_VI = [
-  {
-    id: '1',
-    img: '/images/recruitment1.jpeg',
-    slug: 'tuyen-dung-nhan-vien-sales-khach-hang-thuong-mai-dien-tu',
-    time: '19/03/2019 15:05:40',
-    title: 'TUYỂN DỤNG NHÂN VIÊN SALE KHÁCH HÀNG B2C',
-    desc: 'ACF thông báo tuyển dụng Tuyển Dụng Nhân Viên Sale Khách Hàng B2C. Lương hấp dẫn, chế độ đãi ngộ ...',
-  },
-];
+export const DATA_RECRUITMENT_EN = [];
+export const DATA_RECRUITMENT_VI = [];
 
 export const DATA_TOP_VI = [
   {

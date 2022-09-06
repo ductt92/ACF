@@ -15,8 +15,8 @@ const CustomerRequest = () => {
   };
   return (
     <div className='ml-[43px]'>
-      <h2 className='mt-[75px] mb-0 flex w-full items-center text-[29px] font-semibold tracking-tight text-[#ec3235]'>
-        <span className='float-left mb-[12px] mr-[7px] block border-b-[1px] border-[#ec3235]'>
+      <h2 className='mt-[75px] mb-0 flex w-full items-center text-[29px] font-semibold tracking-tight text-yellow-primary'>
+        <span className='float-left mb-[12px] mr-[7px] block border-b-[1px] border-yellow-primary'>
           {t('CustomerRequest')}
         </span>
         <Image src='/images/ic_linhvuc.png' alt='' height={36} width={58} />
@@ -30,7 +30,7 @@ const CustomerRequest = () => {
       />
       <input type='button' value='' className={styles.buttonRequest} />
       <Button
-        className='float-left ml-[80px] mt-[29px] rounded-none border-0 bg-[#ec3236] text-[12px] hover:bg-[#ec3236]'
+        className='float-left ml-[80px] mt-[29px] rounded-none border-0 bg-yellow-primary text-[12px] hover:bg-yellow-primary'
         style={{ width: 'max-content', height: '32px' }}
         onClick={handleFocus}
       >

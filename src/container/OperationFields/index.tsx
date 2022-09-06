@@ -16,7 +16,7 @@ function OperationFields() {
   return (
     <div className='sn:hidden'>
       <h1 className={styles.fieldsAffter}>
-        <span className=' float-left border-b-[1px] border-[#ec3235] font-semibold'>
+        <span className=' float-left border-b-[1px] border-yellow-primary font-semibold'>
           {t('Field')}
         </span>
       </h1>
@@ -26,7 +26,7 @@ function OperationFields() {
             <div className={styles.contentField}>
               <Link href={value.href} passHref>
                 <a className='float-left'>
-                  <Image src={value.src} alt='' width='206' height='160' />
+                  <Image src={value.src} alt='' width='400' height='160' />
                 </a>
               </Link>
               <div className={styles.boxContent}>

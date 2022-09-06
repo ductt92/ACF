@@ -312,25 +312,6 @@ export const DATA_POST_EN = [
     ],
   },
   {
-    id: '24',
-    slug: 'dich-vu-hang-nhap-quoc-te',
-    title: 'Import services from overseas to Vietnam',
-    img: '/images/hinh-anh-xam.jpeg',
-    img2: '/images/acf.png',
-    desc: [
-      {
-        name: 'Vận tải đường biển là hình thức vận tải ra đời sớm nhất ở Việt Nam chuyên chở hàng hóa trong và ngoài nước.Dịch vụ vận chuyển đường biển chuyên nghiệp.Với bề dày kinh nghiệm gần 10 năm trong lĩnh vực vận chuyển, ACF tự hào cung cung cấp giải pháp dịch vụ vận tải biển trọn gói, nhanh chóng và an toàn. Ngoài ra, chúng tôi còn cung cấp các dịch vụ đi kèm như thông quan hàng hóa, lưu kho bãi, kiểm tra hàng hóa với gói cước cạnh tranh và tối ưu nhất.',
-        desc1:
-          'Với sự am hiểu về thủ tục hải quan, xuất nhập khẩu hàng hóa, nắm rõ quy trình thông quan hàng hóa. ACF đã và đang cung cấp các dịch vụ khai báo hải quan trọn gói, cung cấp giao nhận hàng hóa xuất nhập khẩu, giúp quý khách hàng, doanh nghiệp thông quan hàng hóa nhanh chóng nhằm đảm bảo việc kinh doanh của doanh nghiệp và đối tác được thuận lợi.',
-        desc2:
-          'Nhằm đáp ứng nhu cầu vận chuyển ngày càng cao/gia tăng của Quý khách, ACF luôn củng cố, phát triển đội ngũ nhân viên có nền tảng kiến thưc sâu rộng và bề dày kinh nghiệm nhiều năm trong hoạt động chuyển phát. Hơn thế nữa, ACF mở rộng, cung cấp đa dạng các loại dịch vụ hải quan khác nhau để đảm bảo quá tình thông quan diễn ra nhanh chóng và hiệu quả nhất',
-        desc3:
-          'Trên tất cả, sự am hiểu và nắm chắc  những quy định trong quy trình khai báo hải quan của ACF sẽ giúp Quý Khách hoàn toàn có thể chuyên tâm điều hành hoạt động kinh doanh của mình, mà không cần phải lo lắng về hàng hóa khi đã tin tưởng giao phó cho ',
-        desc4: '',
-      },
-    ],
-  },
-  {
     id: '25',
     slug: 'khieu-nai-va-giai-quyet',
     title: 'Khiếu nại và giải quyết',
@@ -379,7 +360,7 @@ export const DATA_POST_EN = [
         name: '',
         desc1: 'Hotline : +84 968 022 257',
         desc2: 'Zalo : 0968 022  257/ ID : ACFlogistics',
-        desc3: 'Skype : ACFlogistics',
+        desc3: 'Email Center : Support@acf.vn',
         desc4: '',
       },
     ],
@@ -602,24 +583,7 @@ export const DATA_POST_EN = [
       },
     ],
   },
-  {
-    id: '4',
-    slug: 'dich-vu-hang-nhap-quoc-te',
-    title: 'IMPORT SERVICES FROM OVERSEAS TO VIETNAM',
-    img: '/images/hinh-anh-xam.jpeg',
-    desc: [
-      {
-        name: 'Vận tải đường biển là hình thức vận tải ra đời sớm nhất ở Việt Nam chuyên chở hàng hóa trong và ngoài nước.Dịch vụ vận chuyển đường biển chuyên nghiệp.Với bề dày kinh nghiệm gần 10 năm trong lĩnh vực vận chuyển, ACF tự hào cung cung cấp giải pháp dịch vụ vận tải biển trọn gói, nhanh chóng và an toàn. Ngoài ra, chúng tôi còn cung cấp các dịch vụ đi kèm như thông quan hàng hóa, lưu kho bãi, kiểm tra hàng hóa với gói cước cạnh tranh và tối ưu nhất.',
-        desc1:
-          'Với sự am hiểu về thủ tục hải quan, xuất nhập khẩu hàng hóa, nắm rõ quy trình thông quan hàng hóa. ACF đã và đang cung cấp các dịch vụ khai báo hải quan trọn gói, cung cấp giao nhận hàng hóa xuất nhập khẩu, giúp quý khách hàng, doanh nghiệp thông quan hàng hóa nhanh chóng nhằm đảm bảo việc kinh doanh của doanh nghiệp và đối tác được thuận lợi.',
-        desc2:
-          'Nhằm đáp ứng nhu cầu vận chuyển ngày càng cao/gia tăng của Quý khách, ACF luôn củng cố, phát triển đội ngũ nhân viên có nền tảng kiến thưc sâu rộng và bề dày kinh nghiệm nhiều năm trong hoạt động chuyển phát. Hơn thế nữa, ACF mở rộng, cung cấp đa dạng các loại dịch vụ hải quan khác nhau để đảm bảo quá tình thông quan diễn ra nhanh chóng và hiệu quả nhất',
-        desc3:
-          'Trên tất cả, sự am hiểu và nắm chắc  những quy định trong quy trình khai báo hải quan của ACF sẽ giúp Quý Khách hoàn toàn có thể chuyên tâm điều hành hoạt động kinh doanh của mình, mà không cần phải lo lắng về hàng hóa khi đã tin tưởng giao phó cho ',
-        desc4: '',
-      },
-    ],
-  },
+
   {
     id: '5',
     slug: 'mang-luoi-quoc-te',
@@ -631,7 +595,7 @@ export const DATA_POST_EN = [
         name: '',
         desc1: 'Hotline : +84 968 022 257',
         desc2: 'Zalo : 0968 022  257/ ID : ACFlogistics',
-        desc3: 'Skype : ACFlogistics',
+        desc3: 'Email Center : Support@acf.vn',
         desc4: '',
       },
     ],
@@ -692,24 +656,6 @@ export const DATA_POST_EN = [
     ],
   },
 
-  {
-    id: '9',
-    slug: 'tuyen-dung-nhan-vien-sales-khach-hang-thuong-mai-dien-tu',
-    title: 'RECRUITMENT OF B2C CUSTOMERS SELLER',
-    img: '/images/banner-5.jpeg',
-    desc: [
-      {
-        name: 'Vận tải đường biển là hình thức vận tải ra đời sớm nhất ở Việt Nam chuyên chở hàng hóa trong và ngoài nước.Dịch vụ vận chuyển đường biển chuyên nghiệp.Với bề dày kinh nghiệm gần 10 năm trong lĩnh vực vận chuyển, ACF tự hào cung cung cấp giải pháp dịch vụ vận tải biển trọn gói, nhanh chóng và an toàn. Ngoài ra, chúng tôi còn cung cấp các dịch vụ đi kèm như thông quan hàng hóa, lưu kho bãi, kiểm tra hàng hóa với gói cước cạnh tranh và tối ưu nhất.',
-        desc1:
-          'Với sự am hiểu về thủ tục hải quan, xuất nhập khẩu hàng hóa, nắm rõ quy trình thông quan hàng hóa. ACF đã và đang cung cấp các dịch vụ khai báo hải quan trọn gói, cung cấp giao nhận hàng hóa xuất nhập khẩu, giúp quý khách hàng, doanh nghiệp thông quan hàng hóa nhanh chóng nhằm đảm bảo việc kinh doanh của doanh nghiệp và đối tác được thuận lợi.',
-        desc2:
-          'Nhằm đáp ứng nhu cầu vận chuyển ngày càng cao/gia tăng của Quý khách, ACF luôn củng cố, phát triển đội ngũ nhân viên có nền tảng kiến thưc sâu rộng và bề dày kinh nghiệm nhiều năm trong hoạt động chuyển phát. Hơn thế nữa, ACF mở rộng, cung cấp đa dạng các loại dịch vụ hải quan khác nhau để đảm bảo quá tình thông quan diễn ra nhanh chóng và hiệu quả nhất',
-        desc3:
-          'Trên tất cả, sự am hiểu và nắm chắc  những quy định trong quy trình khai báo hải quan của ACF sẽ giúp Quý Khách hoàn toàn có thể chuyên tâm điều hành hoạt động kinh doanh của mình, mà không cần phải lo lắng về hàng hóa khi đã tin tưởng giao phó cho ',
-        desc4: '',
-      },
-    ],
-  },
   {
     id: '37',
     slug: 'dieu-khoan-su-dung-tai-acf',
@@ -1240,24 +1186,7 @@ export const DATA_POST_VI = [
       },
     ],
   },
-  {
-    id: '4',
-    slug: 'dich-vu-hang-nhap-quoc-te',
-    title: 'Dịch vụ hàng nhập quốc tế',
-    img: '/images/hinh-anh-xam.jpeg',
-    desc: [
-      {
-        name: 'Vận tải đường biển là hình thức vận tải ra đời sớm nhất ở Việt Nam chuyên chở hàng hóa trong và ngoài nước.Dịch vụ vận chuyển đường biển chuyên nghiệp.Với bề dày kinh nghiệm gần 10 năm trong lĩnh vực vận chuyển, ACF tự hào cung cung cấp giải pháp dịch vụ vận tải biển trọn gói, nhanh chóng và an toàn. Ngoài ra, chúng tôi còn cung cấp các dịch vụ đi kèm như thông quan hàng hóa, lưu kho bãi, kiểm tra hàng hóa với gói cước cạnh tranh và tối ưu nhất.',
-        desc1:
-          'Với sự am hiểu về thủ tục hải quan, xuất nhập khẩu hàng hóa, nắm rõ quy trình thông quan hàng hóa. ACF đã và đang cung cấp các dịch vụ khai báo hải quan trọn gói, cung cấp giao nhận hàng hóa xuất nhập khẩu, giúp quý khách hàng, doanh nghiệp thông quan hàng hóa nhanh chóng nhằm đảm bảo việc kinh doanh của doanh nghiệp và đối tác được thuận lợi.',
-        desc2:
-          'Nhằm đáp ứng nhu cầu vận chuyển ngày càng cao/gia tăng của Quý khách, ACF luôn củng cố, phát triển đội ngũ nhân viên có nền tảng kiến thưc sâu rộng và bề dày kinh nghiệm nhiều năm trong hoạt động chuyển phát. Hơn thế nữa, ACF mở rộng, cung cấp đa dạng các loại dịch vụ hải quan khác nhau để đảm bảo quá tình thông quan diễn ra nhanh chóng và hiệu quả nhất',
-        desc3:
-          'Trên tất cả, sự am hiểu và nắm chắc  những quy định trong quy trình khai báo hải quan của ACF sẽ giúp Quý Khách hoàn toàn có thể chuyên tâm điều hành hoạt động kinh doanh của mình, mà không cần phải lo lắng về hàng hóa khi đã tin tưởng giao phó cho ',
-        desc4: '',
-      },
-    ],
-  },
+
   {
     id: '5',
     slug: 'mang-luoi-quoc-te',
@@ -1268,7 +1197,7 @@ export const DATA_POST_VI = [
         name: '',
         desc1: 'Hotline : +84 968 022 257',
         desc2: 'Zalo : 0968 022  257/ ID : ACFlogistics',
-        desc3: 'Skype : ACFlogistics',
+        desc3: 'Email Center : Support@acf.vn',
         desc4: '',
       },
     ],
@@ -1327,24 +1256,6 @@ export const DATA_POST_VI = [
     ],
   },
 
-  {
-    id: '9',
-    slug: 'tuyen-dung-nhan-vien-sales-khach-hang-thuong-mai-dien-tu',
-    title: 'Tuyển Dụng Nhân Viên Sale Khách Hàng B2C',
-    img: '/images/banner-5.jpeg',
-    desc: [
-      {
-        name: 'Vận tải đường biển là hình thức vận tải ra đời sớm nhất ở Việt Nam chuyên chở hàng hóa trong và ngoài nước.Dịch vụ vận chuyển đường biển chuyên nghiệp.Với bề dày kinh nghiệm gần 10 năm trong lĩnh vực vận chuyển, ACF tự hào cung cung cấp giải pháp dịch vụ vận tải biển trọn gói, nhanh chóng và an toàn. Ngoài ra, chúng tôi còn cung cấp các dịch vụ đi kèm như thông quan hàng hóa, lưu kho bãi, kiểm tra hàng hóa với gói cước cạnh tranh và tối ưu nhất.',
-        desc1:
-          'Với sự am hiểu về thủ tục hải quan, xuất nhập khẩu hàng hóa, nắm rõ quy trình thông quan hàng hóa. ACF đã và đang cung cấp các dịch vụ khai báo hải quan trọn gói, cung cấp giao nhận hàng hóa xuất nhập khẩu, giúp quý khách hàng, doanh nghiệp thông quan hàng hóa nhanh chóng nhằm đảm bảo việc kinh doanh của doanh nghiệp và đối tác được thuận lợi.',
-        desc2:
-          'Nhằm đáp ứng nhu cầu vận chuyển ngày càng cao/gia tăng của Quý khách, ACF luôn củng cố, phát triển đội ngũ nhân viên có nền tảng kiến thưc sâu rộng và bề dày kinh nghiệm nhiều năm trong hoạt động chuyển phát. Hơn thế nữa, ACF mở rộng, cung cấp đa dạng các loại dịch vụ hải quan khác nhau để đảm bảo quá tình thông quan diễn ra nhanh chóng và hiệu quả nhất',
-        desc3:
-          'Trên tất cả, sự am hiểu và nắm chắc  những quy định trong quy trình khai báo hải quan của ACF sẽ giúp Quý Khách hoàn toàn có thể chuyên tâm điều hành hoạt động kinh doanh của mình, mà không cần phải lo lắng về hàng hóa khi đã tin tưởng giao phó cho ',
-        desc4: '',
-      },
-    ],
-  },
   {
     id: '10',
     slug: 'chuyen-phat-nhanh-chuyen-tuyen-quoc-te-acf',
@@ -1607,24 +1518,7 @@ export const DATA_POST_VI = [
       },
     ],
   },
-  {
-    id: '24',
-    slug: 'dich-vu-hang-nhap-quoc-te',
-    title: 'Dịch vụ hàng nhập quốc tế',
-    img: '/images/hinh-anh-xam.jpeg',
-    desc: [
-      {
-        name: 'Vận tải đường biển là hình thức vận tải ra đời sớm nhất ở Việt Nam chuyên chở hàng hóa trong và ngoài nước.Dịch vụ vận chuyển đường biển chuyên nghiệp.Với bề dày kinh nghiệm gần 10 năm trong lĩnh vực vận chuyển, ACF tự hào cung cung cấp giải pháp dịch vụ vận tải biển trọn gói, nhanh chóng và an toàn. Ngoài ra, chúng tôi còn cung cấp các dịch vụ đi kèm như thông quan hàng hóa, lưu kho bãi, kiểm tra hàng hóa với gói cước cạnh tranh và tối ưu nhất.',
-        desc1:
-          'Với sự am hiểu về thủ tục hải quan, xuất nhập khẩu hàng hóa, nắm rõ quy trình thông quan hàng hóa. ACF đã và đang cung cấp các dịch vụ khai báo hải quan trọn gói, cung cấp giao nhận hàng hóa xuất nhập khẩu, giúp quý khách hàng, doanh nghiệp thông quan hàng hóa nhanh chóng nhằm đảm bảo việc kinh doanh của doanh nghiệp và đối tác được thuận lợi.',
-        desc2:
-          'Nhằm đáp ứng nhu cầu vận chuyển ngày càng cao/gia tăng của Quý khách, ACF luôn củng cố, phát triển đội ngũ nhân viên có nền tảng kiến thưc sâu rộng và bề dày kinh nghiệm nhiều năm trong hoạt động chuyển phát. Hơn thế nữa, ACF mở rộng, cung cấp đa dạng các loại dịch vụ hải quan khác nhau để đảm bảo quá tình thông quan diễn ra nhanh chóng và hiệu quả nhất',
-        desc3:
-          'Trên tất cả, sự am hiểu và nắm chắc  những quy định trong quy trình khai báo hải quan của ACF sẽ giúp Quý Khách hoàn toàn có thể chuyên tâm điều hành hoạt động kinh doanh của mình, mà không cần phải lo lắng về hàng hóa khi đã tin tưởng giao phó cho ',
-        desc4: '',
-      },
-    ],
-  },
+
   {
     id: '25',
     slug: 'khieu-nai-va-giai-quyet',
@@ -1672,8 +1566,7 @@ export const DATA_POST_VI = [
         name: '',
         desc1: 'Hotline : +84 968 022 257',
         desc2: 'Zalo : 0968 022  257/ ID : ACFlogistics',
-        desc3: 'Skype : ACFlogistics',
-        desc4: '',
+        desc3: 'Email Center : Support@acf.vn',
       },
     ],
   },
