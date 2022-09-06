@@ -54,7 +54,6 @@ export const DATA_POST_EN = [
           'Nhằm đáp ứng nhu cầu vận chuyển ngày càng cao/gia tăng của Quý khách, ACF luôn củng cố, phát triển đội ngũ nhân viên có nền tảng kiến thưc sâu rộng và bề dày kinh nghiệm nhiều năm trong hoạt động chuyển phát. Hơn thế nữa, ACF mở rộng, cung cấp đa dạng các loại dịch vụ hải quan khác nhau để đảm bảo quá tình thông quan diễn ra nhanh chóng và hiệu quả nhất',
         desc3:
           'Trên tất cả, sự am hiểu và nắm chắc  những quy định trong quy trình khai báo hải quan của ACF sẽ giúp Quý Khách hoàn toàn có thể chuyên tâm điều hành hoạt động kinh doanh của mình, mà không cần phải lo lắng về hàng hóa khi đã tin tưởng giao phó cho ',
-        desc4: '',
       },
     ],
     img: '/images/banner-6.jpeg',

@@ -21,8 +21,9 @@ const DetailPost = () => {
   const router = useRouter();
   const { lang, t } = useTranslation('common');
 
-  const data = lang === 'vi' ? DATA_POST_VI : DATA_POST_EN;
-  const post = data.find((x) => x.slug === router.query.slug);
+  const post = (lang === 'vi' ? DATA_POST_VI : DATA_POST_EN).find(
+    (x) => x.slug === router.query.slug
+  );
 
   return (
     <div className='m-auto w-[1174px] lg:w-full'>
@@ -57,9 +58,6 @@ const DetailPost = () => {
                   <p className='mb-0 py-1'>{value.desc1}</p>
                   <p className='mb-0 py-1'>{value.desc2}</p>
                   <p className='mb-0 py-1'>{value.desc3}</p>
-                  <p className='text-right text-[14px] font-bold'>
-                    {value.desc4}
-                  </p>
                 </div>
               );
             })}
@@ -128,7 +126,7 @@ const DetailPost = () => {
             </div>
             <div className='float-left mt-[42px]'>
               <h2 className='mb-[30px] mt-[15px]'>
-                <span className='border-b-[1px] border-[#ec3235] pb-[3px] text-[29px] font-semibold text-[#ec3235]'>
+                <span className='border-b-[1px] border-yellow-primary pb-[3px] text-[29px] font-semibold text-yellow-primary'>
                   {t('RelatedNews')}
                 </span>
               </h2>
