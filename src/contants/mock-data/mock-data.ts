@@ -7,13 +7,13 @@ export const DATA_MOCK_DETAIL_VI = [
     slug: 'lich-su-hinh-thanh-va-phat-trien',
   },
 
-  {
-    title: ' GIỚI THIỆU VỀ ACF',
-    describe:
-      'ACF – PLANET COURIER SERVICES. Tổng Công ty Cổ phần Thương Mại và Dịch vụ Chuyển phát nhanh ACF.',
-    src: '/images/value2.jpg',
-    slug: 'gioi-thieu-ve-acf',
-  },
+  // {
+  //   title: ' GIỚI THIỆU VỀ ACF',
+  //   describe:
+  //     'ACF – PLANET COURIER SERVICES. Tổng Công ty Cổ phần Thương Mại và Dịch vụ Chuyển phát nhanh ACF.',
+  //   src: '/images/value2.jpg',
+  //   slug: 'gioi-thieu-ve-acf',
+  // },
 
   {
     title: ' DỊCH VỤ VẬN CHUYỂN ĐƯỜNG BIỂN',
@@ -25,13 +25,13 @@ export const DATA_MOCK_DETAIL_VI = [
 ];
 
 export const DATA_MOCK_DETAIL_EN = [
-  {
-    title: 'ABOUT ACF',
-    describe:
-      'ACF – PLANET COURIER SERVICES. ACF Commercial & Express Service Joint Stock Company.',
-    src: '/images/value1.jpg',
-    slug: 'lich-su-hinh-thanh-va-phat-trien',
-  },
+  // {
+  //   title: 'ABOUT ACF',
+  //   describe:
+  //     'ACF – PLANET COURIER SERVICES. ACF Commercial & Express Service Joint Stock Company.',
+  //   src: '/images/value1.jpg',
+  //   slug: 'lich-su-hinh-thanh-va-phat-trien',
+  // },
   {
     title: 'SEA FREIGHT SERVICES',
     describe: 'International Sea Freight Services: ',
@@ -55,28 +55,6 @@ export const DATA_MOCK_MENU_VI = [
       {
         title: 'Dịch vụ hàng xuất chuyển phát nhanh đi Quốc Tế',
         href: '/detail-post/dich-vu-van-chuyen-quoc-te',
-        submenu: [
-          {
-            title: 'CPN Chuyên tuyến Nhật Bản, Hồng Kông, Singapore...',
-            href: '/detail-post/chuyen-phat-nhanh-chuyen-tuyen-quoc-te-acf',
-          },
-          {
-            title: 'CPN Quốc tế khác',
-            href: '/detail-post/dich-vu-cpn-quoc-te-khac',
-          },
-          {
-            title: 'Dịch vụ vận chuyển đường hàng không Quốc Tế',
-            href: '/detail-post/dich-vu-chuyen-hang-nguy-hiem',
-          },
-          {
-            title: 'Hàng nguy hiểm',
-            href: '/detail-post/dich-vu-van-chuyen-duong-hang-khong',
-          },
-          {
-            title: 'Dịch vụ thông quan',
-            href: '/detail-post/dich-vu-thong-quan',
-          },
-        ],
       },
       {
         title: 'Dịch vụ hàng nhập Chuyển phát nhanh Quốc tế về Việt Nam',
@@ -204,10 +182,10 @@ export const DATA_MOCK_MENU_VI = [
             href: '/detail-post/nang-luc-thong-quan',
             title: 'Năng lực thông quan',
           },
-          {
-            href: '/detail-post/he-thong-mang-luoi',
-            title: 'Năng lực vận tải',
-          },
+          // {
+          //   href: '/detail-post/he-thong-mang-luoi',
+          //   title: 'Năng lực vận tải',
+          // },
         ],
       },
       {
@@ -244,28 +222,6 @@ export const DATA_MOCK_MENU_EN = [
       {
         title: 'Express delivery service to International',
         href: '/detail-post/dich-vu-van-chuyen-quoc-te',
-        submenu: [
-          {
-            href: '/detail-post/chuyen-phat-nhanh-chuyen-tuyen-quoc-te-acf',
-            title: 'Direct express : Japan, Hongkong, Singapore, Korea',
-          },
-          {
-            title: 'Others international Express Services',
-            href: '/detail-post/dich-vu-cpn-quoc-te-khac',
-          },
-          {
-            title: 'International air freight service',
-            href: '/detail-post/dich-vu-chuyen-hang-nguy-hiem',
-          },
-          {
-            title: 'Dangerous goods',
-            href: '/detail-post/dich-vu-van-chuyen-duong-hang-khong',
-          },
-          {
-            title: 'Customs clearrance service',
-            href: '/detail-post/dich-vu-thong-quan',
-          },
-        ],
       },
       {
         title: 'Imported goods service International Courier to Vietnam',
@@ -357,10 +313,10 @@ export const DATA_MOCK_MENU_EN = [
         href: '/about',
         title: 'General information',
         submenu: [
-          {
-            href: '/detail-post/gioi-thieu-ve-acf',
-            title: 'About ACF',
-          },
+          // {
+          //   href: '/detail-post/gioi-thieu-ve-acf',
+          //   title: 'About ACF',
+          // },
           {
             href: '/detail-post/lich-su-hinh-thanh-va-phat-trien',
             title: 'History of formation and development',
@@ -438,34 +394,14 @@ export const DATA_MOCK_IMG_SLIDER = [
     img_src: '/images/banner2-chuyen-phat-nhanh-acf.png',
   },
 ];
-export const DATA_MOCK_DETAIL_TRACK_EN = [
-  {
-    title: 'About ACF',
-    href: '/detail-post/gioi-thieu-ve-acf',
-  },
-  {
-    title: 'International Network',
-    href: '/detail-post/mang-luoi-quoc-te',
-  },
-  {
-    title: ' Domestic network',
-    href: '/detail-post/mang-luoi-trong-nuoc',
-  },
-];
-export const DATA_MOCK_DETAIL_TRACK_VI = [
-  {
-    title: 'THÔNG BÁO LỊCH NGHỈ TẾT NGUYÊN ĐÁN 2022',
-    href: '/detail-post/thong-bao-lich-nghi-tet-nguyen-dan-2022',
-  },
-  {
-    title: 'Tạm biệt năm cũ qua – Đón năm mới bình an',
-    href: '/detail-post/tam-biet-nam-cu-qua-don-nam-moi-binh-an',
-  },
-  {
-    title: ' ACF tổng kết cuối năm 2020 – Chào xuân 2021: Vững tâm vươn tầm',
-    href: '/detail-post/acf-tong-ket-cuoi-nam-2020-chao-xuan-2021-vung-tam-vuon-tam',
-  },
-];
+export const DATA_MOCK_DETAIL_TRACK_EN: Array<{
+  title?: string;
+  href?: string;
+}> = [];
+export const DATA_MOCK_DETAIL_TRACK_VI: Array<{
+  title?: string;
+  href?: string;
+}> = [];
 export const DATA_MOCK_FIELDS_EN = [
   {
     title: 'AIR CARGO ',
@@ -554,10 +490,10 @@ export const MOCK_FOOTER_CONTACT_EN = [
 ];
 export const MOCK_FOOTER_CONTACT_VI = [
   {
-    city: 'ACF HÀ NỘI',
+    city: 'CÔNG TY TNHH DỊCH VỤ VÀ THƯƠNG MẠI ACF',
     street: 'Biệt thự Long Cảnh 95, Vinhomes Thăng Long,',
     locality: 'An Khánh, Hoài Đức, Hà Nội.',
-    phone: '(+84) 968 022 257',
+    phone: '(+84) 968 02 22 57',
     callCenter: '19008972',
   },
 ];
@@ -663,102 +599,94 @@ export const MOCK_IMAGE_SOCIAL = [
 
 export const MOCK_DATA_LIST_BUSINESS_EN = [
   {
+    title: 'Express delivery service to International',
+    href: '/detail-post/dich-vu-van-chuyen-quoc-te',
+  },
+  {
+    title: 'Imported goods service International Courier to Vietnam',
+    href: '/detail-post/dich-vu-hang-nhap-chuyen-phat-nhanh-quoc-te-ve-viet-nam',
+  },
+  {
     title: 'International Export Courier Service',
-    slug: 'hang-nhap-quoc-te',
-    submenu: [
-      {
-        slug: '/#',
-        title: 'Direct express : Japan, Hongkong, Singapore, Korea',
-      },
-      {
-        title: 'Others international Express Services',
-        slug: '/#',
-      },
-      {
-        title: 'Air freight services',
-        slug: '/#',
-      },
-      {
-        title: 'Dangerous goods',
-        slug: '/#',
-      },
-      {
-        title: 'Customs clearrance service',
-        slug: '/#',
-      },
-    ],
+    href: '/detail-post/hang-nhap-quoc-te',
   },
   {
-    title: 'Golden lotus card',
-    slug: 'dich-vu-hang-nhap-chuyen-phat-nhanh-quoc-te-ve-viet-nam',
+    title: 'International air freight service',
+    href: '/detail-post/dich-vu-chuyen-hang-nguy-hiem',
   },
   {
-    title: 'Providing logistics service for suppliers to AMAZON',
-    slug: 'cung-cap-dich-vu-logistic-cho-cac-nha-cung-ung-den-amaron',
+    title: 'Shipping service ePackit/Dropshipping/FBM',
+    href: '/detail-post/hang-nhap-quoc-te',
   },
   {
-    title: 'Domestic courier',
-    slug: 'dich-vu-chuyen-phat-nhanh-noi-dia',
+    title: 'Domestic and International sea freight services',
+    href: '/detail-post/van-chuyen-duong-bien ',
   },
   {
-    title: 'Ocean freight',
-    slug: 'van-chuyen-duong-bien',
+    title: 'Shipping service to Amazon warehouse (FBA)',
+    href: '/detail-post/cung-cap-dich-vu-logistic-cho-cac-nha-cung-ung-den-amaron',
+  },
+  {
+    title: 'Domestic road transport service',
+    href: '/detail-post/dich-vu-van-tai-trong-nuoc',
+  },
+  {
+    title: 'Customs declaration service',
+    href: '/detail-post/khai-bao-hai-quan',
+  },
+  {
+    title: 'E-commerce service',
+    href: '/detail-post/thuong-mai-dien-tu',
   },
 ];
 
 export const MOCK_DATA_LIST_BUSINESS_VI = [
   {
-    title: 'CPN Hàng xuất Quốc tế',
-    slug: 'hang-nhap-quoc-te',
-    submenu: [
-      {
-        title: 'CPN Chuyên tuyến Nhật Bản, Hồng Kông, Singapore...',
-        slug: '/#',
-      },
-      {
-        title: 'CPN Quốc tế khác',
-        slug: '/#',
-      },
-      {
-        title: 'Dịch vụ vận chuyển Đường hàng không',
-        slug: '/#',
-      },
-      {
-        title: 'Hàng nguy hiểm',
-        slug: '/#',
-      },
-      {
-        title: 'Dịch vụ thông quan',
-        slug: '/#',
-      },
-    ],
+    title: 'Dịch vụ hàng xuất chuyển phát nhanh đi Quốc Tế',
+    href: '/detail-post/dich-vu-van-chuyen-quoc-te',
   },
   {
-    title: 'CPN Thư thẻ BSV',
-    slug: 'dich-vu-hang-nhap-chuyen-phat-nhanh-quoc-te-ve-viet-nam',
+    title: 'Dịch vụ hàng nhập Chuyển phát nhanh Quốc tế về Việt Nam',
+    href: '/detail-post/dich-vu-hang-nhap-chuyen-phat-nhanh-quoc-te-ve-viet-nam',
   },
   {
-    title: 'CPN Hàng nhập Quốc tế',
-    slug: 'dich-vu-chuyen-phat-nhanh-noi-dia',
+    title: 'Dịch vụ vận chuyển đường hàng không Quốc Tế',
+    href: '/detail-post/dich-vu-van-chuyen-duong-hang-khong',
   },
   {
-    title: 'Vận chuyển đường Biển',
-    slug: 'van-chuyen-duong-bien',
+    title: 'Dịch vụ vận chuyển ePackit/Dropshipping/FBM',
+    href: '/detail-post/hang-nhap-quoc-te',
   },
   {
-    title: 'Cung cấp DV Logistic cung ứng đến AMAZON',
-    slug: 'cung-cap-dich-vu-logistic-cho-cac-nha-cung-ung-den-amaron',
+    title: 'Dịch vụ vận chuyển đường biển Trong nước và Quốc tế',
+    href: '/detail-post/van-chuyen-duong-bien ',
+  },
+  {
+    title: 'Dịch vụ vận chuyển hàng vào kho Amazon (FBA)',
+    href: '/detail-post/cung-cap-dich-vu-logistic-cho-cac-nha-cung-ung-den-amaron',
+  },
+  {
+    title: 'Dịch vụ vận tải đường bộ trong nước',
+    href: '/detail-post/dich-vu-van-tai-trong-nuoc',
+  },
+  {
+    title: 'Dịch vụ khai báo hải quan',
+    href: '/detail-post/khai-bao-hai-quan',
+  },
+  {
+    title: 'Dịch vụ Thương mại điện tử',
+    href: '/detail-post/thuong-mai-dien-tu',
   },
 ];
 
 export const MOCK_DATA_POSTED_ARTICLES_EN = [
-  {
-    id: '2',
-    img: '/images/gia-tri-cot-loi.jpeg',
-    title: 'About ACF',
-    disc: 'ACF – PLANET COURIER SERVICES. ACF Commercial & Express Service ...',
-    slug: 'gioi-thieu-ve-acf',
-  },
+  // {
+  //   id: '2',
+  //   img: '/images/gia-tri-cot-loi.jpeg',
+  //   title: 'About ACF',
+  //   disc: 'ACF – PLANET COURIER SERVICES. ACF Commercial & Express Service ...',
+  //   slug: 'gioi-thieu-ve-acf',
+  // },
   {
     id: '3',
     img: '/images/hang-khong.png',
@@ -769,13 +697,13 @@ export const MOCK_DATA_POSTED_ARTICLES_EN = [
 ];
 
 export const MOCK_DATA_POSTED_ARTICLES_VI = [
-  {
-    id: '2',
-    img: '/images/gia-tri-cot-loi.jpeg',
-    title: 'Giới thiệu về ACF',
-    disc: 'ACF – PLANET COURIER SERVICES. Tổng Công ty Cổ phần Thương Mại ...',
-    slug: 'gioi-thieu-ve-acf',
-  },
+  // {
+  //   id: '2',
+  //   img: '/images/gia-tri-cot-loi.jpeg',
+  //   title: 'Giới thiệu về ACF',
+  //   disc: 'ACF – PLANET COURIER SERVICES. Tổng Công ty Cổ phần Thương Mại ...',
+  //   slug: 'gioi-thieu-ve-acf',
+  // },
   {
     id: '3',
     img: '/images/hang-khong.png',
@@ -984,14 +912,14 @@ export const DATA_IDEOLOGY_LI = [
   },
 ];
 export const DATA_COMPETENCE_LI = [
-  {
-    id: 1,
-    img: '/images/hinh-anh-xam.jpeg',
-    slug: 'he-thong-mang-luoi',
-    time: '11/04/2019 13:44:00',
-    title: 'NĂNG LỰC VẬN TẢI',
-    desc: 'Với việc đầu tư mở rộng mạng lưới trên toàn quốc, phục vụ khách hàng với hệ thống máy móc, phần mềm ...',
-  },
+  // {
+  //   id: 1,
+  //   img: '/images/hinh-anh-xam.jpeg',
+  //   slug: 'he-thong-mang-luoi',
+  //   time: '11/04/2019 13:44:00',
+  //   title: 'NĂNG LỰC VẬN TẢI',
+  //   desc: 'Với việc đầu tư mở rộng mạng lưới trên toàn quốc, phục vụ khách hàng với hệ thống máy móc, phần mềm ...',
+  // },
   {
     id: 2,
     img: '/images/hinh-anh-xam.jpeg',
@@ -1092,40 +1020,40 @@ export const DATA_NETWORK_VI = [
   },
 ];
 export const DATA_ABOUT_EN = [
-  {
-    id: '1',
-    img: '/images/value2.jpg',
-    slug: 'gioi-thieu-ve-acf',
-    time: '19/03/2019 15:05:40',
-    title: 'ABOUT ACF',
-    desc: 'ACF – PLANET COURIER SERVICES. PSC Commercial & Express Service Joint Stock Company.',
-  },
-  {
-    id: '2',
-    img: '/images/adv.png',
-    slug: 'he-thong-mang-luoi',
-    time: '13/08/2018 13:29:10',
-    title: 'TRANSPORTATION CAPACITY',
-    desc: 'ACF constantly invests in expanding network around the nation, serving customer with the ...',
-  },
+  // {
+  //   id: '1',
+  //   img: '/images/value2.jpg',
+  //   slug: 'gioi-thieu-ve-acf',
+  //   time: '19/03/2019 15:05:40',
+  //   title: 'ABOUT ACF',
+  //   desc: 'ACF – PLANET COURIER SERVICES. PSC Commercial & Express Service Joint Stock Company.',
+  // },
+  // {
+  //   id: '2',
+  //   img: '/images/adv.png',
+  //   slug: 'he-thong-mang-luoi',
+  //   time: '13/08/2018 13:29:10',
+  //   title: 'TRANSPORTATION CAPACITY',
+  //   desc: 'ACF constantly invests in expanding network around the nation, serving customer with the ...',
+  // },
 ];
 export const DATA_ABOUT_VI = [
-  {
-    id: '1',
-    img: '/images/value2.jpg',
-    slug: 'gioi-thieu-ve-acf',
-    time: '19/03/2019 15:05:40',
-    title: 'GIỚI THIỆU VỀ ACF',
-    desc: 'ACF – PLANET COURIER SERVICES. Tổng Công ty Cổ phần Thương Mại và Dịch vụ Chuyển phát nhanh ACF.',
-  },
-  {
-    id: '2',
-    img: '/images/adv.png',
-    slug: 'he-thong-mang-luoi',
-    time: '10/04/2019 14:33:34',
-    title: 'NĂNG LỰC VẬN TẢI',
-    desc: 'Với việc đầu tư mở rộng mạng lưới trên toàn quốc, phục vụ khách hàng với hệ thống máy móc, phần mềm ...',
-  },
+  // {
+  //   id: '1',
+  //   img: '/images/value2.jpg',
+  //   slug: 'gioi-thieu-ve-acf',
+  //   time: '19/03/2019 15:05:40',
+  //   title: 'GIỚI THIỆU VỀ ACF',
+  //   desc: 'ACF – PLANET COURIER SERVICES. Tổng Công ty Cổ phần Thương Mại và Dịch vụ Chuyển phát nhanh ACF.',
+  // },
+  // {
+  //   id: '2',
+  //   img: '/images/adv.png',
+  //   slug: 'he-thong-mang-luoi',
+  //   time: '10/04/2019 14:33:34',
+  //   title: 'NĂNG LỰC VẬN TẢI',
+  //   desc: 'Với việc đầu tư mở rộng mạng lưới trên toàn quốc, phục vụ khách hàng với hệ thống máy móc, phần mềm ...',
+  // },
 ];
 export const DATA_RECRUITMENT_EN = [];
 export const DATA_RECRUITMENT_VI = [];

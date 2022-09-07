@@ -37,7 +37,7 @@ const BannerContainer = () => {
               {contactPhone}
             </div>
             <div className='text-[14px] font-semibold text-[#595959]'>
-              (+84)968.022257
+              (+84) 968 02 22 57
             </div>
           </div>
         </div>

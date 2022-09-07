@@ -63,7 +63,7 @@ const TrackForm = () => {
                       <span className='mr-2 inline-block h-[17px] w-[20px] items-center bg-yellow-primary pb-1 text-center text-[11px] leading-[16px] text-white'>
                         <PlusOutlined style={{ fontSize: '9px' }} />
                       </span>
-                      <Link href={value.href} passHref>
+                      <Link href={value.href || '#'} passHref>
                         <a className='text-[12px] font-semibold text-[#222]'>
                           {value.title}
                         </a>

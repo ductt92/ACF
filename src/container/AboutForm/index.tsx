@@ -1,18 +1,14 @@
 import Image from 'next/image';
-import useTranslation from 'next-translate/useTranslation';
 import React from 'react';
 
 import Breadcumb from '@/components/Breadcrumb';
 import ContentLeft from '@/components/ContentLeft';
 import FormCustomerRequest from '@/components/FormCustomerRequest';
-import ListNew from '@/components/ListNew';
-
-import { DATA_ABOUT_EN, DATA_ABOUT_VI } from '@/contants/mock-data/mock-data';
 
 import BANNER from '~/images/hinh-anh-xam.jpeg';
 const AboutForm = () => {
-  const { lang, t } = useTranslation('common');
-  const dataAbout = lang === 'vi' ? DATA_ABOUT_VI : DATA_ABOUT_EN;
+  // const { lang, t } = useTranslation('common');
+  // const dataAbout = lang === 'vi' ? DATA_ABOUT_VI : DATA_ABOUT_EN;
   return (
     <div className='m-auto w-[1174px] lg:w-full'>
       <div>
@@ -30,25 +26,25 @@ const AboutForm = () => {
         <ContentLeft />
       </div>
       <div className='float-left w-[905px] lg:w-full lg:px-[10px]'>
-        <div className=' mt-[20px] '>
+        {/* <div className=' mt-[20px] '>
           {dataAbout.map((value, index) => {
             return (
               <ListNew
-                title={value.title}
+                title={value?.title}
                 key={index}
-                img={value.img}
-                desc={value.desc}
+                img={value?.img}
+                desc={value?.desc}
                 time={value.time}
                 slug={value.slug}
               />
             );
           })}
-        </div>
-        <div className='float-left mb-[15px] flex w-full items-center justify-between'>
+        </div> */}
+        {/* <div className='float-left mb-[15px] flex w-full items-center justify-between'>
           <button className='m-[0_auto] h-[38px] w-[140px]  bg-[#ec3236] text-[16px] font-semibold leading-[39px] text-[#fff]'>
             {t('LoadMore')}
           </button>
-        </div>
+        </div> */}
       </div>
     </div>
   );

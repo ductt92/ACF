@@ -25,7 +25,8 @@
 }
 
 .show {
-  display: block;
+  display: grid;
+  grid-template-columns: auto auto auto;
 }
 .dropdownSubmenu {
   float: left;

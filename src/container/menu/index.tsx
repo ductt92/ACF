@@ -39,51 +39,45 @@ const Menu = (props: IProps) => {
   };
   return (
     <>
-      <div
-        className='grib grid-cols-3 gap-2'
-        onMouseEnter={onMouseEnter}
-        onMouseLeave={onMouseLeave}
-        ref={ref}
-      >
+      <div onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave} ref={ref}>
         <Link href={`${href}`} passHref>
           <div
             className={`${styles.hoverDropdown}  cursor-pointer px-[35px] py-2 sn:px-[10px] `}
           >
             {items.submenu ? (
-              <>
+              <div className='123'>
                 {depthLevel > 0 ? (
                   <BiChevronRight
                     style={{
-                      fontSize: 19,
+                      fontSize: 18,
                       display: 'inline-block',
                       color: 'red',
                       position: 'absolute',
                       left: -2,
-                      top: 0,
+                      top: 5,
                     }}
                   />
                 ) : (
                   <span className='arrow' />
                 )}
-                {items.title}
-
+                <p className='m-0 p-0'> {items.title}</p>
                 <Dropdown
                   depthLevel={depthLevel}
                   submenus={items.submenu}
                   dropdown={dropdown}
                 />
-              </>
+              </div>
             ) : (
-              <div>
+              <div className='456'>
                 {depthLevel > 0 ? (
                   <BiChevronRight
                     style={{
-                      fontSize: 19,
+                      fontSize: 18,
                       display: 'inline-block',
                       color: 'red',
                       position: 'absolute',
                       left: -2,
-                      top: 0,
+                      top: 5,
                     }}
                   />
                 ) : (

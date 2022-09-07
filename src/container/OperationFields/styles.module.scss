@@ -6,15 +6,15 @@
   color: #efbd2b;
   margin-bottom: 40px;
   width: 100%;
-  &::after {
-    content: '';
-    display: inline-block;
-    margin-top: 7px;
-    margin-left: 7px;
-    width: 43px;
-    height: 27px;
-    background: url(/images/ic_linhvuc.png) no-repeat;
-  }
+  // &::after {
+  //   content: '';
+  //   display: inline-block;
+  //   margin-top: 7px;
+  //   margin-left: 7px;
+  //   width: 43px;
+  //   height: 27px;
+  //   background: url(/images/ic_linhvuc.png) no-repeat;
+  // }
 }
 .contentField {
   float: left;
