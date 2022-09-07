@@ -157,11 +157,11 @@ export const DATA_POST_EN = [
     img2: '/images/amazon2.png',
     desc: [
       {
-        name: 'ACF cung cấp dịch vụ vận chuyển hàng hóa và kho vận từ Việt Nam đến sàn Amazon tại Mỹ cho các nhà sản xuất Việt Nam muốn mở rộng thị phần ra quốc tế.',
         desc1: '',
         desc2: '',
         desc3: '',
         desc4: '',
+        name: '',
       },
     ],
   },
@@ -173,14 +173,11 @@ export const DATA_POST_EN = [
     img2: '/images/acf.png',
     desc: [
       {
-        name: 'Vận tải đường biển là hình thức vận tải ra đời sớm nhất ở Việt Nam chuyên chở hàng hóa trong và ngoài nước.Dịch vụ vận chuyển đường biển chuyên nghiệp.Với bề dày kinh nghiệm gần 10 năm trong lĩnh vực vận chuyển, ACF tự hào cung cung cấp giải pháp dịch vụ vận tải biển trọn gói, nhanh chóng và an toàn. Ngoài ra, chúng tôi còn cung cấp các dịch vụ đi kèm như thông quan hàng hóa, lưu kho bãi, kiểm tra hàng hóa với gói cước cạnh tranh và tối ưu nhất.',
-        desc1:
-          'Với sự am hiểu về thủ tục hải quan, xuất nhập khẩu hàng hóa, nắm rõ quy trình thông quan hàng hóa. ACF đã và đang cung cấp các dịch vụ khai báo hải quan trọn gói, cung cấp giao nhận hàng hóa xuất nhập khẩu, giúp quý khách hàng, doanh nghiệp thông quan hàng hóa nhanh chóng nhằm đảm bảo việc kinh doanh của doanh nghiệp và đối tác được thuận lợi.',
-        desc2:
-          'Nhằm đáp ứng nhu cầu vận chuyển ngày càng cao/gia tăng của Quý khách, ACF luôn củng cố, phát triển đội ngũ nhân viên có nền tảng kiến thưc sâu rộng và bề dày kinh nghiệm nhiều năm trong hoạt động chuyển phát. Hơn thế nữa, ACF mở rộng, cung cấp đa dạng các loại dịch vụ hải quan khác nhau để đảm bảo quá tình thông quan diễn ra nhanh chóng và hiệu quả nhất',
-        desc3:
-          'Trên tất cả, sự am hiểu và nắm chắc  những quy định trong quy trình khai báo hải quan của ACF sẽ giúp Quý Khách hoàn toàn có thể chuyên tâm điều hành hoạt động kinh doanh của mình, mà không cần phải lo lắng về hàng hóa khi đã tin tưởng giao phó cho ',
+        desc1: '',
+        desc2: '',
+        desc3: '',
         desc4: '',
+        name: '',
       },
     ],
   },
@@ -192,11 +189,11 @@ export const DATA_POST_EN = [
     img2: '/images/duong-bien.png',
     desc: [
       {
-        name: 'ACF tự hào cung cung cấp giải pháp dịch vụ vận tải biển trọn gói, nhanh chóng và an toàn. Ngoài ra, chúng tôi còn cung cấp các dịch vụ đi kèm như thông quan hàng hóa, lưu kho bãi, kiểm tra hàng hóa với gói cước cạnh tranh và tối ưu nhất.',
         desc1: '',
         desc2: '',
         desc3: '',
         desc4: '',
+        name: '',
       },
     ],
   },
@@ -208,14 +205,11 @@ export const DATA_POST_EN = [
     img2: '/images/acf.png',
     desc: [
       {
-        name: 'Vận tải đường biển là hình thức vận tải ra đời sớm nhất ở Việt Nam chuyên chở hàng hóa trong và ngoài nước.Dịch vụ vận chuyển đường biển chuyên nghiệp.Với bề dày kinh nghiệm gần 10 năm trong lĩnh vực vận chuyển, ACF tự hào cung cung cấp giải pháp dịch vụ vận tải biển trọn gói, nhanh chóng và an toàn. Ngoài ra, chúng tôi còn cung cấp các dịch vụ đi kèm như thông quan hàng hóa, lưu kho bãi, kiểm tra hàng hóa với gói cước cạnh tranh và tối ưu nhất.',
-        desc1:
-          'Với sự am hiểu về thủ tục hải quan, xuất nhập khẩu hàng hóa, nắm rõ quy trình thông quan hàng hóa. ACF đã và đang cung cấp các dịch vụ khai báo hải quan trọn gói, cung cấp giao nhận hàng hóa xuất nhập khẩu, giúp quý khách hàng, doanh nghiệp thông quan hàng hóa nhanh chóng nhằm đảm bảo việc kinh doanh của doanh nghiệp và đối tác được thuận lợi.',
-        desc2:
-          'Nhằm đáp ứng nhu cầu vận chuyển ngày càng cao/gia tăng của Quý khách, ACF luôn củng cố, phát triển đội ngũ nhân viên có nền tảng kiến thưc sâu rộng và bề dày kinh nghiệm nhiều năm trong hoạt động chuyển phát. Hơn thế nữa, ACF mở rộng, cung cấp đa dạng các loại dịch vụ hải quan khác nhau để đảm bảo quá tình thông quan diễn ra nhanh chóng và hiệu quả nhất',
-        desc3:
-          'Trên tất cả, sự am hiểu và nắm chắc  những quy định trong quy trình khai báo hải quan của ACF sẽ giúp Quý Khách hoàn toàn có thể chuyên tâm điều hành hoạt động kinh doanh của mình, mà không cần phải lo lắng về hàng hóa khi đã tin tưởng giao phó cho ',
+        desc1: '',
+        desc2: '',
+        desc3: '',
         desc4: '',
+        name: '',
       },
     ],
   },
@@ -227,14 +221,11 @@ export const DATA_POST_EN = [
     img2: '/images/acf.png',
     desc: [
       {
-        name: 'Vận tải đường biển là hình thức vận tải ra đời sớm nhất ở Việt Nam chuyên chở hàng hóa trong và ngoài nước.Dịch vụ vận chuyển đường biển chuyên nghiệp.Với bề dày kinh nghiệm gần 10 năm trong lĩnh vực vận chuyển, ACF tự hào cung cung cấp giải pháp dịch vụ vận tải biển trọn gói, nhanh chóng và an toàn. Ngoài ra, chúng tôi còn cung cấp các dịch vụ đi kèm như thông quan hàng hóa, lưu kho bãi, kiểm tra hàng hóa với gói cước cạnh tranh và tối ưu nhất.',
-        desc1:
-          'Với sự am hiểu về thủ tục hải quan, xuất nhập khẩu hàng hóa, nắm rõ quy trình thông quan hàng hóa. ACF đã và đang cung cấp các dịch vụ khai báo hải quan trọn gói, cung cấp giao nhận hàng hóa xuất nhập khẩu, giúp quý khách hàng, doanh nghiệp thông quan hàng hóa nhanh chóng nhằm đảm bảo việc kinh doanh của doanh nghiệp và đối tác được thuận lợi.',
-        desc2:
-          'Nhằm đáp ứng nhu cầu vận chuyển ngày càng cao/gia tăng của Quý khách, ACF luôn củng cố, phát triển đội ngũ nhân viên có nền tảng kiến thưc sâu rộng và bề dày kinh nghiệm nhiều năm trong hoạt động chuyển phát. Hơn thế nữa, ACF mở rộng, cung cấp đa dạng các loại dịch vụ hải quan khác nhau để đảm bảo quá tình thông quan diễn ra nhanh chóng và hiệu quả nhất',
-        desc3:
-          'Trên tất cả, sự am hiểu và nắm chắc  những quy định trong quy trình khai báo hải quan của ACF sẽ giúp Quý Khách hoàn toàn có thể chuyên tâm điều hành hoạt động kinh doanh của mình, mà không cần phải lo lắng về hàng hóa khi đã tin tưởng giao phó cho ',
+        desc1: '',
+        desc2: '',
+        desc3: '',
         desc4: '',
+        name: '',
       },
     ],
   },
@@ -246,14 +237,11 @@ export const DATA_POST_EN = [
     img2: '/images/acf.png',
     desc: [
       {
-        name: 'Vận tải đường biển là hình thức vận tải ra đời sớm nhất ở Việt Nam chuyên chở hàng hóa trong và ngoài nước.Dịch vụ vận chuyển đường biển chuyên nghiệp.Với bề dày kinh nghiệm gần 10 năm trong lĩnh vực vận chuyển, ACF tự hào cung cung cấp giải pháp dịch vụ vận tải biển trọn gói, nhanh chóng và an toàn. Ngoài ra, chúng tôi còn cung cấp các dịch vụ đi kèm như thông quan hàng hóa, lưu kho bãi, kiểm tra hàng hóa với gói cước cạnh tranh và tối ưu nhất.',
-        desc1:
-          'Với sự am hiểu về thủ tục hải quan, xuất nhập khẩu hàng hóa, nắm rõ quy trình thông quan hàng hóa. ACF đã và đang cung cấp các dịch vụ khai báo hải quan trọn gói, cung cấp giao nhận hàng hóa xuất nhập khẩu, giúp quý khách hàng, doanh nghiệp thông quan hàng hóa nhanh chóng nhằm đảm bảo việc kinh doanh của doanh nghiệp và đối tác được thuận lợi.',
-        desc2:
-          'Nhằm đáp ứng nhu cầu vận chuyển ngày càng cao/gia tăng của Quý khách, ACF luôn củng cố, phát triển đội ngũ nhân viên có nền tảng kiến thưc sâu rộng và bề dày kinh nghiệm nhiều năm trong hoạt động chuyển phát. Hơn thế nữa, ACF mở rộng, cung cấp đa dạng các loại dịch vụ hải quan khác nhau để đảm bảo quá tình thông quan diễn ra nhanh chóng và hiệu quả nhất',
-        desc3:
-          'Trên tất cả, sự am hiểu và nắm chắc  những quy định trong quy trình khai báo hải quan của ACF sẽ giúp Quý Khách hoàn toàn có thể chuyên tâm điều hành hoạt động kinh doanh của mình, mà không cần phải lo lắng về hàng hóa khi đã tin tưởng giao phó cho ',
+        desc1: '',
+        desc2: '',
+        desc3: '',
         desc4: '',
+        name: '',
       },
     ],
   },
@@ -264,14 +252,11 @@ export const DATA_POST_EN = [
     img: '/images/hinh-anh-xam.jpeg',
     desc: [
       {
-        name: 'Vận tải đường biển là hình thức vận tải ra đời sớm nhất ở Việt Nam chuyên chở hàng hóa trong và ngoài nước.Dịch vụ vận chuyển đường biển chuyên nghiệp.Với bề dày kinh nghiệm gần 10 năm trong lĩnh vực vận chuyển, ACF tự hào cung cung cấp giải pháp dịch vụ vận tải biển trọn gói, nhanh chóng và an toàn. Ngoài ra, chúng tôi còn cung cấp các dịch vụ đi kèm như thông quan hàng hóa, lưu kho bãi, kiểm tra hàng hóa với gói cước cạnh tranh và tối ưu nhất.',
-        desc1:
-          'Với sự am hiểu về thủ tục hải quan, xuất nhập khẩu hàng hóa, nắm rõ quy trình thông quan hàng hóa. ACF đã và đang cung cấp các dịch vụ khai báo hải quan trọn gói, cung cấp giao nhận hàng hóa xuất nhập khẩu, giúp quý khách hàng, doanh nghiệp thông quan hàng hóa nhanh chóng nhằm đảm bảo việc kinh doanh của doanh nghiệp và đối tác được thuận lợi.',
-        desc2:
-          'Nhằm đáp ứng nhu cầu vận chuyển ngày càng cao/gia tăng của Quý khách, ACF luôn củng cố, phát triển đội ngũ nhân viên có nền tảng kiến thưc sâu rộng và bề dày kinh nghiệm nhiều năm trong hoạt động chuyển phát. Hơn thế nữa, ACF mở rộng, cung cấp đa dạng các loại dịch vụ hải quan khác nhau để đảm bảo quá tình thông quan diễn ra nhanh chóng và hiệu quả nhất',
-        desc3:
-          'Trên tất cả, sự am hiểu và nắm chắc  những quy định trong quy trình khai báo hải quan của ACF sẽ giúp Quý Khách hoàn toàn có thể chuyên tâm điều hành hoạt động kinh doanh của mình, mà không cần phải lo lắng về hàng hóa khi đã tin tưởng giao phó cho ',
+        desc1: '',
+        desc2: '',
+        desc3: '',
         desc4: '',
+        name: '',
       },
     ],
   },
@@ -283,14 +268,11 @@ export const DATA_POST_EN = [
     img2: '/images/acf.png',
     desc: [
       {
-        name: 'Vận tải đường biển là hình thức vận tải ra đời sớm nhất ở Việt Nam chuyên chở hàng hóa trong và ngoài nước.Dịch vụ vận chuyển đường biển chuyên nghiệp.Với bề dày kinh nghiệm gần 10 năm trong lĩnh vực vận chuyển, ACF tự hào cung cung cấp giải pháp dịch vụ vận tải biển trọn gói, nhanh chóng và an toàn. Ngoài ra, chúng tôi còn cung cấp các dịch vụ đi kèm như thông quan hàng hóa, lưu kho bãi, kiểm tra hàng hóa với gói cước cạnh tranh và tối ưu nhất.',
-        desc1:
-          'Với sự am hiểu về thủ tục hải quan, xuất nhập khẩu hàng hóa, nắm rõ quy trình thông quan hàng hóa. ACF đã và đang cung cấp các dịch vụ khai báo hải quan trọn gói, cung cấp giao nhận hàng hóa xuất nhập khẩu, giúp quý khách hàng, doanh nghiệp thông quan hàng hóa nhanh chóng nhằm đảm bảo việc kinh doanh của doanh nghiệp và đối tác được thuận lợi.',
-        desc2:
-          'Nhằm đáp ứng nhu cầu vận chuyển ngày càng cao/gia tăng của Quý khách, ACF luôn củng cố, phát triển đội ngũ nhân viên có nền tảng kiến thưc sâu rộng và bề dày kinh nghiệm nhiều năm trong hoạt động chuyển phát. Hơn thế nữa, ACF mở rộng, cung cấp đa dạng các loại dịch vụ hải quan khác nhau để đảm bảo quá tình thông quan diễn ra nhanh chóng và hiệu quả nhất',
-        desc3:
-          'Trên tất cả, sự am hiểu và nắm chắc  những quy định trong quy trình khai báo hải quan của ACF sẽ giúp Quý Khách hoàn toàn có thể chuyên tâm điều hành hoạt động kinh doanh của mình, mà không cần phải lo lắng về hàng hóa khi đã tin tưởng giao phó cho ',
+        desc1: '',
+        desc2: '',
+        desc3: '',
         desc4: '',
+        name: '',
       },
     ],
   },
@@ -318,14 +300,11 @@ export const DATA_POST_EN = [
     img2: '/images/acf.png',
     desc: [
       {
-        name: 'Vận tải đường biển là hình thức vận tải ra đời sớm nhất ở Việt Nam chuyên chở hàng hóa trong và ngoài nước.Dịch vụ vận chuyển đường biển chuyên nghiệp.Với bề dày kinh nghiệm gần 10 năm trong lĩnh vực vận chuyển, ACF tự hào cung cung cấp giải pháp dịch vụ vận tải biển trọn gói, nhanh chóng và an toàn. Ngoài ra, chúng tôi còn cung cấp các dịch vụ đi kèm như thông quan hàng hóa, lưu kho bãi, kiểm tra hàng hóa với gói cước cạnh tranh và tối ưu nhất.',
-        desc1:
-          'Với sự am hiểu về thủ tục hải quan, xuất nhập khẩu hàng hóa, nắm rõ quy trình thông quan hàng hóa. ACF đã và đang cung cấp các dịch vụ khai báo hải quan trọn gói, cung cấp giao nhận hàng hóa xuất nhập khẩu, giúp quý khách hàng, doanh nghiệp thông quan hàng hóa nhanh chóng nhằm đảm bảo việc kinh doanh của doanh nghiệp và đối tác được thuận lợi.',
-        desc2:
-          'Nhằm đáp ứng nhu cầu vận chuyển ngày càng cao/gia tăng của Quý khách, ACF luôn củng cố, phát triển đội ngũ nhân viên có nền tảng kiến thưc sâu rộng và bề dày kinh nghiệm nhiều năm trong hoạt động chuyển phát. Hơn thế nữa, ACF mở rộng, cung cấp đa dạng các loại dịch vụ hải quan khác nhau để đảm bảo quá tình thông quan diễn ra nhanh chóng và hiệu quả nhất',
-        desc3:
-          'Trên tất cả, sự am hiểu và nắm chắc  những quy định trong quy trình khai báo hải quan của ACF sẽ giúp Quý Khách hoàn toàn có thể chuyên tâm điều hành hoạt động kinh doanh của mình, mà không cần phải lo lắng về hàng hóa khi đã tin tưởng giao phó cho ',
+        desc1: '',
+        desc2: '',
+        desc3: '',
         desc4: '',
+        name: '',
       },
     ],
   },
@@ -680,13 +659,10 @@ export const DATA_POST_EN = [
     img: '/images/hinh-anh-xam.jpeg',
     desc: [
       {
-        name: 'Vận tải đường biển là hình thức vận tải ra đời sớm nhất ở Việt Nam chuyên chở hàng hóa trong và ngoài nước.Dịch vụ vận chuyển đường biển chuyên nghiệp.Với bề dày kinh nghiệm gần 10 năm trong lĩnh vực vận chuyển, ACF tự hào cung cung cấp giải pháp dịch vụ vận tải biển trọn gói, nhanh chóng và an toàn. Ngoài ra, chúng tôi còn cung cấp các dịch vụ đi kèm như thông quan hàng hóa, lưu kho bãi, kiểm tra hàng hóa với gói cước cạnh tranh và tối ưu nhất.',
-        desc1:
-          'Với sự am hiểu về thủ tục hải quan, xuất nhập khẩu hàng hóa, nắm rõ quy trình thông quan hàng hóa. ACF đã và đang cung cấp các dịch vụ khai báo hải quan trọn gói, cung cấp giao nhận hàng hóa xuất nhập khẩu, giúp quý khách hàng, doanh nghiệp thông quan hàng hóa nhanh chóng nhằm đảm bảo việc kinh doanh của doanh nghiệp và đối tác được thuận lợi.',
-        desc2:
-          'Nhằm đáp ứng nhu cầu vận chuyển ngày càng cao/gia tăng của Quý khách, ACF luôn củng cố, phát triển đội ngũ nhân viên có nền tảng kiến thưc sâu rộng và bề dày kinh nghiệm nhiều năm trong hoạt động chuyển phát. Hơn thế nữa, ACF mở rộng, cung cấp đa dạng các loại dịch vụ hải quan khác nhau để đảm bảo quá tình thông quan diễn ra nhanh chóng và hiệu quả nhất',
-        desc3:
-          'Trên tất cả, sự am hiểu và nắm chắc  những quy định trong quy trình khai báo hải quan của ACF sẽ giúp Quý Khách hoàn toàn có thể chuyên tâm điều hành hoạt động kinh doanh của mình, mà không cần phải lo lắng về hàng hóa khi đã tin tưởng giao phó cho ',
+        name: '',
+        desc1: '',
+        desc2: '',
+        desc3: '',
         desc4: '',
       },
     ],
@@ -1452,14 +1428,11 @@ export const DATA_POST_VI = [
     img: '/images/hinh-anh-xam.jpeg',
     desc: [
       {
-        name: 'Vận tải đường biển là hình thức vận tải ra đời sớm nhất ở Việt Nam chuyên chở hàng hóa trong và ngoài nước.Dịch vụ vận chuyển đường biển chuyên nghiệp.Với bề dày kinh nghiệm gần 10 năm trong lĩnh vực vận chuyển, ACF tự hào cung cung cấp giải pháp dịch vụ vận tải biển trọn gói, nhanh chóng và an toàn. Ngoài ra, chúng tôi còn cung cấp các dịch vụ đi kèm như thông quan hàng hóa, lưu kho bãi, kiểm tra hàng hóa với gói cước cạnh tranh và tối ưu nhất.',
-        desc1:
-          'Với sự am hiểu về thủ tục hải quan, xuất nhập khẩu hàng hóa, nắm rõ quy trình thông quan hàng hóa. ACF đã và đang cung cấp các dịch vụ khai báo hải quan trọn gói, cung cấp giao nhận hàng hóa xuất nhập khẩu, giúp quý khách hàng, doanh nghiệp thông quan hàng hóa nhanh chóng nhằm đảm bảo việc kinh doanh của doanh nghiệp và đối tác được thuận lợi.',
-        desc2:
-          'Nhằm đáp ứng nhu cầu vận chuyển ngày càng cao/gia tăng của Quý khách, ACF luôn củng cố, phát triển đội ngũ nhân viên có nền tảng kiến thưc sâu rộng và bề dày kinh nghiệm nhiều năm trong hoạt động chuyển phát. Hơn thế nữa, ACF mở rộng, cung cấp đa dạng các loại dịch vụ hải quan khác nhau để đảm bảo quá tình thông quan diễn ra nhanh chóng và hiệu quả nhất',
-        desc3:
-          'Trên tất cả, sự am hiểu và nắm chắc  những quy định trong quy trình khai báo hải quan của ACF sẽ giúp Quý Khách hoàn toàn có thể chuyên tâm điều hành hoạt động kinh doanh của mình, mà không cần phải lo lắng về hàng hóa khi đã tin tưởng giao phó cho ',
+        desc1: '',
+        desc2: '',
+        desc3: '',
         desc4: '',
+        name: '',
       },
     ],
   },
@@ -1505,14 +1478,11 @@ export const DATA_POST_VI = [
     img: '/images/hinh-anh-xam.jpeg',
     desc: [
       {
-        name: 'Vận tải đường biển là hình thức vận tải ra đời sớm nhất ở Việt Nam chuyên chở hàng hóa trong và ngoài nước.Dịch vụ vận chuyển đường biển chuyên nghiệp.Với bề dày kinh nghiệm gần 10 năm trong lĩnh vực vận chuyển, ACF tự hào cung cung cấp giải pháp dịch vụ vận tải biển trọn gói, nhanh chóng và an toàn. Ngoài ra, chúng tôi còn cung cấp các dịch vụ đi kèm như thông quan hàng hóa, lưu kho bãi, kiểm tra hàng hóa với gói cước cạnh tranh và tối ưu nhất.',
-        desc1:
-          'Với sự am hiểu về thủ tục hải quan, xuất nhập khẩu hàng hóa, nắm rõ quy trình thông quan hàng hóa. ACF đã và đang cung cấp các dịch vụ khai báo hải quan trọn gói, cung cấp giao nhận hàng hóa xuất nhập khẩu, giúp quý khách hàng, doanh nghiệp thông quan hàng hóa nhanh chóng nhằm đảm bảo việc kinh doanh của doanh nghiệp và đối tác được thuận lợi.',
-        desc2:
-          'Nhằm đáp ứng nhu cầu vận chuyển ngày càng cao/gia tăng của Quý khách, ACF luôn củng cố, phát triển đội ngũ nhân viên có nền tảng kiến thưc sâu rộng và bề dày kinh nghiệm nhiều năm trong hoạt động chuyển phát. Hơn thế nữa, ACF mở rộng, cung cấp đa dạng các loại dịch vụ hải quan khác nhau để đảm bảo quá tình thông quan diễn ra nhanh chóng và hiệu quả nhất',
-        desc3:
-          'Trên tất cả, sự am hiểu và nắm chắc  những quy định trong quy trình khai báo hải quan của ACF sẽ giúp Quý Khách hoàn toàn có thể chuyên tâm điều hành hoạt động kinh doanh của mình, mà không cần phải lo lắng về hàng hóa khi đã tin tưởng giao phó cho ',
+        desc1: '',
+        desc2: '',
+        desc3: '',
         desc4: '',
+        name: '',
       },
     ],
   },
@@ -1750,13 +1720,10 @@ export const DATA_POST_VI = [
     img: '/images/hinh-anh-xam.jpeg',
     desc: [
       {
-        name: 'Vận tải đường biển là hình thức vận tải ra đời sớm nhất ở Việt Nam chuyên chở hàng hóa trong và ngoài nước.Dịch vụ vận chuyển đường biển chuyên nghiệp.Với bề dày kinh nghiệm gần 10 năm trong lĩnh vực vận chuyển, ACF tự hào cung cung cấp giải pháp dịch vụ vận tải biển trọn gói, nhanh chóng và an toàn. Ngoài ra, chúng tôi còn cung cấp các dịch vụ đi kèm như thông quan hàng hóa, lưu kho bãi, kiểm tra hàng hóa với gói cước cạnh tranh và tối ưu nhất.',
-        desc1:
-          'Với sự am hiểu về thủ tục hải quan, xuất nhập khẩu hàng hóa, nắm rõ quy trình thông quan hàng hóa. ACF đã và đang cung cấp các dịch vụ khai báo hải quan trọn gói, cung cấp giao nhận hàng hóa xuất nhập khẩu, giúp quý khách hàng, doanh nghiệp thông quan hàng hóa nhanh chóng nhằm đảm bảo việc kinh doanh của doanh nghiệp và đối tác được thuận lợi.',
-        desc2:
-          'Nhằm đáp ứng nhu cầu vận chuyển ngày càng cao/gia tăng của Quý khách, ACF luôn củng cố, phát triển đội ngũ nhân viên có nền tảng kiến thưc sâu rộng và bề dày kinh nghiệm nhiều năm trong hoạt động chuyển phát. Hơn thế nữa, ACF mở rộng, cung cấp đa dạng các loại dịch vụ hải quan khác nhau để đảm bảo quá tình thông quan diễn ra nhanh chóng và hiệu quả nhất',
-        desc3:
-          'Trên tất cả, sự am hiểu và nắm chắc  những quy định trong quy trình khai báo hải quan của ACF sẽ giúp Quý Khách hoàn toàn có thể chuyên tâm điều hành hoạt động kinh doanh của mình, mà không cần phải lo lắng về hàng hóa khi đã tin tưởng giao phó cho ',
+        name: '',
+        desc1: '',
+        desc2: '',
+        desc3: '',
         desc4: '',
       },
     ],
