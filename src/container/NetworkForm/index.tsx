@@ -14,7 +14,7 @@ import {
 
 import BANNER from '~/images/hinh-anh-xam.jpeg';
 const NetworkForm = () => {
-  const { lang, t } = useTranslation('common');
+  const { lang } = useTranslation('common');
   const dataCustomerSupport = lang === 'vi' ? DATA_NETWORK_VI : DATA_NETWORK_EN;
   return (
     <div>
@@ -48,11 +48,11 @@ const NetworkForm = () => {
               );
             })}
           </div>
-          <div className='float-left mb-[15px] flex w-full items-center justify-between'>
+          {/* <div className='float-left mb-[15px] flex w-full items-center justify-between'>
             <button className='m-[0_auto] h-[38px] w-[140px]  bg-[#ec3236] text-[16px] font-semibold leading-[39px] text-[#fff]'>
               {t('LoadMore')}
             </button>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

@@ -48,11 +48,11 @@ const CompetenceForm = () => {
             );
           })}
         </div>
-        <div className='float-left mb-[15px] flex w-full items-center justify-between'>
+        {/* <div className='float-left mb-[15px] flex w-full items-center justify-between'>
           <button className='m-[0_auto] h-[38px] w-[140px]  bg-[#ec3236] text-[16px] font-semibold leading-[39px] text-[#fff]'>
             LOAD MORE
           </button>
-        </div>
+        </div> */}
       </div>
     </div>
   );

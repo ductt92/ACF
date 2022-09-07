@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import useTranslation from 'next-translate/useTranslation';
 import React, { useRef } from 'react';
 
@@ -19,7 +18,7 @@ const CustomerRequest = () => {
         <span className='float-left mb-[12px] mr-[7px] block border-b-[1px] border-yellow-primary'>
           {t('CustomerRequest')}
         </span>
-        <Image src='/images/ic_linhvuc.png' alt='' height={36} width={58} />
+        {/* <Image src='/images/ic_linhvuc.png' alt='' height={36} width={58} /> */}
       </h2>
       <p className='mb-[35px] text-[14px] text-black'>{t('DescFuntion')}</p>
       <input

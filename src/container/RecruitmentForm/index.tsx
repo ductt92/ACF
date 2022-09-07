@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import useTranslation from 'next-translate/useTranslation';
+// import useTranslation from 'next-translate/useTranslation';
 import React from 'react';
 
 import Breadcumb from '@/components/Breadcrumb';
@@ -13,7 +13,7 @@ import FormCustomerRequest from '@/components/FormCustomerRequest';
 import BANNER from '~/images/hinh-anh-xam.jpeg';
 
 const RecruimentForm = () => {
-  const { t } = useTranslation('common');
+  // const { t } = useTranslation('common');
   // const dataMockRecruitment =
   //   lang === 'vi' ? DATA_RECRUITMENT_VI : DATA_RECRUITMENT_EN;
   return (
@@ -47,11 +47,11 @@ const RecruimentForm = () => {
             );
           })}
         </div> */}
-        <div className='float-left mb-[15px] flex w-full items-center justify-between'>
+        {/* <div className='float-left mb-[15px] flex w-full items-center justify-between'>
           <button className='m-[0_auto] h-[38px] w-[140px]  bg-[#ec3236] text-[16px] font-semibold leading-[39px] text-[#fff]'>
             {t('LoadMore')}
           </button>
-        </div>
+        </div> */}
       </div>
     </div>
   );
