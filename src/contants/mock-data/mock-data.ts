@@ -481,7 +481,7 @@ export const MOCK_IMAGE_SLIDER = [
 ];
 export const MOCK_FOOTER_CONTACT_EN = [
   {
-    city: 'ACF HANOI',
+    city: 'ACF SERVICES AND TRADING COMPANY LIMITED',
     street: 'Long Canh Villa 95, Vinhomes Thang Long,',
     locality: 'An Khanh Str, Hoai Duc Dist, Ha Noi, Vietnam',
     phone: '(+84) 968 022 257',
