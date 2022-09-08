@@ -137,7 +137,7 @@ const HeaderMobile = () => {
               alt='[ico]'
             />
             <p className='my-[10px] text-[16px]'>{t('ContactPhone')}</p>
-            <b className='font-bold'>(024) 3783 4919</b>
+            <b className='font-bold'>(+84) 968 02 22 57</b>
           </div>
           <div className='pl-[25px] pt-2'>
             <Image
@@ -147,7 +147,7 @@ const HeaderMobile = () => {
               alt='[ico]'
             />
             <p className='my-[10px] text-[16px]'>{t('HotLine')}</p>
-            <b className='font-bold'>1900-545428</b>
+            <b className='font-bold'>19008972</b>
           </div>
         </div>
       </nav>
