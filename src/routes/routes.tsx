@@ -18,3 +18,5 @@ export const routes: IRoutes[] = [
     icons: <TeamOutlined className='-translate-x-1 text-xl' />,
   },
 ];
+
+export const MANAGER_PAGES = '/manager';

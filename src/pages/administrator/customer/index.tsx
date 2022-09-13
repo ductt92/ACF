@@ -61,11 +61,7 @@ const CustomerPage = () => {
             className='cursor-pointer'
             dataSource={dataCustomer?.data}
             pagination={{
-              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-              //  @ts-ignore
               current: dataCustomer?.pagination?.currentPage,
-              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-              //  @ts-ignore
               total: dataCustomer?.pagination?.totalCount,
               showSizeChanger: false,
               defaultPageSize: QUERY_PARAMS.pageSize,

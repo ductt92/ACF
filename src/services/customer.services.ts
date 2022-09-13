@@ -1,6 +1,16 @@
 import { ICustomer } from '@/contants/types';
 import HttpRequest from '@/utils/Http-request';
 
+export interface CustomerResponse {
+  data?: ICustomer[];
+  pagination?: {
+    currentPage: number;
+    pageSize: number;
+    totalCount: number;
+    totalPage: number;
+  };
+}
+
 export const fetchCustomer = async ({
   page,
   pageSize,
@@ -13,7 +23,7 @@ export const fetchCustomer = async ({
   const customer = HttpRequest.get('customer', {
     params: { page, pageSize, search },
   });
-  return customer;
+  return customer as CustomerResponse;
 };
 
 export const createCustomer = async (data: Partial<ICustomer>) => {

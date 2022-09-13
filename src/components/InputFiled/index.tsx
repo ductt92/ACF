@@ -6,7 +6,7 @@ import styles from './style.module.scss';
 interface PropsInputFiled {
   label: string;
   placeholder?: string;
-  name: string;
+  name?: string;
   type: string;
   value: any;
   onChange: (e: any) => void;

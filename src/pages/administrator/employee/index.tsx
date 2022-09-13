@@ -57,11 +57,7 @@ const EmployeeContainer = () => {
           className='cursor-pointer'
           dataSource={dataUser?.data}
           pagination={{
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            //  @ts-ignore
             current: dataUser?.pagination?.currentPage,
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            //  @ts-ignore
             total: dataUser?.pagination?.totalCount,
             showSizeChanger: false,
             defaultPageSize: QUERY_PARAMS.pageSize,

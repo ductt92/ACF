@@ -2,7 +2,8 @@
 import { ColumnsType } from 'antd/lib/table';
 import dayjs from 'dayjs';
 
-import { IStaff } from '../types';
+import { LevelStaff } from '../common.constants';
+import { IStaff, Marital } from '../types';
 
 export const EMPLOYEE_COLUMNS: ColumnsType<IStaff> = [
   {
@@ -86,6 +87,10 @@ export const EMPLOYEE_COLUMNS: ColumnsType<IStaff> = [
     key: 'level',
     align: 'center',
     width: 150,
+    render: (typeCustomer: string) => {
+      return <span>{LevelStaff[typeCustomer as 'MASTER']}</span>;
+    },
+    // LevelStaff
   },
   {
     title: 'Tình trạng hôn nhân',
@@ -93,6 +98,9 @@ export const EMPLOYEE_COLUMNS: ColumnsType<IStaff> = [
     key: 'marital',
     align: 'center',
     width: 150,
+    render: (typeCustomer: string) => {
+      return <span>{Marital[typeCustomer as 'SINGLE']}</span>;
+    },
   },
   {
     title: 'Thành phần',

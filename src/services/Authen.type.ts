@@ -6,6 +6,9 @@ export interface IUser {
   roleId: string;
   phoneCode: string;
   phoneNumber: string;
+  role: {
+    name: string;
+  };
 }
 export interface IExprires {
   token: string;

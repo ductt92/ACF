@@ -9,7 +9,7 @@ type VInputProps = InputProps & {
 export default function VInput({ label, required, ...rest }: VInputProps) {
   return (
     <div className='space-y-1'>
-      <span className='text-sm'>
+      <span className='text-sm font-medium'>
         {label} {required && <span className='text-red-700'>*</span>} :
       </span>
       <Input {...rest} />

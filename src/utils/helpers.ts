@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { message } from 'antd';
 
 export const alertMessage = (
@@ -29,4 +30,16 @@ export const alertMessage = (
     default:
       break;
   }
+};
+
+export const CLICK_TO_COPY = 'Click to copy';
+
+export const copyToClipBoard = (value: any, content?: string) => {
+  navigator.clipboard.writeText(value);
+  message.success({
+    content: content || 'Đã copy',
+    style: {
+      textAlign: 'center',
+    },
+  });
 };

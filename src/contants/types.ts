@@ -114,3 +114,101 @@ export enum NetWorkCustomerType { // Loại khách hàng vào mạng
   RETAIL_CUSTOMER = 'Khách hàng lẻ', //'Khách hàng lẻ',
   TRIAL_CUSTOMER = 'Khách hàng dùng thử', //'Khách hàng dùng thử',
 }
+
+export interface IMyBooking {
+  id: string;
+  bookingCode: string;
+  customerId: string;
+  unitId?: string;
+  invoiceId?: string;
+  type: BookingType;
+  partnerBillCode?: string;
+  senderAddress: string;
+  senderName: string;
+  senderContactPerson: string;
+  senderPhoneNumber: string;
+  senderMobile: string;
+  senderCountry: string;
+  senderCommune: string;
+  senderDistrict: string;
+  senderProvince: string;
+  senderPostalCode: string;
+  senderState: string;
+  receiverAddress: string;
+  receiverName: string;
+  receiverContactPerson: string;
+  receiverPhoneNumber: string;
+  receiverMobile: string;
+  receiverCountry: string;
+  receiverCommune: string;
+  receiverDistrict: string;
+  receiverProvince: string;
+  receiverPostalCode: string;
+  receiverState: string;
+  estimatedDate: string | Date;
+  status: BookingStatus;
+  serviceBooking: ServiceEnum;
+  typeOfPayment: TypeOfPayment;
+  total: number;
+  vat: number;
+  amount: number;
+  note: string;
+  createdAt: string | Date;
+  updatedAt: string | Date;
+  unit: null;
+  customer: ICustomer;
+  bookingDetail: Array<BookingDetails>;
+}
+
+export enum CommoditiesType { // Loại hàng hóa
+  LICENSE = 'Chứng từ', //Chứng từ
+  GARMENT = 'May mặc', //May mặc
+  MACHANICAL = ' Cơ khí', // Cơ khí
+  ELECTRONIC_COMPONENTS = 'Linh kiện điện tử', //Linh kiện điện tử
+  PLASTIC_RUBBER = 'Nhựa, cao su', //Nhựa, cao su
+  FOOD = 'Thực phẩm', // Thực phẩm
+  OTHER = 'Khác', //Khác
+}
+
+export enum BookingStatus {
+  NOT_YET_HANDED_OVER = 'Chưa bàn giao', // Chưa bàn giao
+  HANDED_OVER = 'Đã bàn giao', // Đã bàn giao
+  DELIVERY = 'Đang vận chuyển', // Đang vận chuyển
+  DONE = 'Giao hàng thành công', // Giao hàng thành công
+  CANCEL = 'Đã hủy', // Đã hủy
+}
+
+export enum TypeOfPayment {
+  PREPAID = 'Thanh toán tại Việt Nam', //Thanh toán tại Việt Nam
+  COLLECT_CHARGE = 'Thanh toán tại nước nhận theo order từ đầu nước ngoài', // Thanh toán tại nước nhận theo order từ đầu nước ngoài
+  TELEGRAPHIC_TRANSFER_REMITTANCE = ' Chuyển tiền bằng Điện chuyển tiền', // Chuyển tiền bằng Điện chuyển tiền
+  MAIL_TRANSFER_REMITTANCE = 'Chuyển tiền bằng Thư chuyển tiền', // Chuyển tiền bằng Thư chuyển tiền
+  CASH_AGAINST_DOCUMENT = 'Trả tiền lấy chứng từ', // Trả tiền lấy chứng từ
+  COLLECTION = 'Nhờ thu', // Nhờ thu
+  LETTER_OF_CREDIT = 'Tín dụng thư', // Tín dụng thư
+}
+
+export type BookingDetails = {
+  id: string;
+  bookingId: string;
+  commoditiesType: CommoditiesType;
+  name: string;
+  description: string;
+  quantity: number;
+  weight: number;
+  height: number;
+  width: number;
+  longs: number;
+  bulkyWeight: number;
+  createdAt: string | Date;
+  updatedAt: string | Date;
+};
+export enum UsersRole {
+  USER = 'user',
+  STAFF = 'staff',
+  ADMIN = 'admin',
+}
+export enum BookingType {
+  LICENSE = 'Chứng từ', //Chứng từ,
+  COMMODITY = 'Hàng hóa', //Hàng hóa,
+}

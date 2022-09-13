@@ -1,24 +1,15 @@
 import { IStaff } from '@/contants/types';
 import HttpRequest from '@/utils/Http-request';
 
-// type ResponseType = {
-//   data: Array<IStaff>;
-//   pagination?: {
-//     currentPage: number;
-//     pageSize: number;
-//     totalCount: number;
-//     totalPage: number;
-//   };
-// };
-
-// type UserType = {
-//   id: string,
-//   roleId: string,
-//   status: string,
-//   updatedAt: string,
-//   createdAt: string
-// }
-
+export interface CustomerResponse {
+  data?: IStaff[];
+  pagination?: {
+    currentPage: number;
+    pageSize: number;
+    totalCount: number;
+    totalPage: number;
+  };
+}
 export const fetchUsers = async ({
   page,
   pageSize,
@@ -31,7 +22,7 @@ export const fetchUsers = async ({
   const users = HttpRequest.get('staffs', {
     params: { page, pageSize, search },
   });
-  return users;
+  return users as CustomerResponse;
 };
 
 // create thong tin nhan vien

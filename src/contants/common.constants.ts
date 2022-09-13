@@ -22,6 +22,7 @@ export const QUERY_PARAMS: QueryParams = {
   search: '',
 };
 export const FORMAT_DATE_DD_MM_YYYY = 'DD/MM/YYYY';
+export const FORMAT_DATE_DD_MM_YYYY_HH_MM_SS = 'DD/MM/YYYY hh:mm:ss';
 
 export const QUERY_PARAMS_2: QueryParams2 = {
   page: 1,
