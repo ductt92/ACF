@@ -60,12 +60,12 @@ const ModalCreateBooking = ({ isOpen, onClose }: ModalCreateEmployeeProps) => {
       bookingDetail: dataCreateBooking?.bookingDetail?.map(
         (v: BookingDetails) => ({
           ...v,
-          quantity: parseInt(v.quantity.toString()) || 0,
-          weight: parseInt(v.weight.toString()) || 0,
-          height: parseInt(v.height.toString()) || 0,
-          width: parseInt(v.width.toString()) || 0,
-          longs: parseInt(v.longs.toString()) || 0,
-          bulkyWeight: parseInt(v.bulkyWeight.toString()) || 0,
+          quantity: parseInt(v.quantity?.toString()) || 0,
+          weight: parseInt(v.weight?.toString()) || 0,
+          height: parseInt(v.height?.toString()) || 0,
+          width: parseInt(v.width?.toString()) || 0,
+          longs: parseInt(v.longs?.toString()) || 0,
+          bulkyWeight: parseInt(v.bulkyWeight?.toString()) || 0,
         })
       ),
     });
