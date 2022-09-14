@@ -120,8 +120,8 @@ export const CUSTOMER_COLUMNS: ColumnsType<ICustomer> = [
   },
   {
     title: 'Mã bưu chính',
-    dataIndex: 'postalCost',
-    key: 'postalCost',
+    dataIndex: 'postCode',
+    key: 'postCode',
     align: 'center',
     width: 150,
     render: (type: string) => {

@@ -47,6 +47,8 @@ const ModalEditEmployee = ({ onClose, value }: IProps) => {
       id: value?.id || '',
       data: {
         ...requestData,
+        placeOfBirth: requestData.placeOfBirth?.toString(),
+        religion: requestData.religion?.toString(),
       },
     });
   };
@@ -114,6 +116,19 @@ const ModalEditEmployee = ({ onClose, value }: IProps) => {
                 </Form.Item>
 
                 <Form.Item
+                  name='placeOfBirth'
+                  rules={[
+                    { required: true, message: 'Vui lòng nhập nơi sinh' },
+                  ]}
+                >
+                  <VInput
+                    label='Nơi Sinh'
+                    placeholder='Nhập nơi sinh'
+                    required
+                  />
+                </Form.Item>
+
+                <Form.Item
                   name='gender'
                   rules={[{ required: true, message: 'Vui lòng chọn' }]}
                 >
@@ -128,6 +143,17 @@ const ModalEditEmployee = ({ onClose, value }: IProps) => {
                       </Option>
                     ))}
                   </VSelect>
+                </Form.Item>
+
+                <Form.Item
+                  name='religion'
+                  rules={[{ required: true, message: 'Vui lòng nhập' }]}
+                >
+                  <VInput
+                    label='Tôn giáo'
+                    placeholder='Nhập tôn giáo'
+                    required
+                  />
                 </Form.Item>
 
                 <Form.Item

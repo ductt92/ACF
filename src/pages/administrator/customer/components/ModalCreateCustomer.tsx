@@ -271,7 +271,7 @@ const ModalCreateCustomer = ({ onClose }: IProps) => {
                   ))}
                 </VSelect>
               </Form.Item>
-              <Form.Item name='postalCode'>
+              <Form.Item name='postCode'>
                 <VInput label='Mã bưu chính' placeholder='Nhập Mã bưu chính' />
               </Form.Item>
               <Form.Item name='state'>

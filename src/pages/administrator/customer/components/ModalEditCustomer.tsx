@@ -276,7 +276,7 @@ const ModalEditCustomer = ({ onClose, value }: IProps) => {
                   ))}
                 </VSelect>
               </Form.Item>
-              <Form.Item name='postalCost'>
+              <Form.Item name='postCode'>
                 <VInput label='Mã bưu chính' placeholder='Nhập Mã bưu chính' />
               </Form.Item>
               <Form.Item name='state'>
