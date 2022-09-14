@@ -144,9 +144,9 @@ const ModalCreateBooking = ({ isOpen, onClose }: ModalCreateEmployeeProps) => {
                       ))}
                     </VSelect>
                   </Form.Item>
-                  <Form.Item name='invoiceId'>
+                  {/* <Form.Item name='invoiceId'>
                     <VInput label='Mã invoice' />
-                  </Form.Item>
+                  </Form.Item> */}
                   <Form.Item
                     name='estimatedDate'
                     rules={[
