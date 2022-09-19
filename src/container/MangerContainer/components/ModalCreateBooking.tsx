@@ -5,6 +5,7 @@ import { useMutation, useQueryClient } from 'react-query';
 
 import VDatePicker from '@/components/common/VDatePicker';
 import VInput from '@/components/common/VInput';
+import VInputNumber from '@/components/common/VInputNumber';
 import VSelect from '@/components/common/VSelect';
 
 import { FORMAT_DATE_DD_MM_YYYY_HH_MM_SS } from '@/contants/common.constants';
@@ -200,14 +201,38 @@ const ModalCreateBooking = ({ isOpen, onClose }: ModalCreateEmployeeProps) => {
                   </Form.Item>
 
                   <Form.Item name='total'>
-                    <VInput label='Tổng tiền booking' />
+                    <VInputNumber
+                      label='Tổng tiền booking'
+                      required
+                      onKeyPress={(event) => {
+                        if (!/[0-9]/.test(event.key)) {
+                          event.preventDefault();
+                        }
+                      }}
+                    />
                   </Form.Item>
 
                   <Form.Item name='vat'>
-                    <VInput label='Tiền thuế' />
+                    <VInputNumber
+                      label='Tiền thuế'
+                      required
+                      onKeyPress={(event) => {
+                        if (!/[0-9]/.test(event.key)) {
+                          event.preventDefault();
+                        }
+                      }}
+                    />
                   </Form.Item>
                   <Form.Item name='amount'>
-                    <VInput label='Tổng tiền thanh toán' />
+                    <VInputNumber
+                      label='Tổng tiền thanh toán'
+                      required
+                      onKeyPress={(event) => {
+                        if (!/[0-9]/.test(event.key)) {
+                          event.preventDefault();
+                        }
+                      }}
+                    />
                   </Form.Item>
                   <Form.Item name='note'>
                     <VInput label='Note' />
@@ -564,7 +589,7 @@ const ModalCreateBooking = ({ isOpen, onClose }: ModalCreateEmployeeProps) => {
                                 },
                               ]}
                             >
-                              <VInput
+                              <VInputNumber
                                 label='Số lượng'
                                 required
                                 onKeyPress={(event) => {
@@ -588,7 +613,7 @@ const ModalCreateBooking = ({ isOpen, onClose }: ModalCreateEmployeeProps) => {
                                 },
                               ]}
                             >
-                              <VInput
+                              <VInputNumber
                                 label='Trọng lượng (kg/kiện)'
                                 required
                                 onKeyPress={(event) => {

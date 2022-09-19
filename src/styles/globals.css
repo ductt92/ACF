@@ -480,3 +480,7 @@ body {
     ),
     linear-gradient(92deg, hsl(80, 0%, 14%), hsl(80, 0%, 14%));
 }
+
+.ant-input-number-handler-wrap {
+  display: none;
+}

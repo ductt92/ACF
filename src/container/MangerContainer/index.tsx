@@ -17,7 +17,7 @@ import ModalCreateBooking from './components/ModalCreateBooking';
 
 const QUERY_PARAMS: QueryParams = {
   page: 1,
-  pageSize: 40,
+  pageSize: 20,
   search: '',
 };
 const ManageContainer = () => {
@@ -39,9 +39,9 @@ const ManageContainer = () => {
   }, [data?.data]);
 
   return (
-    <div className='p-8'>
+    <div>
       <div className='gap-4'>
-        <div>
+        <div className='px-6'>
           <Input
             placeholder='Tìm kiếm đơn hàng...'
             prefix={<SearchOutlined />}
@@ -58,7 +58,7 @@ const ManageContainer = () => {
           <Table
             columns={MYBOOKING_COLUMNS}
             rowKey='key'
-            className='cursor-pointer'
+            className='cursor-pointer px-6'
             dataSource={dataTable || []}
             pagination={{
               current: data?.pagination?.currentPage,
@@ -83,15 +83,7 @@ const ManageContainer = () => {
               ),
               rowExpandable: (record) => record.bookingDetail.length > 0,
             }}
-            // onRow={(record) => {
-            //   return {
-            //     onClick: async () => {
-            //       await setSlectEmployee(record);
-            //       await setIsOpenEdit(true);
-            //     },
-            //   };
-            // }}
-            scroll={{ y: 750, x: 800 }}
+            scroll={{ y: 700, x: 800 }}
           />
         </Spin>
         {isCreateBooking && (

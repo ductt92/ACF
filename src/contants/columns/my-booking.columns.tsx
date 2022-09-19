@@ -3,7 +3,11 @@ import { Tooltip } from 'antd';
 import { ColumnsType } from 'antd/lib/table';
 import dayjs from 'dayjs';
 
-import { CLICK_TO_COPY, copyToClipBoard } from '@/utils/helpers';
+import {
+  CLICK_TO_COPY,
+  copyToClipBoard,
+  numberWithCommas,
+} from '@/utils/helpers';
 
 import {
   BookingDetails,
@@ -254,6 +258,9 @@ export const MYBOOKING_COLUMNS: ColumnsType<IMyBooking> = [
     key: 'total',
     align: 'center',
     width: 150,
+    render: (total: any) => {
+      return <span>{numberWithCommas(total)}</span>;
+    },
   },
   {
     title: 'Tiền thuế',
@@ -261,6 +268,9 @@ export const MYBOOKING_COLUMNS: ColumnsType<IMyBooking> = [
     key: 'vat',
     align: 'center',
     width: 150,
+    render: (vat: any) => {
+      return <span>{numberWithCommas(vat)}</span>;
+    },
   },
   {
     title: 'Tổng tiền thanh toán',
@@ -268,6 +278,9 @@ export const MYBOOKING_COLUMNS: ColumnsType<IMyBooking> = [
     key: 'amount',
     align: 'center',
     width: 150,
+    render: (amount: any) => {
+      return <span>{numberWithCommas(amount)}</span>;
+    },
   },
   {
     title: 'Ghi chú',

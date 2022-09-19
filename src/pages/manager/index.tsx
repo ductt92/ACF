@@ -35,7 +35,7 @@ const ManagePage = () => {
   };
   return (
     <div>
-      <div className='mx-8 my-4 flex justify-end gap-6'>
+      <div className='flex justify-end gap-6 px-6'>
         <Popover
           className='cursor-pointer'
           placement='bottomRight'
@@ -60,5 +60,15 @@ const ManagePage = () => {
   );
 };
 
-ManagePage.Layout = BlankLayout;
-export default ManagePage;
+const LayoutNew = () => {
+  return (
+    <div className='h-screen flex-1 flex-col overflow-y-auto'>
+      <div className='h-full rounded-md bg-white px-6'>
+        <ManagePage />
+      </div>
+    </div>
+  );
+};
+
+LayoutNew.Layout = BlankLayout;
+export default LayoutNew;
