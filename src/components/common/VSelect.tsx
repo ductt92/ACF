@@ -20,6 +20,7 @@ export default function VSelect({
       </span>
       <Select
         // showSearch
+        showArrow
         filterOption={(input, option) =>
           // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           //  @ts-ignore

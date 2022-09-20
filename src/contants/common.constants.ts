@@ -22,7 +22,7 @@ export const QUERY_PARAMS: QueryParams = {
   search: '',
 };
 export const FORMAT_DATE_DD_MM_YYYY = 'DD/MM/YYYY';
-export const FORMAT_DATE_DD_MM_YYYY_HH_MM_SS = 'DD/MM/YYYY hh:mm:ss';
+export const HH_MM = 'hh:mm';
 
 export const QUERY_PARAMS_2: QueryParams2 = {
   page: 1,
@@ -38,6 +38,33 @@ export enum LevelStaff { // Trình độ nhân viên
   INTERMEDIATE = 'Trung cấp', // Trung cấp
   HIGH_SCHOOL = 'Trung học phổ thông', // Trung học phổ thông
   FREELANCE_WORKERS = 'Lao động tự do', // Lao động tự do
+}
+
+// delivery conditions
+export enum DeliveryConditions { // Điều kiện giao hàng
+  EX_WORKS = 'Giao tại xưởng', // Giao tại xưởng
+  FREE_CARRIER = 'Giao cho người chuyên chở', //Giao cho người chuyên chở
+  CARRIAGE_PAID_TO = 'Cước phí trả tới', // Cước phí trả tới
+  CARRIAGE_AND_INSURANCE_PAID_TO = 'Cước phí và bảo hiểm trả tới', // Cước phí và bảo hiểm trả tới
+  DELIVERED_AT_TERMINAL = 'Giao tại bến', // Giao tại bến
+  DELIVERED_AT_PLACE = 'Giao tại nơi đến', // Giao tại nơi đến
+  DELIVERED_DUTY_PAID = 'Giao hàng đã nộp thuế', // Giao hàng đã nộp thuế
+  FREE_ALONGSIDE_SHIP = 'Giao tại mạn tàu', // Giao tại mạn tàu
+  FREE_ON_BOARD = 'Giao lên tàu', // Giao lên tàu
+  COST_AND_FREIGHT = 'Tiền hàng và cước phí', // Tiền hàng và cước phí
+  COST_INSURANCE_AND_FREIGHT = 'Tiền hàng, bảo hiểm và cước phí', // Tiền hàng, bảo hiểm và cước phí
+}
+
+// Đơn vị Tiền tệ
+export enum CurrencyUnit {
+  VND = 'VND', // Đồng Việt Nam
+  USD = 'USD', // Đô la Mỹ
+  JSP = 'JSP', // Yên Nhật
+  CAD = 'CAD', // Đô la Canada
+  EUR = 'EUR', // Đông Euro
+  GBP = 'GBP', // Bảng Anh
+  SGD = 'SGD', // Đô la Singapor
+  WON = 'WON', // Won Hàn
 }
 
 export const DATA_POST_EN = [

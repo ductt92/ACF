@@ -11,7 +11,7 @@ import {
 import { QueryParams } from '@/contants/common.constants';
 import { QUERY_BOOKING } from '@/contants/query-key/booking.query';
 import { withPrivateRouteUser } from '@/routes/withPrivateRouteUser';
-import { fetchBooking } from '@/services/booking.services';
+import { fetchBooking, fetchUser } from '@/services/booking.services';
 
 import ModalCreateBooking from './components/ModalCreateBooking';
 
@@ -23,11 +23,12 @@ const QUERY_PARAMS: QueryParams = {
 const ManageContainer = () => {
   const [queries, setQueries] = useState<QueryParams>(QUERY_PARAMS);
   const [isCreateBooking, setIsCreateBooking] = useState<boolean>(false);
-
   const { data, isLoading, isFetching } = useQuery(
     [QUERY_BOOKING.GET_BOOKING, queries],
     () => fetchBooking({ ...queries })
   );
+  const { data: userData } = useQuery(['getuser', queries], () => fetchUser());
+
   const handleSearch = debounce((value: string) => {
     setQueries((prev) => ({ ...prev, search: value }));
   }, 500);
@@ -89,6 +90,7 @@ const ManageContainer = () => {
         {isCreateBooking && (
           <ModalCreateBooking
             isOpen={isCreateBooking}
+            dataUser={userData}
             onClose={() => setIsCreateBooking(false)}
           />
         )}

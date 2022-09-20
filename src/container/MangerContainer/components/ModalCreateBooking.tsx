@@ -1,4 +1,4 @@
-import { PlusOutlined } from '@ant-design/icons';
+import { DeleteOutlined, PlusOutlined } from '@ant-design/icons';
 import { Button, Form, Modal, notification, Select } from 'antd';
 import React, { useEffect } from 'react';
 import { useMutation, useQueryClient } from 'react-query';
@@ -7,25 +7,37 @@ import VDatePicker from '@/components/common/VDatePicker';
 import VInput from '@/components/common/VInput';
 import VInputNumber from '@/components/common/VInputNumber';
 import VSelect from '@/components/common/VSelect';
+import VTimePicker from '@/components/common/VTimePicker';
 
-import { FORMAT_DATE_DD_MM_YYYY_HH_MM_SS } from '@/contants/common.constants';
+import {
+  DeliveryConditions,
+  FORMAT_DATE_DD_MM_YYYY,
+  HH_MM,
+} from '@/contants/common.constants';
 import { QUERY_BOOKING } from '@/contants/query-key/booking.query';
 import {
   BookingDetails,
   BookingType,
   CommoditiesType,
   IMyBooking,
+  IUser,
   ServiceEnum,
   TypeOfPayment,
 } from '@/contants/types';
+import { countries } from '@/contants/types/Country';
 import { createBooking } from '@/services/booking.services';
 const { Option } = Select;
 
 type ModalCreateEmployeeProps = {
   isOpen: boolean;
+  dataUser: IUser | undefined;
   onClose: (value: boolean) => void;
 };
-const ModalCreateBooking = ({ isOpen, onClose }: ModalCreateEmployeeProps) => {
+const ModalCreateBooking = ({
+  isOpen,
+  onClose,
+  dataUser,
+}: ModalCreateEmployeeProps) => {
   const [form] = Form.useForm();
   const queryClient = useQueryClient();
   // const { getItem } = storage();
@@ -52,12 +64,15 @@ const ModalCreateBooking = ({ isOpen, onClose }: ModalCreateEmployeeProps) => {
   );
 
   const onSubmit = async () => {
-    const dataCreateBooking: Partial<IMyBooking> = await form.validateFields();
+    const dataCreateBooking: Partial<
+      IMyBooking & { estDate: string | Date; estTime: string | Date }
+    > = await form.validateFields();
     mutateCreate({
       ...dataCreateBooking,
       total: parseInt(dataCreateBooking.total?.toString() || '') || 0,
       vat: parseInt(dataCreateBooking.vat?.toString() || '') || 0,
       amount: parseInt(dataCreateBooking.amount?.toString() || '') || 0,
+      estimatedDate: dataCreateBooking.estDate,
       bookingDetail: dataCreateBooking?.bookingDetail?.map(
         (v: BookingDetails) => ({
           ...v,
@@ -103,6 +118,27 @@ const ModalCreateBooking = ({ isOpen, onClose }: ModalCreateEmployeeProps) => {
       label: value,
     })
   );
+  const OpitionDeliveryConditions = Object.entries(DeliveryConditions).map(
+    ([key, value]) => ({
+      value: key,
+      label: value,
+    })
+  );
+
+  useEffect(() => {
+    form.setFieldsValue({
+      senderName: dataUser?.fullName,
+      senderPhoneNumber: dataUser?.phoneNumber,
+      senderContactPerson: dataUser?.contactPerson,
+      senderMobile: dataUser?.phoneNumber,
+      senderCountry: dataUser?.country,
+      senderCommune: dataUser?.commune,
+      senderDistrict: dataUser?.district,
+      senderProvince: dataUser?.province,
+      senderPostalCode: dataUser?.postalCode,
+      senderState: dataUser?.state,
+    });
+  }, [dataUser, form]);
 
   useEffect(() => {
     return () => {
@@ -145,24 +181,51 @@ const ModalCreateBooking = ({ isOpen, onClose }: ModalCreateEmployeeProps) => {
                       ))}
                     </VSelect>
                   </Form.Item>
-                  {/* <Form.Item name='invoiceId'>
-                    <VInput label='Mã invoice' />
-                  </Form.Item> */}
-                  <Form.Item
-                    name='estimatedDate'
-                    rules={[
-                      {
-                        required: true,
-                        message: 'Vui lòng chọn thời gian dự kiến lấy hàng',
-                      },
-                    ]}
-                  >
-                    <VDatePicker
-                      label='Thời gian dự kiến lấy hàng'
-                      format={FORMAT_DATE_DD_MM_YYYY_HH_MM_SS}
-                      required
-                    />
+
+                  <Form.Item name='deliveryConditions'>
+                    <VSelect label='Điều kiện giao hàng' required>
+                      {OpitionDeliveryConditions.map((v) => (
+                        <Option value={v.value} key={v.value}>
+                          {v.label}
+                        </Option>
+                      ))}
+                    </VSelect>
                   </Form.Item>
+
+                  <div className='grid grid-cols-2 gap-x-6'>
+                    <Form.Item
+                      name='estimatedDate'
+                      rules={[
+                        {
+                          required: true,
+                          message: 'Vui lòng chọn thời gian dự kiến lấy hàng',
+                        },
+                      ]}
+                    >
+                      <VDatePicker
+                        label='Ngày dự kiến lấy hàng'
+                        format={FORMAT_DATE_DD_MM_YYYY}
+                        required
+                      />
+                      {/* <TimePicker format={HH_MM} /> */}
+                    </Form.Item>
+
+                    <Form.Item
+                      name='estimateHour'
+                      rules={[
+                        {
+                          required: true,
+                          message: 'Vui lòng chọn thời gian dự kiến lấy hàng',
+                        },
+                      ]}
+                    >
+                      <VTimePicker
+                        format={HH_MM}
+                        label='Giờ dự kiến lấy hàng'
+                        required
+                      />
+                    </Form.Item>
+                  </div>
 
                   <Form.Item
                     name='serviceBooking'
@@ -305,31 +368,21 @@ const ModalCreateBooking = ({ isOpen, onClose }: ModalCreateEmployeeProps) => {
                       },
                     ]}
                   >
-                    <VInput label='Quốc gia' required />
+                    <VSelect label='Quốc gia' required showSearch>
+                      {countries.map((v) => (
+                        <Option value={v.value} key={v.value}>
+                          {v.label}
+                        </Option>
+                      ))}
+                    </VSelect>
                   </Form.Item>
 
-                  <Form.Item
-                    name='senderCommune'
-                    rules={[
-                      {
-                        required: true,
-                        message: 'Vui lòng nhập phường xã',
-                      },
-                    ]}
-                  >
-                    <VInput label='Phường/xã' required />
+                  <Form.Item name='senderCommune'>
+                    <VInput label='Phường/xã' />
                   </Form.Item>
 
-                  <Form.Item
-                    name='senderDistrict'
-                    rules={[
-                      {
-                        required: true,
-                        message: 'Vui lòng nhập Quận/Huyện',
-                      },
-                    ]}
-                  >
-                    <VInput label='Quận/Huyện' required />
+                  <Form.Item name='senderDistrict'>
+                    <VInput label='Quận/Huyện' />
                   </Form.Item>
 
                   <Form.Item
@@ -418,39 +471,29 @@ const ModalCreateBooking = ({ isOpen, onClose }: ModalCreateEmployeeProps) => {
                   </Form.Item>
 
                   <Form.Item
-                    name='receiverCountry'
+                    name='senderCountry'
                     rules={[
                       {
                         required: true,
-                        message: 'Vui lòng nhập quốc gia ',
+                        message: 'Vui lòng nhập quốc gia',
                       },
                     ]}
                   >
-                    <VInput label='Quốc gia' required />
+                    <VSelect label='Quốc gia' required showSearch>
+                      {countries.map((v) => (
+                        <Option value={v.value} key={v.value}>
+                          {v.label}
+                        </Option>
+                      ))}
+                    </VSelect>
                   </Form.Item>
 
-                  <Form.Item
-                    name='receiverCommune'
-                    rules={[
-                      {
-                        required: true,
-                        message: 'Vui lòng nhập phường/xã',
-                      },
-                    ]}
-                  >
-                    <VInput label='Phường/xã' required />
+                  <Form.Item name='receiverCommune'>
+                    <VInput label='Phường/xã' />
                   </Form.Item>
 
-                  <Form.Item
-                    name='receiverDistrict'
-                    rules={[
-                      {
-                        required: true,
-                        message: 'Vui lòng nhập Quận/Huyện',
-                      },
-                    ]}
-                  >
-                    <VInput label='Quận/Huyện' required />
+                  <Form.Item name='receiverDistrict'>
+                    <VInput label='Quận/Huyện' />
                   </Form.Item>
 
                   <Form.Item
@@ -519,11 +562,205 @@ const ModalCreateBooking = ({ isOpen, onClose }: ModalCreateEmployeeProps) => {
                     },
                   ]}
                 >
-                  {(fields, { add }, { errors }) => (
+                  {(fields, { add, remove }, { errors }) => (
                     <>
                       {fields.map(({ key, name, ...restField }) => (
-                        <div className='grid grid-cols-2 gap-x-6' key={key}>
-                          <div>
+                        <div key={key}>
+                          <p className='text-lg font-bold'>4.1 Đơn hàng</p>
+                          <div className='grid grid-cols-2 gap-x-6'>
+                            <div>
+                              <Form.Item
+                                {...restField}
+                                name={[name, 'commoditiesType']}
+                                className='w-full'
+                                rules={[
+                                  {
+                                    required: true,
+                                    message: 'Vui lòng chọn loại hàng hóa',
+                                  },
+                                ]}
+                              >
+                                <VSelect label='Loại hàng hóa' required>
+                                  {OpitionCommoditiesType.map((v) => (
+                                    <Option value={v.value} key={v.value}>
+                                      {v.label}
+                                    </Option>
+                                  ))}
+                                </VSelect>
+                              </Form.Item>
+                            </div>
+
+                            <div>
+                              <Form.Item
+                                {...restField}
+                                name={[name, 'name']}
+                                className='w-full'
+                                rules={[
+                                  {
+                                    required: true,
+                                    message: 'Vui lòng nhập tên hàng hóa',
+                                  },
+                                ]}
+                              >
+                                <VInput label='Tên hàng hóa' required />
+                              </Form.Item>
+                            </div>
+
+                            <div>
+                              <Form.Item
+                                {...restField}
+                                name={[name, 'description']}
+                                className='w-full'
+                                rules={[
+                                  {
+                                    required: true,
+                                    message: 'Vui lòng nhập mô tả cho hàng hóa',
+                                  },
+                                ]}
+                              >
+                                <VInput label='Mô tả' required />
+                              </Form.Item>
+                            </div>
+
+                            <div>
+                              <Form.Item
+                                {...restField}
+                                name={[name, 'quantity']}
+                                className='w-full'
+                                rules={[
+                                  {
+                                    required: true,
+                                    message: 'Vui lòng nhập số lượng hàng hóa',
+                                  },
+                                ]}
+                              >
+                                <VInputNumber
+                                  label='Số lượng'
+                                  required
+                                  onKeyPress={(event) => {
+                                    if (!/[0-9]/.test(event.key)) {
+                                      event.preventDefault();
+                                    }
+                                  }}
+                                />
+                              </Form.Item>
+                            </div>
+
+                            <div>
+                              <Form.Item
+                                {...restField}
+                                name={[name, 'weight']}
+                                className='w-full'
+                                rules={[
+                                  {
+                                    required: true,
+                                    message:
+                                      'Vui lòng nhập trọng lượng hàng hóa',
+                                  },
+                                ]}
+                              >
+                                <VInputNumber
+                                  label='Trọng lượng (kg/kiện)'
+                                  required
+                                  onKeyPress={(event) => {
+                                    if (!/[0-9]/.test(event.key)) {
+                                      event.preventDefault();
+                                    }
+                                  }}
+                                />
+                              </Form.Item>
+                            </div>
+
+                            <div>
+                              <Form.Item
+                                {...restField}
+                                name={[name, 'width']}
+                                className='w-full'
+                              >
+                                <VInput
+                                  label='Chiều rộng(cm)'
+                                  onKeyPress={(event) => {
+                                    if (!/[0-9]/.test(event.key)) {
+                                      event.preventDefault();
+                                    }
+                                  }}
+                                />
+                              </Form.Item>
+                            </div>
+
+                            <div>
+                              <Form.Item
+                                {...restField}
+                                name={[name, 'height']}
+                                className='w-full'
+                              >
+                                <VInput
+                                  label='Chiều cao(cm)'
+                                  onKeyPress={(event) => {
+                                    if (!/[0-9]/.test(event.key)) {
+                                      event.preventDefault();
+                                    }
+                                  }}
+                                />
+                              </Form.Item>
+                            </div>
+
+                            <div>
+                              <Form.Item
+                                {...restField}
+                                name={[name, 'longs']}
+                                className='w-full'
+                              >
+                                <VInput
+                                  label='Chiều dài(cm)'
+                                  onKeyPress={(event) => {
+                                    if (!/[0-9]/.test(event.key)) {
+                                      event.preventDefault();
+                                    }
+                                  }}
+                                />
+                              </Form.Item>
+                            </div>
+                            <div>
+                              <Form.Item
+                                {...restField}
+                                name={[name, 'bulkyWeight']}
+                                className='w-full'
+                              >
+                                <VInput
+                                  label='Trọng lượng cồng kềnh'
+                                  onKeyPress={(event) => {
+                                    if (!/[0-9]/.test(event.key)) {
+                                      event.preventDefault();
+                                    }
+                                  }}
+                                />
+                              </Form.Item>
+                            </div>
+                            <div>
+                              <Form.Item
+                                {...restField}
+                                name={[name, 'note']}
+                                className='w-full'
+                              >
+                                <VInput label='Note' />
+                              </Form.Item>
+                            </div>
+
+                            <div className='col-span-2 mb-4 flex flex-row items-center justify-center'>
+                              <Button
+                                type='primary'
+                                onClick={() => remove(name)}
+                                danger
+                                ghost
+                                icon={<DeleteOutlined size={16} />}
+                              >
+                                Xóa đơn hàng
+                              </Button>
+                            </div>
+                          </div>
+                          <p>4.2 Hóa đơn</p>
+                          <div className='grid grid-cols-2 gap-x-6'>
                             <Form.Item
                               {...restField}
                               name={[name, 'commoditiesType']}
@@ -542,162 +779,6 @@ const ModalCreateBooking = ({ isOpen, onClose }: ModalCreateEmployeeProps) => {
                                   </Option>
                                 ))}
                               </VSelect>
-                            </Form.Item>
-                          </div>
-
-                          <div>
-                            <Form.Item
-                              {...restField}
-                              name={[name, 'name']}
-                              className='w-full'
-                              rules={[
-                                {
-                                  required: true,
-                                  message: 'Vui lòng nhập tên hàng hóa',
-                                },
-                              ]}
-                            >
-                              <VInput label='Tên hàng hóa' required />
-                            </Form.Item>
-                          </div>
-
-                          <div>
-                            <Form.Item
-                              {...restField}
-                              name={[name, 'description']}
-                              className='w-full'
-                              rules={[
-                                {
-                                  required: true,
-                                  message: 'Vui lòng nhập mô tả cho hàng hóa',
-                                },
-                              ]}
-                            >
-                              <VInput label='Mô tả' required />
-                            </Form.Item>
-                          </div>
-
-                          <div>
-                            <Form.Item
-                              {...restField}
-                              name={[name, 'quantity']}
-                              className='w-full'
-                              rules={[
-                                {
-                                  required: true,
-                                  message: 'Vui lòng nhập số lượng hàng hóa',
-                                },
-                              ]}
-                            >
-                              <VInputNumber
-                                label='Số lượng'
-                                required
-                                onKeyPress={(event) => {
-                                  if (!/[0-9]/.test(event.key)) {
-                                    event.preventDefault();
-                                  }
-                                }}
-                              />
-                            </Form.Item>
-                          </div>
-
-                          <div>
-                            <Form.Item
-                              {...restField}
-                              name={[name, 'weight']}
-                              className='w-full'
-                              rules={[
-                                {
-                                  required: true,
-                                  message: 'Vui lòng nhập trọng lượng hàng hóa',
-                                },
-                              ]}
-                            >
-                              <VInputNumber
-                                label='Trọng lượng (kg/kiện)'
-                                required
-                                onKeyPress={(event) => {
-                                  if (!/[0-9]/.test(event.key)) {
-                                    event.preventDefault();
-                                  }
-                                }}
-                              />
-                            </Form.Item>
-                          </div>
-
-                          <div>
-                            <Form.Item
-                              {...restField}
-                              name={[name, 'width']}
-                              className='w-full'
-                            >
-                              <VInput
-                                label='Chiều rộng'
-                                onKeyPress={(event) => {
-                                  if (!/[0-9]/.test(event.key)) {
-                                    event.preventDefault();
-                                  }
-                                }}
-                              />
-                            </Form.Item>
-                          </div>
-
-                          <div>
-                            <Form.Item
-                              {...restField}
-                              name={[name, 'height']}
-                              className='w-full'
-                            >
-                              <VInput
-                                label='Chiều cao'
-                                onKeyPress={(event) => {
-                                  if (!/[0-9]/.test(event.key)) {
-                                    event.preventDefault();
-                                  }
-                                }}
-                              />
-                            </Form.Item>
-                          </div>
-
-                          <div>
-                            <Form.Item
-                              {...restField}
-                              name={[name, 'longs']}
-                              className='w-full'
-                            >
-                              <VInput
-                                label='Chiều dài'
-                                onKeyPress={(event) => {
-                                  if (!/[0-9]/.test(event.key)) {
-                                    event.preventDefault();
-                                  }
-                                }}
-                              />
-                            </Form.Item>
-                          </div>
-                          <div>
-                            <Form.Item
-                              {...restField}
-                              name={[name, 'bulkyWeight']}
-                              className='w-full'
-                            >
-                              <VInput
-                                label='Trọng lượng cồng kềnh'
-                                onKeyPress={(event) => {
-                                  if (!/[0-9]/.test(event.key)) {
-                                    event.preventDefault();
-                                  }
-                                }}
-                              />
-                            </Form.Item>
-                          </div>
-                          <div>
-                            <Form.Item
-                              {...restField}
-                              name={[name, 'note']}
-                              className='w-full'
-                            >
-                              <VInput label='Note' />
                             </Form.Item>
                           </div>
                         </div>

@@ -1,4 +1,4 @@
-import { IMyBooking } from '@/contants/types';
+import { IMyBooking, IUser } from '@/contants/types';
 import HttpRequest from '@/utils/Http-request';
 
 export interface MyBookingResponse {
@@ -31,4 +31,9 @@ export const createBooking = async (data: Partial<IMyBooking>) => {
     ...data,
   });
   return booking as MyBookingResponse;
+};
+
+export const fetchUser = () => {
+  const users = HttpRequest.get(`customer/my-profile`);
+  return users as unknown as IUser;
 };

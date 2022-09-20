@@ -86,6 +86,41 @@ export interface ICustomer {
   note?: string;
 }
 
+export interface IUser {
+  id: string;
+  unitId?: string;
+  userId: string | null;
+  fullName: string;
+  detailAddress: string | null;
+  commune: string;
+  district: string;
+  country: string;
+  province: string;
+  taxCode: string;
+  contactPerson: string;
+  phoneNumber: string;
+  phoneCode: string;
+  email: string;
+  typeCustomer: CustomerType;
+  type: NetWorkCustomerType;
+  service: ServiceEnum;
+  postalCode: string;
+  state: string;
+  note: string;
+  createdAt: string | Date;
+  updatedAt: string | Date;
+  user: {
+    id: string;
+    username: string;
+    roleId: string;
+    status: string;
+    createdAt: string | Date;
+    updatedAt: string | Date;
+  };
+  unit: string | null;
+  contract: [];
+}
+
 export enum CustomerType { // Loại khách hàng
   DOMESTIC_COMPANY = 'Doanh nghiệp trong nước', //'Doanh nghiệp trong nước',
   FOREIGN_JOINT_VENTURE_ENTERPRISE = 'Doanh nghiệp liên doanh nước ngoài', //'Doanh nghiệp liên doanh nước ngoài',
@@ -158,8 +193,21 @@ export interface IMyBooking {
   unit: null;
   customer: ICustomer;
   bookingDetail: Array<BookingDetails>;
+  invoice: {
+    invoiceDetail: Array<IInvoiceDetail>;
+  };
 }
-
+export interface IInvoiceDetail {
+  goodsName: string;
+  describe: string;
+  quantity: number;
+  unitOfMeasure: string;
+  price: number;
+  totalMoney: number;
+  weight: number;
+  originOfGoods: string;
+  HSCode: string;
+}
 export enum CommoditiesType { // Loại hàng hóa
   LICENSE = 'Chứng từ', //Chứng từ
   GARMENT = 'May mặc', //May mặc
