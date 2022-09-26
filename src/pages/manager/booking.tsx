@@ -4,13 +4,13 @@ import ManageContainer from '@/container/MangerContainer';
 
 import NewLayout from '@/layout/NewLayout';
 
-const ManagePage = () => {
+const BookingContainer = () => {
   return (
     <div>
       <ManageContainer />
     </div>
   );
 };
+BookingContainer.Layout = NewLayout;
 
-ManagePage.Layout = NewLayout;
-export default ManagePage;
+export default BookingContainer;
