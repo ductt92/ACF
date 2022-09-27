@@ -92,13 +92,6 @@ const ModalCreateBooking = ({
     label: value,
   }));
 
-  // const OpitionBookingStatus = Object.entries(BookingStatus).map(
-  //   ([key, value]) => ({
-  //     value: key,
-  //     label: value,
-  //   })
-  // );
-
   const OpitionServiceBooking = Object.entries(ServiceEnum).map(
     ([key, value]) => ({
       value: key,
@@ -299,10 +292,6 @@ const ModalCreateBooking = ({
                   </Form.Item>
                   <Form.Item name='note'>
                     <VInput label='Note' />
-                  </Form.Item>
-
-                  <Form.Item name='partnerBillCode'>
-                    <VInput label='Mã bill đối tác' />
                   </Form.Item>
                 </div>
               </div>

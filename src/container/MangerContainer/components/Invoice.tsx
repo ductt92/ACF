@@ -1,7 +1,7 @@
 import React from 'react';
 
 const InVoice = () => {
-  return <div>GeneralInfomation</div>;
+  return <div>Dịch vụ gia tăng</div>;
 };
 
 export default InVoice;

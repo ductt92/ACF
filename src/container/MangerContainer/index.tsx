@@ -1,5 +1,5 @@
 import { SearchOutlined } from '@ant-design/icons';
-import { Button, Input, Spin, Table } from 'antd';
+import { Input, Spin, Table } from 'antd';
 import { debounce } from 'lodash';
 import React, { ChangeEvent, useMemo, useState } from 'react';
 import { useQuery } from 'react-query';
@@ -51,9 +51,9 @@ const ManageContainer = () => {
               handleSearch(event.target.value)
             }
           />
-          <Button onClick={() => setIsCreateBooking(true)} type='primary'>
+          {/* <Button onClick={() => setIsCreateBooking(true)} type='primary'>
             Tạo mới đơn hàng
-          </Button>
+          </Button> */}
         </div>
         <Spin spinning={isLoading || isFetching}>
           <Table

@@ -42,17 +42,17 @@ export enum LevelStaff { // Trình độ nhân viên
 
 // delivery conditions
 export enum DeliveryConditions { // Điều kiện giao hàng
-  EX_WORKS = 'Giao tại xưởng', // Giao tại xưởng
-  FREE_CARRIER = 'Giao cho người chuyên chở', //Giao cho người chuyên chở
-  CARRIAGE_PAID_TO = 'Cước phí trả tới', // Cước phí trả tới
-  CARRIAGE_AND_INSURANCE_PAID_TO = 'Cước phí và bảo hiểm trả tới', // Cước phí và bảo hiểm trả tới
-  DELIVERED_AT_TERMINAL = 'Giao tại bến', // Giao tại bến
-  DELIVERED_AT_PLACE = 'Giao tại nơi đến', // Giao tại nơi đến
-  DELIVERED_DUTY_PAID = 'Giao hàng đã nộp thuế', // Giao hàng đã nộp thuế
-  FREE_ALONGSIDE_SHIP = 'Giao tại mạn tàu', // Giao tại mạn tàu
-  FREE_ON_BOARD = 'Giao lên tàu', // Giao lên tàu
-  COST_AND_FREIGHT = 'Tiền hàng và cước phí', // Tiền hàng và cước phí
-  COST_INSURANCE_AND_FREIGHT = 'Tiền hàng, bảo hiểm và cước phí', // Tiền hàng, bảo hiểm và cước phí
+  EX_WORKS = 'EXW – Giao tại xưởng.', // Giao tại xưởng
+  FREE_CARRIER = 'FCA – Giao cho người chuyên chở.	', //Giao cho người chuyên chở
+  CARRIAGE_PAID_TO = 'CPT – Cước phí trả tới.', // Cước phí trả tới
+  CARRIAGE_AND_INSURANCE_PAID_TO = 'CIP – Cước phí và bảo hiểm trả tới.	', // Cước phí và bảo hiểm trả tới
+  DELIVERED_AT_TERMINAL = 'DAT – Giao tại bến.', // Giao tại bến
+  DELIVERED_AT_PLACE = 'DAP – Giao tại nơi đến.', // Giao tại nơi đến
+  DELIVERED_DUTY_PAID = 'DDP – Giao hàng đã nộp thuế.	', // Giao hàng đã nộp thuế
+  FREE_ALONGSIDE_SHIP = 'FAS – Giao tại mạn tàu.	', // Giao tại mạn tàu
+  FREE_ON_BOARD = 'FOB – Giao lên tàu.', // Giao lên tàu
+  COST_AND_FREIGHT = 'CFR – Tiền hàng và cước phí.	', // Tiền hàng và cước phí
+  COST_INSURANCE_AND_FREIGHT = 'CIF– Tiền hàng, bảo hiểm và cước phí.	', // Tiền hàng, bảo hiểm và cước phí
 }
 
 // Đơn vị Tiền tệ
