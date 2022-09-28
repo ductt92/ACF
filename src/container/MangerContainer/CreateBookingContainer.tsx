@@ -1,18 +1,28 @@
 /* eslint-disable unused-imports/no-unused-vars */
 import { Button, Form, notification, Tabs } from 'antd';
-import React from 'react';
-import { useMutation, useQueryClient } from 'react-query';
+import React, { useState } from 'react';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 
+import { QueryParams } from '@/contants/common.constants';
 import { QUERY_BOOKING } from '@/contants/query-key/booking.query';
 import { BookingDetails, IMyBooking } from '@/contants/types';
-import { createBooking } from '@/services/booking.services';
+import { createBooking, fetchUser } from '@/services/booking.services';
 
 import InVoice from './components/Invoice';
 import TabsBooking from './components/TabsBooking';
 
+const QUERY_PARAMS: QueryParams = {
+  page: 1,
+  pageSize: 20,
+  search: '',
+};
+
 const CreateBookingContainer = () => {
+  const [queries, setQueries] = useState<QueryParams>(QUERY_PARAMS);
+
   const [form] = Form.useForm();
   const queryClient = useQueryClient();
+  const { data: userData } = useQuery(['getuser', queries], () => fetchUser());
 
   const { mutate: mutateCreate, isLoading: isCreating } = useMutation(
     createBooking,
@@ -68,12 +78,13 @@ const CreateBookingContainer = () => {
           Tạo bookings
         </Button>
       </div>
+
       <Tabs type='card'>
         <Tabs.TabPane tab='Booking' key='Booking'>
           <TabsBooking form={form} />
         </Tabs.TabPane>
         <Tabs.TabPane tab='Invoice' key='invoice'>
-          <InVoice />
+          <InVoice form={form} dataUser={userData} />
         </Tabs.TabPane>
       </Tabs>
     </div>

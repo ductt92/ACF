@@ -40,7 +40,7 @@ const ManageContainer = () => {
   }, [data?.data]);
 
   return (
-    <div>
+    <div className='mb-20'>
       <div className='gap-4'>
         <div className='px-6'>
           <Input

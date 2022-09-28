@@ -57,14 +57,14 @@ export enum DeliveryConditions { // Điều kiện giao hàng
 
 // Đơn vị Tiền tệ
 export enum CurrencyUnit {
-  VND = 'VND', // Đồng Việt Nam
-  USD = 'USD', // Đô la Mỹ
-  JSP = 'JSP', // Yên Nhật
-  CAD = 'CAD', // Đô la Canada
-  EUR = 'EUR', // Đông Euro
-  GBP = 'GBP', // Bảng Anh
-  SGD = 'SGD', // Đô la Singapor
-  WON = 'WON', // Won Hàn
+  VND = 'VND -  Đồng Việt Nam', // Đồng Việt Nam
+  USD = 'USD - Đô la Mỹ', // Đô la Mỹ
+  JSP = 'JSP - Yên Nhật', // Yên Nhật
+  CAD = 'CAD - Đô la Canada', // Đô la Canada
+  EUR = 'EUR - Đồng Euro', // Đông Euro
+  GBP = 'GBP - Bảng Anh', // Bảng Anh
+  SGD = 'SGD - Đô la Singapor', // Đô la Singapor
+  WON = 'WON - Won Hàn', // Won Hàn
 }
 
 export const DATA_POST_EN = [

@@ -260,3 +260,97 @@ export enum BookingType {
   LICENSE = 'Chứng từ', //Chứng từ,
   COMMODITY = 'Hàng hóa', //Hàng hóa,
 }
+
+export interface IInvoiceDetails {
+  nameGood: string;
+  desGood: string;
+  quantity: number;
+  unit: string;
+  unitPrice: number;
+  total: number;
+  weight: number;
+  hsCode: string;
+  origin_of_goods: string;
+}
+
+export const mockUnit = [
+  { value: 1, label: 'Set' },
+  { value: 2, label: 'Piece' },
+  { value: 3, label: 'Pcs' },
+];
+
+export const mockData = [
+  { value: 1, label: 'ĐỘNG VẬT SỐNG; CÁC SẢN PHẨM TỪ ĐỘNG VẬT ' },
+  { value: 2, label: 'CÁC SẢN PHẨM THỰC VẬT' },
+  {
+    value: 3,
+    label:
+      'CHẤT BÉO VÀ DẦU CÓ NGUỒN GỐC TỪ ĐỘNG VẬT HOẶC THỰC VẬT VÀ CÁC SẢN PHẨM TÁCH TỪ CHÚNG; CHẤT BÉO ĂN ĐƯỢC ĐÃ CHẾ BIẾN; CÁC LOẠI SÁP ĐỘNG VẬT HOẶC THỰC VẬT',
+  },
+  {
+    value: 4,
+    label:
+      'THỰC PHẨM CHẾ BIẾN; ĐỒ UỐNG, RƯỢU MẠNH VÀ GIẤM; THUỐC LÁ VÀ CÁC LOẠI NGUYÊN LIỆU THAY THẾ THUỐC LÁ ĐÃ CHẾ BIẾN',
+  },
+  { value: 5, label: 'KHOÁNG SẢN' },
+  {
+    value: 6,
+    label:
+      'SẢN PHẨM CỦA NGÀNH CÔNG NGHIỆP HOÁ CHẤT HOẶC CÁC NGÀNH CÔNG NGHIỆP LIÊN QUAN',
+  },
+  {
+    value: 7,
+    label:
+      'PLASTIC VÀ CÁC SẢN PHẨM BẰNG PLASTIC; CAO SU VÀ CÁC SẢN PHẨM BẰNG CAO SU',
+  },
+  {
+    value: 8,
+    label:
+      'DA SỐNG, DA THUỘC, DA LÔNG VÀ CÁC SẢN PHẨM TỪ DA; YÊN CƯƠNG VÀ BỘ ĐỒ YÊN CƯƠNG; HÀNG DU LỊCH, TÚI XÁCH TAY VÀ CÁC LOẠI ĐỒ CHỨA TƯƠNG TỰ; CÁC MẶT HÀNG TỪ RUỘT ĐỘNG VẬT (TRỪ RUỘT CON TẰM)',
+  },
+  {
+    value: 9,
+    label:
+      'GỖ VÀ CÁC MẶT HÀNG BẰNG GỖ; THAN TỪ GỖ; LIE VÀ CÁC SẢN PHẨM BẰNG LIE; CÁC SẢN PHẨM TỪ RƠM, CỎ GIẤY HOẶC CÁC VẬT LIỆU TẾT BỆN KHÁC; CÁC SẢN PHẨM BẰNG LIỄU GAI VÀ SONG MÂY',
+  },
+  {
+    value: 10,
+    label:
+      'PBỘT GIẤY TỪ GỖ HOẶC TỪ NGUYÊN LIỆU XƠ SỢI XENLULO KHÁC; GIẤY LOẠI HOẶC BÌA LOẠI THU HỒI (PHẾ LIỆU VÀ VỤN THỪA); GIẤY VÀ BÌA VÀ CÁC SẢN PHẨM CỦA CHÚNG',
+  },
+  { value: 11, label: 'NGUYÊN LIỆU DỆT VÀ CÁC SẢN PHẨM DỆT' },
+  {
+    value: 12,
+    label:
+      'GIÀY, DÉP, MŨ VÀ CÁC VẬT ĐỘI ĐẦU KHÁC, Ô, DÙ, BA TOONG, GẬY TAY CẦM CÓ THỂ CHUYỂN THÀNH GHẾ, ROI GẬY ĐIỀU KHIỂN, ROI ĐIỀU KHIỂN SÚC VẬT THỒ KÉO VÀ CÁC BỘ PHẬN CỦA CÁC LOẠI HÀNG TRÊN; LÔNG VŨ CHẾ BIẾN VÀ CÁC SẢN PHẨM LÀM TỪ LÔNG VŨ CHẾ BIẾN; HOA NHÂN TẠO; CÁC SẢN PHẨM LÀM TỪ TÓC NGƯỜI',
+  },
+  {
+    value: 13,
+    label:
+      'SẢN PHẨM BẰNG ĐÁ, THẠCH CAO, XI MĂNG, AMIĂNG, MICA HOẶC CÁC VẬT LIỆU TƯƠNG TỰ; ĐỒ GỐM; THUỶ TINH VÀ CÁC SẢN PHẨM BẰNG THUỶ TINH',
+  },
+  {
+    value: 14,
+    label:
+      'NGỌC TRAI TỰ NHIÊN HOẶC NUÔI CẤY, ĐÁ QUÝ HOẶC ĐÁ BÁN QUÝ, KIM LOẠI QUÝ, KIM LOẠI ĐƯỢC DÁT PHỦ KIM LOẠI QUÝ, VÀ CÁC SẢN PHẨM CỦA CHÚNG; ĐỒ TRANG SỨC LÀM BẰNG CHẤT LIỆU KHÁC; TIỀN KIM LOẠI',
+  },
+  { value: 15, label: 'KIM LOẠI CƠ BẢN VÀ CÁC SẢN PHẨM BẰNG KIM LOẠI CƠ BẢN' },
+  {
+    value: 16,
+    label:
+      'MÁY VÀ CÁC TRANG THIẾT BỊ CƠ KHÍ; THIẾT BỊ ĐIỆN; CÁC BỘ PHẬN CỦA CHÚNG; THIẾT BỊ GHI VÀ TÁI TẠO ÂM THANH, THIẾT BỊ GHI VÀ TÁI TẠO HÌNH ẢNH, ÂM THANH TRUYỀN HÌNH VÀ CÁC BỘ PHẬN VÀ PHỤ KIỆN CỦA CÁC THIẾT BỊ TRÊN',
+  },
+  {
+    value: 17,
+    label:
+      'XE CỘ, PHƯƠNG TIỆN BAY, TÀU THUYỀN VÀ CÁC THIẾT BỊ VẬN TẢI LIÊN HỢP',
+  },
+  {
+    value: 18,
+    label:
+      'DỤNG CỤ, THIẾT BỊ VÀ MÁY QUANG HỌC, NHIẾP ẢNH, ĐIỆN ẢNH, ĐO LƯỜNG, KIỂM TRA, CHÍNH XÁC, Y TẾ HOẶC PHẪU THUẬT; ĐỒNG HỒ THỜI GIAN VÀ ĐỒNG HỒ CÁ NHÂN; NHẠC CỤ; CÁC BỘ PHẬN VÀ PHỤ KIỆN CỦA CHÚNG',
+  },
+  { value: 19, label: 'VŨ KHÍ VÀ ĐẠN; CÁC BỘ PHẬN VÀ PHỤ KIỆN CỦA CHÚNG' },
+  { value: 19, label: 'CÁC TÁC PHẨM NGHỆ THUẬT, ĐỒ SƯU TẦM VÀ ĐỒ CỔ' },
+  { value: 21, label: 'CÁC MẶT HÀNG KHÁC' },
+];
