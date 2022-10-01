@@ -60,7 +60,7 @@ const MenuUserContainer = () => {
 
   const handleLogout = async () => {
     removeAll();
-    await router.push('/administrator/login');
+    await router.push('/');
   };
 
   const handleOpenLogout = () => {

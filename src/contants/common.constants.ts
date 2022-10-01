@@ -1,11 +1,19 @@
+import { BookingStatusPost } from './types';
+
 export const BASE_URL = 'https://api.acf.vn';
 
 export const DEFAULT_DATE_FORMAT = 'YYYY-MM-DD';
 
+export enum CalculationUnit {
+  CM_KG = 'CM_KG',
+  CBM = 'CBM',
+  CONT = 'CONT',
+}
 export interface QueryParams {
   page: number;
   search?: string;
   pageSize: number;
+  status?: BookingStatusPost;
 }
 
 export interface QueryParams2 {

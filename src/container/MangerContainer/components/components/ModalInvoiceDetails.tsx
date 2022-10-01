@@ -25,6 +25,10 @@ const ModalInvoiceDetails = ({ isOpen, onClose }: ModalInvoiceDetailsProps) => {
     form.setFieldsValue({ total });
   };
 
+  const handleAddBooking = async () => {
+    // const res = await form.validateFields();
+  };
+
   return (
     <Modal
       footer={null}
@@ -163,13 +167,8 @@ const ModalInvoiceDetails = ({ isOpen, onClose }: ModalInvoiceDetailsProps) => {
           </div>
 
           <div className='mt-4 flex justify-start'>
-            <Button
-              // onClick={onSubmit}
-              // loading={isCreating}
-              htmlType='submit'
-              type='primary'
-            >
-              Tạo mới Invoice
+            <Button htmlType='submit' type='primary' onClick={handleAddBooking}>
+              Tạo mới Booking
             </Button>
           </div>
         </Form>

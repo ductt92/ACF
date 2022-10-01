@@ -1,4 +1,4 @@
-import { LevelStaff } from './common.constants';
+import { CalculationUnit, LevelStaff } from './common.constants';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export type dataLogin = {
@@ -221,9 +221,32 @@ export enum CommoditiesType { // Loại hàng hóa
 export enum BookingStatus {
   NOT_YET_HANDED_OVER = 'Chưa bàn giao', // Chưa bàn giao
   HANDED_OVER = 'Đã bàn giao', // Đã bàn giao
-  DELIVERY = 'Đang vận chuyển', // Đang vận chuyển
   DONE = 'Giao hàng thành công', // Giao hàng thành công
   CANCEL = 'Đã hủy', // Đã hủy
+}
+
+export enum BookingStatusPost {
+  NOT_YET_HANDED_OVER = 'NOT_YET_HANDED_OVER', // Chưa bàn giao
+  HANDED_OVER = 'HANDED_OVER', // Đã bàn giao
+  DONE = 'DONE', // Giao hàng thành công
+  CANCEL = 'CANCEL', // Đã hủy
+}
+
+export interface DetailsBookingPost {
+  commoditiesTypeId: string;
+  shippingItemViId: string;
+  description: string;
+  originItem: string;
+  shippingItemEn: string;
+  quantity: number;
+  weight: number;
+  height: number;
+  width: number;
+  longs: number;
+  bulkyWeight: number;
+  numb22: number;
+  calculationUnit: CalculationUnit;
+  note: string;
 }
 
 export enum TypeOfPayment {

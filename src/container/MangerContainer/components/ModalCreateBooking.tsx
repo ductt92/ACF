@@ -157,7 +157,7 @@ const ModalCreateBooking = ({
                 <p className='text-xl font-bold'>1. Thông tin chung</p>
                 <div className='grid grid-cols-2 gap-x-6'>
                   <Form.Item
-                    name='type'
+                    name='commoditiesTypeId'
                     rules={[
                       {
                         required: true,
@@ -175,7 +175,7 @@ const ModalCreateBooking = ({
                     </VSelect>
                   </Form.Item>
 
-                  <Form.Item name='deliveryConditions'>
+                  <Form.Item name='shippingItemViId'>
                     <VSelect label='Điều kiện giao hàng' required>
                       {OpitionDeliveryConditions.map((v) => (
                         <Option value={v.value} key={v.value}>

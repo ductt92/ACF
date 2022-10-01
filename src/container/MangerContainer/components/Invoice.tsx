@@ -54,6 +54,9 @@ const InVoice = ({ form, dataUser }: InvoiceProps) => {
     handleSetField();
   }, [form, dataUser, handleSetField]);
 
+  // const handleAddBookingDetails = (form: FormInstance) => {
+  //   console.log(form);
+  // };
   return (
     <div className='mb-20 h-full'>
       <Form form={form}>

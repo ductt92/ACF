@@ -3,29 +3,23 @@ import { Tooltip } from 'antd';
 import { ColumnsType } from 'antd/lib/table';
 import dayjs from 'dayjs';
 
-import {
-  CLICK_TO_COPY,
-  copyToClipBoard,
-  numberWithCommas,
-} from '@/utils/helpers';
+import { CLICK_TO_COPY, copyToClipBoard } from '@/utils/helpers';
 
+import { CalculationUnit } from '../common.constants';
 import {
-  BookingDetails,
   BookingStatus,
   BookingType,
-  CommoditiesType,
+  DetailsBookingPost,
   IInvoiceDetails,
   IMyBooking,
-  ServiceEnum,
-  TypeOfPayment,
 } from '../types';
 const HIGH_LIGHT_CLASS = 'text-[#1890ff] ';
 
 export const MYBOOKING_COLUMNS: ColumnsType<IMyBooking> = [
   {
-    title: 'Mã đơn hàng',
-    dataIndex: 'bookingCode',
-    key: 'bookingCode',
+    title: 'Mã bưu phẩm bưu kiện ACF',
+    dataIndex: 'booking_code',
+    key: 'booking_code',
     align: 'center',
     width: 150,
     render: (bookingCode: string) => (
@@ -39,194 +33,18 @@ export const MYBOOKING_COLUMNS: ColumnsType<IMyBooking> = [
       </Tooltip>
     ),
   },
-  {
-    title: 'Loại đơn hàng (Chứng từ, hàng hóa)',
-    dataIndex: 'type',
-    key: 'type',
-    align: 'center',
-    width: 150,
-    render: (type: string) => {
-      return <span>{BookingType[type as 'LICENSE']}</span>;
-    },
-  },
 
   {
-    title: 'Mã bill đối tác',
-    dataIndex: 'partnerBillCode',
-    key: 'partnerBillCode',
+    title: 'Mã bưu phẩm bưu kiện đối tác',
+    dataIndex: 'partner_bill_code',
+    key: 'partner_bill_code',
     align: 'center',
     width: 150,
   },
   {
-    title: 'Địa chỉ chi tiết người gửi',
-    dataIndex: 'senderAddress',
-    key: 'senderAddress',
-    align: 'center',
-    width: 150,
-  },
-  {
-    title: 'Người gửi',
-    dataIndex: 'senderName',
-    key: 'senderName',
-    align: 'center',
-    width: 150,
-  },
-  {
-    title: 'Người liên hệ',
-    dataIndex: 'senderContactPerson',
-    key: 'senderContactPerson',
-    align: 'center',
-    width: 150,
-  },
-  {
-    title: 'Số điện thoại',
-    dataIndex: 'senderPhoneNumber',
-    key: 'senderPhoneNumber',
-    align: 'center',
-    width: 150,
-  },
-  {
-    title: 'Mobile',
-    dataIndex: 'senderMobile',
-    key: 'senderMobile',
-    align: 'center',
-    width: 150,
-  },
-
-  {
-    title: 'Quốc gia',
-    dataIndex: 'senderCountry',
-    key: 'senderCountry',
-    align: 'center',
-    width: 150,
-  },
-  {
-    title: 'Phường/xã',
-    dataIndex: 'senderCommune',
-    key: 'senderCommune',
-    align: 'center',
-    width: 150,
-  },
-  {
-    title: 'Quận/Huyện',
-    dataIndex: 'senderDistrict',
-    key: 'senderDistrict',
-    align: 'center',
-    width: 150,
-  },
-  {
-    title: 'Tỉnh/Thành phố',
-    dataIndex: 'senderProvince',
-    key: 'senderProvince',
-    align: 'center',
-    width: 150,
-  },
-  {
-    title: 'Mã bưu chính',
-    dataIndex: 'senderPostalCode',
-    key: 'senderPostalCode',
-    align: 'center',
-    width: 150,
-  },
-  {
-    title: 'Tiểu bang',
-    dataIndex: 'senderState',
-    key: 'senderState',
-    align: 'center',
-    width: 150,
-  },
-  {
-    title: 'Địa chỉ chi tiết người nhận',
-    dataIndex: 'receiverAddress',
-    key: 'receiverAddress',
-    align: 'center',
-    width: 150,
-  },
-  {
-    title: 'Người nhận',
-    dataIndex: 'receiverName',
-    key: 'receiverName',
-    align: 'center',
-    width: 150,
-  },
-  {
-    title: 'Người liên hệ',
-    dataIndex: 'receiverContactPerson',
-    key: 'receiverContactPerson',
-    align: 'center',
-    width: 150,
-  },
-  {
-    title: 'Số điện thoại',
-    dataIndex: 'receiverPhoneNumber',
-    key: 'receiverPhoneNumber',
-    align: 'center',
-    width: 150,
-  },
-  {
-    title: 'Mobile',
-    dataIndex: 'receiverMobile',
-    key: 'receiverMobile',
-    align: 'center',
-    width: 150,
-  },
-  {
-    title: 'Quốc gia',
-    dataIndex: 'receiverCountry',
-    key: 'receiverCountry',
-    align: 'center',
-    width: 150,
-  },
-  {
-    title: 'Phường/xã',
-    dataIndex: 'receiverCommune',
-    key: 'receiverCommune',
-    align: 'center',
-    width: 150,
-  },
-  {
-    title: 'Quận/Huyện',
-    dataIndex: 'receiverDistrict',
-    key: 'receiverDistrict',
-    align: 'center',
-    width: 150,
-  },
-  {
-    title: 'Tỉnh/Thành phố',
-    dataIndex: 'receiverProvince',
-    key: 'receiverProvince',
-    align: 'center',
-    width: 150,
-  },
-
-  {
-    title: 'Mã bưu chính',
-    dataIndex: 'receiverPostalCode',
-    key: 'receiverPostalCode',
-    align: 'center',
-    width: 150,
-  },
-  {
-    title: 'Tiểu bang',
-    dataIndex: 'receiverState',
-    key: 'receiverState',
-    align: 'center',
-    width: 150,
-  },
-  {
-    title: 'Thời gian dự kiến lấy hàng',
-    dataIndex: 'estimatedDate',
-    key: 'estimatedDate',
-    align: 'center',
-    width: 150,
-    render: (estimatedDate: string) => {
-      return <span>{dayjs(estimatedDate).format('DD/MM/YYYY')}</span>;
-    },
-  },
-  {
-    title: 'Trạng thái booking',
-    dataIndex: 'status',
-    key: 'status',
+    title: 'Trạng thái đơn hàng',
+    dataIndex: 'booking_status',
+    key: 'booking_status',
     align: 'center',
     width: 150,
     render: (type: string) => {
@@ -234,114 +52,127 @@ export const MYBOOKING_COLUMNS: ColumnsType<IMyBooking> = [
     },
   },
   {
-    title: 'Dịch vụ',
-    dataIndex: 'serviceBooking',
-    key: 'serviceBooking',
+    title: 'Thời gian yêu cầu lấy hàng',
+    dataIndex: 'estimate_date',
+    key: 'estimate_date',
+    align: 'center',
+    width: 150,
+    render: (estimatedDate: string) => {
+      return <span>{dayjs(estimatedDate).format('DD/MM/YYYY hh:mm:ss')}</span>;
+    },
+  },
+  {
+    title: 'Loại bưu phẩm bưu kiện',
+    dataIndex: 'booking_status',
+    key: 'booking_status',
     align: 'center',
     width: 150,
     render: (type: string) => {
-      return <span>{ServiceEnum[type as 'EXPORT_SERVICE_EXPRESS']}</span>;
+      return <span>{BookingType[type as 'LICENSE']}</span>;
     },
   },
   {
-    title: 'Loại hình thanh toán',
-    dataIndex: 'typeOfPayment',
-    key: 'typeOfPayment',
-    align: 'center',
-    width: 150,
-    render: (type: string) => {
-      return <span>{TypeOfPayment[type as 'PREPAID']}</span>;
-    },
-  },
-  {
-    title: 'Tổng tiền đơn hàng',
-    dataIndex: 'total',
-    key: 'total',
-    align: 'center',
-    width: 150,
-    render: (total: any) => {
-      return <span>{numberWithCommas(total)}</span>;
-    },
-  },
-  {
-    title: 'Tiền thuế',
-    dataIndex: 'vat',
-    key: 'vat',
-    align: 'center',
-    width: 150,
-    render: (vat: any) => {
-      return <span>{numberWithCommas(vat)}</span>;
-    },
-  },
-  {
-    title: 'Tổng tiền thanh toán',
-    dataIndex: 'amount',
-    key: 'amount',
-    align: 'center',
-    width: 150,
-    render: (amount: any) => {
-      return <span>{numberWithCommas(amount)}</span>;
-    },
-  },
-  {
-    title: 'Ghi chú',
-    dataIndex: 'note',
-    key: 'note',
-    align: 'center',
-    width: 150,
-  },
-];
-
-export const BOOKING_DETAILS: ColumnsType<BookingDetails> = [
-  {
-    title: 'Loại hàng hóa',
-    dataIndex: 'commoditiesType',
-    key: 'commoditiesType-2',
-    align: 'center',
-    width: 150,
-    render: (type: string) => {
-      return <span>{CommoditiesType[type as 'LICENSE']}</span>;
-    },
-  },
-  {
-    title: 'Tên hàng hóa',
-    dataIndex: 'name',
-    key: 'name',
-    align: 'center',
-    width: 150,
-  },
-  {
-    title: 'Mô tả',
-    dataIndex: 'description',
-    key: 'description',
-    align: 'center',
-    width: 150,
-  },
-  {
-    title: 'Số kiện',
-    dataIndex: 'quantity',
-    key: 'quantity',
-    align: 'center',
-    width: 150,
-  },
-  {
-    title: 'Trọng lượng (kg/kiện)',
+    title: 'Cân nặng thực (Kg)',
     dataIndex: 'weight',
     key: 'weight',
     align: 'center',
     width: 150,
   },
   {
-    title: 'Chiều cao(cm)',
-    dataIndex: 'height',
-    key: 'height',
+    title: 'Cân nặng cồng kềnh (kg)',
+    dataIndex: 'bulky_weight',
+    key: 'bulky_weight',
     align: 'center',
     width: 150,
   },
   {
-    title: 'Chiều rộng(cm)',
-    dataIndex: 'width',
-    key: 'width',
+    title: 'Dịch vụ',
+    dataIndex: 'services_name',
+    key: 'services_name',
+    align: 'center',
+    width: 150,
+  },
+  {
+    title: 'Thông tin người nhận',
+    dataIndex: 'receiver_contact_person',
+    key: 'receiver_contact_person',
+    align: 'center',
+    width: 150,
+  },
+  {
+    title: 'Ghi chú',
+    dataIndex: 'booking_note',
+    key: 'booking_note',
+    align: 'center',
+    width: 150,
+  },
+
+  {
+    title: 'Thời gian tạo booking',
+    dataIndex: 'created_at',
+    key: 'created_at',
+    align: 'center',
+    width: 150,
+    render: (created_at: string) => {
+      return <span>{dayjs(created_at).format('DD/MM/YYYY hh:mm:ss')}</span>;
+    },
+  },
+];
+
+export const BOOKING_DETAILS: ColumnsType<DetailsBookingPost> = [
+  {
+    title: 'Đơn vị',
+    dataIndex: 'calculationUnit',
+    key: 'calculationUnit',
+    align: 'center',
+    width: 150,
+    render: (type: string) => {
+      return <span>{CalculationUnit[type as 'CM_KG']}</span>;
+    },
+  },
+  {
+    title: 'Nhóm hàng hóa vận chuyển',
+    dataIndex: 'commoditiesTypeId',
+    key: 'commoditiesType',
+    align: 'center',
+    width: 150,
+  },
+  {
+    title: 'Mặt hàng vận chuyển (Tiếng Việt)',
+    dataIndex: 'shippingItemViId',
+    key: 'shippingItemVi ',
+    align: 'center',
+    width: 150,
+    render: (type: any) => {
+      return <span>{type}</span>;
+    },
+  },
+  {
+    title: 'Mô tả chi tiết hàng hóa',
+    dataIndex: 'description',
+    key: 'description',
+    align: 'center',
+    width: 150,
+  },
+  {
+    title: 'Xuất xứ hàng hóa',
+    dataIndex: 'originItem',
+    key: 'originItem',
+    align: 'center',
+    width: 150,
+  },
+
+  {
+    title: 'Mặt hàng vận chuyển (Tiếng Anh)',
+    dataIndex: 'shippingItemEn',
+    key: 'shippingItemEn ',
+    align: 'center',
+    width: 150,
+  },
+  {
+    title: 'Số kiện hàng',
+    dataIndex: 'quantity',
+    key: 'quantity',
     align: 'center',
     width: 150,
   },

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { SearchOutlined } from '@ant-design/icons';
 import {
   Button,
@@ -8,7 +9,8 @@ import {
   Select,
   Table,
 } from 'antd';
-import React, { useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
+import { useQuery } from 'react-query';
 
 import VDatePicker from '@/components/common/VDatePicker';
 import VInput from '@/components/common/VInput';
@@ -16,11 +18,13 @@ import VSelect from '@/components/common/VSelect';
 import VTimePicker from '@/components/common/VTimePicker';
 
 import { BOOKING_DETAILS } from '@/contants/columns/my-booking.columns';
+import { FORMAT_DATE_DD_MM_YYYY } from '@/contants/common.constants';
+import { BookingType, DetailsBookingPost } from '@/contants/types';
 import {
-  DeliveryConditions,
-  FORMAT_DATE_DD_MM_YYYY,
-} from '@/contants/common.constants';
-import { BookingType, ServiceEnum, TypeOfPayment } from '@/contants/types';
+  fetchDeliveryCondition,
+  fetchServicesBooking,
+  fetchTypeOfPayment,
+} from '@/services/booking.services';
 
 import ModalBookingDetails from './ModalBookingDeatails';
 const { Option } = Select;
@@ -30,32 +34,91 @@ interface GeneralInfomationProps {
 
 const GeneralInfomation = ({ form }: GeneralInfomationProps) => {
   const [isCreate, setIsCreate] = useState<boolean>(false);
+  const [isShow, setIsShow] = useState<boolean>(false);
 
-  const OpitionServiceBooking = Object.entries(ServiceEnum).map(
-    ([key, value]) => ({
-      value: key,
-      label: value,
-    })
+  const [dataDetails, setDataDetails] = useState<Array<DetailsBookingPost>>([]);
+
+  const { data: dataSerivicesBooknig } = useQuery(
+    ['dataSerivicesBooknig', {}],
+    () => fetchServicesBooking()
   );
 
-  const OpitionDeliveryConditions = Object.entries(DeliveryConditions).map(
-    ([key, value]) => ({
-      value: key,
-      label: value,
-    })
+  const OpitionServiceBooking = useMemo(() => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    //  @ts-ignore
+    if (dataSerivicesBooknig?.length < 0) {
+      return [];
+    } else {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      //  @ts-ignore
+      return dataSerivicesBooknig?.map((v) => ({
+        value: v.id,
+        label: v.name,
+      }));
+    }
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    //  @ts-ignore
+  }, [dataSerivicesBooknig]);
+
+  const { data: dataDelivery } = useQuery(['fetchDeliveryCondition', {}], () =>
+    fetchDeliveryCondition()
   );
 
+  const OpitionDeliveryConditions = useMemo(() => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    //  @ts-ignore
+    if (dataDelivery?.length < 0) {
+      return [];
+    } else {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      //  @ts-ignore
+      return dataDelivery?.map((v) => ({
+        value: v.id,
+        label: v.name,
+      }));
+    }
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    //  @ts-ignore
+  }, [dataDelivery]);
+
+  useEffect(() => {
+    return () => setIsShow(false);
+  }, []);
+
+  const onSelect = () => {
+    setIsShow(true);
+  };
   const OpitionType = Object.entries(BookingType).map(([key, value]) => ({
     value: key,
     label: value,
   }));
 
-  const OpitionTypePayment = Object.entries(TypeOfPayment).map(
-    ([key, value]) => ({
-      value: key,
-      label: value,
-    })
+  const { data: fetchTypeOfPaymentId } = useQuery(
+    ['fetchDeliveryCondition', {}],
+    () => fetchTypeOfPayment()
   );
+
+  const OpitionTypePayment = useMemo(() => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    //  @ts-ignore
+    if (fetchTypeOfPaymentId?.length < 0) {
+      return [];
+    } else {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      //  @ts-ignore
+      return fetchTypeOfPaymentId?.map((v) => ({
+        value: v.id,
+        label: v.name,
+      }));
+    }
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    //  @ts-ignore
+  }, [fetchTypeOfPaymentId]);
+
+  const handleAddBookingDetails = (form: any) => {
+    setDataDetails((prev) => [...prev, form]);
+    setIsCreate(false);
+  };
 
   return (
     <div className='mb-20 h-full'>
@@ -76,18 +139,16 @@ const GeneralInfomation = ({ form }: GeneralInfomationProps) => {
               },
             ]}
           >
-            <VSelect label='Dịch vụ' required>
-              {OpitionServiceBooking.map((v) => (
-                <Option value={v.value} key={v.value}>
-                  {v.label}
-                </Option>
+            <VSelect label='Dịch vụ' required onChange={onSelect}>
+              {OpitionServiceBooking?.map((v: any) => (
+                <Option key={v.value}>{v.label}</Option>
               ))}
             </VSelect>
           </Form.Item>
 
           <Form.Item name='deliveryConditions'>
             <VSelect label='Điều kiện giao hàng' required>
-              {OpitionDeliveryConditions.map((v) => (
+              {OpitionDeliveryConditions?.map((v: any) => (
                 <Option value={v.value} key={v.value}>
                   {v.label}
                 </Option>
@@ -106,9 +167,7 @@ const GeneralInfomation = ({ form }: GeneralInfomationProps) => {
           >
             <VSelect label='Loại booking (Chứng từ, hàng hóa)' required>
               {OpitionType.map((v) => (
-                <Option value={v.value} key={v.value}>
-                  {v.label}
-                </Option>
+                <Option key={v.value}>{v.label}</Option>
               ))}
             </VSelect>
           </Form.Item>
@@ -167,7 +226,7 @@ const GeneralInfomation = ({ form }: GeneralInfomationProps) => {
             ]}
           >
             <VSelect label='Loại hình thanh toán' required>
-              {OpitionTypePayment.map((v) => (
+              {OpitionTypePayment?.map((v: any) => (
                 <Option value={v.value} key={v.value}>
                   {v.label}
                 </Option>
@@ -186,11 +245,12 @@ const GeneralInfomation = ({ form }: GeneralInfomationProps) => {
               placeholder='Tìm kiếm đơn hàng...'
               prefix={<SearchOutlined />}
               className='mb-4 mr-4 w-[350px]'
-              // onChange={(event: ChangeEvent<HTMLInputElement>) =>
-              //   handleSearch(event.target.value)
-              // }
             />
-            <Button type='primary' onClick={() => setIsCreate(true)}>
+            <Button
+              type='primary'
+              onClick={() => setIsCreate(true)}
+              disabled={!isShow}
+            >
               Thêm hàng hóa
             </Button>
           </div>
@@ -199,12 +259,9 @@ const GeneralInfomation = ({ form }: GeneralInfomationProps) => {
             columns={BOOKING_DETAILS}
             rowKey='key'
             className='cursor-pointer'
-            dataSource={[]}
+            dataSource={dataDetails}
             pagination={{
-              // current: data?.pagination?.currentPage,
-              // total: data?.pagination?.totalCount,
               showSizeChanger: false,
-              // defaultPageSize: QUERY_PARAMS.pageSize,
             }}
             bordered
           />
@@ -213,6 +270,7 @@ const GeneralInfomation = ({ form }: GeneralInfomationProps) => {
             <ModalBookingDetails
               isOpen={isCreate}
               onClose={() => setIsCreate(false)}
+              handleAddBookingDetails={handleAddBookingDetails}
             />
           )}
         </div>
