@@ -30,13 +30,17 @@ import ModalBookingDetails from './ModalBookingDeatails';
 const { Option } = Select;
 interface GeneralInfomationProps {
   form: FormInstance;
+  dataDetails: Array<DetailsBookingPost>;
+  handleAddBookingDetails: (form: any) => void;
 }
 
-const GeneralInfomation = ({ form }: GeneralInfomationProps) => {
+const GeneralInfomation = ({
+  form,
+  dataDetails,
+  handleAddBookingDetails,
+}: GeneralInfomationProps) => {
   const [isCreate, setIsCreate] = useState<boolean>(false);
   const [isShow, setIsShow] = useState<boolean>(false);
-
-  const [dataDetails, setDataDetails] = useState<Array<DetailsBookingPost>>([]);
 
   const { data: dataSerivicesBooknig } = useQuery(
     ['dataSerivicesBooknig', {}],
@@ -94,7 +98,7 @@ const GeneralInfomation = ({ form }: GeneralInfomationProps) => {
   }));
 
   const { data: fetchTypeOfPaymentId } = useQuery(
-    ['fetchDeliveryCondition', {}],
+    ['fetchTypeOfPaymentId', {}],
     () => fetchTypeOfPayment()
   );
 
@@ -115,8 +119,8 @@ const GeneralInfomation = ({ form }: GeneralInfomationProps) => {
     //  @ts-ignore
   }, [fetchTypeOfPaymentId]);
 
-  const handleAddBookingDetails = (form: any) => {
-    setDataDetails((prev) => [...prev, form]);
+  const handleAddBooking = (form: any) => {
+    handleAddBookingDetails(form);
     setIsCreate(false);
   };
 
@@ -131,7 +135,7 @@ const GeneralInfomation = ({ form }: GeneralInfomationProps) => {
           </Form.Item>
 
           <Form.Item
-            name='serviceBooking'
+            name='serviceBookingId'
             rules={[
               {
                 required: true,
@@ -146,7 +150,7 @@ const GeneralInfomation = ({ form }: GeneralInfomationProps) => {
             </VSelect>
           </Form.Item>
 
-          <Form.Item name='deliveryConditions'>
+          <Form.Item name='deliveryConditionId'>
             <VSelect label='Điều kiện giao hàng' required>
               {OpitionDeliveryConditions?.map((v: any) => (
                 <Option value={v.value} key={v.value}>
@@ -217,7 +221,7 @@ const GeneralInfomation = ({ form }: GeneralInfomationProps) => {
 
         <div className='grid grid-cols-2 gap-x-6'>
           <Form.Item
-            name='typeOfPayment'
+            name='typeOfPaymentId'
             rules={[
               {
                 required: true,
@@ -270,7 +274,7 @@ const GeneralInfomation = ({ form }: GeneralInfomationProps) => {
             <ModalBookingDetails
               isOpen={isCreate}
               onClose={() => setIsCreate(false)}
-              handleAddBookingDetails={handleAddBookingDetails}
+              handleAddBookingDetails={handleAddBooking}
             />
           )}
         </div>

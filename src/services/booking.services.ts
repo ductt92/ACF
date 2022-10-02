@@ -30,7 +30,7 @@ export const fetchBooking = async ({
 
 export const createBooking = async (data: Partial<IMyBooking>) => {
   const booking = HttpRequest.post('booking', {
-    ...data,
+    booking: { ...data },
   });
   return booking as MyBookingResponse;
 };

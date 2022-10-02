@@ -1,11 +1,13 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable unused-imports/no-unused-vars */
 import { Button, Form, notification, Tabs } from 'antd';
+import moment from 'moment';
 import React, { useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 
 import { QueryParams } from '@/contants/common.constants';
 import { QUERY_BOOKING } from '@/contants/query-key/booking.query';
-import { BookingDetails, IMyBooking } from '@/contants/types';
+import { DetailsBookingPost, IMyBooking } from '@/contants/types';
 import { createBooking, fetchUser } from '@/services/booking.services';
 
 import InVoice from './components/Invoice';
@@ -23,6 +25,10 @@ const CreateBookingContainer = () => {
   const [form] = Form.useForm();
   const queryClient = useQueryClient();
   const { data: userData } = useQuery(['getuser', queries], () => fetchUser());
+
+  const [detailsBooking, setDetailsBooking] = useState<
+    Array<DetailsBookingPost>
+  >([]);
 
   const { mutate: mutateCreate, isLoading: isCreating } = useMutation(
     createBooking,
@@ -42,31 +48,58 @@ const CreateBookingContainer = () => {
       },
     }
   );
+
+  const handleAddBookingDetails = (form: any) => {
+    const {
+      bulkyWeight,
+      calculationUnit,
+      commoditiesTypeId,
+      description,
+      height,
+      longs,
+      note,
+      originItem,
+      quantity,
+      shippingItemEn,
+      shippingItemViId,
+      weight,
+      width,
+    } = form;
+    const resForm = {
+      bulkyWeight,
+      calculationUnit,
+      commoditiesTypeId,
+      description,
+      height,
+      longs,
+      note,
+      originItem,
+      quantity,
+      shippingItemEn,
+      shippingItemViId,
+      weight,
+      width,
+    };
+    setDetailsBooking((prev) => [...prev, resForm]);
+  };
   const onSubmit = async () => {
     const dataCreateBooking: Partial<
-      IMyBooking & { estDate: string | Date; estTime: string | Date }
+      IMyBooking & { estimateHour: string | Date; estimatedDate: string | Date }
     > = await form.validateFields();
 
-    // console.log(JSON.stringify(dataCreateBooking));
-
-    mutateCreate({
+    const estimatedDate = moment(dataCreateBooking.estimatedDate).format(
+      'YYYY/MM/DD'
+    );
+    const estimateHour = moment(dataCreateBooking.estimateHour).format('HH:mm');
+    const booking = {
       ...dataCreateBooking,
-      total: parseInt(dataCreateBooking.total?.toString() || '') || 0,
-      vat: parseInt(dataCreateBooking.vat?.toString() || '') || 0,
-      amount: parseInt(dataCreateBooking.amount?.toString() || '') || 0,
-      estimatedDate: dataCreateBooking.estDate,
-      bookingDetail: dataCreateBooking?.bookingDetail?.map(
-        (v: BookingDetails) => ({
-          ...v,
-          quantity: parseInt(v.quantity?.toString()) || 0,
-          weight: parseInt(v.weight?.toString()) || 0,
-          height: parseInt(v.height?.toString()) || 0,
-          width: parseInt(v.width?.toString()) || 0,
-          longs: parseInt(v.longs?.toString()) || 0,
-          bulkyWeight: parseInt(v.bulkyWeight?.toString()) || 0,
-        })
-      ),
-    });
+      estimatedDate,
+      estimateHour,
+      bookingDetail: detailsBooking,
+      //fake data
+      isCustomsDeclaration: false,
+    };
+    mutateCreate(booking);
   };
   return (
     <div>
@@ -81,7 +114,11 @@ const CreateBookingContainer = () => {
 
       <Tabs type='card'>
         <Tabs.TabPane tab='Booking' key='Booking'>
-          <TabsBooking form={form} />
+          <TabsBooking
+            form={form}
+            detailsBooking={detailsBooking}
+            handleAddBookingDetails={handleAddBookingDetails}
+          />
         </Tabs.TabPane>
         <Tabs.TabPane tab='Invoice' key='invoice'>
           <InVoice form={form} dataUser={userData} />

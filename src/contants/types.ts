@@ -151,50 +151,37 @@ export enum NetWorkCustomerType { // Loại khách hàng vào mạng
 }
 
 export interface IMyBooking {
-  id: string;
-  bookingCode: string;
-  customerId: string;
-  unitId?: string;
-  invoiceId?: string;
-  type: BookingType;
-  partnerBillCode?: string;
-  senderAddress: string;
-  senderName: string;
-  senderContactPerson: string;
-  senderPhoneNumber: string;
-  senderMobile: string;
-  senderCountry: string;
-  senderCommune: string;
-  senderDistrict: string;
-  senderProvince: string;
-  senderPostalCode: string;
-  senderState: string;
-  receiverAddress: string;
-  receiverName: string;
-  receiverContactPerson: string;
-  receiverPhoneNumber: string;
-  receiverMobile: string;
-  receiverCountry: string;
-  receiverCommune: string;
-  receiverDistrict: string;
-  receiverProvince: string;
-  receiverPostalCode: string;
-  receiverState: string;
-  estimatedDate: string | Date;
-  status: BookingStatus;
-  serviceBooking: ServiceEnum;
-  typeOfPayment: TypeOfPayment;
-  total: number;
-  vat: number;
-  amount: number;
-  note: string;
-  createdAt: string | Date;
-  updatedAt: string | Date;
-  unit: null;
-  customer: ICustomer;
-  bookingDetail: Array<BookingDetails>;
-  invoice: {
-    invoiceDetail: Array<IInvoiceDetail>;
+  booking: {
+    type: CommoditiesType;
+    serviceBookingId: string;
+    estimatedDate: string | Date;
+    estimateHour: string | Date;
+    deliveryConditionId: string;
+    otherDeliveryConditions: string;
+    note: string;
+    payment: string;
+    typeOfPaymentId: string;
+    isCustomsDeclaration: boolean;
+    senderNameVi: string;
+    senderNameEn: string;
+    senderAddressVi: string;
+    senderAddressEn: string;
+    senderContactPerson: string;
+    senderDepartment: string;
+    senderPhoneNumber: string;
+    senderNote: string;
+    receiverName: string;
+    receiverAddress: string;
+    receiverPostalCode: string;
+    receiverCountry: string;
+    receiverContactPerson: string;
+    receiverDepartment: string;
+    receiverPhoneNumber: string;
+    receiverNote: string;
+    total: number;
+    vat: number;
+    amount: number;
+    bookingDetail: Array<DetailsBookingPost>;
   };
 }
 export interface IInvoiceDetail {
@@ -244,7 +231,7 @@ export interface DetailsBookingPost {
   width: number;
   longs: number;
   bulkyWeight: number;
-  numb22: number;
+  numb22?: number;
   calculationUnit: CalculationUnit;
   note: string;
 }

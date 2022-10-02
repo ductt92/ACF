@@ -1,9 +1,11 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable unused-imports/no-unused-vars */
 import { FormInstance, Tabs } from 'antd';
 import React, { useState } from 'react';
 import { useQuery } from 'react-query';
 
 import { QueryParams } from '@/contants/common.constants';
+import { DetailsBookingPost } from '@/contants/types';
 import { fetchUser } from '@/services/booking.services';
 
 import AddOnServices from './components/addOnServices';
@@ -12,15 +14,21 @@ import GeneralInfomation from './components/generalInfo';
 
 interface TabsBookingProps {
   form: FormInstance;
+  detailsBooking: Array<DetailsBookingPost>;
+  handleAddBookingDetails: (form: any) => void;
 }
 
 const QUERY_PARAMS: QueryParams = {
   page: 1,
-  pageSize: 20,
+  pageSize: 9999,
   search: '',
 };
 
-const TabsBooking = ({ form }: TabsBookingProps) => {
+const TabsBooking = ({
+  form,
+  handleAddBookingDetails,
+  detailsBooking,
+}: TabsBookingProps) => {
   const [queries, setQueries] = useState<QueryParams>(QUERY_PARAMS);
 
   const { data: userData } = useQuery(['getuser', queries], () => fetchUser());
@@ -29,7 +37,11 @@ const TabsBooking = ({ form }: TabsBookingProps) => {
     <div>
       <Tabs type='card'>
         <Tabs.TabPane tab='Thông tin chung' key='general-information'>
-          <GeneralInfomation form={form} />
+          <GeneralInfomation
+            form={form}
+            dataDetails={detailsBooking}
+            handleAddBookingDetails={handleAddBookingDetails}
+          />
         </Tabs.TabPane>
         <Tabs.TabPane tab='Địa chỉ' key='address'>
           <Address form={form} dataUser={userData} />

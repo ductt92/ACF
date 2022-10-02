@@ -17,7 +17,7 @@ const { Option } = Select;
 const Address = ({ form, dataUser }: AddressProps) => {
   useEffect(() => {
     form.setFieldsValue({
-      senderName: dataUser?.fullName,
+      senderNameVi: dataUser?.fullName,
       senderPhoneNumber: dataUser?.phoneNumber,
       senderContactPerson: dataUser?.contactPerson,
       senderMobile: dataUser?.phoneNumber,
@@ -27,7 +27,7 @@ const Address = ({ form, dataUser }: AddressProps) => {
       senderProvince: dataUser?.province,
       senderPostalCode: dataUser?.postalCode,
       senderState: dataUser?.state,
-      senderAddress: dataUser?.detailAddress,
+      senderAddressVi: dataUser?.detailAddress,
     });
   }, [dataUser, form]);
 
@@ -38,27 +38,43 @@ const Address = ({ form, dataUser }: AddressProps) => {
         <Divider className='bg-yellow' />
         <div className='grid grid-cols-2 gap-x-6'>
           <Form.Item
-            name='senderName'
+            name='senderNameVi'
             rules={[
               {
                 required: true,
-                message: 'Vui lòng nhập người gửi',
+                message: 'Vui lòng nhập Tên công ty gửi (Tiếng Việt)',
               },
             ]}
           >
-            <VInput label='Người gửi' required />
+            <VInput label='Tên công ty gửi (Tiếng Việt)' required />
+          </Form.Item>
+
+          <Form.Item name='senderNameEn'>
+            <VInput label='Tên công ty gửi (Tiếng Anh)' />
           </Form.Item>
 
           <Form.Item
-            name='senderContactPerson'
+            name='senderAddressVi'
             rules={[
               {
                 required: true,
-                message: 'Vui lòng nhập người liên hệ',
+                message: 'Vui lòng nhập Địa chỉ chi tiết (Tiếng Việt)',
               },
             ]}
           >
-            <VInput label='Người liên hệ' required />
+            <VInput label='Địa chỉ chi tiết (Tiếng Việt)' required />
+          </Form.Item>
+
+          <Form.Item name='senderAddressEn'>
+            <VInput label='Địa chỉ chi tiết (Tiếng Anh)' />
+          </Form.Item>
+
+          <Form.Item name='senderContactPerson'>
+            <VInput label='Tên người gửi hàng' />
+          </Form.Item>
+
+          <Form.Item name='senderDepartment'>
+            <VInput label='Phòng ban gửi' />
           </Form.Item>
 
           <Form.Item
@@ -66,82 +82,17 @@ const Address = ({ form, dataUser }: AddressProps) => {
             rules={[
               {
                 required: true,
-                message: 'Vui lòng nhập sđt người gửi',
+                message: 'Số điện thoại gửi',
               },
             ]}
           >
-            <VInput label='Số điện thoại' required />
+            <VInput label='Số điện thoại gửi' required />
           </Form.Item>
 
-          <Form.Item
-            name='senderMobile'
-            rules={[
-              {
-                required: true,
-                message: 'Vui lòng nhập mobile',
-              },
-            ]}
-          >
-            <VInput label='Mobile' required />
-          </Form.Item>
-
-          <Form.Item
-            name='senderCountry'
-            rules={[
-              {
-                required: true,
-                message: 'Vui lòng nhập quốc gia',
-              },
-            ]}
-          >
-            <VSelect label='Quốc gia' required showSearch>
-              {countries.map((v) => (
-                <Option value={v.value} key={v.value}>
-                  {v.label}
-                </Option>
-              ))}
-            </VSelect>
-          </Form.Item>
-
-          <Form.Item name='senderCommune'>
-            <VInput label='Phường/xã' />
-          </Form.Item>
-
-          <Form.Item name='senderDistrict'>
-            <VInput label='Quận/Huyện' />
-          </Form.Item>
-
-          <Form.Item
-            name='senderProvince'
-            rules={[
-              {
-                required: true,
-                message: 'Vui lòng nhập Tỉnh/Thành phố',
-              },
-            ]}
-          >
-            <VInput label='Tỉnh/Thành phố' required />
-          </Form.Item>
-
-          <Form.Item name='senderPostalCode'>
-            <VInput label='Mã bưu chính' />
-          </Form.Item>
-
-          <Form.Item name='senderState'>
-            <VInput label='Tiểu bang' />
+          <Form.Item name='senderNote'>
+            <VInput label='Ghi chú' />
           </Form.Item>
         </div>
-        <Form.Item
-          name='senderAddress'
-          rules={[
-            {
-              required: true,
-              message: 'Vui lòng nhập địa chỉ chi tiết người gửi',
-            },
-          ]}
-        >
-          <VInput label='Địa chỉ chi tiết người gửi' required />
-        </Form.Item>
 
         <p className='m-0 p-0 font-bold'>2.Địa chỉ người nhận</p>
         <Divider className='bg-yellow' />
@@ -152,47 +103,34 @@ const Address = ({ form, dataUser }: AddressProps) => {
             rules={[
               {
                 required: true,
-                message: 'Vui lòng nhập người nhận',
+                message: 'Vui lòng nhập Tên công ty nhận',
               },
             ]}
           >
-            <VInput label='Người nhận' required />
+            <VInput label='Tên công ty nhận' required />
           </Form.Item>
-
           <Form.Item
-            name='receiverContactPerson'
+            name='receiverAddress'
             rules={[
               {
                 required: true,
-                message: 'Vui lòng nhập người liên hệ',
+                message: 'Vui lòng nhập Địa chỉ nhận hàng chi tiết',
               },
             ]}
           >
-            <VInput label='Người liên hệ' required />
+            <VInput label='Địa chỉ nhận hàng chi tiết' required />
           </Form.Item>
 
           <Form.Item
-            name='receiverPhoneNumber'
+            name='receiverPostalCode'
             rules={[
               {
                 required: true,
-                message: 'Vui lòng nhập số điện thoại',
+                message: 'Vui lòng nhập Mã bưu chính (postcode)',
               },
             ]}
           >
-            <VInput label='Số điện thoại' required />
-          </Form.Item>
-
-          <Form.Item
-            name='receiverMobile'
-            rules={[
-              {
-                required: true,
-                message: 'Vui lòng nhập mobile',
-              },
-            ]}
-          >
-            <VInput label='Mobile' required />
+            <VInput label='Mã bưu chính (postcode)' required />
           </Form.Item>
 
           <Form.Item
@@ -213,53 +151,37 @@ const Address = ({ form, dataUser }: AddressProps) => {
             </VSelect>
           </Form.Item>
 
-          <Form.Item name='receiverCommune'>
-            <VInput label='Phường/xã' />
-          </Form.Item>
-
-          <Form.Item name='receiverDistrict'>
-            <VInput label='Quận/Huyện' />
-          </Form.Item>
-
           <Form.Item
-            name='receiverProvince'
+            name='receiverContactPerson'
             rules={[
               {
                 required: true,
-                message: 'Vui lòng nhập Tỉnh/Thành phố',
+                message: 'Vui lòng nhập Người nhận hàng',
               },
             ]}
           >
-            <VInput label='Tỉnh/Thành phố' required />
+            <VInput label='Người nhận hàng' required />
           </Form.Item>
 
           <Form.Item
-            name='receiverPostalCode'
+            name='receiverPhoneNumber'
             rules={[
               {
                 required: true,
-                message: 'Vui lòng nhập mã bưu chính',
+                message: 'Vui lòng nhập Số điện thoại người gửi',
               },
             ]}
           >
-            <VInput label='Mã bưu chính' required />
+            <VInput label='Số điện thoại người gửi' required />
           </Form.Item>
-          <Form.Item name='receiverState'>
-            <VInput label='Tiểu bang' />
+
+          <Form.Item name='receiverDepartment'>
+            <VInput label='Phòng ban nhận hàng' />
+          </Form.Item>
+          <Form.Item name='receiverNote'>
+            <VInput label='Ghi chú' />
           </Form.Item>
         </div>
-
-        <Form.Item
-          name='receiverAddress'
-          rules={[
-            {
-              required: true,
-              message: 'Vui lòng nhập Địa chỉ chi tiết người nhận',
-            },
-          ]}
-        >
-          <VInput label='Địa chỉ chi tiết người nhận' required />
-        </Form.Item>
       </Form>
     </div>
   );
