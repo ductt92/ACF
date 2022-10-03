@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button, Form, Modal, Select } from 'antd';
 import React from 'react';
 
@@ -5,17 +6,22 @@ import VInput from '@/components/common/VInput';
 import VInputNumber from '@/components/common/VInputNumber';
 import VSelect from '@/components/common/VSelect';
 
-import { mockUnit } from '@/contants/types';
+import { UnitOfMeasure } from '@/contants/types';
 import { countries } from '@/contants/types/Country';
 
 type ModalInvoiceDetailsProps = {
   isOpen: boolean;
   onClose: (value: boolean) => void;
+  handleAddInvoiceDetails: (form: any) => void;
 };
 
 const { Option } = Select;
 
-const ModalInvoiceDetails = ({ isOpen, onClose }: ModalInvoiceDetailsProps) => {
+const ModalInvoiceDetails = ({
+  isOpen,
+  onClose,
+  handleAddInvoiceDetails,
+}: ModalInvoiceDetailsProps) => {
   const [form] = Form.useForm();
 
   const handleChange = () => {
@@ -25,10 +31,17 @@ const ModalInvoiceDetails = ({ isOpen, onClose }: ModalInvoiceDetailsProps) => {
     form.setFieldsValue({ total });
   };
 
-  const handleAddBooking = async () => {
-    // const res = await form.validateFields();
-  };
+  const OpitionUnitOfMeasure = Object.entries(UnitOfMeasure).map(
+    ([key, value]) => ({
+      value: key,
+      label: value,
+    })
+  );
 
+  const handleDetails = async (form: any) => {
+    const resForm = await form.validateFields();
+    handleAddInvoiceDetails(resForm);
+  };
   return (
     <Modal
       footer={null}
@@ -43,7 +56,7 @@ const ModalInvoiceDetails = ({ isOpen, onClose }: ModalInvoiceDetailsProps) => {
           <div className='h-[calc(70vh)] overflow-y-auto p-5'>
             <div className='grid grid-cols-2 gap-x-6'>
               <Form.Item
-                name='nameGood'
+                name='goodsName'
                 className='w-full'
                 rules={[
                   {
@@ -56,7 +69,7 @@ const ModalInvoiceDetails = ({ isOpen, onClose }: ModalInvoiceDetailsProps) => {
               </Form.Item>
 
               <Form.Item
-                name='desGood'
+                name='describe'
                 className='w-full'
                 rules={[
                   {
@@ -81,17 +94,12 @@ const ModalInvoiceDetails = ({ isOpen, onClose }: ModalInvoiceDetailsProps) => {
                   label='Số lượng'
                   required
                   onChange={handleChange}
-                  onKeyPress={(event) => {
-                    if (!/[0-9]/.test(event.key)) {
-                      event.preventDefault();
-                    }
-                  }}
                 />
               </Form.Item>
 
-              <Form.Item name='unit'>
+              <Form.Item name='unitOfMeasure'>
                 <VSelect label='Đơn vị tính' required>
-                  {mockUnit.map((v) => (
+                  {OpitionUnitOfMeasure.map((v) => (
                     <Select.Option value={v.value} key={v.value}>
                       {v.label}
                     </Select.Option>
@@ -100,47 +108,23 @@ const ModalInvoiceDetails = ({ isOpen, onClose }: ModalInvoiceDetailsProps) => {
               </Form.Item>
 
               <Form.Item
-                name='unitPrice'
+                name='price'
                 rules={[
                   {
                     required: true,
-                    message: 'Vui lòng nhập số lượng Đơn giá',
+                    message: 'Vui lòng nhập Giá',
                   },
                 ]}
               >
-                <VInputNumber
-                  label='Đơn giá'
-                  required
-                  onChange={handleChange}
-                  onKeyPress={(event) => {
-                    if (!/[0-9]/.test(event.key)) {
-                      event.preventDefault();
-                    }
-                  }}
-                />
+                <VInputNumber label='Giá' required onChange={handleChange} />
               </Form.Item>
 
-              <Form.Item name='total'>
-                <VInputNumber
-                  label='Thành tiền'
-                  disabled
-                  onKeyPress={(event) => {
-                    if (!/[0-9]/.test(event.key)) {
-                      event.preventDefault();
-                    }
-                  }}
-                />
+              <Form.Item name='totalMoney'>
+                <VInputNumber label='Thành tiền' disabled />
               </Form.Item>
 
               <Form.Item name='weight'>
-                <VInputNumber
-                  label='Cân nặng'
-                  onKeyPress={(event) => {
-                    if (!/[0-9]/.test(event.key)) {
-                      event.preventDefault();
-                    }
-                  }}
-                />
+                <VInputNumber label='Cân nặng' />
               </Form.Item>
               <Form.Item name='hsCode'>
                 <VInput label='HS Code' />
@@ -148,7 +132,7 @@ const ModalInvoiceDetails = ({ isOpen, onClose }: ModalInvoiceDetailsProps) => {
             </div>
 
             <Form.Item
-              name='origin_of_goods'
+              name='originOfGoods'
               rules={[
                 {
                   required: true,
@@ -167,8 +151,15 @@ const ModalInvoiceDetails = ({ isOpen, onClose }: ModalInvoiceDetailsProps) => {
           </div>
 
           <div className='mt-4 flex justify-start'>
-            <Button htmlType='submit' type='primary' onClick={handleAddBooking}>
-              Tạo mới Booking
+            <Button
+              htmlType='submit'
+              type='primary'
+              onClick={() => {
+                handleDetails(form);
+                onClose(false);
+              }}
+            >
+              Tạo mới Invoice
             </Button>
           </div>
         </Form>

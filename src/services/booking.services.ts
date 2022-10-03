@@ -30,7 +30,7 @@ export const fetchBooking = async ({
 
 export const createBooking = async (data: Partial<IMyBooking>) => {
   const booking = HttpRequest.post('booking', {
-    booking: { ...data },
+    ...data,
   });
   return booking as MyBookingResponse;
 };
@@ -61,5 +61,10 @@ export const fetchDeliveryCondition = () => {
 
 export const fetchTypeOfPayment = () => {
   const users = HttpRequest.get(`type-of-payment`);
+  return users;
+};
+
+export const fetchCurrentUnit = () => {
+  const users = HttpRequest.get(`currency-unit`);
   return users;
 };

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { SearchOutlined } from '@ant-design/icons';
 import {
   Button,
@@ -8,40 +9,65 @@ import {
   Select,
   Table,
 } from 'antd';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import { useQuery } from 'react-query';
 
+import VDatePicker from '@/components/common/VDatePicker';
 import VInput from '@/components/common/VInput';
 import VInputNumber from '@/components/common/VInputNumber';
 import VSelect from '@/components/common/VSelect';
+import VTextArea from '@/components/common/VTextarea';
 
 import { INVOICE_DETAILS } from '@/contants/columns/my-booking.columns';
-import { CurrencyUnit } from '@/contants/common.constants';
-import { IUser } from '@/contants/types';
+import { IInvoiceDetails, InvoiceItemType, IUser } from '@/contants/types';
+import { fetchCurrentUnit } from '@/services/booking.services';
 
 import ModalInvoiceDetails from './components/ModalInvoiceDetails';
 
 const { Option } = Select;
-const mockTypeItemInvoice = [
-  { value: 1, label: 'Hàng hóa mậu dịch' },
-  { value: 2, label: 'Hàng hóa phi mậu dịch' },
-];
-const mockTypeInvoice = [
-  { value: 1, label: 'Non-Commercial invoice' },
-  { value: 2, label: 'Commercial invoice' },
-];
+
 type InvoiceProps = {
   form: FormInstance;
   dataUser: IUser | undefined;
+  detailsInvoice?: Array<IInvoiceDetails>;
+  handleAddInvoiceDetails: (form: IInvoiceDetails) => void;
 };
-const InVoice = ({ form, dataUser }: InvoiceProps) => {
+
+const InVoice = ({
+  form,
+  dataUser,
+  detailsInvoice,
+  handleAddInvoiceDetails,
+}: InvoiceProps) => {
   const [isCreate, setIsCreate] = useState<boolean>(false);
 
-  const OpitionCurrencyUnit = Object.entries(CurrencyUnit).map(
+  const { data: dataCurrenUnit } = useQuery(['fetchCurrentUnit', {}], () =>
+    fetchCurrentUnit()
+  );
+  const OpitionCurrencyUnit = useMemo(() => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    //  @ts-ignore
+    if (dataCurrenUnit?.length < 0) {
+      return [];
+    } else {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      //  @ts-ignore
+      return dataCurrenUnit?.map((v) => ({
+        value: v.id,
+        label: v.name,
+      }));
+    }
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    //  @ts-ignore
+  }, [dataCurrenUnit]);
+
+  const OpitionInvoiceItemType = Object.entries(InvoiceItemType).map(
     ([key, value]) => ({
       value: key,
       label: value,
     })
   );
+
   const handleSetField = useCallback(async () => {
     const res = await form.getFieldValue('receiverAddress');
     form.setFieldsValue({
@@ -54,9 +80,6 @@ const InVoice = ({ form, dataUser }: InvoiceProps) => {
     handleSetField();
   }, [form, dataUser, handleSetField]);
 
-  // const handleAddBookingDetails = (form: FormInstance) => {
-  //   console.log(form);
-  // };
   return (
     <div className='mb-20 h-full'>
       <Form form={form}>
@@ -64,23 +87,6 @@ const InVoice = ({ form, dataUser }: InvoiceProps) => {
           <p className='m-0 p-0 font-bold'>1.Thông tin chung </p>
           <Divider className='bg-yellow' />
 
-          <Form.Item
-            name='typeItemInvoice'
-            rules={[
-              {
-                required: true,
-                message: 'Vui lòng chọn loại dịch vụ',
-              },
-            ]}
-          >
-            <VSelect label='Loại hàng hóa' required>
-              {mockTypeItemInvoice.map((v) => (
-                <Option value={v.value} key={v.value}>
-                  {v.label}
-                </Option>
-              ))}
-            </VSelect>
-          </Form.Item>
           <Form.Item
             name='invoice_type'
             rules={[
@@ -91,114 +97,67 @@ const InVoice = ({ form, dataUser }: InvoiceProps) => {
             ]}
           >
             <VSelect label='Loại invoice' required>
-              {mockTypeInvoice.map((v) => (
+              {OpitionInvoiceItemType.map((v) => (
                 <Option value={v.value} key={v.value}>
                   {v.label}
                 </Option>
               ))}
             </VSelect>
           </Form.Item>
-          <Form.Item
-            name='booking_id'
-            rules={[
-              {
-                required: true,
-                message: 'Vui lòng chọn loại dịch vụ',
-              },
-            ]}
-          >
-            <VInput label='Mã vận đơn' />
-          </Form.Item>
 
-          <Form.Item
-            name='sender_information'
-            rules={[
-              {
-                required: true,
-                message: 'Vui lòng chọn loại dịch vụ',
-              },
-            ]}
-          >
+          <Form.Item name='sender_information'>
             <VInput label='Thông tin người gửi' disabled />
           </Form.Item>
 
-          <Form.Item
-            name='receiver_information'
-            rules={[
-              {
-                required: true,
-                message: 'Vui lòng chọn loại dịch vụ',
-              },
-            ]}
-          >
-            <VInput label='Thông tin người gửi' disabled />
-          </Form.Item>
-          <Form.Item
-            name='receiver_information'
-            rules={[
-              {
-                required: true,
-                message: 'Vui lòng chọn loại dịch vụ',
-              },
-            ]}
-          >
-            <VInput label='Thông tin người gửi' disabled />
+          <Form.Item name='receiver_information'>
+            <VInput label='Thông tin người nhận ' disabled />
           </Form.Item>
 
-          <Form.Item name='invoice_date'>
-            <VInput label='Ngày invoice' />
+          <Form.Item
+            name='invoice_date'
+            rules={[
+              {
+                required: true,
+                message: 'Vui lòng nhập ngày invoice',
+              },
+            ]}
+          >
+            <VDatePicker
+              format='DD/MM/YYYY'
+              label='Ngày invoice'
+              placeholder='Nhập Ngày phát hành CMT/CCCD'
+              required
+            />
           </Form.Item>
 
           <Form.Item name='invoice_number'>
             <VInput label='Số invoice' />
           </Form.Item>
+          <Form.Item name='importProceduresPerson'>
+            <VTextArea label='Thông tin người làm thủ tục nhập khẩu' />
+          </Form.Item>
 
-          <Form.Item name='service '>
+          <Form.Item name='service_id'>
             <VInput label='Dịch vụ sử dụng' disabled />
           </Form.Item>
+
           <Form.Item name='total_net_weight'>
-            <VInputNumber
-              label='Tổng trọng lượng thực (Kg)'
-              onKeyPress={(event) => {
-                if (!/[0-9]/.test(event.key)) {
-                  event.preventDefault();
-                }
-              }}
-            />
+            <VInputNumber label='Tổng trọng lượng thực (Kg)' />
           </Form.Item>
           <Form.Item name='total_bulky_weight'>
-            <VInputNumber
-              label='Tổng trọng lượng cồng kềnh (kg)'
-              onKeyPress={(event) => {
-                if (!/[0-9]/.test(event.key)) {
-                  event.preventDefault();
-                }
-              }}
-            />
+            <VInputNumber label='Tổng trọng lượng cồng kềnh (kg)' />
           </Form.Item>
+
           <Form.Item name='goods_size'>
-            <VInputNumber
-              label='Kích thước hàng hóa (cm)'
-              onKeyPress={(event) => {
-                if (!/[0-9]/.test(event.key)) {
-                  event.preventDefault();
-                }
-              }}
-            />
+            <VInputNumber label='Kích thước hàng hóa (cm)' />
           </Form.Item>
+
           <Form.Item name='total_bale_number'>
-            <VInputNumber
-              label='Tổng số kiện'
-              onKeyPress={(event) => {
-                if (!/[0-9]/.test(event.key)) {
-                  event.preventDefault();
-                }
-              }}
-            />
+            <VInputNumber label='Tổng số kiện' />
           </Form.Item>
-          <Form.Item name='currency'>
+          <Form.Item name='currency_id'>
             <VSelect label='Loại tiền tệ' showSearch>
-              {OpitionCurrencyUnit.map((v) => (
+              {OpitionCurrencyUnit?.map((v: any) => (
                 <Option value={v.value} key={v.value}>
                   {v.label}
                 </Option>
@@ -219,9 +178,6 @@ const InVoice = ({ form, dataUser }: InvoiceProps) => {
               placeholder='Tìm kiếm ....'
               prefix={<SearchOutlined />}
               className='mb-4 mr-4 w-[350px]'
-              // onChange={(event: ChangeEvent<HTMLInputElement>) =>
-              //   handleSearch(event.target.value)
-              // }
             />
             <Button type='primary' onClick={() => setIsCreate(true)}>
               Thêm Invoice
@@ -230,14 +186,11 @@ const InVoice = ({ form, dataUser }: InvoiceProps) => {
 
           <Table
             columns={INVOICE_DETAILS}
-            rowKey='key'
+            rowKey='key-HSCode'
             className='cursor-pointer'
-            dataSource={[]}
+            dataSource={detailsInvoice}
             pagination={{
-              // current: data?.pagination?.currentPage,
-              // total: data?.pagination?.totalCount,
               showSizeChanger: false,
-              // defaultPageSize: QUERY_PARAMS.pageSize,
             }}
             bordered
           />
@@ -245,6 +198,7 @@ const InVoice = ({ form, dataUser }: InvoiceProps) => {
           {isCreate && (
             <ModalInvoiceDetails
               isOpen={isCreate}
+              handleAddInvoiceDetails={handleAddInvoiceDetails}
               onClose={() => setIsCreate(false)}
             />
           )}

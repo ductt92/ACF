@@ -149,17 +149,23 @@ export enum NetWorkCustomerType { // Loại khách hàng vào mạng
   RETAIL_CUSTOMER = 'Khách hàng lẻ', //'Khách hàng lẻ',
   TRIAL_CUSTOMER = 'Khách hàng dùng thử', //'Khách hàng dùng thử',
 }
-
+export enum InvoiceType {
+  NonCommercialInvoice = 'Non_Commercial_Invoice',
+  CommercialInvoice = 'Commercial_Invoice',
+}
 export interface IMyBooking {
   booking: {
+    customsDeclarationNumer: string;
     type: CommoditiesType;
     serviceBookingId: string;
+    partnerBillCode: string;
     estimatedDate: string | Date;
     estimateHour: string | Date;
     deliveryConditionId: string;
     otherDeliveryConditions: string;
     note: string;
     payment: string;
+    oderAccountForeign: string;
     typeOfPaymentId: string;
     isCustomsDeclaration: boolean;
     senderNameVi: string;
@@ -182,6 +188,9 @@ export interface IMyBooking {
     vat: number;
     amount: number;
     bookingDetail: Array<DetailsBookingPost>;
+  };
+  invoice: {
+    invoiceDetail: IInvoiceDetail;
   };
 }
 export interface IInvoiceDetail {
@@ -236,6 +245,11 @@ export interface DetailsBookingPost {
   note: string;
 }
 
+export enum InvoiceItemType {
+  CommercialGoods = 'Hàng hoá mậu dịch', //hàng hoá mậu dịch,
+  NonCommercialGoods = 'Hàng hóa phi mậu dịch', //Hàng hóa phi mậu dịch,
+}
+
 export enum TypeOfPayment {
   PREPAID = 'Thanh toán tại Việt Nam', //Thanh toán tại Việt Nam
   COLLECT_CHARGE = 'Thanh toán tại nước nhận theo order từ đầu nước ngoài', // Thanh toán tại nước nhận theo order từ đầu nước ngoài
@@ -283,11 +297,11 @@ export interface IInvoiceDetails {
   origin_of_goods: string;
 }
 
-export const mockUnit = [
-  { value: 1, label: 'Set' },
-  { value: 2, label: 'Piece' },
-  { value: 3, label: 'Pcs' },
-];
+export enum UnitOfMeasure {
+  Set = 'Set',
+  Piece = 'Piece',
+  Pcs = 'Pcs',
+}
 
 export const mockData = [
   { value: 1, label: 'ĐỘNG VẬT SỐNG; CÁC SẢN PHẨM TỪ ĐỘNG VẬT ' },

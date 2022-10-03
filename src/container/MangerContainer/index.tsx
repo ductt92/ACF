@@ -9,9 +9,7 @@ import { QueryParams } from '@/contants/common.constants';
 import { QUERY_BOOKING } from '@/contants/query-key/booking.query';
 import { BookingStatusPost } from '@/contants/types';
 import { withPrivateRouteUser } from '@/routes/withPrivateRouteUser';
-import { fetchBooking, fetchUser } from '@/services/booking.services';
-
-import ModalCreateBooking from './components/ModalCreateBooking';
+import { fetchBooking } from '@/services/booking.services';
 
 const QUERY_PARAMS: QueryParams = {
   page: 1,
@@ -21,14 +19,11 @@ const QUERY_PARAMS: QueryParams = {
 };
 const ManageContainer = () => {
   const [queries, setQueries] = useState<QueryParams>(QUERY_PARAMS);
-  const [isCreateBooking, setIsCreateBooking] = useState<boolean>(false);
 
   const { data, isLoading, isFetching } = useQuery(
     [QUERY_BOOKING.GET_BOOKING, queries],
     () => fetchBooking({ ...queries })
   );
-
-  const { data: userData } = useQuery(['getuser', queries], () => fetchUser());
 
   const handleSearch = debounce((value: string) => {
     setQueries((prev) => ({ ...prev, search: value }));
@@ -92,13 +87,6 @@ const ManageContainer = () => {
             scroll={{ y: 700, x: 800 }}
           />
         </Spin>
-        {isCreateBooking && (
-          <ModalCreateBooking
-            isOpen={isCreateBooking}
-            dataUser={userData}
-            onClose={() => setIsCreateBooking(false)}
-          />
-        )}
       </div>
     </div>
   );
