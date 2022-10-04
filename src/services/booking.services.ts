@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { BookingStatusPost, IMyBooking, IUser } from '@/contants/types';
 import HttpRequest from '@/utils/Http-request';
 
@@ -28,7 +29,7 @@ export const fetchBooking = async ({
   return booking as MyBookingResponse;
 };
 
-export const createBooking = async (data: Partial<IMyBooking>) => {
+export const createBooking = async (data: any) => {
   const booking = HttpRequest.post('booking', {
     ...data,
   });

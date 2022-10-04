@@ -149,9 +149,84 @@ export enum NetWorkCustomerType { // Loại khách hàng vào mạng
   RETAIL_CUSTOMER = 'Khách hàng lẻ', //'Khách hàng lẻ',
   TRIAL_CUSTOMER = 'Khách hàng dùng thử', //'Khách hàng dùng thử',
 }
-export enum InvoiceType {
-  NonCommercialInvoice = 'Non_Commercial_Invoice',
-  CommercialInvoice = 'Commercial_Invoice',
+
+export interface InVoiceDetailss {
+  typeItemInvoice: InvoiceItemType;
+  invoiceType: InvoiceType;
+  senderInformation: string;
+  receiverInformation: string;
+  importers: string;
+  invoiceDate: string | Date;
+  invoiceNumber: string;
+  serviceId: string;
+  totalNetWeight: number;
+  totalBulkyWeight: number;
+  goodsSize: string;
+  totalBaleNumber: string;
+  currencyId: string;
+  reasonExport: string;
+  note: string;
+  invoiceDetail: IInvoiceDetail;
+}
+export interface BookingPost {
+  total: string;
+  vat: string;
+  amount: string;
+  receiverNote: string;
+  receiverCountry: string;
+  receiverContactPerson: string;
+  receiverDepartment: string;
+  receiverPhoneNumber: string;
+  otherDeliveryConditions: string;
+  note: string;
+  receiverPostalCode: string;
+  receiverAddress: string;
+  payment: string;
+  typeOfPaymentId: string;
+  partnerBillCode: string;
+  oderAccountForeign: string;
+  customsDeclarationNumer: string;
+  type: CommoditiesType;
+  deliveryConditionId: string;
+  serviceBookingId: string;
+  estimatedDate: string | Date;
+  estimateHour: string | Date;
+  senderNameVi: string;
+  senderNameEn: string;
+  senderAddressVi: string;
+  senderAddressEn: string;
+  senderContactPerson: string;
+  senderDepartment: string;
+  senderPhoneNumber: string;
+  senderNote: string;
+  bookingDetail: Array<DetailsBookingPost>;
+  receiverName: string;
+  isCustomsDeclaration: boolean;
+  typeItemInvoice: InvoiceItemType;
+  invoiceType: InvoiceType;
+  senderInformation: string;
+  receiverInformation: string;
+  importers: string;
+  invoiceDate: string | Date;
+  invoiceNumber: string;
+  serviceId: string;
+  totalNetWeight: number;
+  totalBulkyWeight: number;
+  goodsSize: string;
+  totalBaleNumber: string;
+  currencyId: string;
+  reasonExport: string;
+  goodsName: string;
+  describe: string;
+  quantity: number;
+  unitOfMeasure: string;
+  price: number;
+  totalMoney: number;
+  weight: number;
+  originOfGoods: string;
+  HSCode: string;
+  importProceduresPerson: string;
+  noteInvoice: string;
 }
 export interface IMyBooking {
   booking: {
@@ -227,7 +302,10 @@ export enum BookingStatusPost {
   DONE = 'DONE', // Giao hàng thành công
   CANCEL = 'CANCEL', // Đã hủy
 }
-
+export interface OpitionType {
+  label: string;
+  value: string;
+}
 export interface DetailsBookingPost {
   commoditiesTypeId: string;
   shippingItemViId: string;
@@ -246,10 +324,13 @@ export interface DetailsBookingPost {
 }
 
 export enum InvoiceItemType {
-  CommercialGoods = 'Hàng hoá mậu dịch', //hàng hoá mậu dịch,
-  NonCommercialGoods = 'Hàng hóa phi mậu dịch', //Hàng hóa phi mậu dịch,
+  Commercial_Goods = 'Hàng hoá mậu dịch,',
+  Non_Commercial_Goods = 'Hàng hóa phi mậu dịch',
 }
-
+export enum InvoiceType {
+  Non_Commercial_Invoice = 'Non Commercial Invoice',
+  Commercial_Invoice = 'Commercial Invoice',
+}
 export enum TypeOfPayment {
   PREPAID = 'Thanh toán tại Việt Nam', //Thanh toán tại Việt Nam
   COLLECT_CHARGE = 'Thanh toán tại nước nhận theo order từ đầu nước ngoài', // Thanh toán tại nước nhận theo order từ đầu nước ngoài

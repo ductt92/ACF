@@ -5,38 +5,30 @@ import moment from 'moment';
 import React, { useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 
-import { QueryParams } from '@/contants/common.constants';
 import { QUERY_BOOKING } from '@/contants/query-key/booking.query';
 import {
+  BookingPost,
   DetailsBookingPost,
   IInvoiceDetails,
-  IMyBooking,
 } from '@/contants/types';
 import { createBooking, fetchUser } from '@/services/booking.services';
 
 import InVoice from './components/Invoice';
 import TabsBooking from './components/TabsBooking';
 
-const QUERY_PARAMS: QueryParams = {
-  page: 1,
-  pageSize: 20,
-  search: '',
-};
-
 const CreateBookingContainer = () => {
-  const [queries, setQueries] = useState<QueryParams>(QUERY_PARAMS);
-
-  const [form] = Form.useForm();
-  const queryClient = useQueryClient();
-  const { data: userData } = useQuery(['getuser', queries], () => fetchUser());
-
   const [detailsInvoice, setDetailsInvoice] = useState<Array<IInvoiceDetails>>(
     []
   );
-
   const [detailsBooking, setDetailsBooking] = useState<
     Array<DetailsBookingPost>
   >([]);
+
+  const [form] = Form.useForm();
+
+  const queryClient = useQueryClient();
+
+  const { data: userData } = useQuery(['getuser'], () => fetchUser());
 
   const { mutate: mutateCreate } = useMutation(createBooking, {
     onSuccess: () => {
@@ -48,7 +40,7 @@ const CreateBookingContainer = () => {
     },
     onError: () => {
       notification.error({
-        message: 'Something went wrong',
+        message: 'Vui lòng kiểm tra lại các trường còn thiếu',
         placement: 'top',
       });
     },
@@ -57,6 +49,7 @@ const CreateBookingContainer = () => {
   const handleAddInvoiceDetails = (resForm: any) => {
     setDetailsInvoice((prev) => [...prev, resForm]);
   };
+
   const handleAddBookingDetails = (form: any) => {
     const {
       bulkyWeight,
@@ -92,80 +85,105 @@ const CreateBookingContainer = () => {
   };
 
   const onSubmit = async () => {
-    const dataCreateBooking: Partial<
-      IMyBooking & {
-        estimateHour: string | Date;
-        estimatedDate: string | Date;
-        invoice_type: string;
-        sender_information: string;
-        receiver_information?: string;
-      }
-    > = await form.validateFields();
-
+    const dataCreateBooking: Partial<BookingPost> = await form.validateFields();
     const estimatedDate = moment(dataCreateBooking.estimatedDate).format(
       'YYYY/MM/DD'
     );
     const estimateHour = moment(dataCreateBooking.estimateHour).format('HH:mm');
+    const {
+      total,
+      vat,
+      amount,
+      receiverNote,
+      receiverCountry,
+      receiverContactPerson,
+      receiverDepartment,
+      receiverPhoneNumber,
+      otherDeliveryConditions,
+      note,
+      receiverPostalCode,
+      typeOfPaymentId,
+      receiverAddress,
+      payment,
+      partnerBillCode,
+      oderAccountForeign,
+      customsDeclarationNumer,
+      type,
+      senderNameVi,
+      senderNameEn,
+      senderAddressVi,
+      senderAddressEn,
+      senderContactPerson,
+      senderDepartment,
+      senderPhoneNumber,
+      senderNote,
+      deliveryConditionId,
+      serviceBookingId,
+      receiverName,
+      typeItemInvoice,
+      invoiceType,
+      importProceduresPerson,
+    } = dataCreateBooking;
 
-    // const booking = {
-    //   booking: {
-    //     total: dataCreateBooking?.total,
-    //     vat: dataCreateBooking?.vat,
-    //     amount: dataCreateBooking?.amount,
-    //     receiverNote: dataCreateBooking?.receiverNote,
-    //     receiverCountry: dataCreateBooking?.receiverCountry,
-    //     receiverContactPerson: dataCreateBooking?.receiverContactPerson,
-    //     receiverDepartment: dataCreateBooking?.receiverDepartment,
-    //     receiverPhoneNumber: dataCreateBooking?.receiverPhoneNumber,
-    //     otherDeliveryConditions: dataCreateBooking?.otherDeliveryConditions,
-    //     note: dataCreateBooking?.note,
-    //     receiverPostalCode: dataCreateBooking?.receiverPostalCode,
-    //     receiverAddress: dataCreateBooking?.receiverAddress,
-    //     payment: dataCreateBooking?.payment,
-    //     typeOfPaymentId: dataCreateBooking?.typeOfPaymentId,
-    //     partnerBillCode: dataCreateBooking?.partnerBillCode,
-    //     oderAccountForeign: dataCreateBooking?.oderAccountForeign,
-    //     customsDeclarationNumer: dataCreateBooking?.customsDeclarationNumer,
-    //     type: dataCreateBooking?.type,
-    //     deliveryConditionId: dataCreateBooking?.deliveryConditionId,
-    //     serviceBookingId: dataCreateBooking?.serviceBookingId,
-    //     estimatedDate,
-    //     estimateHour,
-    //     senderNameVi: dataCreateBooking?.senderNameVi,
-    //     senderNameEn: dataCreateBooking?.senderNameEn,
-    //     senderAddressVi: dataCreateBooking?.senderAddressVi,
-    //     senderAddressEn: dataCreateBooking?.senderAddressEn,
-    //     senderContactPerson: dataCreateBooking?.senderContactPerson,
-    //     senderDepartment: dataCreateBooking?.senderDepartment,
-    //     senderPhoneNumber: dataCreateBooking?.senderPhoneNumber,
-    //     senderNote: dataCreateBooking?.senderNote,
-    //     bookingDetail: detailsBooking,
-    //     receiverName: dataCreateBooking?.receiverName,
-    //     //fake data
-    //     isCustomsDeclaration: false,
-    //   },
-    //   invoice: {
-    //     invoiceDetail: detailsInvoice,
-    //     invoiceType: dataCreateBooking?.invoice_type,
-    //     senderInformation: dataCreateBooking?.sender_information,
-    //     receiverInformation: dataCreateBooking?.receiver_information,
-    //     importers: dataCreateBooking?.importProceduresPerson,
-    //     invoiceDate: dataCreateBooking?.invoice_date,
-    //     invoiceNumber: dataCreateBooking?.invoice_number,
-    //     serviceId: dataCreateBooking?.service_id,
-    //     totalNetWeight: dataCreateBooking?.total_net_weight,
-    //     totalBulkyWeight: dataCreateBooking?.total_bulky_weight,
-    //     goodsSize: dataCreateBooking?.goods_size,
-    //     totalBaleNumber: dataCreateBooking?.total_bale_number,
-    //     currencyId: dataCreateBooking?.currency_id,
-    //     reasonExport: dataCreateBooking?.reason_export,
-    //     note: dataCreateBooking?.note,
-    //   },
-    // };
-    // console.log(dataCreateBooking?.deliveryConditionId);
-    // // console.log(JSON.stringify(resData));
+    const booking = {
+      booking: {
+        total,
+        vat,
+        amount,
+        receiverNote,
+        receiverCountry,
+        receiverContactPerson,
+        receiverDepartment,
+        receiverPhoneNumber,
+        otherDeliveryConditions,
+        note,
+        receiverPostalCode,
+        receiverAddress,
+        payment,
+        typeOfPaymentId,
+        partnerBillCode,
+        oderAccountForeign,
+        customsDeclarationNumer,
+        type,
+        deliveryConditionId,
+        serviceBookingId,
+        estimatedDate,
+        estimateHour,
+        senderNameVi,
+        senderNameEn,
+        senderAddressVi,
+        senderAddressEn,
+        senderContactPerson,
+        senderDepartment,
+        senderPhoneNumber,
+        senderNote,
+        receiverName,
+        isCustomsDeclaration: false,
+        bookingDetail: detailsBooking,
+      },
+      invoice: {
+        invoiceDetail: detailsInvoice,
+        typeItemInvoice,
+        invoiceType,
+        senderInformation: senderAddressVi,
+        receiverInformation: receiverAddress,
+        importers: importProceduresPerson,
+        invoiceDate: moment(dataCreateBooking?.invoiceDate).format(
+          'YYYY/MM/DD'
+        ),
+        invoiceNumber: dataCreateBooking?.invoiceNumber,
+        serviceId: dataCreateBooking?.serviceBookingId,
+        totalNetWeight: dataCreateBooking?.totalNetWeight,
+        totalBulkyWeight: dataCreateBooking?.totalBulkyWeight,
+        goodsSize: dataCreateBooking?.goodsSize,
+        totalBaleNumber: dataCreateBooking?.totalBaleNumber,
+        currencyId: dataCreateBooking?.currencyId,
+        reasonExport: dataCreateBooking?.reasonExport,
+        note: dataCreateBooking?.noteInvoice,
+      },
+    };
 
-    // mutateCreate(booking);
+    mutateCreate(booking);
   };
 
   return (
@@ -183,6 +201,7 @@ const CreateBookingContainer = () => {
         <Tabs.TabPane tab='Booking' key='Booking'>
           <TabsBooking
             form={form}
+            userData={userData}
             detailsBooking={detailsBooking}
             handleAddBookingDetails={handleAddBookingDetails}
           />

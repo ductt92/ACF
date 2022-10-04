@@ -9,7 +9,7 @@ import {
   Select,
   Table,
 } from 'antd';
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { useQuery } from 'react-query';
 
 import VDatePicker from '@/components/common/VDatePicker';
@@ -17,12 +17,14 @@ import VInput from '@/components/common/VInput';
 import VSelect from '@/components/common/VSelect';
 import VTimePicker from '@/components/common/VTimePicker';
 
-import { BOOKING_DETAILS } from '@/contants/columns/my-booking.columns';
+import { renderBookingDetails } from '@/contants/columns/my-booking.columns';
 import { FORMAT_DATE_DD_MM_YYYY } from '@/contants/common.constants';
 import { BookingType, DetailsBookingPost } from '@/contants/types';
 import {
+  fetchCommoditiesTypeId,
   fetchDeliveryCondition,
   fetchServicesBooking,
+  fetchShippingType,
   fetchTypeOfPayment,
 } from '@/services/booking.services';
 
@@ -41,6 +43,7 @@ const GeneralInfomation = ({
 }: GeneralInfomationProps) => {
   const [isCreate, setIsCreate] = useState<boolean>(false);
   const [isShow, setIsShow] = useState<boolean>(false);
+  const [selected, setSelected] = useState();
 
   const { data: dataSerivicesBooknig } = useQuery(
     ['dataSerivicesBooknig', {}],
@@ -85,11 +88,8 @@ const GeneralInfomation = ({
     //  @ts-ignore
   }, [dataDelivery]);
 
-  useEffect(() => {
-    return () => setIsShow(false);
-  }, []);
-
-  const onSelect = () => {
+  const onSelect = (e: any) => {
+    setSelected(e);
     setIsShow(true);
   };
   const OpitionType = Object.entries(BookingType).map(([key, value]) => ({
@@ -118,6 +118,47 @@ const GeneralInfomation = ({
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     //  @ts-ignore
   }, [fetchTypeOfPaymentId]);
+
+  const { data: DataCommoditiesTypeId } = useQuery(
+    ['DataCommoditiesTypeId', {}],
+    () => fetchCommoditiesTypeId()
+  );
+
+  const OpitionCommoditiesTypeId = useMemo(() => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    //  @ts-ignore
+    if (DataCommoditiesTypeId?.length < 0) {
+      return [];
+    } else {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      //  @ts-ignore
+      return DataCommoditiesTypeId?.map((v) => ({
+        value: v.id,
+        label: v.name,
+      }));
+    }
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    //  @ts-ignore
+  }, [DataCommoditiesTypeId]);
+
+  const { data: DataShippingType } = useQuery(['DataShippingType', {}], () =>
+    fetchShippingType()
+  );
+
+  const OpitionShippingType = useMemo(() => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    //  @ts-ignore
+    if (DataShippingType?.length < 0) {
+      return [];
+    } else {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      //  @ts-ignore
+      return DataShippingType?.map((v) => ({
+        value: v.id,
+        label: v.name,
+      }));
+    }
+  }, [DataShippingType]);
 
   const handleAddBooking = (form: any) => {
     handleAddBookingDetails(form);
@@ -150,7 +191,15 @@ const GeneralInfomation = ({
             </VSelect>
           </Form.Item>
 
-          <Form.Item name='deliveryConditionId'>
+          <Form.Item
+            name='deliveryConditionId'
+            rules={[
+              {
+                required: true,
+                message: 'Vui lòng chọn điều kiện giao hàng',
+              },
+            ]}
+          >
             <VSelect label='Điều kiện giao hàng' required>
               {OpitionDeliveryConditions?.map((v: any) => (
                 <Option value={v.value} key={v.value}>
@@ -260,7 +309,10 @@ const GeneralInfomation = ({
           </div>
 
           <Table
-            columns={BOOKING_DETAILS}
+            columns={renderBookingDetails(
+              OpitionCommoditiesTypeId,
+              OpitionShippingType
+            )}
             rowKey='key'
             className='cursor-pointer'
             dataSource={dataDetails}
@@ -273,6 +325,8 @@ const GeneralInfomation = ({
           {isCreate && (
             <ModalBookingDetails
               isOpen={isCreate}
+              services={selected}
+              listServices={OpitionServiceBooking}
               onClose={() => setIsCreate(false)}
               handleAddBookingDetails={handleAddBooking}
             />

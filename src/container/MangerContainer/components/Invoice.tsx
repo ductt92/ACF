@@ -19,7 +19,12 @@ import VSelect from '@/components/common/VSelect';
 import VTextArea from '@/components/common/VTextarea';
 
 import { INVOICE_DETAILS } from '@/contants/columns/my-booking.columns';
-import { IInvoiceDetails, InvoiceItemType, IUser } from '@/contants/types';
+import {
+  IInvoiceDetails,
+  InvoiceItemType,
+  InvoiceType,
+  IUser,
+} from '@/contants/types';
 import { fetchCurrentUnit } from '@/services/booking.services';
 
 import ModalInvoiceDetails from './components/ModalInvoiceDetails';
@@ -67,11 +72,17 @@ const InVoice = ({
       label: value,
     })
   );
+  const OpitionInvoiceType = Object.entries(InvoiceType).map(
+    ([key, value]) => ({
+      value: key,
+      label: value,
+    })
+  );
 
   const handleSetField = useCallback(async () => {
     const res = await form.getFieldValue('receiverAddress');
     form.setFieldsValue({
-      sender_information: dataUser?.detailAddress,
+      senderInformation: dataUser?.detailAddress,
       receiver_information: res,
     });
   }, [dataUser?.detailAddress, form]);
@@ -88,7 +99,7 @@ const InVoice = ({
           <Divider className='bg-yellow' />
 
           <Form.Item
-            name='invoice_type'
+            name='typeItemInvoice'
             rules={[
               {
                 required: true,
@@ -96,7 +107,7 @@ const InVoice = ({
               },
             ]}
           >
-            <VSelect label='Loại invoice' required>
+            <VSelect label='Loại hàng hóa' required>
               {OpitionInvoiceItemType.map((v) => (
                 <Option value={v.value} key={v.value}>
                   {v.label}
@@ -105,16 +116,34 @@ const InVoice = ({
             </VSelect>
           </Form.Item>
 
-          <Form.Item name='sender_information'>
+          <Form.Item
+            name='invoiceType'
+            rules={[
+              {
+                required: true,
+                message: 'Vui lòng chọn loại hóa đơn',
+              },
+            ]}
+          >
+            <VSelect label='Loại hóa đơn' required>
+              {OpitionInvoiceType.map((v) => (
+                <Option value={v.value} key={v.value}>
+                  {v.label}
+                </Option>
+              ))}
+            </VSelect>
+          </Form.Item>
+
+          <Form.Item name='senderInformation'>
             <VInput label='Thông tin người gửi' disabled />
           </Form.Item>
 
-          <Form.Item name='receiver_information'>
+          <Form.Item name='receiverInformation'>
             <VInput label='Thông tin người nhận ' disabled />
           </Form.Item>
 
           <Form.Item
-            name='invoice_date'
+            name='invoiceDate'
             rules={[
               {
                 required: true,
@@ -125,38 +154,46 @@ const InVoice = ({
             <VDatePicker
               format='DD/MM/YYYY'
               label='Ngày invoice'
-              placeholder='Nhập Ngày phát hành CMT/CCCD'
+              placeholder='Nhập ngày invoice'
               required
             />
           </Form.Item>
 
-          <Form.Item name='invoice_number'>
+          <Form.Item name='invoiceNumber'>
             <VInput label='Số invoice' />
           </Form.Item>
           <Form.Item name='importProceduresPerson'>
             <VTextArea label='Thông tin người làm thủ tục nhập khẩu' />
           </Form.Item>
 
-          <Form.Item name='service_id'>
+          <Form.Item name='serviceId'>
             <VInput label='Dịch vụ sử dụng' disabled />
           </Form.Item>
 
-          <Form.Item name='total_net_weight'>
+          <Form.Item name='totalNetWeight'>
             <VInputNumber label='Tổng trọng lượng thực (Kg)' />
           </Form.Item>
-          <Form.Item name='total_bulky_weight'>
+          <Form.Item name='totalBulkyWeight'>
             <VInputNumber label='Tổng trọng lượng cồng kềnh (kg)' />
           </Form.Item>
 
-          <Form.Item name='goods_size'>
+          <Form.Item name='goodsSize'>
             <VInputNumber label='Kích thước hàng hóa (cm)' />
           </Form.Item>
 
-          <Form.Item name='total_bale_number'>
+          <Form.Item name='totalBaleNumber'>
             <VInputNumber label='Tổng số kiện' />
           </Form.Item>
-          <Form.Item name='currency_id'>
-            <VSelect label='Loại tiền tệ' showSearch>
+          <Form.Item
+            name='currencyId'
+            rules={[
+              {
+                required: true,
+                message: 'Vui lòng chọn loại tiền tệ',
+              },
+            ]}
+          >
+            <VSelect label='Loại tiền tệ' showSearch required>
               {OpitionCurrencyUnit?.map((v: any) => (
                 <Option value={v.value} key={v.value}>
                   {v.label}
@@ -164,10 +201,19 @@ const InVoice = ({
               ))}
             </VSelect>
           </Form.Item>
+
+          <Form.Item
+            name='reasonExport'
+            rules={[
+              {
+                required: true,
+                message: 'Vui lòng nhập lý do xuất khẩu',
+              },
+            ]}
+          >
+            <VInput label='Lý do xuất khẩu' required />
+          </Form.Item>
         </div>
-        <Form.Item name='reason_export'>
-          <VInput label='Lý do xuất khẩu' />
-        </Form.Item>
 
         <p className='m-0 p-0 font-bold'>2.Chi tiết Booking Express Invoice </p>
         <Divider className='bg-yellow' />

@@ -22,13 +22,13 @@ const ModalInvoiceDetails = ({
   onClose,
   handleAddInvoiceDetails,
 }: ModalInvoiceDetailsProps) => {
-  const [form] = Form.useForm();
+  const [invoiceDetailsForm] = Form.useForm();
 
   const handleChange = () => {
-    const quantity = form.getFieldValue('quantity');
-    const unitPrice = form.getFieldValue('unitPrice');
-    const total = unitPrice * quantity;
-    form.setFieldsValue({ total });
+    const quantity = invoiceDetailsForm.getFieldValue('quantity');
+    const price = invoiceDetailsForm.getFieldValue('price');
+    const totalMoney = price * quantity;
+    invoiceDetailsForm.setFieldsValue({ totalMoney });
   };
 
   const OpitionUnitOfMeasure = Object.entries(UnitOfMeasure).map(
@@ -52,7 +52,7 @@ const ModalInvoiceDetails = ({
       <div>
         <p className='text-center text-[24px] font-bold'>Chi tiết Invoice</p>
 
-        <Form form={form}>
+        <Form form={invoiceDetailsForm}>
           <div className='h-[calc(70vh)] overflow-y-auto p-5'>
             <div className='grid grid-cols-2 gap-x-6'>
               <Form.Item
@@ -116,17 +116,29 @@ const ModalInvoiceDetails = ({
                   },
                 ]}
               >
-                <VInputNumber label='Giá' required onChange={handleChange} />
+                <VInputNumber
+                  label='Đơn Giá'
+                  required
+                  onChange={handleChange}
+                />
               </Form.Item>
 
               <Form.Item name='totalMoney'>
                 <VInputNumber label='Thành tiền' disabled />
               </Form.Item>
 
-              <Form.Item name='weight'>
-                <VInputNumber label='Cân nặng' />
+              <Form.Item
+                name='weight'
+                rules={[
+                  {
+                    required: true,
+                    message: 'Vui lòng nhập cân nặng',
+                  },
+                ]}
+              >
+                <VInputNumber label='Cân nặng' required />
               </Form.Item>
-              <Form.Item name='hsCode'>
+              <Form.Item name='HSCode'>
                 <VInput label='HS Code' />
               </Form.Item>
             </div>
@@ -152,10 +164,9 @@ const ModalInvoiceDetails = ({
 
           <div className='mt-4 flex justify-start'>
             <Button
-              htmlType='submit'
               type='primary'
               onClick={() => {
-                handleDetails(form);
+                handleDetails(invoiceDetailsForm);
                 onClose(false);
               }}
             >
