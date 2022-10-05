@@ -91,6 +91,10 @@ const CreateBookingContainer = () => {
       'YYYY/MM/DD'
     );
     const estimateHour = moment(dataCreateBooking.estimateHour).format('HH:mm');
+
+    const configDetailsInvoice = detailsInvoice.map(
+      ({ totalMoney, ...rest }) => rest
+    );
     const {
       total,
       vat,
@@ -163,7 +167,7 @@ const CreateBookingContainer = () => {
         bookingDetail: detailsBooking,
       },
       invoice: {
-        invoiceDetail: detailsInvoice,
+        invoiceDetail: configDetailsInvoice,
         typeItemInvoice,
         invoiceType,
         senderInformation: senderAddressVi,

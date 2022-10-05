@@ -375,7 +375,8 @@ export interface IInvoiceDetails {
   total: number;
   weight: number;
   hsCode: string;
-  origin_of_goods: string;
+  originOfGoods: string;
+  totalMoney: string;
 }
 
 export enum UnitOfMeasure {

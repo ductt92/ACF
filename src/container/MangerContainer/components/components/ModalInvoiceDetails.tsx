@@ -42,6 +42,7 @@ const ModalInvoiceDetails = ({
     const resForm = await form.validateFields();
     handleAddInvoiceDetails(resForm);
   };
+
   return (
     <Modal
       footer={null}
