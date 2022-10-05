@@ -18,7 +18,7 @@ import VInputNumber from '@/components/common/VInputNumber';
 import VSelect from '@/components/common/VSelect';
 import VTextArea from '@/components/common/VTextarea';
 
-import { INVOICE_DETAILS } from '@/contants/columns/my-booking.columns';
+import { renderInvoiceDetails } from '@/contants/columns/my-booking.columns';
 import {
   IInvoiceDetails,
   InvoiceItemType,
@@ -28,6 +28,7 @@ import {
 import { fetchCurrentUnit } from '@/services/booking.services';
 
 import ModalInvoiceDetails from './components/ModalInvoiceDetails';
+import ModalUpdateInvoiceDetails from './components/ModalUpdateInvoiceDetails';
 
 const { Option } = Select;
 
@@ -36,6 +37,8 @@ type InvoiceProps = {
   dataUser: IUser | undefined;
   detailsInvoice?: Array<IInvoiceDetails>;
   handleAddInvoiceDetails: (form: IInvoiceDetails) => void;
+  handleUpdateBookingInvoice: (form: IInvoiceDetails) => void;
+  handleDeleteInvoice: (id: any) => void;
 };
 
 const InVoice = ({
@@ -43,8 +46,12 @@ const InVoice = ({
   dataUser,
   detailsInvoice,
   handleAddInvoiceDetails,
+  handleDeleteInvoice,
+  handleUpdateBookingInvoice,
 }: InvoiceProps) => {
   const [isCreate, setIsCreate] = useState<boolean>(false);
+  const [isEdit, setIsEdit] = useState<boolean>(false);
+  const [detailsInvoices, setDetailsInvoices] = useState();
 
   const { data: dataCurrenUnit } = useQuery(['fetchCurrentUnit', {}], () =>
     fetchCurrentUnit()
@@ -90,6 +97,11 @@ const InVoice = ({
   useEffect(() => {
     handleSetField();
   }, [form, dataUser, handleSetField]);
+
+  const handleUpdateInVoice = (record: any) => {
+    setDetailsInvoices(record);
+    setIsEdit(true);
+  };
 
   return (
     <div className='mb-20 h-full'>
@@ -231,7 +243,10 @@ const InVoice = ({
           </div>
 
           <Table
-            columns={INVOICE_DETAILS}
+            columns={renderInvoiceDetails(
+              handleDeleteInvoice,
+              handleUpdateInVoice
+            )}
             rowKey='key-HSCode'
             className='cursor-pointer'
             dataSource={detailsInvoice}
@@ -240,12 +255,24 @@ const InVoice = ({
             }}
             bordered
           />
-
+          {/* handleDeleteInvoice */}
           {isCreate && (
             <ModalInvoiceDetails
               isOpen={isCreate}
               handleAddInvoiceDetails={handleAddInvoiceDetails}
               onClose={() => setIsCreate(false)}
+            />
+          )}
+
+          {isEdit && (
+            <ModalUpdateInvoiceDetails
+              isOpen={isEdit}
+              value={detailsInvoices}
+              onClose={() => setIsEdit(false)}
+              handleEdiInvoiceDetails={(e) => {
+                handleUpdateBookingInvoice(e);
+                setIsEdit(false);
+              }}
             />
           )}
         </div>

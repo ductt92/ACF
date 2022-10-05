@@ -81,7 +81,8 @@ const ModalUpdateBookingDetails = ({
 
   const handleUpdateBooking = async () => {
     const resForm = await detailsBookingForm.validateFields();
-    handleUpdateBookingDetails(resForm);
+    const updateForm = { ...resForm, idKey: value.idKey };
+    handleUpdateBookingDetails(updateForm);
   };
 
   const OpitionCalculationUnit = Object.entries(CalculationUnit).map(

@@ -323,68 +323,100 @@ export const renderBookingDetails = (
   return BOOKING_DETAILS;
 };
 
-export const INVOICE_DETAILS: ColumnsType<IInvoiceDetails> = [
-  {
-    title: 'Tên hàng hóa',
-    dataIndex: 'goodsName',
-    key: 'goodsName',
-    align: 'center',
-    width: 150,
-  },
-  {
-    title: 'Mô tả hàng hóa',
-    dataIndex: 'describe',
-    key: 'describe',
-    align: 'center',
-    width: 150,
-  },
-  {
-    title: 'Số lượng',
-    dataIndex: 'quantity',
-    key: 'quantity',
-    align: 'center',
-    width: 150,
-  },
-  {
-    title: 'Đơn vị tính',
-    dataIndex: 'unitOfMeasure',
-    key: 'unitOfMeasure',
-    align: 'center',
-    width: 150,
-  },
-  {
-    title: 'Đơn giá',
-    dataIndex: 'price',
-    key: 'price',
-    align: 'center',
-    width: 150,
-  },
-  {
-    title: 'Thành tiền',
-    dataIndex: 'totalMoney',
-    key: 'totalMoney',
-    align: 'center',
-    width: 150,
-  },
-  {
-    title: 'Cân nặng',
-    dataIndex: 'weight',
-    key: 'weight',
-    align: 'center',
-    width: 150,
-  },
-  {
-    title: 'Xuất xứ',
-    dataIndex: 'originOfGoods',
-    key: 'originOfGoods',
-    align: 'center',
-    width: 150,
-  },
-  {
-    title: 'HS Code',
-    dataIndex: 'HSCode',
-    key: 'HSCode',
-    align: 'center',
-    width: 150,
-  },
-];
+export const renderInvoiceDetails = (
+  handleDeleteInvoice: (id: any) => void,
+  handleUpdateInvoice: (form: any) => void
+) => {
+  const handleDeleteRow = (row: any) => {
+    Modal.confirm({
+      title: 'Thông báo',
+      icon: <WarningOutlined className='text-red-700' />,
+      content: 'Bạn có chắc chắn muốn xóa hàng hóa này không?',
+      okText: 'Đồng ý',
+      cancelText: 'Không',
+      onOk: () => handleDeleteInvoice(row),
+    });
+  };
+  const INVOICE_DETAILS: ColumnsType<IInvoiceDetails> = [
+    {
+      title: 'Tên hàng hóa',
+      dataIndex: 'goodsName',
+      key: 'goodsName',
+      align: 'center',
+      width: 150,
+    },
+    {
+      title: 'Mô tả hàng hóa',
+      dataIndex: 'describe',
+      key: 'describe',
+      align: 'center',
+      width: 150,
+    },
+    {
+      title: 'Số lượng',
+      dataIndex: 'quantity',
+      key: 'quantity',
+      align: 'center',
+      width: 150,
+    },
+    {
+      title: 'Đơn vị tính',
+      dataIndex: 'unitOfMeasure',
+      key: 'unitOfMeasure',
+      align: 'center',
+      width: 150,
+    },
+    {
+      title: 'Đơn giá',
+      dataIndex: 'price',
+      key: 'price',
+      align: 'center',
+      width: 150,
+    },
+    {
+      title: 'Thành tiền',
+      dataIndex: 'totalMoney',
+      key: 'totalMoney',
+      align: 'center',
+      width: 150,
+    },
+    {
+      title: 'Cân nặng',
+      dataIndex: 'weight',
+      key: 'weight',
+      align: 'center',
+      width: 150,
+    },
+    {
+      title: 'Xuất xứ',
+      dataIndex: 'originOfGoods',
+      key: 'originOfGoods',
+      align: 'center',
+      width: 150,
+    },
+    {
+      title: 'HS Code',
+      dataIndex: 'HSCode',
+      key: 'HSCode',
+      align: 'center',
+      width: 150,
+    },
+
+    {
+      title: 'Action',
+      key: 'operation',
+      fixed: 'right',
+      width: 100,
+      render: (type: string, record: any, index) => (
+        <div className='flex flex-row gap-8'>
+          <EditOutlined
+            onClick={() => handleUpdateInvoice({ ...record, idKey: index })}
+          />
+          <DeleteOutlined onClick={() => handleDeleteRow(index)} />
+        </div>
+      ),
+    },
+  ];
+
+  return INVOICE_DETAILS;
+};

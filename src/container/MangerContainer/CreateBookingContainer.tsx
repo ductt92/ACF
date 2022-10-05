@@ -189,8 +189,8 @@ const CreateBookingContainer = () => {
 
   const handleUpdateBookingDetails = (form: any) => {
     const res = detailsBooking.map((x, index) => {
-      if (form.key === index) {
-        const { key, ...resetForm } = form;
+      if (form.idKey === index) {
+        const { idKey, ...resetForm } = form;
         return resetForm;
       } else {
         return x;
@@ -203,6 +203,24 @@ const CreateBookingContainer = () => {
   const handleDeleteRow = (id: any) => {
     const res = detailsBooking.filter((x, index) => id !== index);
     setDetailsBooking(res);
+  };
+
+  const handleDeleteInvoice = (id: any) => {
+    const res = detailsInvoice.filter((x, index) => id !== index);
+    setDetailsInvoice(res);
+  };
+
+  const handleUpdateBookingInvoice = (form: any) => {
+    const res = detailsInvoice.map((x, index) => {
+      if (form.idKey === index) {
+        const { idKey, ...resetForm } = form;
+        return resetForm;
+      } else {
+        return x;
+      }
+    });
+
+    setDetailsInvoice(res);
   };
 
   return (
@@ -233,6 +251,8 @@ const CreateBookingContainer = () => {
             dataUser={userData}
             detailsInvoice={detailsInvoice}
             handleAddInvoiceDetails={handleAddInvoiceDetails}
+            handleDeleteInvoice={handleDeleteInvoice}
+            handleUpdateBookingInvoice={handleUpdateBookingInvoice}
           />
         </Tabs.TabPane>
       </Tabs>
