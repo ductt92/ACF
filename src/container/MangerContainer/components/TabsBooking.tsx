@@ -14,11 +14,15 @@ interface TabsBookingProps {
   detailsBooking: Array<DetailsBookingPost>;
   handleAddBookingDetails: (form: any) => void;
   userData: any;
+  handleDeleteRow: (id: any) => void;
+  handleUpdateBookingDetails: (form: any) => void;
 }
 
 const TabsBooking = ({
   form,
   handleAddBookingDetails,
+  handleDeleteRow,
+  handleUpdateBookingDetails,
   detailsBooking,
   userData,
 }: TabsBookingProps) => {
@@ -29,7 +33,9 @@ const TabsBooking = ({
           <GeneralInfomation
             form={form}
             dataDetails={detailsBooking}
+            handleUpdateBookingDetails={handleUpdateBookingDetails}
             handleAddBookingDetails={handleAddBookingDetails}
+            handleDeleteRow={handleDeleteRow}
           />
         </Tabs.TabPane>
 

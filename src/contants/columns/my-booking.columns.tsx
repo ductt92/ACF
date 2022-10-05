@@ -1,5 +1,11 @@
+/* eslint-disable unused-imports/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Tooltip } from 'antd';
+import {
+  DeleteOutlined,
+  EditOutlined,
+  WarningOutlined,
+} from '@ant-design/icons';
+import { Modal, Tooltip } from 'antd';
 import { ColumnsType } from 'antd/lib/table';
 import dayjs from 'dayjs';
 
@@ -202,8 +208,20 @@ export const MYBOOKING_COLUMNS: ColumnsType<IMyBooking> = [
 
 export const renderBookingDetails = (
   commoditiesType: Array<OpitionType>,
-  shippingType: Array<OpitionType>
+  shippingType: Array<OpitionType>,
+  handleDelete: (id: any) => void,
+  handleUpdateBooking: (record: any) => void
 ) => {
+  const handleDeleteRow = (row: any) => {
+    Modal.confirm({
+      title: 'Thông báo',
+      icon: <WarningOutlined className='text-red-700' />,
+      content: 'Bạn có chắc chắn muốn xóa hàng hóa này không?',
+      okText: 'Đồng ý',
+      cancelText: 'Không',
+      onOk: () => handleDelete(row),
+    });
+  };
   const BOOKING_DETAILS: ColumnsType<DetailsBookingPost> = [
     {
       title: 'Đơn vị',
@@ -286,6 +304,20 @@ export const renderBookingDetails = (
       key: 'note-2',
       align: 'center',
       width: 150,
+    },
+    {
+      title: 'Action',
+      key: 'operation',
+      fixed: 'right',
+      width: 100,
+      render: (type: string, record: any, index) => (
+        <div className='flex flex-row gap-8'>
+          <EditOutlined
+            onClick={() => handleUpdateBooking({ ...record, idKey: index })}
+          />
+          <DeleteOutlined onClick={() => handleDeleteRow(index)} />
+        </div>
+      ),
     },
   ];
   return BOOKING_DETAILS;

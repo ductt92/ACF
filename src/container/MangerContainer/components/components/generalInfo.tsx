@@ -29,20 +29,27 @@ import {
 } from '@/services/booking.services';
 
 import ModalBookingDetails from './ModalBookingDeatails';
+import ModalUpdateBookingDetails from './ModalUpdateBookingDetails';
 const { Option } = Select;
 interface GeneralInfomationProps {
   form: FormInstance;
   dataDetails: Array<DetailsBookingPost>;
   handleAddBookingDetails: (form: any) => void;
+  handleDeleteRow: (id: any) => void;
+  handleUpdateBookingDetails: (form: any) => void;
 }
 
 const GeneralInfomation = ({
   form,
   dataDetails,
   handleAddBookingDetails,
+  handleDeleteRow,
+  handleUpdateBookingDetails,
 }: GeneralInfomationProps) => {
   const [isCreate, setIsCreate] = useState<boolean>(false);
   const [isShow, setIsShow] = useState<boolean>(false);
+  const [isEdit, setIsEdit] = useState<boolean>(false);
+  const [detailsBooking, setDetailsBooking] = useState();
   const [selected, setSelected] = useState();
 
   const { data: dataSerivicesBooknig } = useQuery(
@@ -163,6 +170,11 @@ const GeneralInfomation = ({
   const handleAddBooking = (form: any) => {
     handleAddBookingDetails(form);
     setIsCreate(false);
+  };
+
+  const handleUpdateBooking = (record: any) => {
+    setDetailsBooking(record);
+    setIsEdit(true);
   };
 
   return (
@@ -311,7 +323,9 @@ const GeneralInfomation = ({
           <Table
             columns={renderBookingDetails(
               OpitionCommoditiesTypeId,
-              OpitionShippingType
+              OpitionShippingType,
+              handleDeleteRow,
+              handleUpdateBooking
             )}
             rowKey='key'
             className='cursor-pointer'
@@ -329,6 +343,19 @@ const GeneralInfomation = ({
               listServices={OpitionServiceBooking}
               onClose={() => setIsCreate(false)}
               handleAddBookingDetails={handleAddBooking}
+            />
+          )}
+          {isEdit && (
+            <ModalUpdateBookingDetails
+              isOpen={isEdit}
+              services={selected}
+              listServices={OpitionServiceBooking}
+              onClose={() => setIsEdit(false)}
+              handleUpdateBookingDetails={(e) => {
+                handleUpdateBookingDetails(e);
+                setIsEdit(false);
+              }}
+              value={detailsBooking}
             />
           )}
         </div>

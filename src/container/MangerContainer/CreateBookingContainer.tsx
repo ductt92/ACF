@@ -86,6 +86,7 @@ const CreateBookingContainer = () => {
 
   const onSubmit = async () => {
     const dataCreateBooking: Partial<BookingPost> = await form.validateFields();
+
     const estimatedDate = moment(dataCreateBooking.estimatedDate).format(
       'YYYY/MM/DD'
     );
@@ -186,6 +187,24 @@ const CreateBookingContainer = () => {
     mutateCreate(booking);
   };
 
+  const handleUpdateBookingDetails = (form: any) => {
+    const res = detailsBooking.map((x, index) => {
+      if (form.key === index) {
+        const { key, ...resetForm } = form;
+        return resetForm;
+      } else {
+        return x;
+      }
+    });
+
+    setDetailsBooking(res);
+  };
+
+  const handleDeleteRow = (id: any) => {
+    const res = detailsBooking.filter((x, index) => id !== index);
+    setDetailsBooking(res);
+  };
+
   return (
     <div>
       <p className='text-2xl font-bold text-yellow-primary'>
@@ -202,8 +221,10 @@ const CreateBookingContainer = () => {
           <TabsBooking
             form={form}
             userData={userData}
+            handleDeleteRow={handleDeleteRow}
             detailsBooking={detailsBooking}
             handleAddBookingDetails={handleAddBookingDetails}
+            handleUpdateBookingDetails={handleUpdateBookingDetails}
           />
         </Tabs.TabPane>
         <Tabs.TabPane tab='Invoice' key='invoice'>
