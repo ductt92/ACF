@@ -89,6 +89,24 @@ const Address = ({ form, dataUser }: AddressProps) => {
             <VInput label='Số điện thoại gửi' required />
           </Form.Item>
 
+          <Form.Item name='senderProvince'>
+            <VInput label='Tỉnh/Thành phố' />
+          </Form.Item>
+
+          <Form.Item name='senderCountry'>
+            <VSelect label='Quốc gia' required showSearch>
+              {countries.map((v) => (
+                <Option value={v.value} key={v.value}>
+                  {v.label}
+                </Option>
+              ))}
+            </VSelect>
+          </Form.Item>
+
+          <Form.Item name='senderPostalCode'>
+            <VInput label='Mã bưu chính (postcode)' />
+          </Form.Item>
+
           <Form.Item name='senderNote'>
             <VInput label='Ghi chú' />
           </Form.Item>
@@ -119,6 +137,10 @@ const Address = ({ form, dataUser }: AddressProps) => {
             ]}
           >
             <VInput label='Địa chỉ nhận hàng chi tiết' required />
+          </Form.Item>
+
+          <Form.Item name='receiverProvince'>
+            <VInput label='Thành phố' />
           </Form.Item>
 
           <Form.Item
@@ -168,11 +190,11 @@ const Address = ({ form, dataUser }: AddressProps) => {
             rules={[
               {
                 required: true,
-                message: 'Vui lòng nhập Số điện thoại người gửi',
+                message: 'Vui lòng nhập Số điện thoại người nhận',
               },
             ]}
           >
-            <VInput label='Số điện thoại người gửi' required />
+            <VInput label='Số điện thoại người nhận' required />
           </Form.Item>
 
           <Form.Item name='receiverDepartment'>

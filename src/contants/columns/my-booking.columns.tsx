@@ -65,7 +65,7 @@ export const MYBOOKING_COLUMNS: ColumnsType<IMyBooking> = [
     align: 'center',
     width: 150,
     render: (estimatedDate: string) => {
-      return <span>{dayjs(estimatedDate).format('DD/MM/YYYY hh:mm:ss')}</span>;
+      return <span>{dayjs(estimatedDate).format('DD/MM/YYYY HH:mm:ss')}</span>;
     },
   },
   {
@@ -121,7 +121,7 @@ export const MYBOOKING_COLUMNS: ColumnsType<IMyBooking> = [
     align: 'center',
     width: 150,
     render: (created_at: string) => {
-      return <span>{dayjs(created_at).format('DD/MM/YYYY hh:mm:ss')}</span>;
+      return <span>{dayjs(created_at).format('DD/MM/YYYY HH:mm:ss')}</span>;
     },
   },
 ];
