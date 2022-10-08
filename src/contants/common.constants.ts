@@ -23,6 +23,13 @@ export interface QueryParams2 {
   startDate?: string | Date;
   endDate?: string | Date;
 }
+export interface QueryParams3 {
+  page?: number;
+  search?: string;
+  pageSize?: number;
+  createBookingFrom?: string | Date;
+  createBookingTo?: string | Date;
+}
 
 export const QUERY_PARAMS: QueryParams = {
   page: 1,

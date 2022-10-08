@@ -7,7 +7,7 @@ import React, { ChangeEvent, useMemo, useState } from 'react';
 import { useQuery } from 'react-query';
 
 import { MYBOOKING_COLUMNS } from '@/contants/columns/my-booking.columns';
-import { QueryParams } from '@/contants/common.constants';
+import { QueryParams, QueryParams3 } from '@/contants/common.constants';
 import { QUERY_BOOKING } from '@/contants/query-key/booking.query';
 import { BookingStatusPost } from '@/contants/types';
 import { withPrivateRouteUser } from '@/routes/withPrivateRouteUser';
@@ -23,7 +23,7 @@ const QUERY_PARAMS: QueryParams = {
 const { RangePicker } = DatePicker;
 
 const ManageContainer = () => {
-  const [queries, setQueries] = useState<QueryParams>(QUERY_PARAMS);
+  const [queries, setQueries] = useState<QueryParams3>(QUERY_PARAMS);
 
   const { data, isLoading, isFetching } = useQuery(
     [QUERY_BOOKING.GET_BOOKING, queries],

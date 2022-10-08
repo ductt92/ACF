@@ -17,14 +17,19 @@ export const fetchBooking = async ({
   pageSize,
   search,
   status,
+  createBookingFrom,
+  createBookingTo
 }: {
   page: number;
   pageSize: number;
   search?: string;
   status?: BookingStatusPost;
+  createBookingFrom?:string | Date ;
+  createBookingTo?:string | Date ;
+
 }) => {
   const booking = HttpRequest.get('booking/my-booking', {
-    params: { page, pageSize, search, status },
+    params: { page, pageSize, search, status,createBookingTo ,createBookingFrom},
   });
   return booking as MyBookingResponse;
 };
