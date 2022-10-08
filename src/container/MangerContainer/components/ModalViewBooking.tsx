@@ -1,22 +1,33 @@
-import { Form } from 'antd';
-import React, { useEffect } from 'react';
+import { Modal, Spin } from 'antd';
+import React from 'react';
+import { useQuery } from 'react-query';
 
-import { IMyBooking } from '@/contants/types';
+import { getBookingById } from '@/services/booking.services';
+
+import Viewbooking from './components/ViewBooking';
 
 type ModalViewBookingProps = {
-  value: IMyBooking;
   onClose: (value: boolean) => void;
+  id?: string;
 };
-const ModalViewBooking = ({ value }: ModalViewBookingProps) => {
-  const [form] = Form.useForm();
+const ModalViewBooking = ({ id, onClose }: ModalViewBookingProps) => {
+  const { data, isLoading, isFetching } = useQuery(['', { id }], () =>
+    getBookingById(id)
+  );
 
-  useEffect(() => {
-    form.setFieldsValue({
-      ...value,
-    });
-  }, [form, value]);
-
-  return <div></div>;
+  return (
+    <Modal
+      footer={null}
+      visible={true}
+      destroyOnClose
+      onCancel={() => onClose(false)}
+      className='top-[calc(5vh)] w-[calc(50vw)]'
+    >
+      <Spin spinning={isLoading || isFetching}>
+        <Viewbooking data={data} />
+      </Spin>
+    </Modal>
+  );
 };
 
 export default ModalViewBooking;

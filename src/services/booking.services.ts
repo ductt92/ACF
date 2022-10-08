@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { BookingStatusPost, IMyBooking, IUser } from '@/contants/types';
+import { QueryParams3 } from '@/contants/common.constants';
+import { IMyBooking, IUser } from '@/contants/types';
 import HttpRequest from '@/utils/Http-request';
 
 export interface MyBookingResponse {
@@ -18,18 +19,17 @@ export const fetchBooking = async ({
   search,
   status,
   createBookingFrom,
-  createBookingTo
-}: {
-  page: number;
-  pageSize: number;
-  search?: string;
-  status?: BookingStatusPost;
-  createBookingFrom?:string | Date ;
-  createBookingTo?:string | Date ;
-
-}) => {
+  createBookingTo,
+}: QueryParams3) => {
   const booking = HttpRequest.get('booking/my-booking', {
-    params: { page, pageSize, search, status,createBookingTo ,createBookingFrom},
+    params: {
+      page,
+      pageSize,
+      search,
+      status,
+      createBookingTo,
+      createBookingFrom,
+    },
   });
   return booking as MyBookingResponse;
 };
@@ -38,6 +38,10 @@ export const createBooking = async (data: any) => {
   const booking = HttpRequest.post('booking', {
     ...data,
   });
+  return booking as MyBookingResponse;
+};
+export const getBookingById = async (id: any) => {
+  const booking = HttpRequest.get(`booking/${id}`);
   return booking as MyBookingResponse;
 };
 

@@ -7,23 +7,29 @@ import React, { ChangeEvent, useMemo, useState } from 'react';
 import { useQuery } from 'react-query';
 
 import { MYBOOKING_COLUMNS } from '@/contants/columns/my-booking.columns';
-import { QueryParams, QueryParams3 } from '@/contants/common.constants';
+import { QueryParams3 } from '@/contants/common.constants';
 import { QUERY_BOOKING } from '@/contants/query-key/booking.query';
 import { BookingStatusPost } from '@/contants/types';
 import { withPrivateRouteUser } from '@/routes/withPrivateRouteUser';
 import { fetchBooking } from '@/services/booking.services';
 
-const QUERY_PARAMS: QueryParams = {
+import ModalViewBooking from './components/ModalViewBooking';
+
+const QUERY_PARAMS: QueryParams3 = {
   page: 1,
   pageSize: 20,
   search: '',
   status: undefined,
+  createBookingFrom: '',
+  createBookingTo: '',
 };
 
 const { RangePicker } = DatePicker;
 
 const ManageContainer = () => {
   const [queries, setQueries] = useState<QueryParams3>(QUERY_PARAMS);
+  const [idBooking, setIdbooking] = useState();
+  const [isViewBooking, setIsViewBooking] = useState<boolean>(false);
 
   const { data, isLoading, isFetching } = useQuery(
     [QUERY_BOOKING.GET_BOOKING, queries],
@@ -104,10 +110,26 @@ const ManageContainer = () => {
               showSizeChanger: false,
               defaultPageSize: QUERY_PARAMS.pageSize,
             }}
+            // onRow={(record) => {
+            //   return {
+            //     onClick: () => {
+            //       setIsViewBooking(true);
+            //       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            //       //  @ts-ignore
+            //       setIdbooking(record.booking_id);
+            //     }, // click row
+            //   };
+            // }}
             bordered
-            scroll={{ y: 650, x: 800 }}
+            scroll={{ y: 450, x: 800 }}
           />
         </Spin>
+        {isViewBooking && (
+          <ModalViewBooking
+            id={idBooking}
+            onClose={() => setIsViewBooking(false)}
+          />
+        )}
       </div>
     </div>
   );

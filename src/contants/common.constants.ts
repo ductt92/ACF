@@ -27,6 +27,7 @@ export interface QueryParams3 {
   page?: number;
   search?: string;
   pageSize?: number;
+  status?: BookingStatusPost;
   createBookingFrom?: string | Date;
   createBookingTo?: string | Date;
 }
