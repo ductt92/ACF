@@ -13,7 +13,11 @@ import {
   IInvoiceDetails,
   ReceiverCustome,
 } from '@/contants/types';
-import { createBooking, fetchUser } from '@/services/booking.services';
+import {
+  createBooking,
+  fetchUser,
+  generateBill,
+} from '@/services/booking.services';
 
 import InVoice from './components/Invoice';
 import TabsBooking from './components/TabsBooking';
@@ -25,6 +29,8 @@ const CreateBookingContainer = () => {
   const [detailsBooking, setDetailsBooking] = useState<
     Array<DetailsBookingPost>
   >([]);
+
+  const [id, setId] = useState('');
   const [addressCustome, setAddressCustome] =
     useState<Partial<AddressCustomer>>();
 
@@ -38,6 +44,22 @@ const CreateBookingContainer = () => {
   const { data: userData } = useQuery(['getuser'], () => fetchUser());
 
   const { mutate: mutateCreate } = useMutation(createBooking, {
+    onSuccess: () => {
+      queryClient.invalidateQueries([QUERY_BOOKING.GET_BOOKING]);
+      notification.success({
+        message: 'Tạo đơn hàng mới thành công',
+        placement: 'top',
+      });
+    },
+    onError: () => {
+      notification.error({
+        message: 'Vui lòng kiểm tra lại các trường còn thiếu',
+        placement: 'top',
+      });
+    },
+  });
+
+  const { mutate: generatorBill } = useMutation(generateBill, {
     onSuccess: () => {
       queryClient.invalidateQueries([QUERY_BOOKING.GET_BOOKING]);
       notification.success({
@@ -256,15 +278,22 @@ const CreateBookingContainer = () => {
 
     setDetailsInvoice(res);
   };
-
+  const handleGenerataeBill = () => {
+    const id = 'd19e89bd-4584-4449-8d83-7cb7cd8e266f';
+    generatorBill(id);
+  };
   return (
     <div>
       <p className='text-2xl font-bold text-yellow-primary'>
         Tạo Booking Hàng xuất
       </p>
-      <div className='my-5'>
+      <div className='my-5 flex gap-4'>
         <Button onClick={onSubmit} type='primary'>
           Tạo bookings
+        </Button>
+
+        <Button onClick={handleGenerataeBill} type='primary'>
+          Tạo Bill
         </Button>
       </div>
 

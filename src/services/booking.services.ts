@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { QueryParams3 } from '@/contants/common.constants';
 import { IMyBooking, IUser } from '@/contants/types';
 import HttpRequest from '@/utils/Http-request';
@@ -57,6 +58,18 @@ export const fetchCommoditiesTypeId = () => {
 export const fetchShippingType = () => {
   const users = HttpRequest.get(`shipping-item`);
   return users;
+};
+
+export const generateBill = (id: string) => {
+  return HttpRequest.get('booking/generate-bill', {
+    params: { bookingId: id },
+  }).then((res) => {
+    const blob = new Blob([new Uint8Array(res.data)]);
+    const link = document.createElement('a');
+    link.href = window.URL.createObjectURL(blob);
+    link.download = `bill-${new Date()}.pdf`;
+    link.click();
+  });
 };
 
 export const fetchServicesBooking = () => {

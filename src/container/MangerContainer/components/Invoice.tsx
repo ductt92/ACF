@@ -268,7 +268,6 @@ const InVoice = ({
             }}
             bordered
           />
-          {/* handleDeleteInvoice */}
           {isCreate && (
             <ModalInvoiceDetails
               isOpen={isCreate}

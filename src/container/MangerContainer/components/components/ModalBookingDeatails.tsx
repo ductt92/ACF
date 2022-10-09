@@ -223,7 +223,15 @@ const ModalBookingDetails = ({
                 <VInput label='Nhóm hàng hóa vận chuyển(Tiếng Anh)' required />
               </Form.Item>
 
-              <Form.Item name='quantity'>
+              <Form.Item
+                name='quantity'
+                rules={[
+                  {
+                    required: true,
+                    message: 'Vui lòng nhập số kiện',
+                  },
+                ]}
+              >
                 <VInputNumber
                   label='Số kiện'
                   required
