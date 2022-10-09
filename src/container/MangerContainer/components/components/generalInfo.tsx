@@ -47,7 +47,6 @@ const GeneralInfomation = ({
   handleUpdateBookingDetails,
 }: GeneralInfomationProps) => {
   const [isCreate, setIsCreate] = useState<boolean>(false);
-  const [isShow, setIsShow] = useState<boolean>(false);
   const [isEdit, setIsEdit] = useState<boolean>(false);
   const [detailsBooking, setDetailsBooking] = useState();
   const [selected, setSelected] = useState();
@@ -97,7 +96,6 @@ const GeneralInfomation = ({
 
   const onSelect = (e: any) => {
     setSelected(e);
-    setIsShow(true);
   };
   const OpitionType = Object.entries(BookingType).map(([key, value]) => ({
     value: key,
@@ -314,7 +312,7 @@ const GeneralInfomation = ({
             <Button
               type='primary'
               onClick={() => setIsCreate(true)}
-              disabled={!isShow}
+              disabled={!selected}
             >
               Thêm hàng hóa
             </Button>

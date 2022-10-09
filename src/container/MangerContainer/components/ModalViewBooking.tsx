@@ -24,12 +24,9 @@ const ModalViewBooking = ({ id, onClose }: ModalViewBookingProps) => {
       onCancel={() => onClose(false)}
       className='top-[calc(5vh)] w-[calc(70vw)]'
     >
-      <div className='h-[calc(80vh)] overflow-y-auto p-5'>
-        <p className='text-lg'>Chi tiết đơn hàng</p>
-        <Spin spinning={isLoading || isFetching}>
-          <Viewbooking data={data} />
-        </Spin>
-      </div>
+      <Spin spinning={isLoading || isFetching}>
+        <Viewbooking data={data} />
+      </Spin>
     </Modal>
   );
 };

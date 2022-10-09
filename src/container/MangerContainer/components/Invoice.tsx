@@ -94,10 +94,16 @@ const InVoice = ({
 
   const handleSetField = useCallback(async () => {
     form.setFieldsValue({
-      senderInformation: `${sendAddress?.senderNameVi}\n${sendAddress?.senderAddressVi}\n${sendAddress?.senderProvince}\n${sendAddress?.senderCountry}\n${sendAddress?.senderPhoneNumber}\n${sendAddress?.senderPostalCode}`,
+      senderInformation: `${sendAddress?.senderNameVi || dataUser?.fullName}\n${
+        sendAddress?.senderAddressVi || dataUser?.detailAddress
+      }\n${sendAddress?.senderProvince || dataUser?.province}\n${
+        sendAddress?.senderCountry || dataUser?.country
+      }\n${sendAddress?.senderPhoneNumber || dataUser?.phoneNumber}\n${
+        sendAddress?.senderPostalCode
+      }`,
       receiverInformation: `${receiverCustome?.receiverName}\n${receiverCustome?.receiverAddress}\n${receiverCustome?.province}\n${receiverCustome?.receiverCountry}\n${receiverCustome?.receiverPhoneNumber}\n${receiverCustome?.receiverPostalCode}`,
     });
-  }, [sendAddress, form, receiverCustome]);
+  }, [sendAddress, form, receiverCustome, dataUser]);
 
   useEffect(() => {
     handleSetField();

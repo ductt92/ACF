@@ -27,17 +27,20 @@ const Address = ({
 }: AddressProps) => {
   useEffect(() => {
     form.setFieldsValue({
-      senderNameVi: addressCustome?.senderNameVi,
-      senderPhoneNumber: addressCustome?.senderPhoneNumber,
+      senderNameVi: addressCustome?.senderNameVi || dataUser?.fullName,
+      senderPhoneNumber:
+        addressCustome?.senderPhoneNumber || dataUser?.phoneNumber,
       senderContactPerson: dataUser?.contactPerson,
       senderMobile: dataUser?.phoneNumber,
-      senderCountry: addressCustome?.senderCountry,
+      senderCountry: addressCustome?.senderCountry || dataUser?.country,
       senderCommune: dataUser?.commune,
       senderDistrict: dataUser?.district,
-      senderProvince: addressCustome?.senderProvince,
-      senderPostalCode: dataUser?.postalCode,
+      senderProvince: addressCustome?.senderProvince || dataUser?.province,
+      senderPostalCode:
+        addressCustome?.senderPostalCode || dataUser?.postalCode,
       senderState: dataUser?.state,
-      senderAddressVi: addressCustome?.senderAddressVi,
+      senderAddressVi:
+        addressCustome?.senderAddressVi || dataUser?.detailAddress,
     });
   }, [addressCustome, dataUser, form]);
 

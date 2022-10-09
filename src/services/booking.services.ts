@@ -35,12 +35,40 @@ export const fetchBooking = async ({
   return booking as MyBookingResponse;
 };
 
-export const createBooking = async (data: any) => {
-  const booking = HttpRequest.post('booking', {
-    ...data,
+export const createBooking = async ({
+  booking,
+  handleSetId,
+}: {
+  booking: any;
+  handleSetId: (id: string) => void;
+}) => {
+  const bookings = await HttpRequest.post('booking', {
+    ...booking,
   });
-  return booking as MyBookingResponse;
+
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  //  @ts-ignore
+  if (bookings.id) {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    //  @ts-ignore
+    handleSetId(bookings.id);
+  }
+  return bookings as MyBookingResponse;
 };
+
+export const updateBooking = ({
+  booking,
+  id,
+}: {
+  booking: any;
+  id: string;
+}) => {
+  const updateBookings = HttpRequest.put(`booking/update-booking/${id}`, {
+    ...booking,
+  });
+  return updateBookings;
+};
+
 export const getBookingById = async (id: any) => {
   const booking = HttpRequest.get(`booking/${id}`);
   return booking as MyBookingResponse;

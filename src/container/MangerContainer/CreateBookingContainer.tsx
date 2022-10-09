@@ -63,13 +63,13 @@ const CreateBookingContainer = () => {
     onSuccess: () => {
       queryClient.invalidateQueries([QUERY_BOOKING.GET_BOOKING]);
       notification.success({
-        message: 'Tạo đơn hàng mới thành công',
+        message: 'Tải xuống thành công',
         placement: 'top',
       });
     },
     onError: () => {
       notification.error({
-        message: 'Vui lòng kiểm tra lại các trường còn thiếu',
+        message: 'Tải xuống thất bại',
         placement: 'top',
       });
     },
@@ -122,6 +122,9 @@ const CreateBookingContainer = () => {
 
   const handleChangeInfoRecei = (name: string, value: any) => {
     setReceiverCustome((prev) => ({ ...prev, [name]: value }));
+  };
+  const handleSetId = (id: string) => {
+    setId(id);
   };
 
   useEffect(() => {
@@ -240,7 +243,10 @@ const CreateBookingContainer = () => {
       },
     };
 
-    mutateCreate(booking);
+    mutateCreate({
+      booking,
+      handleSetId,
+    });
   };
 
   const handleUpdateBookingDetails = (form: any) => {
@@ -279,9 +285,9 @@ const CreateBookingContainer = () => {
     setDetailsInvoice(res);
   };
   const handleGenerataeBill = () => {
-    const id = 'd19e89bd-4584-4449-8d83-7cb7cd8e266f';
     generatorBill(id);
   };
+
   return (
     <div>
       <p className='text-2xl font-bold text-yellow-primary'>
@@ -292,7 +298,7 @@ const CreateBookingContainer = () => {
           Tạo bookings
         </Button>
 
-        <Button onClick={handleGenerataeBill} type='primary'>
+        <Button onClick={handleGenerataeBill} type='primary' disabled={!id}>
           Tạo Bill
         </Button>
       </div>
