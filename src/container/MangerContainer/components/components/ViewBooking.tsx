@@ -28,7 +28,6 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
     viewBooking.setFieldsValue({
       ...data,
       estimatedDate: moment(data?.estimatedDate),
-
       estimateHour: moment(data?.estimateHour, 'HH:mm'),
     });
 
@@ -108,6 +107,14 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
     setDetailsBooking(res);
   };
 
+  const handleChangeInfoSender = (name: string, value: any) => {
+    console.log(name, value);
+    // setDetailsBooking((prev) => ({
+    //   ...prev,
+    //   [name]: value,
+    // }));
+  };
+
   return (
     <Tabs type='card'>
       <Tabs.TabPane tab='Booking' key='Booking'>
@@ -116,6 +123,7 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
           userData={userData}
           handleDeleteRow={handleDeleteRow}
           detailsBooking={detailsBooking}
+          handleChangeInfoSender={handleChangeInfoSender}
           handleAddBookingDetails={handleAddBookingDetails}
           handleUpdateBookingDetails={handleUpdateBookingDetails}
         />

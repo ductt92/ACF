@@ -306,6 +306,25 @@ export interface OpitionType {
   label: string;
   value: string;
 }
+
+export interface AddressCustomer {
+  senderNameVi: string;
+  senderAddressVi: string;
+  senderProvince: string;
+  senderCountry: string;
+  senderPhoneNumber: string;
+  senderPostalCode: string;
+}
+
+export interface ReceiverCustome {
+  receiverPostalCode: string;
+  receiverName: string;
+  receiverPhoneNumber: string;
+  receiverCountry: string;
+  province: string;
+  receiverAddress: string;
+}
+
 export interface DetailsBookingPost {
   commoditiesTypeId: string;
   shippingItemViId: string;

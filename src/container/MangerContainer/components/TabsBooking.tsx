@@ -3,7 +3,7 @@
 import { FormInstance, Tabs } from 'antd';
 import React from 'react';
 
-import { DetailsBookingPost } from '@/contants/types';
+import { AddressCustomer, DetailsBookingPost } from '@/contants/types';
 
 import AddOnServices from './components/addOnServices';
 import Address from './components/address';
@@ -14,8 +14,11 @@ interface TabsBookingProps {
   detailsBooking: Array<DetailsBookingPost>;
   handleAddBookingDetails: (form: any) => void;
   userData: any;
+  addressCustome?: Partial<AddressCustomer>;
   handleDeleteRow: (id: any) => void;
   handleUpdateBookingDetails: (form: any) => void;
+  handleChangeInfoSender: (name: string, value: any) => void;
+  handleChangeInfoRecei: (name: string, value: any) => void;
 }
 
 const TabsBooking = ({
@@ -25,6 +28,9 @@ const TabsBooking = ({
   handleUpdateBookingDetails,
   detailsBooking,
   userData,
+  addressCustome,
+  handleChangeInfoSender,
+  handleChangeInfoRecei,
 }: TabsBookingProps) => {
   return (
     <div>
@@ -40,7 +46,13 @@ const TabsBooking = ({
         </Tabs.TabPane>
 
         <Tabs.TabPane tab='Địa chỉ' key='address'>
-          <Address form={form} dataUser={userData} />
+          <Address
+            form={form}
+            dataUser={userData}
+            handleChangeInfoSender={handleChangeInfoSender}
+            handleChangeInfoRecei={handleChangeInfoRecei}
+            addressCustome={addressCustome}
+          />
         </Tabs.TabPane>
 
         <Tabs.TabPane tab='Dịch vụ gia tăng' key='tabs-3'>

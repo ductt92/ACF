@@ -2,14 +2,16 @@
 /* eslint-disable unused-imports/no-unused-vars */
 import { Button, Form, notification, Tabs } from 'antd';
 import moment from 'moment';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 
 import { QUERY_BOOKING } from '@/contants/query-key/booking.query';
 import {
+  AddressCustomer,
   BookingPost,
   DetailsBookingPost,
   IInvoiceDetails,
+  ReceiverCustome,
 } from '@/contants/types';
 import { createBooking, fetchUser } from '@/services/booking.services';
 
@@ -23,6 +25,11 @@ const CreateBookingContainer = () => {
   const [detailsBooking, setDetailsBooking] = useState<
     Array<DetailsBookingPost>
   >([]);
+  const [addressCustome, setAddressCustome] =
+    useState<Partial<AddressCustomer>>();
+
+  const [receiverCustome, setReceiverCustome] =
+    useState<Partial<ReceiverCustome>>();
 
   const [form] = Form.useForm();
 
@@ -83,6 +90,29 @@ const CreateBookingContainer = () => {
     };
     setDetailsBooking((prev) => [...prev, resForm]);
   };
+
+  const handleChangeInfoSender = (name: string, value: any) => {
+    setAddressCustome((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleChangeInfoRecei = (name: string, value: any) => {
+    setReceiverCustome((prev) => ({ ...prev, [name]: value }));
+  };
+
+  useEffect(() => {
+    const custome = {
+      senderNameVi: userData?.fullName || '',
+      senderPhoneNumber: userData?.phoneNumber || '',
+      senderCountry: userData?.country || '',
+      senderProvince: userData?.province || '',
+      senderAddressVi: userData?.detailAddress || '',
+      senderPostalCode: userData?.postalCode || '',
+    };
+    setAddressCustome(custome);
+  }, [userData]);
 
   const onSubmit = async () => {
     const dataCreateBooking: Partial<BookingPost> = await form.validateFields();
@@ -243,17 +273,22 @@ const CreateBookingContainer = () => {
           <TabsBooking
             form={form}
             userData={userData}
+            addressCustome={addressCustome}
             handleDeleteRow={handleDeleteRow}
             detailsBooking={detailsBooking}
             handleAddBookingDetails={handleAddBookingDetails}
             handleUpdateBookingDetails={handleUpdateBookingDetails}
+            handleChangeInfoSender={handleChangeInfoSender}
+            handleChangeInfoRecei={handleChangeInfoRecei}
           />
         </Tabs.TabPane>
         <Tabs.TabPane tab='Invoice' key='invoice'>
           <InVoice
             form={form}
             dataUser={userData}
+            sendAddress={addressCustome}
             detailsInvoice={detailsInvoice}
+            receiverCustome={receiverCustome}
             handleAddInvoiceDetails={handleAddInvoiceDetails}
             handleDeleteInvoice={handleDeleteInvoice}
             handleUpdateBookingInvoice={handleUpdateBookingInvoice}

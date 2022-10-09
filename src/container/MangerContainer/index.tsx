@@ -20,8 +20,8 @@ const QUERY_PARAMS: QueryParams3 = {
   pageSize: 20,
   search: '',
   status: undefined,
-  createBookingFrom: '',
-  createBookingTo: '',
+  createBookingFrom: undefined,
+  createBookingTo: undefined,
 };
 
 const { RangePicker } = DatePicker;
@@ -54,12 +54,8 @@ const ManageContainer = () => {
   const handleFilterDate = (_: any, value: string[]) => {
     setQueries((prev) => ({
       ...prev,
-      createBookingFrom: value[0]
-        ? moment(value[0]).format('YYYY-MM-DD')
-        : undefined,
-      createBookingTo: value[1]
-        ? moment(value[1]).format('YYYY-MM-DD')
-        : undefined,
+      createBookingFrom: moment(value[0]).format('YYYY-MM-DD'),
+      createBookingTo: moment(value[1]).format('YYYY-MM-DD'),
     }));
   };
 

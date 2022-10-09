@@ -1,35 +1,45 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Divider, Form, FormInstance, Select } from 'antd';
 import React, { useEffect } from 'react';
 
 import VInput from '@/components/common/VInput';
 import VSelect from '@/components/common/VSelect';
 
-import { IUser } from '@/contants/types';
+import { AddressCustomer, IUser } from '@/contants/types';
 import { countries } from '@/contants/types/Country';
 
 interface AddressProps {
   form: FormInstance;
   dataUser: IUser | undefined;
+  addressCustome: Partial<AddressCustomer> | undefined;
+  handleChangeInfoSender: (name: string, value: any) => void;
+  handleChangeInfoRecei: (name: string, value: any) => void;
 }
 
 const { Option } = Select;
 
-const Address = ({ form, dataUser }: AddressProps) => {
+const Address = ({
+  form,
+  dataUser,
+  addressCustome,
+  handleChangeInfoSender,
+  handleChangeInfoRecei,
+}: AddressProps) => {
   useEffect(() => {
     form.setFieldsValue({
-      senderNameVi: dataUser?.fullName,
-      senderPhoneNumber: dataUser?.phoneNumber,
+      senderNameVi: addressCustome?.senderNameVi,
+      senderPhoneNumber: addressCustome?.senderPhoneNumber,
       senderContactPerson: dataUser?.contactPerson,
       senderMobile: dataUser?.phoneNumber,
-      senderCountry: dataUser?.country,
+      senderCountry: addressCustome?.senderCountry,
       senderCommune: dataUser?.commune,
       senderDistrict: dataUser?.district,
-      senderProvince: dataUser?.province,
+      senderProvince: addressCustome?.senderProvince,
       senderPostalCode: dataUser?.postalCode,
       senderState: dataUser?.state,
-      senderAddressVi: dataUser?.detailAddress,
+      senderAddressVi: addressCustome?.senderAddressVi,
     });
-  }, [dataUser, form]);
+  }, [addressCustome, dataUser, form]);
 
   return (
     <div className='mb-24'>
@@ -46,7 +56,13 @@ const Address = ({ form, dataUser }: AddressProps) => {
               },
             ]}
           >
-            <VInput label='Tên công ty gửi (Tiếng Việt)' required />
+            <VInput
+              label='Tên công ty gửi (Tiếng Việt)'
+              required
+              onChange={(e) =>
+                handleChangeInfoSender('senderNameVi', e.target.value)
+              }
+            />
           </Form.Item>
 
           <Form.Item name='senderNameEn'>
@@ -62,7 +78,13 @@ const Address = ({ form, dataUser }: AddressProps) => {
               },
             ]}
           >
-            <VInput label='Địa chỉ chi tiết (Tiếng Việt)' required />
+            <VInput
+              label='Địa chỉ chi tiết (Tiếng Việt)'
+              required
+              onChange={(e) =>
+                handleChangeInfoSender('senderAddressVi', e.target.value)
+              }
+            />
           </Form.Item>
 
           <Form.Item name='senderAddressEn'>
@@ -86,15 +108,31 @@ const Address = ({ form, dataUser }: AddressProps) => {
               },
             ]}
           >
-            <VInput label='Số điện thoại gửi' required />
+            <VInput
+              label='Số điện thoại gửi'
+              required
+              onChange={(e) =>
+                handleChangeInfoSender('senderAddressVi', e.target.value)
+              }
+            />
           </Form.Item>
 
           <Form.Item name='senderProvince'>
-            <VInput label='Tỉnh/Thành phố' />
+            <VInput
+              label='Tỉnh/Thành phố'
+              onChange={(e) =>
+                handleChangeInfoSender('senderProvince', e.target.value)
+              }
+            />
           </Form.Item>
 
           <Form.Item name='senderCountry'>
-            <VSelect label='Quốc gia' required showSearch>
+            <VSelect
+              label='Quốc gia'
+              required
+              showSearch
+              onChange={(e) => handleChangeInfoSender('senderCountry', e)}
+            >
               {countries.map((v) => (
                 <Option value={v.value} key={v.value}>
                   {v.label}
@@ -104,7 +142,12 @@ const Address = ({ form, dataUser }: AddressProps) => {
           </Form.Item>
 
           <Form.Item name='senderPostalCode'>
-            <VInput label='Mã bưu chính (postcode)' />
+            <VInput
+              label='Mã bưu chính (postcode)'
+              onChange={(e) =>
+                handleChangeInfoSender('senderPostalCode', e.target.value)
+              }
+            />
           </Form.Item>
 
           <Form.Item name='senderNote'>
@@ -125,7 +168,13 @@ const Address = ({ form, dataUser }: AddressProps) => {
               },
             ]}
           >
-            <VInput label='Tên công ty nhận' required />
+            <VInput
+              label='Tên công ty nhận'
+              required
+              onChange={(e) =>
+                handleChangeInfoRecei('receiverName', e.target.value)
+              }
+            />
           </Form.Item>
           <Form.Item
             name='receiverAddress'
@@ -136,11 +185,22 @@ const Address = ({ form, dataUser }: AddressProps) => {
               },
             ]}
           >
-            <VInput label='Địa chỉ nhận hàng chi tiết' required />
+            <VInput
+              label='Địa chỉ nhận hàng chi tiết'
+              required
+              onChange={(e) =>
+                handleChangeInfoRecei('receiverAddress', e.target.value)
+              }
+            />
           </Form.Item>
 
           <Form.Item name='receiverProvince'>
-            <VInput label='Thành phố' />
+            <VInput
+              label='Thành phố'
+              onChange={(e) =>
+                handleChangeInfoRecei('receiverProvince', e.target.value)
+              }
+            />
           </Form.Item>
 
           <Form.Item
@@ -152,7 +212,13 @@ const Address = ({ form, dataUser }: AddressProps) => {
               },
             ]}
           >
-            <VInput label='Mã bưu chính (postcode)' required />
+            <VInput
+              label='Mã bưu chính (postcode)'
+              required
+              onChange={(e) =>
+                handleChangeInfoRecei('receiverPostalCode', e.target.value)
+              }
+            />
           </Form.Item>
 
           <Form.Item
@@ -164,7 +230,12 @@ const Address = ({ form, dataUser }: AddressProps) => {
               },
             ]}
           >
-            <VSelect label='Quốc gia' required showSearch>
+            <VSelect
+              label='Quốc gia'
+              required
+              showSearch
+              onChange={(e) => handleChangeInfoRecei('receiverPostalCode', e)}
+            >
               {countries.map((v) => (
                 <Option value={v.value} key={v.value}>
                   {v.label}

@@ -20,10 +20,12 @@ import VTextArea from '@/components/common/VTextarea';
 
 import { renderInvoiceDetails } from '@/contants/columns/my-booking.columns';
 import {
+  AddressCustomer,
   IInvoiceDetails,
   InvoiceItemType,
   InvoiceType,
   IUser,
+  ReceiverCustome,
 } from '@/contants/types';
 import { fetchCurrentUnit } from '@/services/booking.services';
 
@@ -33,6 +35,8 @@ import ModalUpdateInvoiceDetails from './components/ModalUpdateInvoiceDetails';
 const { Option } = Select;
 
 type InvoiceProps = {
+  sendAddress?: Partial<AddressCustomer>;
+  receiverCustome?: Partial<ReceiverCustome>;
   form: FormInstance;
   dataUser: IUser | undefined;
   detailsInvoice?: Array<IInvoiceDetails>;
@@ -48,6 +52,8 @@ const InVoice = ({
   handleAddInvoiceDetails,
   handleDeleteInvoice,
   handleUpdateBookingInvoice,
+  sendAddress,
+  receiverCustome,
 }: InvoiceProps) => {
   const [isCreate, setIsCreate] = useState<boolean>(false);
   const [isEdit, setIsEdit] = useState<boolean>(false);
@@ -87,12 +93,11 @@ const InVoice = ({
   );
 
   const handleSetField = useCallback(async () => {
-    const res = await form.getFieldValue('receiverAddress');
     form.setFieldsValue({
-      senderInformation: dataUser?.detailAddress,
-      receiver_information: res,
+      senderInformation: `${sendAddress?.senderNameVi}\n${sendAddress?.senderAddressVi}\n${sendAddress?.senderProvince}\n${sendAddress?.senderCountry}\n${sendAddress?.senderPhoneNumber}\n${sendAddress?.senderPostalCode}`,
+      receiverInformation: `${receiverCustome?.receiverName}\n${receiverCustome?.receiverAddress}\n${receiverCustome?.province}\n${receiverCustome?.receiverCountry}\n${receiverCustome?.receiverPhoneNumber}\n${receiverCustome?.receiverPostalCode}`,
     });
-  }, [dataUser?.detailAddress, form]);
+  }, [sendAddress, form, receiverCustome]);
 
   useEffect(() => {
     handleSetField();
@@ -147,11 +152,19 @@ const InVoice = ({
           </Form.Item>
 
           <Form.Item name='senderInformation'>
-            <VTextArea label='Thông tin người gửi' disabled />
+            <VTextArea
+              label='Thông tin người gửi'
+              disabled
+              className='h-[130px]'
+            />
           </Form.Item>
 
           <Form.Item name='receiverInformation'>
-            <VTextArea label='Thông tin người nhận ' disabled />
+            <VTextArea
+              label='Thông tin người nhận '
+              disabled
+              className='h-[130px]'
+            />
           </Form.Item>
 
           <Form.Item
