@@ -328,6 +328,7 @@ const GeneralInfomation = ({
               handleUpdateBooking
             )}
             rowKey='key'
+            scroll={{ y: 450, x: 500 }}
             className='cursor-pointer'
             dataSource={dataDetails}
             pagination={{

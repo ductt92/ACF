@@ -147,11 +147,11 @@ const InVoice = ({
           </Form.Item>
 
           <Form.Item name='senderInformation'>
-            <VInput label='Thông tin người gửi' disabled />
+            <VTextArea label='Thông tin người gửi' disabled />
           </Form.Item>
 
           <Form.Item name='receiverInformation'>
-            <VInput label='Thông tin người nhận ' disabled />
+            <VTextArea label='Thông tin người nhận ' disabled />
           </Form.Item>
 
           <Form.Item

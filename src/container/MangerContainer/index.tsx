@@ -54,8 +54,12 @@ const ManageContainer = () => {
   const handleFilterDate = (_: any, value: string[]) => {
     setQueries((prev) => ({
       ...prev,
-      createBookingFrom: value[0] ? moment(value[0]).format('YYYY/MM/DD') : '',
-      createBookingTo: value[1] ? moment(value[1]).format('YYYY/MM/DD') : '',
+      createBookingFrom: value[0]
+        ? moment(value[0]).format('YYYY-MM-DD')
+        : undefined,
+      createBookingTo: value[1]
+        ? moment(value[1]).format('YYYY-MM-DD')
+        : undefined,
     }));
   };
 
@@ -110,16 +114,16 @@ const ManageContainer = () => {
               showSizeChanger: false,
               defaultPageSize: QUERY_PARAMS.pageSize,
             }}
-            // onRow={(record) => {
-            //   return {
-            //     onClick: () => {
-            //       setIsViewBooking(true);
-            //       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            //       //  @ts-ignore
-            //       setIdbooking(record.booking_id);
-            //     }, // click row
-            //   };
-            // }}
+            onRow={(record) => {
+              return {
+                onClick: () => {
+                  setIsViewBooking(true);
+                  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                  //  @ts-ignore
+                  setIdbooking(record.booking_id);
+                }, // click row
+              };
+            }}
             bordered
             scroll={{ y: 450, x: 800 }}
           />

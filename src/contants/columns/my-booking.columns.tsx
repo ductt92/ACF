@@ -7,6 +7,7 @@ import {
 } from '@ant-design/icons';
 import { Modal, Tooltip } from 'antd';
 import { ColumnsType } from 'antd/lib/table';
+import clsx from 'clsx';
 import dayjs from 'dayjs';
 
 import { CLICK_TO_COPY, copyToClipBoard } from '@/utils/helpers';
@@ -20,7 +21,11 @@ import {
   IMyBooking,
   OpitionType,
 } from '../types';
-const HIGH_LIGHT_CLASS = 'text-[#1890ff] ';
+
+const COMMON_CLASS = 'cursor-pointer truncate text-center';
+const HIGH_LIGHT_CLASS = 'text-[#1890ff]';
+const DEFAULT_CONTAINER = 'min-h-[32px] min-w-[50px] text-center';
+const CUSTOMER_CLASS = 'w-[150px] cursor-pointer truncate text-center p-2 m-0';
 
 export const MYBOOKING_COLUMNS: ColumnsType<IMyBooking> = [
   {
@@ -252,7 +257,14 @@ export const renderBookingDetails = (
       width: 150,
       render: (type: any) => {
         const shipping = shippingType.filter((x) => x.value === type);
-        return shipping.map((v) => <span key={v.value}>{v.label}</span>);
+        return shipping.map((v) => (
+          // <span key={v.value} className={clsx(COMMON_CLASS)}>
+          //   {v.label}
+          // </span>
+          <Tooltip placement='bottom' title={v.label} key={v.value}>
+            <p className={clsx(COMMON_CLASS)}>{v.label}</p>
+          </Tooltip>
+        ));
       },
     },
     {

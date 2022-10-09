@@ -11,8 +11,9 @@ type ModalViewBookingProps = {
   id?: string;
 };
 const ModalViewBooking = ({ id, onClose }: ModalViewBookingProps) => {
-  const { data, isLoading, isFetching } = useQuery(['', { id }], () =>
-    getBookingById(id)
+  const { data, isLoading, isFetching } = useQuery(
+    ['ModalViewBooking', { id }],
+    () => getBookingById(id)
   );
 
   return (
@@ -21,11 +22,14 @@ const ModalViewBooking = ({ id, onClose }: ModalViewBookingProps) => {
       visible={true}
       destroyOnClose
       onCancel={() => onClose(false)}
-      className='top-[calc(5vh)] w-[calc(50vw)]'
+      className='top-[calc(5vh)] w-[calc(70vw)]'
     >
-      <Spin spinning={isLoading || isFetching}>
-        <Viewbooking data={data} />
-      </Spin>
+      <div className='h-[calc(80vh)] overflow-y-auto p-5'>
+        <p className='text-lg'>Chi tiết đơn hàng</p>
+        <Spin spinning={isLoading || isFetching}>
+          <Viewbooking data={data} />
+        </Spin>
+      </div>
     </Modal>
   );
 };
