@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+/* eslint-disable unused-imports/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Form, Tabs } from 'antd';
 import moment from 'moment';
@@ -114,6 +116,9 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
     //   [name]: value,
     // }));
   };
+  const handleChangeInfoRecei = (name: string, value: any) => {
+    console.log(name);
+  };
 
   return (
     <Tabs type='card'>
@@ -126,6 +131,7 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
           handleChangeInfoSender={handleChangeInfoSender}
           handleAddBookingDetails={handleAddBookingDetails}
           handleUpdateBookingDetails={handleUpdateBookingDetails}
+          handleChangeInfoRecei={handleChangeInfoRecei}
         />
       </Tabs.TabPane>
       <Tabs.TabPane tab='Invoice' key='invoice'>
