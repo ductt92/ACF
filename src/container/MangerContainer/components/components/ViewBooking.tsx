@@ -83,8 +83,12 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
       estimatedDate: moment(data?.estimatedDate),
       estimateHour: moment(data?.estimateHour, 'HH:mm'),
     });
+    const detailBooking = data?.bookingDetail?.map((v: any) => {
+      const { updatedAt, createdAt, ...res } = v;
+      return res;
+    });
 
-    setDetailsBooking(data?.bookingDetail || []);
+    setDetailsBooking(detailBooking || []);
     setDetailsInvoice(data?.invoice?.invoiceDetail || []);
     setAddressCustome((prev) => ({
       ...prev,
@@ -128,6 +132,8 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
     });
     setDetailsInvoice(res);
   };
+
+  console.log(detailsBooking);
 
   const handleAddBookingDetails = (form: any) => {
     const {
