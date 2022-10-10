@@ -239,6 +239,10 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
       typeItemInvoice,
       invoiceType,
       importProceduresPerson,
+      senderPostalCode,
+      senderProvince,
+      senderCountry,
+      receiverProvince,
     } = dataCreateBooking;
 
     const booking = {
@@ -273,9 +277,14 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
         senderDepartment,
         senderPhoneNumber,
         senderNote,
+        senderPostalCode,
+        senderProvince,
+        senderCountry,
         receiverName,
         isCustomsDeclaration: false,
         bookingDetail: detailsBooking,
+        isInvoice: true,
+        receiverProvince,
       },
       invoice: {
         invoiceDetail: configDetailsInvoice,

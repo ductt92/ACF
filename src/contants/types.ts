@@ -202,6 +202,7 @@ export interface BookingPost {
   bookingDetail: Array<DetailsBookingPost>;
   receiverName: string;
   isCustomsDeclaration: boolean;
+  receiverProvince: string;
   typeItemInvoice: InvoiceItemType;
   invoiceType: InvoiceType;
   senderInformation: string;
@@ -227,6 +228,10 @@ export interface BookingPost {
   HSCode: string;
   importProceduresPerson: string;
   noteInvoice: string;
+  senderPostalCode: string;
+  senderProvince: string;
+  senderCountry: string;
+  isInvoice: boolean;
 }
 export interface IMyBooking {
   booking: {

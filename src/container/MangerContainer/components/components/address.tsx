@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Divider, Form, FormInstance, Select } from 'antd';
 import React, { useEffect } from 'react';
@@ -42,7 +43,7 @@ const Address = ({
       senderAddressVi:
         addressCustome?.senderAddressVi || dataUser?.detailAddress,
     });
-  }, [addressCustome, dataUser, form]);
+  }, []);
 
   return (
     <div className='mb-24'>
@@ -115,7 +116,7 @@ const Address = ({
               label='Số điện thoại gửi'
               required
               onChange={(e) =>
-                handleChangeInfoSender('senderAddressVi', e.target.value)
+                handleChangeInfoSender('senderPhoneNumber', e.target.value)
               }
             />
           </Form.Item>
