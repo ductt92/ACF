@@ -298,11 +298,11 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
 
     mutateUpdate({
       booking,
-      id: data.id,
+      id: data?.id,
     });
   };
   const handleGenerataeBill = () => {
-    generatorBill(data.id);
+    generatorBill(data?.id);
   };
 
   return (
@@ -312,7 +312,7 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
         <Button
           onClick={handleGenerataeBill}
           type='primary'
-          disabled={!data.id}
+          disabled={!data?.id}
         >
           Tạo Bill
         </Button>
