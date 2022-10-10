@@ -143,7 +143,7 @@ const CreateBookingContainer = () => {
     const dataCreateBooking: Partial<BookingPost> = await form.validateFields();
 
     const estimatedDate = moment(dataCreateBooking.estimatedDate).format(
-      'YYYY/MM/DD'
+      'YYYY-MM-DD'
     );
     const estimateHour = moment(dataCreateBooking.estimateHour).format('HH:mm');
 
@@ -229,7 +229,7 @@ const CreateBookingContainer = () => {
         receiverInformation: receiverAddress,
         importers: importProceduresPerson,
         invoiceDate: moment(dataCreateBooking?.invoiceDate).format(
-          'YYYY/MM/DD'
+          'YYYY-MM-DD'
         ),
         invoiceNumber: dataCreateBooking?.invoiceNumber,
         serviceId: dataCreateBooking?.serviceBookingId,

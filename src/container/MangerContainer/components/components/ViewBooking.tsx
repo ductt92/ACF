@@ -192,11 +192,8 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
   const onSubmit = async () => {
     const dataCreateBooking: Partial<BookingPost> =
       await viewBooking.validateFields();
-
-    console.log(dataCreateBooking.senderNameVi, 'senderNameVi');
-
     const estimatedDate = moment(dataCreateBooking.estimatedDate).format(
-      'YYYY/MM/DD'
+      'YYYY-MM-DD'
     );
     const estimateHour = moment(dataCreateBooking.estimateHour).format('HH:mm');
 
@@ -282,7 +279,7 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
         receiverInformation: receiverAddress,
         importers: importProceduresPerson,
         invoiceDate: moment(dataCreateBooking?.invoiceDate).format(
-          'YYYY/MM/DD'
+          'YYYY-MM-DD'
         ),
         invoiceNumber: dataCreateBooking?.invoiceNumber,
         serviceId: dataCreateBooking?.serviceBookingId,
