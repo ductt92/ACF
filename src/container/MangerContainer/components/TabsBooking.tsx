@@ -19,6 +19,8 @@ interface TabsBookingProps {
   handleUpdateBookingDetails: (form: any) => void;
   handleChangeInfoSender: (name: string, value: any) => void;
   handleChangeInfoRecei: (name: string, value: any) => void;
+  serivcesSelected: any;
+  handleServicesSelected: (e: any) => void;
 }
 
 const TabsBooking = ({
@@ -31,6 +33,8 @@ const TabsBooking = ({
   addressCustome,
   handleChangeInfoSender,
   handleChangeInfoRecei,
+  serivcesSelected,
+  handleServicesSelected,
 }: TabsBookingProps) => {
   return (
     <div>
@@ -39,6 +43,8 @@ const TabsBooking = ({
           <GeneralInfomation
             form={form}
             dataDetails={detailsBooking}
+            serivcesSelected={serivcesSelected}
+            handleServicesSelected={handleServicesSelected}
             handleUpdateBookingDetails={handleUpdateBookingDetails}
             handleAddBookingDetails={handleAddBookingDetails}
             handleDeleteRow={handleDeleteRow}

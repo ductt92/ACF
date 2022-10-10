@@ -27,7 +27,10 @@ import {
   IUser,
   ReceiverCustome,
 } from '@/contants/types';
-import { fetchCurrentUnit } from '@/services/booking.services';
+import {
+  fetchCurrentUnit,
+  fetchServicesBooking,
+} from '@/services/booking.services';
 
 import ModalInvoiceDetails from './components/ModalInvoiceDetails';
 import ModalUpdateInvoiceDetails from './components/ModalUpdateInvoiceDetails';
@@ -43,6 +46,7 @@ type InvoiceProps = {
   handleAddInvoiceDetails: (form: IInvoiceDetails) => void;
   handleUpdateBookingInvoice: (form: IInvoiceDetails) => void;
   handleDeleteInvoice: (id: any) => void;
+  serivcesSelected: any;
 };
 
 const InVoice = ({
@@ -53,6 +57,7 @@ const InVoice = ({
   handleDeleteInvoice,
   handleUpdateBookingInvoice,
   sendAddress,
+  serivcesSelected,
   receiverCustome,
 }: InvoiceProps) => {
   const [isCreate, setIsCreate] = useState<boolean>(false);
@@ -79,6 +84,28 @@ const InVoice = ({
     //  @ts-ignore
   }, [dataCurrenUnit]);
 
+  const { data: dataSerivicesBooknig } = useQuery(
+    ['dataSerivicesBooknig', {}],
+    () => fetchServicesBooking()
+  );
+
+  const OpitionServiceBooking = useMemo(() => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    //  @ts-ignore
+    if (dataSerivicesBooknig?.length < 0) {
+      return [];
+    } else {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      //  @ts-ignore
+      return dataSerivicesBooknig?.map((v) => ({
+        value: v.id,
+        label: v.name,
+      }));
+    }
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    //  @ts-ignore
+  }, [dataSerivicesBooknig]);
+
   const OpitionInvoiceItemType = Object.entries(InvoiceItemType).map(
     ([key, value]) => ({
       value: key,
@@ -101,9 +128,40 @@ const InVoice = ({
       }\n${sendAddress?.senderPhoneNumber || dataUser?.phoneNumber}\n${
         sendAddress?.senderPostalCode
       }`,
-      receiverInformation: `${receiverCustome?.receiverName}\n${receiverCustome?.receiverAddress}\n${receiverCustome?.province}\n${receiverCustome?.receiverCountry}\n${receiverCustome?.receiverPhoneNumber}\n${receiverCustome?.receiverPostalCode}`,
+      receiverInformation: `${receiverCustome?.receiverName || ''}\n${
+        receiverCustome?.receiverAddress || ''
+      }\n${receiverCustome?.province || ''}\n${
+        receiverCustome?.receiverCountry || ''
+      }\n${receiverCustome?.receiverPhoneNumber || ''}\n${
+        receiverCustome?.receiverPostalCode || ''
+      }`,
+      serviceId:
+        OpitionServiceBooking.filter(
+          (x: any) => x.value === serivcesSelected
+        )[0]?.label || undefined,
     });
-  }, [sendAddress, form, receiverCustome, dataUser]);
+  }, [
+    form,
+    sendAddress?.senderNameVi,
+    sendAddress?.senderAddressVi,
+    sendAddress?.senderProvince,
+    sendAddress?.senderCountry,
+    sendAddress?.senderPhoneNumber,
+    sendAddress?.senderPostalCode,
+    dataUser?.fullName,
+    dataUser?.detailAddress,
+    dataUser?.province,
+    dataUser?.country,
+    dataUser?.phoneNumber,
+    receiverCustome?.receiverName,
+    receiverCustome?.receiverAddress,
+    receiverCustome?.province,
+    receiverCustome?.receiverCountry,
+    receiverCustome?.receiverPhoneNumber,
+    receiverCustome?.receiverPostalCode,
+    OpitionServiceBooking,
+    serivcesSelected,
+  ]);
 
   useEffect(() => {
     handleSetField();

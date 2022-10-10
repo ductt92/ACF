@@ -31,6 +31,8 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
   const [detailsInvoice, setDetailsInvoice] = useState<Array<IInvoiceDetails>>(
     []
   );
+  const [selected, setSelected] = useState();
+
   const [detailsBooking, setDetailsBooking] = useState<
     Array<DetailsBookingPost>
   >([]);
@@ -185,6 +187,10 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
     setDetailsBooking(res);
   };
 
+  const onSelect = (e: any) => {
+    setSelected(e);
+  };
+
   const handleChangeInfoSender = (name: string, value: any) => {
     setAddressCustome((prev) => ({
       ...prev,
@@ -336,6 +342,8 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
             <TabsBooking
               form={viewBooking}
               userData={userData}
+              serivcesSelected={selected}
+              handleServicesSelected={onSelect}
               addressCustome={addressCustome}
               handleDeleteRow={handleDeleteRow}
               detailsBooking={detailsBooking}
@@ -354,6 +362,7 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
               receiverCustome={receiverCustome}
               handleAddInvoiceDetails={handleAddInvoiceDetails}
               handleDeleteInvoice={handleDeleteInvoice}
+              serivcesSelected={selected}
               handleUpdateBookingInvoice={handleUpdateBookingInvoice}
             />
           </Tabs.TabPane>

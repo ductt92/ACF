@@ -37,6 +37,8 @@ const CreateBookingContainer = () => {
   const [receiverCustome, setReceiverCustome] =
     useState<Partial<ReceiverCustome>>();
 
+  const [selected, setSelected] = useState();
+
   const [form] = Form.useForm();
 
   const queryClient = useQueryClient();
@@ -77,6 +79,10 @@ const CreateBookingContainer = () => {
 
   const handleAddInvoiceDetails = (resForm: any) => {
     setDetailsInvoice((prev) => [...prev, resForm]);
+  };
+
+  const onSelect = (e: any) => {
+    setSelected(e);
   };
 
   const handleAddBookingDetails = (form: any) => {
@@ -324,6 +330,8 @@ const CreateBookingContainer = () => {
             handleUpdateBookingDetails={handleUpdateBookingDetails}
             handleChangeInfoSender={handleChangeInfoSender}
             handleChangeInfoRecei={handleChangeInfoRecei}
+            serivcesSelected={selected}
+            handleServicesSelected={onSelect}
           />
         </Tabs.TabPane>
         <Tabs.TabPane tab='Invoice' key='invoice'>
@@ -336,6 +344,7 @@ const CreateBookingContainer = () => {
             handleAddInvoiceDetails={handleAddInvoiceDetails}
             handleDeleteInvoice={handleDeleteInvoice}
             handleUpdateBookingInvoice={handleUpdateBookingInvoice}
+            serivcesSelected={selected}
           />
         </Tabs.TabPane>
       </Tabs>

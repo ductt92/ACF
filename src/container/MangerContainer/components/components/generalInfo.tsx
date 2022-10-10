@@ -37,6 +37,8 @@ interface GeneralInfomationProps {
   handleAddBookingDetails: (form: any) => void;
   handleDeleteRow: (id: any) => void;
   handleUpdateBookingDetails: (form: any) => void;
+  serivcesSelected: string;
+  handleServicesSelected: (e: any) => void;
 }
 
 const GeneralInfomation = ({
@@ -45,11 +47,12 @@ const GeneralInfomation = ({
   handleAddBookingDetails,
   handleDeleteRow,
   handleUpdateBookingDetails,
+  handleServicesSelected,
+  serivcesSelected,
 }: GeneralInfomationProps) => {
   const [isCreate, setIsCreate] = useState<boolean>(false);
   const [isEdit, setIsEdit] = useState<boolean>(false);
   const [detailsBooking, setDetailsBooking] = useState();
-  const [selected, setSelected] = useState();
 
   const { data: dataSerivicesBooknig } = useQuery(
     ['dataSerivicesBooknig', {}],
@@ -94,9 +97,6 @@ const GeneralInfomation = ({
     //  @ts-ignore
   }, [dataDelivery]);
 
-  const onSelect = (e: any) => {
-    setSelected(e);
-  };
   const OpitionType = Object.entries(BookingType).map(([key, value]) => ({
     value: key,
     label: value,
@@ -194,7 +194,7 @@ const GeneralInfomation = ({
               },
             ]}
           >
-            <VSelect label='Dịch vụ' required onChange={onSelect}>
+            <VSelect label='Dịch vụ' required onChange={handleServicesSelected}>
               {OpitionServiceBooking?.map((v: any) => (
                 <Option key={v.value}>{v.label}</Option>
               ))}
@@ -312,7 +312,7 @@ const GeneralInfomation = ({
             <Button
               type='primary'
               onClick={() => setIsCreate(true)}
-              disabled={!selected}
+              disabled={!serivcesSelected}
             >
               Thêm hàng hóa
             </Button>
@@ -338,7 +338,7 @@ const GeneralInfomation = ({
           {isCreate && (
             <ModalBookingDetails
               isOpen={isCreate}
-              services={selected}
+              services={serivcesSelected}
               listServices={OpitionServiceBooking}
               onClose={() => setIsCreate(false)}
               handleAddBookingDetails={handleAddBooking}
@@ -347,7 +347,7 @@ const GeneralInfomation = ({
           {isEdit && (
             <ModalUpdateBookingDetails
               isOpen={isEdit}
-              services={selected}
+              services={serivcesSelected}
               listServices={OpitionServiceBooking}
               onClose={() => setIsEdit(false)}
               handleUpdateBookingDetails={(e) => {
