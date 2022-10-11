@@ -398,7 +398,7 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
         currencyId:
           // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           //  @ts-ignore
-          dataCreateBooking?.currencyId || dataCreateBooking?.currencyId.value,
+          dataCreateBooking?.currencyId || dataCreateBooking?.currencyId?.value,
         reasonExport: dataCreateBooking?.reasonExport,
         note: dataCreateBooking?.noteInvoice,
       },
