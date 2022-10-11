@@ -16,7 +16,6 @@ import { MANAGER_PAGES } from '@/routes/routes';
 import AuthenService from '@/services/Authen.service';
 import storage from '@/utils/storage';
 
-import BANNER from '~/images/bg_dangky.png';
 const LoginPage = () => {
   const { t } = useTranslation('common');
   const [valueName, setValueName] = useState<string>('');
@@ -62,8 +61,13 @@ const LoginPage = () => {
   return (
     <div className='m-auto w-[1174px] lg:w-full'>
       <div className='float-left w-[905px] lg:w-full'>
-        <div className='relative w-full'>
-          <Image src={BANNER} height={262} width={905} alt='[image]' />
+        <div className='relative w-full p-4'>
+          <Image
+            src='/images/logo-acf.png'
+            height={262}
+            width={905}
+            alt='[image]'
+          />
         </div>
         <Breadcumb />
         <Form form={form}>
@@ -106,7 +110,7 @@ const LoginPage = () => {
             </div>
             <div className='float-left w-[50%] p-[40px_0_0_81px] lg:pl-[30px]'>
               <Image
-                src='/images/banner2-chuyen-phat-nhanh-acf.jpg'
+                src='/images/logo-acf.png'
                 height={157}
                 width={315}
                 alt=''
