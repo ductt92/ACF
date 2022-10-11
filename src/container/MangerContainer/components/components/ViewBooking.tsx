@@ -151,7 +151,7 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
       totalBaleNumber: data?.invoice?.totalBaleNumber,
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       //  @ts-ignore
-      serviceId: dataSerivicesBooknig.find(
+      serviceId: dataSerivicesBooknig?.find(
         (x: { id: any }) => x.id === data.serviceBookingId
       ).name,
     });
