@@ -2,9 +2,9 @@ import React from 'react';
 
 import TrackForm from '@/components/FormTrack';
 import CustomerRequest from '@/container/CustomerRequest';
+import SliderCarousel from '@/container/Footer/Slider';
 import OperationFields from '@/container/OperationFields';
 import OperationFieldsMobile from '@/container/OperationFieldsMobile';
-import SliderCarousel from '@/container/Slider';
 
 import { DATA_MOCK_IMG_SLIDER } from '@/contants/mock-data/mock-data';
 
