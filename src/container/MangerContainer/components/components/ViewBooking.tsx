@@ -364,8 +364,17 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
       },
       invoice: {
         invoiceDetail: configDetailsInvoice,
-        typeItemInvoice,
-        invoiceType,
+
+        typeItemInvoice:
+          dataCreateBooking?.typeItemInvoice ||
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          //  @ts-ignore
+          dataCreateBooking?.typeItemInvoice?.value,
+        invoiceType:
+          dataCreateBooking?.invoiceType ||
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          //  @ts-ignore
+          dataCreateBooking?.invoiceType?.value,
         senderInformation: senderAddressVi,
         receiverInformation: receiverAddress,
         importers: importProceduresPerson,
@@ -374,11 +383,22 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
         ),
         invoiceNumber: dataCreateBooking?.invoiceNumber,
         serviceId: dataCreateBooking?.serviceBookingId,
-        totalNetWeight: dataCreateBooking?.totalNetWeight,
-        totalBulkyWeight: dataCreateBooking?.totalBulkyWeight,
-        goodsSize: dataCreateBooking?.goodsSize,
-        totalBaleNumber: dataCreateBooking?.totalBaleNumber,
-        currencyId: dataCreateBooking?.currencyId,
+        totalNetWeight: dataCreateBooking?.totalNetWeight
+          ? +dataCreateBooking.totalNetWeight
+          : 0,
+        totalBulkyWeight: dataCreateBooking?.totalBulkyWeight
+          ? +dataCreateBooking?.totalBulkyWeight
+          : 0,
+        goodsSize: dataCreateBooking?.goodsSize
+          ? +dataCreateBooking.goodsSize
+          : 0,
+        totalBaleNumber: dataCreateBooking?.totalBaleNumber
+          ? +dataCreateBooking?.totalBaleNumber
+          : 0,
+        currencyId:
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          //  @ts-ignore
+          dataCreateBooking?.currencyId || dataCreateBooking?.currencyId.value,
         reasonExport: dataCreateBooking?.reasonExport,
         note: dataCreateBooking?.noteInvoice,
       },
