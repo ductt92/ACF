@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { SearchOutlined } from '@ant-design/icons';
 import {
@@ -82,7 +83,7 @@ const InVoice = ({
     }
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     //  @ts-ignore
-  }, [dataCurrenUnit]);
+  }, []);
 
   const { data: dataSerivicesBooknig } = useQuery(
     ['dataSerivicesBooknig', {}],
@@ -112,6 +113,7 @@ const InVoice = ({
       label: value,
     })
   );
+
   const OpitionInvoiceType = Object.entries(InvoiceType).map(
     ([key, value]) => ({
       value: key,

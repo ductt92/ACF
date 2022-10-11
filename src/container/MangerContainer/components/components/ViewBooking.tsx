@@ -1,9 +1,10 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-console */
 /* eslint-disable unused-imports/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button, Form, notification, Tabs } from 'antd';
 import moment from 'moment';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 
 import {
@@ -11,9 +12,14 @@ import {
   BookingPost,
   DetailsBookingPost,
   IInvoiceDetails,
+  InvoiceItemType,
+  InvoiceType,
+  OpitionType,
   ReceiverCustome,
 } from '@/contants/types';
 import {
+  fetchCurrentUnit,
+  fetchServicesBooking,
   fetchUser,
   generateBill,
   updateBooking,
@@ -79,11 +85,75 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
     },
   });
 
+  const { data: dataCurrenUnit } = useQuery(['fetchCurrentUnit2', {}], () =>
+    fetchCurrentUnit()
+  );
+
+  const { data: dataSerivicesBooknig } = useQuery(
+    ['dataSerivicesBooknig', {}],
+    () => fetchServicesBooking()
+  );
+
+  const OpitionCurrencyUnit = useMemo(() => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    //  @ts-ignore
+    if (dataCurrenUnit?.length < 0) {
+      return [];
+    } else {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      //  @ts-ignore
+      return dataCurrenUnit?.map((v) => ({
+        value: v.id,
+        label: v.name,
+      }));
+    }
+  }, [dataCurrenUnit]);
+
+  const OpitionInvoiceItemType = Object.entries(InvoiceItemType).map(
+    ([key, value]) => ({
+      value: key,
+      label: value,
+    })
+  );
+  const OpitionInvoiceType = Object.entries(InvoiceType).map(
+    ([key, value]) => ({
+      value: key,
+      label: value,
+    })
+  );
   useEffect(() => {
+    const typeItemInvoice = OpitionInvoiceItemType.find(
+      (x) => x.value === data?.invoice?.typeItemInvoice
+    );
+
+    const invoiceType = OpitionInvoiceType.find(
+      (x) => x.value === data?.invoice?.invoiceType
+    );
+
+    const currencyId = OpitionCurrencyUnit?.find(
+      (x: OpitionType) => x.value === data?.invoice?.currencyId
+    );
+
     viewBooking.setFieldsValue({
       ...data,
+      typeItemInvoice,
+      invoiceType,
+      currencyId,
+      reasonExport: data?.invoice?.reasonExport,
+      invoiceNumber: data?.invoice?.invoiceNumber,
       estimatedDate: moment(data?.estimatedDate),
+      invoiceDate: moment(data?.invoice?.invoiceDate),
       estimateHour: moment(data?.estimateHour, 'HH:mm'),
+      importProceduresPerson: data?.invoice?.importProceduresPerson,
+      totalNetWeight: data?.invoice?.totalNetWeight,
+      totalBulkyWeight: data?.invoice?.totalBulkyWeight,
+      goodsSize: data?.invoice?.goodsSize,
+      totalBaleNumber: data?.invoice?.totalBaleNumber,
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      //  @ts-ignore
+      serviceId: dataSerivicesBooknig.find(
+        (x: { id: any }) => x.id === data.serviceBookingId
+      ).name,
     });
     const detailBooking = data?.bookingDetail?.map((v: any) => {
       const { updatedAt, createdAt, ...res } = v;
@@ -113,6 +183,8 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
     }));
   }, [data, viewBooking]);
 
+  console.log(data);
+
   const handleDeleteRow = (id: any) => {
     const res = detailsBooking.filter((x, index) => id !== index);
     setDetailsBooking(res);
@@ -134,8 +206,6 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
     });
     setDetailsInvoice(res);
   };
-
-  console.log(detailsBooking);
 
   const handleAddBookingDetails = (form: any) => {
     const {
