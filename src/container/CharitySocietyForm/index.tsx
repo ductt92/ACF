@@ -12,8 +12,6 @@ import {
   DATA_CHARITY_LI,
 } from '@/contants/mock-data/mock-data';
 
-import BANNER from '~/images/banner-13.jpeg';
-
 const CharitySocietyForm = () => {
   const { lang } = useTranslation('common');
   const dataMock = lang === 'vi' ? DATA_CHARITY_LI : DATA_CHARITY_EN;
@@ -22,7 +20,7 @@ const CharitySocietyForm = () => {
       <div>
         <div className='float-left mb-[30px] w-[905px] lg:mb-[10px] lg:w-full'>
           <div className='relative w-full'>
-            <Image src={BANNER} height={262} width={905} alt='[image]' />
+            <Image src='' height={262} width={905} alt='[image]' />
           </div>
           <Breadcumb />
         </div>

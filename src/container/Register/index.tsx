@@ -12,7 +12,6 @@ import FormTrack from '@/components/FormTrack';
 import Coprorate from './components/Coprorate';
 import Personal from './components/Personal';
 
-import BANNER from '~/images/bg_dangky.png';
 const { TabPane } = Tabs;
 const RegisterForm = () => {
   const { t } = useTranslation('common');
@@ -20,7 +19,7 @@ const RegisterForm = () => {
     <div className='m-auto w-[1174px] lg:w-full'>
       <div className='float-left w-[905px] lg:w-full'>
         <div className='relative w-full'>
-          <Image src={BANNER} height={262} width={905} alt='[image]' />
+          <Image src='BANNER' height={262} width={905} alt='[image]' />
         </div>
         <Breadcumb />
         <div className={styles.tabs}>
