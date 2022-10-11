@@ -716,7 +716,7 @@ export const MOCK_DATA_POSTED_ARTICLES_VI = [
 export const DATA_BUSINESS_FIELD_EN = [
   {
     id: 1,
-    img: '/images/business1.jpeg',
+    img: '/images/logo-acf.png',
     slug: 'dich-vu-van-chuyen-duong-hang-khong',
     time: '11/04/2019 13:44:00',
     title: 'PROVIDING LOGISTICS SERVICE FOR SUPPLIERS TO AMAZON',
@@ -734,7 +734,7 @@ export const DATA_BUSINESS_FIELD_EN = [
 export const DATA_BUSINESS_FIELD_LI = [
   {
     id: 1,
-    img: '/images/business1.jpeg',
+    img: '/images/logo-acf.png',
     slug: 'dich-vu-van-chuyen-duong-hang-khong',
     time: '11/04/2019 13:44:00',
     title: 'DỊCH VỤ VẬN CHUYỂN ĐƯỜNG HÀNG KHÔNG',
