@@ -364,17 +364,12 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
       },
       invoice: {
         invoiceDetail: configDetailsInvoice,
-
-        typeItemInvoice:
-          dataCreateBooking?.typeItemInvoice ||
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-          //  @ts-ignore
-          dataCreateBooking?.typeItemInvoice?.value,
-        invoiceType:
-          dataCreateBooking?.invoiceType ||
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-          //  @ts-ignore
-          dataCreateBooking?.invoiceType?.value,
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        //  @ts-ignore
+        typeItemInvoice: typeItemInvoice?.value || typeItemInvoice,
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        //  @ts-ignore
+        invoiceType: invoiceType?.value || invoiceType,
         senderInformation: senderAddressVi,
         receiverInformation: receiverAddress,
         importers: importProceduresPerson,
@@ -398,7 +393,7 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
         currencyId:
           // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           //  @ts-ignore
-          dataCreateBooking?.currencyId || dataCreateBooking?.currencyId?.value,
+          dataCreateBooking?.currencyId?.value || dataCreateBooking?.currencyId,
         reasonExport: dataCreateBooking?.reasonExport,
         note: dataCreateBooking?.noteInvoice,
       },
