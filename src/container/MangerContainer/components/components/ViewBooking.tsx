@@ -135,8 +135,8 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
     );
 
     viewBooking.setFieldsValue({
-      ...data.booking,
-      ...data.invoice,
+      ...data?.booking,
+      ...data?.invoice,
       typeItemInvoice,
       invoiceType,
       currencyId,
@@ -156,7 +156,7 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
         (x: { id: any }) => x.id === data?.serviceBookingId
       )?.name,
     });
-    const detailBooking = data?.bookingDetail?.map((v: any) => {
+    const detailBooking = data?.booking?.bookingDetail?.map((v: any) => {
       const { updatedAt, createdAt, ...res } = v;
       return res;
     });
@@ -327,7 +327,7 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
         total: total || data?.booking?.total,
         vat: vat || data?.booking?.vat,
         amount: amount || data?.booking?.amount,
-        receiverNote: amount || data?.booking?.amount,
+        receiverNote: receiverNote || data?.booking?.receiverNote,
         receiverCountry: receiverCountry || data?.booking?.receiverCountry,
         receiverContactPerson:
           receiverContactPerson || data?.booking?.receiverContactPerson,
@@ -441,7 +441,7 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
         <Button
           onClick={handleGenerataeBill}
           type='primary'
-          disabled={!data?.id}
+          disabled={!data?.booking?.id}
         >
           Tạo Bill
         </Button>
