@@ -426,12 +426,12 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
 
     mutateUpdate({
       booking,
-      id: data?.id,
+      id: data?.booking?.id,
     });
     console.log(booking);
   };
   const handleGenerataeBill = () => {
-    generatorBill(data?.id);
+    generatorBill(data?.booking?.id);
   };
 
   return (
