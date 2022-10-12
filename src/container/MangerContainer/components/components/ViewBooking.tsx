@@ -142,9 +142,9 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
       currencyId,
       reasonExport: data?.invoice?.reasonExport,
       invoiceNumber: data?.invoice?.invoiceNumber,
-      estimatedDate: moment(data?.estimatedDate),
+      estimatedDate: moment(data?.booking?.estimatedDate),
       invoiceDate: moment(data?.invoice?.invoiceDate),
-      estimateHour: moment(data?.estimateHour, 'HH:mm'),
+      estimateHour: moment(data?.booking?.estimateHour, 'HH:mm'),
       importProceduresPerson: data?.invoice?.importProceduresPerson,
       totalNetWeight: data?.invoice?.totalNetWeight,
       totalBulkyWeight: data?.invoice?.totalBulkyWeight,
@@ -278,7 +278,9 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
     const estimatedDate = moment(dataCreateBooking.estimatedDate).format(
       'YYYY-MM-DD'
     );
-    const estimateHour = moment(dataCreateBooking.estimateHour).format('HH:mm');
+    const estimateHour = moment(
+      dataCreateBooking.estimateHour || data?.booking?.estimateHour
+    ).format('HH:mm');
 
     const configDetailsInvoice = detailsInvoice.map(
       ({ totalMoney, ...rest }) => rest
@@ -353,7 +355,7 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
           deliveryConditionId || data?.booking?.deliveryConditionId,
         serviceBookingId: serviceBookingId || data?.booking?.serviceBookingId,
         estimatedDate: estimatedDate || data?.booking?.estimatedDate,
-        estimateHour: estimateHour || data?.booking?.estimateHour,
+        estimateHour: estimateHour,
         senderNameVi: senderNameVi || data?.booking?.senderNameVi,
         senderNameEn: senderNameEn || data?.booking?.senderNameEn,
         senderAddressVi: senderAddressVi || data?.booking?.senderAddressVi,
@@ -428,7 +430,6 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
       booking,
       id: data?.booking?.id,
     });
-    console.log(booking);
   };
   const handleGenerataeBill = () => {
     generatorBill(data?.booking?.id);
