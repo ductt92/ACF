@@ -725,14 +725,6 @@ export const DATA_BUSINESS_FIELD_LI = [
     title: 'DỊCH VỤ VẬN CHUYỂN ĐƯỜNG HÀNG KHÔNG',
     desc: 'ACF cung cấp dịch vụ vận chuyển hàng hóa và kho vận  từ Việt Nam đến sàn Amazon tại Mỹ và Nhật cho ...',
   },
-  {
-    id: 2,
-    img: '/images/value3.jpg',
-    time: '10/04/2019 09:23:22',
-    slug: 'van-chuyen-duong-bien',
-    title: 'DỊCH VỤ VẬN CHUYỂN ĐƯỜNG BIỂN',
-    desc: ' Vận tải đường biển là hình thức vận tải ra đời sớm nhất ở Việt Nam chuyên chở hàng hóa trong và ...',
-  },
 ];
 export const DATA_CUSTOMER_SUPPORT_EN = [
   {
