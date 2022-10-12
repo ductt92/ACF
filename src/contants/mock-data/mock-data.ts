@@ -38,13 +38,6 @@ export const DATA_MOCK_DETAIL_EN = [
     src: '/images/value2.jpg',
     slug: 'gioi-thieu-ve-acf',
   },
-  {
-    title: 'GOODS BANNED FROM SENDING AND CONDITIONAL GOODS',
-    describe:
-      'In order not to interrupt business activities or avoid unfortunate incidents, ACF would like to send to customers a list of prohibited items, restrictions and conditional ...',
-    src: '/images/value3.jpg',
-    slug: 'van-chuyen-duong-bien',
-  },
 ];
 
 export const DATA_MOCK_MENU_VI = [
@@ -721,14 +714,6 @@ export const DATA_BUSINESS_FIELD_EN = [
     time: '11/04/2019 13:44:00',
     title: 'PROVIDING LOGISTICS SERVICE FOR SUPPLIERS TO AMAZON',
     desc: 'ACF provides freight and warehousing services from Vietnam to Amazon in the US and Japan for ...',
-  },
-  {
-    id: 2,
-    img: '/images/value3.jpg',
-    slug: 'van-chuyen-duong-bien',
-    time: '10/04/2019 09:23:22',
-    title: 'SEA FREIGHT SERVICES',
-    desc: ' International Sea Freight Services:',
   },
 ];
 export const DATA_BUSINESS_FIELD_LI = [
