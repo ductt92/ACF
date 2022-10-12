@@ -166,7 +166,7 @@ const ModalBookingDetails = ({
                 ]}
               >
                 <VSelect
-                  label='Mặt hàng vận chuyển (Tiếng Việt)'
+                  label='Nhóm hàng hóa vận chuyển (Tiếng Việt)'
                   required
                   showSearch
                 >

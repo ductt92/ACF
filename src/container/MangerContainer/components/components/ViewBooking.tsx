@@ -57,13 +57,13 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
     onSuccess: () => {
       queryClient.invalidateQueries(['updateBooking']);
       notification.success({
-        message: 'Tạo đơn hàng mới thành công',
+        message: 'Cập nhật đơn hàng thành công',
         placement: 'top',
       });
     },
     onError: () => {
       notification.error({
-        message: 'Vui lòng kiểm tra lại các trường còn thiếu',
+        message: 'Some thing when wrong ,Please try again !!',
         placement: 'top',
       });
     },
@@ -135,7 +135,8 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
     );
 
     viewBooking.setFieldsValue({
-      ...data,
+      ...data.booking,
+      ...data.invoice,
       typeItemInvoice,
       invoiceType,
       currencyId,
@@ -152,8 +153,8 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       //  @ts-ignore
       serviceId: dataSerivicesBooknig?.find(
-        (x: { id: any }) => x.id === data.serviceBookingId
-      ).name,
+        (x: { id: any }) => x.id === data?.serviceBookingId
+      )?.name,
     });
     const detailBooking = data?.bookingDetail?.map((v: any) => {
       const { updatedAt, createdAt, ...res } = v;
@@ -181,9 +182,7 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
       province: data?.province,
       receiverAddress: data?.receiverAddress,
     }));
-  }, [data, viewBooking]);
-
-  console.log(data);
+  }, [OpitionCurrencyUnit, data, viewBooking]);
 
   const handleDeleteRow = (id: any) => {
     const res = detailsBooking.filter((x, index) => id !== index);
@@ -206,6 +205,8 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
     });
     setDetailsInvoice(res);
   };
+
+  console.log(data);
 
   const handleAddBookingDetails = (form: any) => {
     const {
@@ -323,79 +324,103 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
 
     const booking = {
       booking: {
-        total,
-        vat,
-        amount,
-        receiverNote,
-        receiverCountry,
-        receiverContactPerson,
-        receiverDepartment,
-        receiverPhoneNumber,
-        otherDeliveryConditions,
-        note,
-        receiverPostalCode,
-        receiverAddress,
-        payment,
-        typeOfPaymentId,
-        partnerBillCode,
-        oderAccountForeign,
-        customsDeclarationNumer,
-        type,
-        deliveryConditionId,
-        serviceBookingId,
-        estimatedDate,
-        estimateHour,
-        senderNameVi,
-        senderNameEn,
-        senderAddressVi,
-        senderAddressEn,
-        senderContactPerson,
-        senderDepartment,
-        senderPhoneNumber,
-        senderNote,
-        senderPostalCode,
-        senderProvince,
-        senderCountry,
-        receiverName,
+        total: total || data?.booking?.total,
+        vat: vat || data?.booking?.vat,
+        amount: amount || data?.booking?.amount,
+        receiverNote: amount || data?.booking?.amount,
+        receiverCountry: receiverCountry || data?.booking?.receiverCountry,
+        receiverContactPerson:
+          receiverContactPerson || data?.booking?.receiverContactPerson,
+        receiverDepartment:
+          receiverDepartment || data?.booking?.receiverDepartment,
+        receiverPhoneNumber:
+          receiverPhoneNumber || data?.booking?.receiverPhoneNumber,
+        otherDeliveryConditions:
+          otherDeliveryConditions || data?.booking?.otherDeliveryConditions,
+        note: note || data?.booking?.note,
+        receiverPostalCode:
+          receiverPostalCode || data?.booking?.receiverPostalCode,
+        receiverAddress: receiverAddress || data?.booking?.receiverAddress,
+        payment: payment || data?.booking?.payment,
+        typeOfPaymentId: typeOfPaymentId || data?.booking?.typeOfPaymentId,
+        partnerBillCode: partnerBillCode || data?.booking?.partnerBillCode,
+        oderAccountForeign:
+          oderAccountForeign || data?.booking?.oderAccountForeign,
+        customsDeclarationNumer:
+          customsDeclarationNumer || data?.booking?.customsDeclarationNumer,
+        type: type || data?.booking?.type,
+        deliveryConditionId:
+          deliveryConditionId || data?.booking?.deliveryConditionId,
+        serviceBookingId: serviceBookingId || data?.booking?.serviceBookingId,
+        estimatedDate: estimatedDate || data?.booking?.estimatedDate,
+        estimateHour: estimateHour || data?.booking?.estimateHour,
+        senderNameVi: senderNameVi || data?.booking?.senderNameVi,
+        senderNameEn: senderNameEn || data?.booking?.senderNameEn,
+        senderAddressVi: senderAddressVi || data?.booking?.senderAddressVi,
+        senderAddressEn: senderAddressEn || data?.booking?.senderAddressEn,
+        senderContactPerson:
+          senderContactPerson || data?.booking?.senderContactPerson,
+        senderDepartment: senderDepartment || data?.booking?.senderDepartment,
+        senderPhoneNumber:
+          senderPhoneNumber || data?.booking?.senderPhoneNumber,
+        senderNote: senderNote || data?.booking?.senderNote,
+        senderPostalCode: senderPostalCode || data?.booking?.senderPostalCode,
+        senderProvince: senderProvince || data?.booking?.senderProvince,
+        senderCountry: senderCountry || data?.booking?.senderCountry,
+        receiverName: receiverName || data?.booking?.receiverName,
         isCustomsDeclaration: false,
         bookingDetail: detailsBooking,
         isInvoice: true,
-        receiverProvince,
+        receiverProvince: receiverProvince || data?.booking?.receiverProvince,
       },
       invoice: {
         invoiceDetail: configDetailsInvoice,
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        //  @ts-ignore
-        typeItemInvoice: typeItemInvoice?.value || typeItemInvoice,
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        //  @ts-ignore
-        invoiceType: invoiceType?.value || invoiceType,
-        senderInformation: senderAddressVi,
-        receiverInformation: receiverAddress,
+
+        typeItemInvoice:
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          //  @ts-ignore
+          typeItemInvoice?.value ||
+          typeItemInvoice ||
+          data?.invoice?.typeItemInvoice,
+
+        invoiceType:
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          //  @ts-ignore
+          invoiceType?.value || invoiceType || data?.invoice?.invoiceType,
+
+        senderInformation: senderAddressVi || data?.booking?.senderAddressVi,
+        receiverInformation: receiverAddress || data?.booking?.receiverAddress,
         importers: importProceduresPerson,
-        invoiceDate: moment(dataCreateBooking?.invoiceDate).format(
-          'YYYY-MM-DD'
-        ),
-        invoiceNumber: dataCreateBooking?.invoiceNumber,
-        serviceId: dataCreateBooking?.serviceBookingId,
+        invoiceDate: moment(
+          dataCreateBooking?.invoiceDate || data?.invoice?.invoiceDate
+        ).format('YYYY-MM-DD'),
+        invoiceNumber:
+          dataCreateBooking?.invoiceNumber || data?.invoice?.invoiceNumber,
+        serviceId:
+          dataCreateBooking?.serviceBookingId ||
+          data?.invoice?.serviceBookingId,
         totalNetWeight: dataCreateBooking?.totalNetWeight
           ? +dataCreateBooking.totalNetWeight
-          : 0,
+          : +data?.invoice?.totalNetWeight,
         totalBulkyWeight: dataCreateBooking?.totalBulkyWeight
           ? +dataCreateBooking?.totalBulkyWeight
-          : 0,
+          : +data?.invoice?.totalBulkyWeight,
         goodsSize: dataCreateBooking?.goodsSize
           ? +dataCreateBooking.goodsSize
-          : 0,
+          : +data?.invoice?.goodsSize,
         totalBaleNumber: dataCreateBooking?.totalBaleNumber
           ? +dataCreateBooking?.totalBaleNumber
-          : 0,
+          : +data?.invoice?.totalBaleNumber,
         currencyId:
           // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           //  @ts-ignore
-          dataCreateBooking?.currencyId?.value || dataCreateBooking?.currencyId,
-        reasonExport: dataCreateBooking?.reasonExport,
-        note: dataCreateBooking?.noteInvoice,
+          dataCreateBooking?.currencyId?.value ||
+          dataCreateBooking?.currencyId ||
+          data?.invoice?.currencyId,
+        reasonExport:
+          dataCreateBooking?.reasonExport || data?.invoice?.reasonExport,
+        noteInvoice:
+          dataCreateBooking?.noteInvoice || data?.invoce?.noteInvoice,
       },
     };
 
@@ -403,6 +428,7 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
       booking,
       id: data?.id,
     });
+    console.log(booking);
   };
   const handleGenerataeBill = () => {
     generatorBill(data?.id);
