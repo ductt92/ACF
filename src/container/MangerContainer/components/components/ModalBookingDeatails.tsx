@@ -143,11 +143,11 @@ const ModalBookingDetails = ({
                 rules={[
                   {
                     required: true,
-                    message: 'Vui lòng nhập nhóm hàng hóa vận chuyển',
+                    message: 'Vui lòng nhập hàng hóa vận chuyển',
                   },
                 ]}
               >
-                <VSelect label='Nhóm hàng hóa vận chuyển' required showSearch>
+                <VSelect label='Hàng hóa vận chuyển' required showSearch>
                   {OpitionCommoditiesTypeId?.map((v: any) => (
                     <Option value={v.value} key={v.value}>
                       {v.label}
@@ -166,7 +166,7 @@ const ModalBookingDetails = ({
                 ]}
               >
                 <VSelect
-                  label='Nhóm hàng hóa vận chuyển (Tiếng Việt)'
+                  label='Hàng hóa vận chuyển (Tiếng Việt)'
                   required
                   showSearch
                 >
@@ -216,7 +216,7 @@ const ModalBookingDetails = ({
                 rules={[
                   {
                     required: true,
-                    message: 'Vui lòng nhập nhóm hàng hóa vận chuyển',
+                    message: 'Vui lòng nhập hàng hóa vận chuyển',
                   },
                 ]}
               >

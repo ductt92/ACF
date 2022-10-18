@@ -256,7 +256,7 @@ export const renderBookingDetails = (
       align: 'center',
       width: 150,
       render: (type: any) => {
-        const shipping = shippingType.filter((x) => x.value === type);
+        const shipping = shippingType?.filter((x) => x.value === type);
         return shipping.map((v) => (
           // <span key={v.value} className={clsx(COMMON_CLASS)}>
           //   {v.label}
@@ -300,6 +300,20 @@ export const renderBookingDetails = (
       title: 'Chiều dài(cm)',
       dataIndex: 'longs',
       key: 'longs',
+      align: 'center',
+      width: 150,
+    },
+    {
+      title: 'Chiều rộng(cm)',
+      dataIndex: 'width',
+      key: 'width',
+      align: 'center',
+      width: 150,
+    },
+    {
+      title: 'Chiều cao(cm)',
+      dataIndex: 'height',
+      key: 'height',
       align: 'center',
       width: 150,
     },
