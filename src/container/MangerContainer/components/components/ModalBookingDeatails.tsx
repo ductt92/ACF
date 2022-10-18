@@ -71,9 +71,13 @@ const ModalBookingDetails = ({
   };
 
   const handleChangeWeight = () => {
-    const weight = detailsBookingForm.getFieldValue('weight');
     const quantity = detailsBookingForm.getFieldValue('quantity');
-    const numb22 = weight * quantity || 0;
+    const width = detailsBookingForm.getFieldValue('width');
+    const height = detailsBookingForm.getFieldValue('height');
+    const longs = detailsBookingForm.getFieldValue('longs');
+    const bulkyWeight =
+      (width * height * longs) / getBulkyWeight(services || '') || 0;
+    const numb22 = bulkyWeight * quantity || 0;
     detailsBookingForm.setFieldsValue({ numb22 });
   };
 
