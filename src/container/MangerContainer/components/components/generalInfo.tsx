@@ -6,6 +6,8 @@ import {
   Form,
   FormInstance,
   Input,
+  Radio,
+  RadioChangeEvent,
   Select,
   Table,
 } from 'antd';
@@ -39,6 +41,8 @@ interface GeneralInfomationProps {
   handleUpdateBookingDetails: (form: any) => void;
   serivcesSelected: string;
   handleServicesSelected: (e: any) => void;
+  value: any;
+  handleSetvalue: (e: any) => void;
 }
 
 const GeneralInfomation = ({
@@ -49,6 +53,8 @@ const GeneralInfomation = ({
   handleUpdateBookingDetails,
   handleServicesSelected,
   serivcesSelected,
+  value,
+  handleSetvalue,
 }: GeneralInfomationProps) => {
   const [isCreate, setIsCreate] = useState<boolean>(false);
   const [isEdit, setIsEdit] = useState<boolean>(false);
@@ -168,6 +174,9 @@ const GeneralInfomation = ({
   const handleAddBooking = (form: any) => {
     handleAddBookingDetails(form);
     setIsCreate(false);
+  };
+  const onChange = (e: RadioChangeEvent) => {
+    handleSetvalue(e.target.value);
   };
 
   const handleUpdateBooking = (record: any) => {
@@ -298,8 +307,29 @@ const GeneralInfomation = ({
           </Form.Item>
           {/* Chi Tiết booking */}
         </div>
+        <p className='m-0 p-0 font-bold'>3.Tờ khai hải quan</p>
+        <div className='flex flex-col gap-4'>
+          <Radio.Group onChange={onChange} value={value}>
+            <Radio value={1}>Không</Radio>
+            <Radio value={2}>Có</Radio>
+          </Radio.Group>
+          {value === 2 && (
+            <Form.Item
+              name='customsDeclarationNumer'
+              rules={[
+                {
+                  required: true,
+                  message: 'Vui lòng nhập số tờ khai hải quan',
+                },
+              ]}
+            >
+              <VInput label='Số tờ khai hải quan' required />
+            </Form.Item>
+          )}
+        </div>
+        <Divider className='bg-yellow' />
 
-        <p className='m-0 p-0 font-bold'>3.Chi tiết booking </p>
+        <p className='m-0 p-0 font-bold'>4.Chi tiết booking </p>
         <Divider className='bg-yellow' />
 
         <div>
