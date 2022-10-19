@@ -184,7 +184,7 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
     });
     setValue(data?.booking.customsDeclarationNumer ? 2 : 1);
     setDetailsBooking(detailBooking || []);
-    setIsInvoice(data.booking.isInvoice);
+    setIsInvoice(data?.booking.isInvoice);
     setDetailsInvoice(data?.invoice?.invoiceDetail || []);
     setAddressCustome((prev) => ({
       ...prev,
