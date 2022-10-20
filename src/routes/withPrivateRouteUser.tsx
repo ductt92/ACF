@@ -16,7 +16,7 @@ export function withPrivateRouteUser(WrappedComponent: any) {
         router.replace(LOGIN_HOME);
       } else {
         setVerified(true);
-        localStorage.setItem('accessToken', ACCSESS_TOKEN);
+        localStorage.setItem(ACCSESS_TOKEN, accessToken);
       }
     }, [router]);
 

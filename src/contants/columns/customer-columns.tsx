@@ -10,6 +10,13 @@ import {
 
 export const CUSTOMER_COLUMNS: ColumnsType<ICustomer> = [
   {
+    title: 'Mã khách hàng',
+    dataIndex: 'customerCode',
+    key: 'customerCode',
+    align: 'center',
+    width: 150,
+  },
+  {
     title: 'Tên khách hàng',
     dataIndex: 'fullName',
     key: 'fullName',
