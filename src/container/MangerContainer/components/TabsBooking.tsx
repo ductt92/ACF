@@ -21,6 +21,8 @@ interface TabsBookingProps {
   handleChangeInfoRecei: (name: string, value: any) => void;
   serivcesSelected: any;
   handleServicesSelected: (e: any) => void;
+  value: any;
+  handleSetValue: (e: any) => void;
 }
 
 const TabsBooking = ({
@@ -34,6 +36,8 @@ const TabsBooking = ({
   handleChangeInfoSender,
   handleChangeInfoRecei,
   serivcesSelected,
+  value,
+  handleSetValue,
   handleServicesSelected,
 }: TabsBookingProps) => {
   return (
@@ -48,6 +52,8 @@ const TabsBooking = ({
             handleUpdateBookingDetails={handleUpdateBookingDetails}
             handleAddBookingDetails={handleAddBookingDetails}
             handleDeleteRow={handleDeleteRow}
+            value={value}
+            handleSetvalue={handleSetValue}
           />
         </Tabs.TabPane>
 

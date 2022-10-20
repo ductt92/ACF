@@ -22,6 +22,7 @@ import {
   fetchServicesBooking,
   fetchUser,
   generateBill,
+  generateInvoice,
   updateBooking,
 } from '@/services/booking.services';
 
@@ -51,6 +52,10 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
 
   const { data: userData } = useQuery(['getuser'], () => fetchUser());
 
+  const [isInvoice, setIsInvoice] = useState<boolean>(false);
+
+  const [value, setValue] = useState(1);
+
   const queryClient = useQueryClient();
 
   const { mutate: mutateUpdate } = useMutation(updateBooking, {
@@ -72,6 +77,22 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
   const { mutate: generatorBill } = useMutation(generateBill, {
     onSuccess: () => {
       queryClient.invalidateQueries(['generateBill']);
+      notification.success({
+        message: 'Tải xuống thành công',
+        placement: 'top',
+      });
+    },
+    onError: () => {
+      notification.error({
+        message: 'Tải xuống thất bại',
+        placement: 'top',
+      });
+    },
+  });
+
+  const { mutate: generatorInvoice } = useMutation(generateInvoice, {
+    onSuccess: () => {
+      queryClient.invalidateQueries(['generateInVoice']);
       notification.success({
         message: 'Tải xuống thành công',
         placement: 'top',
@@ -133,7 +154,7 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
     const currencyId = OpitionCurrencyUnit?.find(
       (x: OpitionType) => x.value === data?.invoice?.currencyId
     );
-
+    console.log(data?.booking.customsDeclarationNumer);
     viewBooking.setFieldsValue({
       ...data?.booking,
       ...data?.invoice,
@@ -156,12 +177,14 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
         (x: { id: any }) => x.id === data?.serviceBookingId
       )?.name,
     });
+
     const detailBooking = data?.booking?.bookingDetail?.map((v: any) => {
       const { updatedAt, createdAt, ...res } = v;
       return res;
     });
-
+    setValue(data?.booking.customsDeclarationNumer ? 2 : 1);
     setDetailsBooking(detailBooking || []);
+    setIsInvoice(data?.booking.isInvoice);
     setDetailsInvoice(data?.invoice?.invoiceDetail || []);
     setAddressCustome((prev) => ({
       ...prev,
@@ -205,9 +228,6 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
     });
     setDetailsInvoice(res);
   };
-
-  console.log(data);
-
   const handleAddBookingDetails = (form: any) => {
     const {
       bulkyWeight,
@@ -268,6 +288,7 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
       [name]: value,
     }));
   };
+
   const handleChangeInfoRecei = (name: string, value: any) => {
     setReceiverCustome((prev) => ({ ...prev, [name]: value }));
   };
@@ -431,8 +452,13 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
       id: data?.booking?.id,
     });
   };
+
   const handleGenerataeBill = () => {
     generatorBill(data?.booking?.id);
+  };
+
+  const handleGenerataeInvoice = () => {
+    generatorInvoice(data?.booking?.id);
   };
 
   return (
@@ -445,6 +471,17 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
           disabled={!data?.booking?.id}
         >
           Tạo Bill
+        </Button>
+
+        <Button
+          onClick={handleGenerataeInvoice}
+          type='primary'
+          disabled={!data?.booking?.id}
+        >
+          Tạo Invoice
+        </Button>
+        <Button onClick={() => setIsInvoice(!isInvoice)} type='primary'>
+          {isInvoice ? 'Không Invoice' : 'Có Invoice'}
         </Button>
       </div>
 
@@ -463,9 +500,11 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
               handleUpdateBookingDetails={handleUpdateBookingDetails}
               handleChangeInfoSender={handleChangeInfoSender}
               handleChangeInfoRecei={handleChangeInfoRecei}
+              value={value}
+              handleSetValue={(e: any) => setValue(e)}
             />
           </Tabs.TabPane>
-          <Tabs.TabPane tab='Invoice' key='invoice'>
+          <Tabs.TabPane tab='Invoice' key='invoice' disabled={!isInvoice}>
             <InVoice
               form={viewBooking}
               dataUser={userData}

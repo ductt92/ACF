@@ -17,6 +17,7 @@ import {
   createBooking,
   fetchUser,
   generateBill,
+  generateInvoice,
 } from '@/services/booking.services';
 
 import InVoice from './components/Invoice';
@@ -36,6 +37,10 @@ const CreateBookingContainer = () => {
 
   const [receiverCustome, setReceiverCustome] =
     useState<Partial<ReceiverCustome>>();
+
+  const [isInvoice, setIsInvoice] = useState<boolean>(true);
+
+  const [value, setValue] = useState(1);
 
   const [selected, setSelected] = useState();
 
@@ -77,12 +82,32 @@ const CreateBookingContainer = () => {
     },
   });
 
+  const { mutate: generatorInvoice } = useMutation(generateInvoice, {
+    onSuccess: () => {
+      queryClient.invalidateQueries(['generateInVoice']);
+      notification.success({
+        message: 'Tải xuống thành công',
+        placement: 'top',
+      });
+    },
+    onError: () => {
+      notification.error({
+        message: 'Tải xuống thất bại',
+        placement: 'top',
+      });
+    },
+  });
+
   const handleAddInvoiceDetails = (resForm: any) => {
     setDetailsInvoice((prev) => [...prev, resForm]);
   };
 
   const onSelect = (e: any) => {
     setSelected(e);
+  };
+
+  const handleSetValue = (value: any) => {
+    setValue(value);
   };
 
   const handleAddBookingDetails = (form: any) => {
@@ -233,7 +258,7 @@ const CreateBookingContainer = () => {
         receiverName,
         isCustomsDeclaration: false,
         bookingDetail: detailsBooking,
-        isInvoice: true,
+        isInvoice,
         receiverProvince,
       },
       invoice: {
@@ -303,6 +328,10 @@ const CreateBookingContainer = () => {
     generatorBill(id);
   };
 
+  const handleGeneratorInvoice = () => {
+    generatorInvoice(id);
+  };
+
   return (
     <div>
       <p className='text-2xl font-bold text-yellow-primary'>
@@ -315,6 +344,12 @@ const CreateBookingContainer = () => {
 
         <Button onClick={handleGenerataeBill} type='primary' disabled={!id}>
           Tạo Bill
+        </Button>
+        <Button onClick={handleGeneratorInvoice} type='primary' disabled={!id}>
+          Tạo Invoice
+        </Button>
+        <Button onClick={() => setIsInvoice(!isInvoice)} type='primary'>
+          {isInvoice ? 'Không Invoice' : 'Có Invoice'}
         </Button>
       </div>
 
@@ -332,9 +367,11 @@ const CreateBookingContainer = () => {
             handleChangeInfoRecei={handleChangeInfoRecei}
             serivcesSelected={selected}
             handleServicesSelected={onSelect}
+            value={value}
+            handleSetValue={handleSetValue}
           />
         </Tabs.TabPane>
-        <Tabs.TabPane tab='Invoice' key='invoice'>
+        <Tabs.TabPane tab='Invoice' key='invoice' disabled={!isInvoice}>
           <InVoice
             form={form}
             dataUser={userData}

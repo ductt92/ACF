@@ -407,6 +407,10 @@ export enum UnitOfMeasure {
   Set = 'Set',
   Piece = 'Piece',
   Pcs = 'Pcs',
+  Met = 'Met',
+  Roll = 'Roll',
+  Box = 'Box',
+  Bottle = 'Bottle',
 }
 
 export const mockData = [
