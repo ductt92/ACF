@@ -53,6 +53,9 @@ const Address = ({
       senderState: addressCustome?.senderState || dataUser?.state,
       senderAddressVi:
         addressCustome?.senderAddressVi || dataUser?.detailAddress,
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      //  @ts-ignore
+      senderNote: addressCustome?.senderNote || dataUser?.note,
     });
   }, []);
 
