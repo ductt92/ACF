@@ -175,6 +175,11 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
       serviceId: dataSerivicesBooknig?.find(
         (x: { id: any }) => x.id === data?.serviceBookingId
       )?.name,
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      //  @ts-ignore
+      service: dataSerivicesBooknig?.find(
+        (x: { id: any }) => x.id === data?.serviceBookingId
+      )?.name,
     });
 
     const detailBooking = data?.booking?.bookingDetail?.map((v: any) => {
@@ -185,6 +190,8 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
     setDetailsBooking(detailBooking || []);
     setIsInvoice(data?.booking.isInvoice);
     setDetailsInvoice(data?.invoice?.invoiceDetail || []);
+
+    console.log(data?.booking?.serviceBookingId);
     setAddressCustome((prev) => ({
       ...prev,
       ...data?.booking,

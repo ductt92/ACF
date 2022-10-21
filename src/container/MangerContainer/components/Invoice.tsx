@@ -141,6 +141,10 @@ const InVoice = ({
         OpitionServiceBooking.filter(
           (x: any) => x.value === serivcesSelected
         )[0]?.label || undefined,
+      service:
+        OpitionServiceBooking.filter(
+          (x: any) => x.value === serivcesSelected
+        )[0]?.label || undefined,
     });
   }, [
     form,
