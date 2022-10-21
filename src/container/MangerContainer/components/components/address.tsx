@@ -31,15 +31,26 @@ const Address = ({
       senderNameVi: addressCustome?.senderNameVi || dataUser?.fullName,
       senderPhoneNumber:
         addressCustome?.senderPhoneNumber || dataUser?.phoneNumber,
-      senderContactPerson: dataUser?.contactPerson,
-      senderMobile: dataUser?.phoneNumber,
+      senderContactPerson:
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        //  @ts-ignore
+        addressCustome?.senderContactPerson || dataUser?.contactPerson,
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      //  @ts-ignore
+      senderMobile: addressCustome?.senderMobile || dataUser?.phoneNumber,
       senderCountry: addressCustome?.senderCountry || dataUser?.country,
-      senderCommune: dataUser?.commune,
-      senderDistrict: dataUser?.district,
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      //  @ts-ignore
+      senderCommune: addressCustome?.addressCustome || dataUser?.commune,
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      //  @ts-ignore
+      senderDistrict: addressCustome?.senderDistrict || dataUser?.district,
       senderProvince: addressCustome?.senderProvince || dataUser?.province,
       senderPostalCode:
         addressCustome?.senderPostalCode || dataUser?.postalCode,
-      senderState: dataUser?.state,
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      //  @ts-ignore
+      senderState: addressCustome?.senderState || dataUser?.state,
       senderAddressVi:
         addressCustome?.senderAddressVi || dataUser?.detailAddress,
     });
