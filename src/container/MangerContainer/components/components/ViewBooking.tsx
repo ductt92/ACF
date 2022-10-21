@@ -191,7 +191,7 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
     setIsInvoice(data?.booking.isInvoice);
     setDetailsInvoice(data?.invoice?.invoiceDetail || []);
 
-    console.log(data?.booking?.serviceBookingId);
+    setSelected(data?.serviceBookingId);
     setAddressCustome((prev) => ({
       ...prev,
       ...data?.booking,
