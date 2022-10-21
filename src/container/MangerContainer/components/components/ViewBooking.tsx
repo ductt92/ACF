@@ -19,7 +19,6 @@ import {
 } from '@/contants/types';
 import {
   fetchCurrentUnit,
-  fetchServicesBooking,
   fetchUser,
   generateBill,
   generateInvoice,
@@ -110,11 +109,6 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
     fetchCurrentUnit()
   );
 
-  const { data: dataSerivicesBooknig } = useQuery(
-    ['dataSerivicesBooknig', {}],
-    () => fetchServicesBooking()
-  );
-
   const OpitionCurrencyUnit = useMemo(() => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     //  @ts-ignore
@@ -170,16 +164,6 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
       totalBulkyWeight: data?.invoice?.totalBulkyWeight,
       goodsSize: data?.invoice?.goodsSize,
       totalBaleNumber: data?.invoice?.totalBaleNumber,
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      //  @ts-ignore
-      serviceId: dataSerivicesBooknig?.find(
-        (x: { id: any }) => x.id === data?.serviceBookingId
-      )?.name,
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      //  @ts-ignore
-      service: dataSerivicesBooknig?.find(
-        (x: { id: any }) => x.id === data?.serviceBookingId
-      )?.name,
     });
 
     const detailBooking = data?.booking?.bookingDetail?.map((v: any) => {
@@ -191,7 +175,7 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
     setIsInvoice(data?.booking.isInvoice);
     setDetailsInvoice(data?.invoice?.invoiceDetail || []);
 
-    setSelected(data?.serviceBookingId);
+    setSelected(data?.invoice?.importProceduresPerson);
     setAddressCustome((prev) => ({
       ...prev,
       ...data?.booking,
@@ -455,11 +439,17 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
           dataCreateBooking?.noteInvoice || data?.invoce?.noteInvoice,
       },
     };
-
-    mutateUpdate({
-      booking,
-      id: data?.booking?.id,
-    });
+    if (moment(`${estimatedDate} ${estimateHour}`).isAfter(Date.now())) {
+      mutateUpdate({
+        booking,
+        id: data?.booking?.id,
+      });
+    } else {
+      notification.error({
+        message: 'Vui lòng chọn ngày và giờ giao hàng sau thời gian hiện tại',
+        placement: 'top',
+      });
+    }
   };
 
   const handleGenerataeBill = () => {

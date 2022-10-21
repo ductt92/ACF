@@ -282,11 +282,17 @@ const CreateBookingContainer = () => {
         note: dataCreateBooking?.noteInvoice,
       },
     };
-
-    mutateCreate({
-      booking,
-      handleSetId,
-    });
+    if (moment(`${estimatedDate} ${estimateHour}`).isAfter(Date.now())) {
+      mutateCreate({
+        booking,
+        handleSetId,
+      });
+    } else {
+      notification.error({
+        message: 'Vui lòng chọn ngày và giờ giao hàng sau thời gian hiện tại',
+        placement: 'top',
+      });
+    }
   };
 
   const handleUpdateBookingDetails = (form: any) => {
