@@ -154,7 +154,6 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
     const currencyId = OpitionCurrencyUnit?.find(
       (x: OpitionType) => x.value === data?.invoice?.currencyId
     );
-    console.log(data?.booking.customsDeclarationNumer);
     viewBooking.setFieldsValue({
       ...data?.booking,
       ...data?.invoice,
@@ -188,22 +187,22 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
     setDetailsInvoice(data?.invoice?.invoiceDetail || []);
     setAddressCustome((prev) => ({
       ...prev,
-      senderNameVi: data?.senderNameVi,
-      senderAddressVi: data?.senderAddressVi,
-      senderProvince: data?.senderProvince,
-      senderCountry: data?.senderCountry,
-      senderPhoneNumber: data?.senderPhoneNumber,
-      senderPostalCode: data?.senderPostalCode,
+      senderNameVi: data?.booking?.senderNameVi,
+      senderAddressVi: data?.booking?.senderAddressVi,
+      senderProvince: data?.booking?.senderProvince,
+      senderCountry: data?.booking?.senderCountry,
+      senderPhoneNumber: data?.booking?.senderPhoneNumber,
+      senderPostalCode: data?.booking?.senderPostalCode,
     }));
 
     setReceiverCustome((prev) => ({
       ...prev,
-      receiverPostalCode: data?.receiverPostalCode,
-      receiverName: data?.receiverName,
-      receiverPhoneNumber: data?.receiverPhoneNumber,
-      receiverCountry: data?.receiverCountry,
-      province: data?.province,
-      receiverAddress: data?.receiverAddress,
+      receiverPostalCode: data?.booking.receiverPostalCode,
+      receiverName: data?.booking?.receiverName,
+      receiverPhoneNumber: data?.booking?.receiverPhoneNumber,
+      receiverCountry: data?.booking?.receiverCountry,
+      province: data?.booking?.province,
+      receiverAddress: data?.booking?.receiverAddress,
     }));
   }, [OpitionCurrencyUnit, data, viewBooking]);
 

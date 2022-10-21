@@ -11,6 +11,7 @@ import {
   Select,
   Table,
 } from 'antd';
+import moment from 'moment';
 import React, { useMemo, useState } from 'react';
 import { useQuery } from 'react-query';
 
@@ -258,6 +259,10 @@ const GeneralInfomation = ({
                 label='Ngày dự kiến lấy hàng'
                 format={FORMAT_DATE_DD_MM_YYYY}
                 required
+                disabledDate={(current) => {
+                  // Can not select days before today and today
+                  return current && current < moment().startOf('day');
+                }}
               />
               {/* <TimePicker format={HH_MM} /> */}
             </Form.Item>

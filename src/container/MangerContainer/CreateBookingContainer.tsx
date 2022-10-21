@@ -31,7 +31,7 @@ const CreateBookingContainer = () => {
     Array<DetailsBookingPost>
   >([]);
 
-  const [id, setId] = useState('');
+  const [id, setId] = useState<string | null | undefined>();
   const [addressCustome, setAddressCustome] =
     useState<Partial<AddressCustomer>>();
 
@@ -325,11 +325,20 @@ const CreateBookingContainer = () => {
     setDetailsInvoice(res);
   };
   const handleGenerataeBill = () => {
-    generatorBill(id);
+    if (id) {
+      generatorBill(id);
+    }
   };
 
   const handleGeneratorInvoice = () => {
-    generatorInvoice(id);
+    if (id) {
+      generatorInvoice(id);
+    }
+  };
+
+  const handleNewForm = () => {
+    form.resetFields();
+    setId(undefined);
   };
 
   return (
@@ -350,6 +359,10 @@ const CreateBookingContainer = () => {
         </Button>
         <Button onClick={() => setIsInvoice(!isInvoice)} type='primary'>
           {isInvoice ? 'Không Invoice' : 'Có Invoice'}
+        </Button>
+
+        <Button onClick={handleNewForm} type='primary'>
+          Tạo bookings mới
         </Button>
       </div>
 

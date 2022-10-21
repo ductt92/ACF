@@ -95,9 +95,9 @@ const ModalCreateCustomer = ({ onClose }: IProps) => {
                 rules={[{ required: true, message: 'Vui lòng nhập hàng' }]}
               >
                 <VInput
-                  label='Tên khách hàng'
+                  label='Tên công ty'
                   required
-                  placeholder='Nhập tên khách hàng'
+                  placeholder='Nhập Tên công ty'
                 />
               </Form.Item>
               <Form.Item
@@ -163,14 +163,14 @@ const ModalCreateCustomer = ({ onClose }: IProps) => {
                 rules={[
                   {
                     required: true,
-                    message: 'Vui lòng người liên hệ của khách hàng ',
+                    message: 'Vui lòng Người liên hệ của công ty ',
                   },
                 ]}
               >
                 <VInput
-                  label='Người liên hệ của khách hàng'
+                  label='Người liên hệ của công ty'
                   required
-                  placeholder='Nhập người liên hệ của khách hàng'
+                  placeholder='Nhập Người liên hệ của công ty'
                 />
               </Form.Item>
               <Form.Item

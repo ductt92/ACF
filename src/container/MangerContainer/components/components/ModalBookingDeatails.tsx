@@ -65,20 +65,14 @@ const ModalBookingDetails = ({
     const width = detailsBookingForm.getFieldValue('width');
     const height = detailsBookingForm.getFieldValue('height');
     const longs = detailsBookingForm.getFieldValue('longs');
+    const quantity = detailsBookingForm.getFieldValue('quantity');
+
     const bulkyWeight =
       (width * height * longs) / getBulkyWeight(services || '') || 0;
     detailsBookingForm.setFieldsValue({ bulkyWeight });
-  };
 
-  const handleChangeWeight = () => {
-    const quantity = detailsBookingForm.getFieldValue('quantity');
-    const width = detailsBookingForm.getFieldValue('width');
-    const height = detailsBookingForm.getFieldValue('height');
-    const longs = detailsBookingForm.getFieldValue('longs');
-    const bulkyWeight =
-      (width * height * longs) / getBulkyWeight(services || '') || 0;
     const numb22 = bulkyWeight * quantity || 0;
-    detailsBookingForm.setFieldsValue({ numb22 });
+    detailsBookingForm.setFieldsValue({ numb22: numb22.toFixed(2) });
   };
 
   const handleAddBooking = async () => {
@@ -239,7 +233,7 @@ const ModalBookingDetails = ({
                 <VInputNumber
                   label='Số kiện'
                   required
-                  onChange={handleChangeWeight}
+                  onChange={handleChange}
                 />
               </Form.Item>
 
@@ -247,7 +241,7 @@ const ModalBookingDetails = ({
                 <VInputNumber
                   label='Tổng trọng lượng thực (kg)'
                   required
-                  onChange={handleChangeWeight}
+                  onChange={handleChange}
                 />
               </Form.Item>
               <Form.Item name='height'>
