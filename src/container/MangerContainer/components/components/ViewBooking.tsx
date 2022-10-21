@@ -187,16 +187,19 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
     setDetailsInvoice(data?.invoice?.invoiceDetail || []);
     setAddressCustome((prev) => ({
       ...prev,
+      ...data.booking,
       senderNameVi: data?.booking?.senderNameVi,
       senderAddressVi: data?.booking?.senderAddressVi,
       senderProvince: data?.booking?.senderProvince,
       senderCountry: data?.booking?.senderCountry,
       senderPhoneNumber: data?.booking?.senderPhoneNumber,
       senderPostalCode: data?.booking?.senderPostalCode,
+      senderContactPerson: data?.booking?.senderContactPerson,
     }));
 
     setReceiverCustome((prev) => ({
       ...prev,
+      ...data.booking,
       receiverPostalCode: data?.booking.receiverPostalCode,
       receiverName: data?.booking?.receiverName,
       receiverPhoneNumber: data?.booking?.receiverPhoneNumber,
