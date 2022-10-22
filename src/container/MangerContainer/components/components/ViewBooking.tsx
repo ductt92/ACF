@@ -175,7 +175,8 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
     setIsInvoice(data?.booking.isInvoice);
     setDetailsInvoice(data?.invoice?.invoiceDetail || []);
 
-    setSelected(data?.invoice?.importProceduresPerson);
+    setSelected(data?.booking?.serviceBookingId);
+
     setAddressCustome((prev) => ({
       ...prev,
       ...data?.booking,
