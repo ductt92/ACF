@@ -2,6 +2,7 @@
 /* eslint-disable no-console */
 /* eslint-disable unused-imports/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { PrinterOutlined } from '@ant-design/icons';
 import { Button, Form, notification, Tabs } from 'antd';
 import moment from 'moment';
 import React, { useEffect, useMemo, useState } from 'react';
@@ -477,16 +478,18 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
           onClick={handleGenerataeBill}
           type='primary'
           disabled={!data?.booking?.id}
+          icon={<PrinterOutlined />}
         >
-          Tạo Bill
+          In Bill
         </Button>
 
         <Button
           onClick={handleGenerataeInvoice}
           type='primary'
           disabled={!data?.booking?.id}
+          icon={<PrinterOutlined />}
         >
-          Tạo Invoice
+          In Invoice
         </Button>
         <Button onClick={() => setIsInvoice(!isInvoice)} type='primary'>
           {isInvoice ? 'Không Invoice' : 'Có Invoice'}

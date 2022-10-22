@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable unused-imports/no-unused-vars */
+import { PrinterOutlined } from '@ant-design/icons';
 import { Button, Form, notification, Tabs } from 'antd';
 import moment from 'moment';
 import React, { useEffect, useState } from 'react';
@@ -356,14 +357,24 @@ const CreateBookingContainer = () => {
       </p>
       <div className='my-5 flex gap-4'>
         <Button onClick={onSubmit} type='primary'>
-          Tạo bookings
+          Lưu
         </Button>
 
-        <Button onClick={handleGenerataeBill} type='primary' disabled={!id}>
-          Tạo Bill
+        <Button
+          onClick={handleGenerataeBill}
+          type='primary'
+          disabled={!id}
+          icon={<PrinterOutlined />}
+        >
+          In Bill
         </Button>
-        <Button onClick={handleGeneratorInvoice} type='primary' disabled={!id}>
-          Tạo Invoice
+        <Button
+          onClick={handleGeneratorInvoice}
+          type='primary'
+          disabled={!id}
+          icon={<PrinterOutlined />}
+        >
+          In Invoice
         </Button>
         <Button onClick={() => setIsInvoice(!isInvoice)} type='primary'>
           {isInvoice ? 'Không Invoice' : 'Có Invoice'}
