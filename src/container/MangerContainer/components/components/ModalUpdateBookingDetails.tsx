@@ -127,7 +127,6 @@ const ModalUpdateBookingDetails = ({
   useEffect(() => {
     detailsBookingForm.setFieldsValue({
       ...value,
-      numb22: value.weight * value.quantity || 0,
     });
   }, [detailsBookingForm, value]);
 
