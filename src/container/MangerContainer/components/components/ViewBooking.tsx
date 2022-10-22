@@ -388,9 +388,14 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
         senderCountry: senderCountry || data?.booking?.senderCountry,
         receiverName: receiverName || data?.booking?.receiverName,
         isCustomsDeclaration: false,
-        bookingDetail: detailsBooking,
         isInvoice: true,
         receiverProvince: receiverProvince || data?.booking?.receiverProvince,
+        bookingDetail: detailsBooking.map((v) => {
+          const { numb22, ...res } = v;
+          return {
+            ...res,
+          };
+        }),
       },
       invoice: {
         invoiceDetail: configDetailsInvoice,
@@ -447,6 +452,7 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
         booking,
         id: data?.booking?.id,
       });
+      console.log(booking);
     } else {
       notification.error({
         message: 'Vui lòng chọn ngày và giờ giao hàng sau thời gian hiện tại',
