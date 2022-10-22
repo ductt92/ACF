@@ -185,7 +185,7 @@ export interface BookingPost {
   typeOfPaymentId: string;
   partnerBillCode: string;
   oderAccountForeign: string;
-  customsDeclarationNumer: string;
+  customsDeclarationNumber: string;
   type: CommoditiesType;
   deliveryConditionId: string;
   serviceBookingId: string;
@@ -232,10 +232,11 @@ export interface BookingPost {
   senderProvince: string;
   senderCountry: string;
   isInvoice: boolean;
+  isCustomerCreateDeclaration: boolean;
 }
 export interface IMyBooking {
   booking: {
-    customsDeclarationNumer: string;
+    customsDeclarationNumber: string;
     type: CommoditiesType;
     serviceBookingId: string;
     partnerBillCode: string;

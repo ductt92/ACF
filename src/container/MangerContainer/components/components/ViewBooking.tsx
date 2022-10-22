@@ -159,7 +159,7 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
       estimatedDate: moment(data?.booking?.estimatedDate),
       invoiceDate: moment(data?.invoice?.invoiceDate),
       estimateHour: moment(data?.booking?.estimateHour, 'HH:mm'),
-      importers: data?.invoice?.importProceduresPerson,
+      importProceduresPerson: data?.invoice?.importers,
       totalNetWeight: data?.invoice?.totalNetWeight,
       totalBulkyWeight: data?.invoice?.totalBulkyWeight,
       goodsSize: data?.invoice?.goodsSize,
@@ -170,7 +170,7 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
       const { updatedAt, createdAt, ...res } = v;
       return res;
     });
-    setValue(data?.booking.customsDeclarationNumer ? 2 : 1);
+    setValue(data?.booking.customsDeclarationNumber ? 2 : 1);
     setDetailsBooking(detailBooking || []);
     setIsInvoice(data?.booking.isInvoice);
     setDetailsInvoice(data?.invoice?.invoiceDetail || []);
@@ -317,7 +317,7 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
       payment,
       partnerBillCode,
       oderAccountForeign,
-      customsDeclarationNumer,
+      customsDeclarationNumber,
       type,
       senderNameVi,
       senderNameEn,
@@ -363,8 +363,8 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
         partnerBillCode: partnerBillCode || data?.booking?.partnerBillCode,
         oderAccountForeign:
           oderAccountForeign || data?.booking?.oderAccountForeign,
-        customsDeclarationNumer:
-          customsDeclarationNumer || data?.booking?.customsDeclarationNumer,
+        customsDeclarationNumber:
+          customsDeclarationNumber || data?.booking?.customsDeclarationNumber,
         type: type || data?.booking?.type,
         deliveryConditionId:
           deliveryConditionId || data?.booking?.deliveryConditionId,

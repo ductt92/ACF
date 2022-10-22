@@ -198,7 +198,7 @@ const CreateBookingContainer = () => {
       payment,
       partnerBillCode,
       oderAccountForeign,
-      customsDeclarationNumer,
+      customsDeclarationNumber,
       type,
       senderNameVi,
       senderNameEn,
@@ -218,6 +218,7 @@ const CreateBookingContainer = () => {
       senderProvince,
       senderCountry,
       receiverProvince,
+      isCustomerCreateDeclaration,
     } = dataCreateBooking;
 
     const booking = {
@@ -238,7 +239,7 @@ const CreateBookingContainer = () => {
         typeOfPaymentId,
         partnerBillCode,
         oderAccountForeign,
-        customsDeclarationNumer,
+        customsDeclarationNumber,
         type,
         deliveryConditionId,
         serviceBookingId,
@@ -260,6 +261,7 @@ const CreateBookingContainer = () => {
         bookingDetail: detailsBooking,
         isInvoice,
         receiverProvince,
+        isCustomerCreateDeclaration,
       },
       invoice: {
         invoiceDetail: configDetailsInvoice,

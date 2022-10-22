@@ -319,17 +319,33 @@ const GeneralInfomation = ({
             <Radio value={2}>Có</Radio>
           </Radio.Group>
           {value === 2 && (
-            <Form.Item
-              name='customsDeclarationNumer'
-              rules={[
-                {
-                  required: true,
-                  message: 'Vui lòng nhập số tờ khai hải quan',
-                },
-              ]}
-            >
-              <VInput label='Số tờ khai hải quan' required />
-            </Form.Item>
+            <div className='grid grid-cols-2 gap-x-6'>
+              <Form.Item
+                name='isCustomerCreateDeclaration'
+                rules={[
+                  {
+                    required: true,
+                    message: 'Vui lòng chọn loại mở tờ khai',
+                  },
+                ]}
+              >
+                <VSelect label='Loại mở tờ khai' required>
+                  <Option value={false}>ACF mở tờ khai hải quan</Option>
+                  <Option value={true}>Khách hàng mở tờ khai hải quan</Option>
+                </VSelect>
+              </Form.Item>
+              <Form.Item
+                name='customsDeclarationNumber'
+                rules={[
+                  {
+                    required: true,
+                    message: 'Vui lòng nhập số tờ khai hải quan',
+                  },
+                ]}
+              >
+                <VInput label='Số tờ khai hải quan' required />
+              </Form.Item>
+            </div>
           )}
         </div>
         <Divider className='bg-yellow' />
