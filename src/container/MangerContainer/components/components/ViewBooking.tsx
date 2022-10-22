@@ -168,8 +168,10 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
 
     const detailBooking = data?.booking?.bookingDetail?.map((v: any) => {
       const { updatedAt, createdAt, ...res } = v;
-      return res;
+      const detailsObject = { ...res, numb22: res.bulkyWeight * res.quantity };
+      return detailsObject;
     });
+
     setValue(data?.booking.customsDeclarationNumber ? 2 : 1);
     setDetailsBooking(detailBooking || []);
     setIsInvoice(data?.booking.isInvoice);
@@ -214,7 +216,7 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
   const handleUpdateBookingInvoice = (form: any) => {
     const res = detailsInvoice.map((x, index) => {
       if (form.idKey === index) {
-        const { idKey, ...resetForm } = form;
+        const { idKey, numb22, ...resetForm } = form;
         return resetForm;
       } else {
         return x;
