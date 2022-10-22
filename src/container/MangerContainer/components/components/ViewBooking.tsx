@@ -159,7 +159,7 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
       estimatedDate: moment(data?.booking?.estimatedDate),
       invoiceDate: moment(data?.invoice?.invoiceDate),
       estimateHour: moment(data?.booking?.estimateHour, 'HH:mm'),
-      importProceduresPerson: data?.invoice?.importProceduresPerson,
+      importers: data?.invoice?.importProceduresPerson,
       totalNetWeight: data?.invoice?.totalNetWeight,
       totalBulkyWeight: data?.invoice?.totalBulkyWeight,
       goodsSize: data?.invoice?.goodsSize,
