@@ -259,10 +259,15 @@ const CreateBookingContainer = () => {
         senderCountry,
         receiverName,
         isCustomsDeclaration: false,
-        bookingDetail: detailsBooking,
         isInvoice,
         receiverProvince,
         isCustomerCreateDeclaration,
+        bookingDetail: detailsBooking.map((v) => {
+          const { numb22, ...res } = v;
+          return {
+            ...res,
+          };
+        }),
       },
       invoice: {
         invoiceDetail: configDetailsInvoice,
