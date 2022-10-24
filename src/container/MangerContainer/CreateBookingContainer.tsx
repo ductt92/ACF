@@ -372,7 +372,7 @@ const CreateBookingContainer = () => {
         <Button
           onClick={handleGenerataeBill}
           type='primary'
-          disabled={!id && isInvoice}
+          disabled={!id || isInvoice}
           icon={<PrinterOutlined />}
         >
           In Bill

@@ -389,7 +389,7 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
         senderCountry: senderCountry || data?.booking?.senderCountry,
         receiverName: receiverName || data?.booking?.receiverName,
         isCustomsDeclaration: false,
-        isInvoice: true,
+        isInvoice,
         receiverProvince: receiverProvince || data?.booking?.receiverProvince,
         bookingDetail: detailsBooking.map((v) => {
           const { numb22, ...res } = v;
