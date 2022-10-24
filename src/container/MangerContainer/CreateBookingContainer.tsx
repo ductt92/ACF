@@ -19,6 +19,7 @@ import {
   fetchUser,
   generateBill,
   generateInvoice,
+  updateBooking,
 } from '@/services/booking.services';
 
 import InVoice from './components/Invoice';
@@ -62,6 +63,22 @@ const CreateBookingContainer = () => {
     onError: () => {
       notification.error({
         message: 'Vui lòng kiểm tra lại các trường còn thiếu',
+        placement: 'top',
+      });
+    },
+  });
+
+  const { mutate: mutateUpdate } = useMutation(updateBooking, {
+    onSuccess: () => {
+      queryClient.invalidateQueries(['updateBooking']);
+      notification.success({
+        message: 'Cập nhật đơn hàng thành công',
+        placement: 'top',
+      });
+    },
+    onError: () => {
+      notification.error({
+        message: 'Some thing when wrong ,Please try again !!',
         placement: 'top',
       });
     },
@@ -291,10 +308,17 @@ const CreateBookingContainer = () => {
       },
     };
     if (moment(`${estimatedDate} ${estimateHour}`).isAfter(Date.now())) {
-      mutateCreate({
-        booking,
-        handleSetId,
-      });
+      if (id) {
+        mutateUpdate({
+          booking,
+          id,
+        });
+      } else {
+        mutateCreate({
+          booking,
+          handleSetId,
+        });
+      }
     } else {
       notification.error({
         message: 'Vui lòng chọn ngày và giờ giao hàng sau thời gian hiện tại',
