@@ -10,6 +10,7 @@ import { QUERY_BOOKING } from '@/contants/query-key/booking.query';
 import {
   AddressCustomer,
   BookingPost,
+  BookingStatusPost,
   DetailsBookingPost,
   IInvoiceDetails,
   ReceiverCustome,
@@ -20,6 +21,7 @@ import {
   generateBill,
   generateInvoice,
   updateBooking,
+  updateStatusBooking,
 } from '@/services/booking.services';
 
 import InVoice from './components/Invoice';
@@ -32,6 +34,8 @@ const CreateBookingContainer = () => {
   const [detailsBooking, setDetailsBooking] = useState<
     Array<DetailsBookingPost>
   >([]);
+
+  const [statusBooking, setStatusBooking] = useState<BookingStatusPost>();
 
   const [id, setId] = useState<string | null | undefined>();
   const [addressCustome, setAddressCustome] =
@@ -83,6 +87,25 @@ const CreateBookingContainer = () => {
       });
     },
   });
+
+  const { mutate: mutateUpdateStautsBooking } = useMutation(
+    updateStatusBooking,
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries(['updateBooking']);
+        notification.success({
+          message: 'Cập nhật đơn hàng thành công',
+          placement: 'top',
+        });
+      },
+      onError: () => {
+        notification.error({
+          message: 'Some thing when wrong ,Please try again !!',
+          placement: 'top',
+        });
+      },
+    }
+  );
 
   const { mutate: generatorBill } = useMutation(generateBill, {
     onSuccess: () => {
@@ -174,6 +197,10 @@ const CreateBookingContainer = () => {
   };
   const handleSetId = (id: string) => {
     setId(id);
+  };
+
+  const handleSetStatus = (value: BookingStatusPost) => {
+    setStatusBooking(value);
   };
 
   useEffect(() => {
@@ -307,6 +334,7 @@ const CreateBookingContainer = () => {
         note: dataCreateBooking?.noteInvoice,
       },
     };
+
     if (moment(`${estimatedDate} ${estimateHour}`).isAfter(Date.now())) {
       if (id) {
         mutateUpdate({
@@ -317,6 +345,7 @@ const CreateBookingContainer = () => {
         mutateCreate({
           booking,
           handleSetId,
+          handleSetStatus,
         });
       }
     } else {
@@ -379,6 +408,15 @@ const CreateBookingContainer = () => {
     setId(undefined);
   };
 
+  const updateStatus = () => {
+    if (id) {
+      mutateUpdateStautsBooking({
+        id,
+        handleSetStatus,
+      });
+    }
+  };
+
   return (
     <div>
       <p className='text-2xl font-bold text-yellow-primary'>
@@ -394,9 +432,17 @@ const CreateBookingContainer = () => {
         </Button>
 
         <Button
+          onClick={updateStatus}
+          type='primary'
+          disabled={statusBooking !== BookingStatusPost.NOT_YET_HANDED_OVER}
+        >
+          Xác nhận đơn hàng
+        </Button>
+
+        <Button
           onClick={handleGenerataeBill}
           type='primary'
-          disabled={!id || isInvoice}
+          disabled={!id}
           icon={<PrinterOutlined />}
         >
           In Bill
@@ -404,7 +450,7 @@ const CreateBookingContainer = () => {
         <Button
           onClick={handleGeneratorInvoice}
           type='primary'
-          disabled={!id}
+          disabled={!id || !isInvoice}
           icon={<PrinterOutlined />}
         >
           In Invoice

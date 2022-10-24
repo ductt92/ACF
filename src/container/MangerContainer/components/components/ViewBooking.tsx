@@ -1,3 +1,4 @@
+/* eslint-disable no-unsafe-optional-chaining */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-console */
 /* eslint-disable unused-imports/no-unused-vars */
@@ -11,6 +12,7 @@ import { useMutation, useQuery, useQueryClient } from 'react-query';
 import {
   AddressCustomer,
   BookingPost,
+  BookingStatusPost,
   DetailsBookingPost,
   IInvoiceDetails,
   InvoiceItemType,
@@ -24,6 +26,7 @@ import {
   generateBill,
   generateInvoice,
   updateBooking,
+  updateStatusBooking,
 } from '@/services/booking.services';
 
 import InVoice from '../Invoice';
@@ -43,6 +46,8 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
   const [detailsBooking, setDetailsBooking] = useState<
     Array<DetailsBookingPost>
   >([]);
+
+  const [statusBooking, setStatusBooking] = useState<BookingStatusPost>();
 
   const [receiverCustome, setReceiverCustome] =
     useState<Partial<ReceiverCustome>>();
@@ -105,6 +110,25 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
       });
     },
   });
+
+  const { mutate: mutateUpdateStautsBooking } = useMutation(
+    updateStatusBooking,
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries(['updateBooking']);
+        notification.success({
+          message: 'Cập nhật đơn hàng thành công',
+          placement: 'top',
+        });
+      },
+      onError: () => {
+        notification.error({
+          message: 'Some thing when wrong ,Please try again !!',
+          placement: 'top',
+        });
+      },
+    }
+  );
 
   const { data: dataCurrenUnit } = useQuery(['fetchCurrentUnit2', {}], () =>
     fetchCurrentUnit()
@@ -202,6 +226,7 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
       province: data?.booking?.province,
       receiverAddress: data?.booking?.receiverAddress,
     }));
+    setStatusBooking(data?.booking.status);
   }, [OpitionCurrencyUnit, data, viewBooking]);
 
   const handleDeleteRow = (id: any) => {
@@ -470,6 +495,21 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
     generatorInvoice(data?.booking?.id);
   };
 
+  const handleSetStatus = (value: BookingStatusPost) => {
+    setStatusBooking(value);
+  };
+  const updateStatus = () => {
+    const { id } = data?.booking;
+    if (id) {
+      mutateUpdateStautsBooking({
+        id,
+        handleSetStatus,
+      });
+    }
+  };
+
+  console.log(data?.booking?.status);
+
   return (
     <div>
       <div className='flex gap-4'>
@@ -490,6 +530,13 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
           icon={<PrinterOutlined />}
         >
           In Invoice
+        </Button>
+        <Button
+          onClick={updateStatus}
+          type='primary'
+          disabled={statusBooking === BookingStatusPost.HANDED_OVER}
+        >
+          Xác nhận đơn hàng
         </Button>
         <Button onClick={() => setIsInvoice(!isInvoice)} type='primary'>
           {isInvoice ? 'Không Invoice' : 'Có Invoice'}

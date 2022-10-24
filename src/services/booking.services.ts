@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { QueryParams3 } from '@/contants/common.constants';
-import { IMyBooking, IUser } from '@/contants/types';
+import { BookingStatusPost, IMyBooking, IUser } from '@/contants/types';
 import HttpRequest from '@/utils/Http-request';
 
 export interface MyBookingResponse {
@@ -38,9 +38,11 @@ export const fetchBooking = async ({
 export const createBooking = async ({
   booking,
   handleSetId,
+  handleSetStatus,
 }: {
   booking: any;
   handleSetId: (id: string) => void;
+  handleSetStatus: (value: BookingStatusPost) => void;
 }) => {
   const bookings = await HttpRequest.post('booking', {
     ...booking,
@@ -52,6 +54,9 @@ export const createBooking = async ({
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     //  @ts-ignore
     handleSetId(bookings.id);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    //  @ts-ignore
+    handleSetStatus(bookings.status);
   }
   return bookings as MyBookingResponse;
 };
@@ -130,4 +135,17 @@ export const fetchTypeOfPayment = () => {
 export const fetchCurrentUnit = () => {
   const users = HttpRequest.get(`currency-unit`);
   return users;
+};
+export const updateStatusBooking = async ({
+  id,
+  handleSetStatus,
+}: {
+  id: string;
+  handleSetStatus: (status: BookingStatusPost) => void;
+}) => {
+  const resStatus = await HttpRequest.patch(`booking/confirm-booking/${id}`);
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  //  @ts-ignore
+  handleSetStatus(resStatus.status);
+  return resStatus;
 };
