@@ -361,14 +361,18 @@ const CreateBookingContainer = () => {
         Tạo Booking Hàng xuất
       </p>
       <div className='my-5 flex gap-4'>
-        <Button onClick={onSubmit} type='primary'>
+        <Button onClick={onSubmit} type='primary' disabled={id ? true : false}>
           Lưu
+        </Button>
+
+        <Button onClick={onSubmit} type='primary' disabled={!id}>
+          Cập nhật đơn hàng
         </Button>
 
         <Button
           onClick={handleGenerataeBill}
           type='primary'
-          disabled={!id}
+          disabled={!id && isInvoice}
           icon={<PrinterOutlined />}
         >
           In Bill
