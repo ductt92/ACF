@@ -1,26 +1,51 @@
 /* eslint-disable unused-imports/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable no-prototype-builtins */
-import { Button, Form, Input, Select } from 'antd';
+import { Button, Form, Input, notification, Select } from 'antd';
 import { Col, Row } from 'antd';
 import useTranslation from 'next-translate/useTranslation';
-import React, { useState } from 'react';
+import React from 'react';
+import { useMutation, useQueryClient } from 'react-query';
 
-import styles from '../../../container/Register/style.module.scss';
+import VDatePicker from '@/components/common/VDatePicker';
+
+import { personRegister } from '@/services/register.services';
+
 const { Option } = Select;
 
 const Personal = () => {
   const { t } = useTranslation('common');
-  const [selectedMon, setMon] = useState<number>(1);
-  const year = new Date().getFullYear();
+  const queryClient = useQueryClient();
+
+  const [personForm] = Form.useForm();
+  const { mutate: personRegis } = useMutation(personRegister, {
+    onSuccess: () => {
+      queryClient.invalidateQueries(['generateBill']);
+      notification.success({
+        message:
+          'Yêu cầu của quý khách đã được gửi đến nhân viên.Nhân viên sẽ liên hệ cho quý khách ngay bây giờ. ACF xin cảm ơn',
+        placement: 'top',
+      });
+    },
+    onError: () => {
+      notification.error({
+        message: 'lỗi, vui lòng thử lại sau',
+        placement: 'top',
+      });
+    },
+  });
+  const handleSubmit = async () => {
+    const value = await personForm.getFieldsValue();
+    personRegis({ ...value });
+  };
 
   return (
     <div className='mt-[10px] w-full p-[20px_0]'>
-      <Form>
+      <Form form={personForm}>
         <Row>
           <Col xs={24} sm={12}>
             <Form.Item
-              name={['user', 'name']}
+              name='fullName'
               label={t('FLname')}
               rules={[
                 {
@@ -32,105 +57,38 @@ const Personal = () => {
               <Input placeholder={t('MrA')} />
             </Form.Item>
           </Col>
+
           <Col xs={24} sm={12}>
             <Form.Item
-              name={['user', 'city']}
-              label={t('City')}
-              rules={[{ required: false }]}
-            >
-              <Select></Select>
-            </Form.Item>
-          </Col>
-          <Col xs={24} sm={12}>
-            <Form.Item
-              name={['user', 'gender']}
+              name='gender'
               label={t('Gender')}
-              rules={[{ required: false }]}
+              rules={[{ required: true }]}
             >
               <Select placeholder={t('SelectGender')}>
-                <Option value='1'>{t('Male')}</Option>
-                <Option value='0'>{t('Female')}</Option>
+                <Option value='Male'>{t('Male')}</Option>
+                <Option value='Female'>{t('Female')}</Option>
               </Select>
             </Form.Item>
           </Col>
           <Col xs={24} sm={12}>
             <Form.Item
-              name={['user', 'address']}
+              name='detailAddress'
               label={t('Address')}
-              rules={[{ required: false }]}
+              rules={[{ required: true }]}
             >
               <Input placeholder={t('EnterAddress')} />
             </Form.Item>
           </Col>
           <Col xs={24} sm={12}>
             <Form.Item
-              name='birthday'
+              name='dob'
               label={t('Birthday')}
-              rules={[{ required: false }]}
+              rules={[{ required: true }]}
             >
-              <Row>
-                <Col span={8}>
-                  <Form.Item name='day' className={styles.optionWrapper}>
-                    <Select placeholder={t('Day')}>
-                      {[...Array(new Date(2022, selectedMon, 0).getDate())].map(
-                        (_, index) => (
-                          <Option key={index.toString()} value={index + 1}>
-                            {index + 1}
-                          </Option>
-                        )
-                      )}
-                    </Select>
-                  </Form.Item>
-                </Col>
+              <VDatePicker format='DD/MM/YYYY' placeholder='Nhập ngày sinh' />
+            </Form.Item>
+          </Col>
 
-                <Col span={8}>
-                  <Form.Item
-                    name='month'
-                    style={{ marginBottom: 0 }}
-                    className={styles.optionWrapper}
-                  >
-                    <Select placeholder={t('Month')}>
-                      {[...Array(12)].map((_, index) => (
-                        <Option key={index.toString()} value={index}>
-                          {index + 1}
-                        </Option>
-                      ))}
-                    </Select>
-                  </Form.Item>
-                </Col>
-                <Col span={8}>
-                  <Form.Item
-                    name='year'
-                    style={{ marginBottom: 0 }}
-                    className={styles.optionWrapper}
-                  >
-                    <Select placeholder={t('Year')}>
-                      {Array.from(new Array(70), (v, i) => (
-                        <Option key={i} value={year + i}>
-                          {year - i}
-                        </Option>
-                      ))}
-                    </Select>
-                  </Form.Item>
-                </Col>
-                {/* </div> */}
-              </Row>
-            </Form.Item>
-          </Col>
-          <Col xs={24} sm={12}>
-            <Form.Item
-              name='password'
-              label={t('Password')}
-              rules={[
-                {
-                  required: true,
-                  message: `${t('Mpassword')}`,
-                },
-              ]}
-            >
-              <Input type='password' />
-            </Form.Item>
-          </Col>
           <Col xs={24} sm={12}>
             <Form.Item
               name='email'
@@ -149,23 +107,10 @@ const Personal = () => {
               <Input type='text' placeholder={t('EnterEmail')} />
             </Form.Item>
           </Col>
+
           <Col xs={24} sm={12}>
             <Form.Item
-              name='rpassword'
-              label={t('Rpassword')}
-              rules={[
-                {
-                  required: true,
-                  message: `${t('Mrpassword')}`,
-                },
-              ]}
-            >
-              <Input type='password' />
-            </Form.Item>
-          </Col>
-          <Col xs={24} sm={12}>
-            <Form.Item
-              name='phone'
+              name='phoneNumber'
               label={t('PhoneNumber')}
               rules={[
                 {
@@ -177,24 +122,10 @@ const Personal = () => {
               <Input type='text' placeholder={t('EnterPhone')} />
             </Form.Item>
           </Col>
-          <Col xs={24} sm={12}>
-            <Form.Item
-              name='captcha'
-              label='Captcha'
-              rules={[
-                {
-                  required: true,
-                  message: 'Please input your Captcha',
-                },
-              ]}
-            >
-              <Input type='text' />
-            </Form.Item>
-          </Col>
         </Row>
 
         <Form.Item style={{ textAlign: 'center', marginTop: 20 }}>
-          <Button type='primary' htmlType='submit'>
+          <Button type='primary' htmlType='submit' onClick={handleSubmit}>
             {t('Register')}
           </Button>
         </Form.Item>

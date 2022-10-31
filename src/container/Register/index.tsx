@@ -19,7 +19,12 @@ const RegisterForm = () => {
     <div className='m-auto w-[1174px] lg:w-full'>
       <div className='float-left w-[905px] lg:w-full'>
         <div className='relative w-full'>
-          <Image src='BANNER' height={262} width={905} alt='[image]' />
+          <Image
+            src='/images/thong-quan.png'
+            height={262}
+            width={905}
+            alt='[image]'
+          />
         </div>
         <Breadcumb />
         <div className={styles.tabs}>

@@ -24,6 +24,7 @@ import {
   fetchCurrentUnit,
   fetchUser,
   generateBill,
+  generateBillPatner,
   generateInvoice,
   updateBooking,
   updateStatusBooking,
@@ -42,6 +43,8 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
     []
   );
   const [selected, setSelected] = useState();
+
+  const [billPartner, setBillPartner] = useState<string | null | undefined>();
 
   const [detailsBooking, setDetailsBooking] = useState<
     Array<DetailsBookingPost>
@@ -82,6 +85,21 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
   const { mutate: generatorBill } = useMutation(generateBill, {
     onSuccess: () => {
       queryClient.invalidateQueries(['generateBill']);
+      notification.success({
+        message: 'Tải xuống thành công',
+        placement: 'top',
+      });
+    },
+    onError: () => {
+      notification.error({
+        message: 'Tải xuống thất bại',
+        placement: 'top',
+      });
+    },
+  });
+  const { mutate: genBillPatner } = useMutation(generateBillPatner, {
+    onSuccess: () => {
+      queryClient.invalidateQueries(['generateBillPatner']);
       notification.success({
         message: 'Tải xuống thành công',
         placement: 'top',
@@ -173,6 +191,7 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
     const currencyId = OpitionCurrencyUnit?.find(
       (x: OpitionType) => x.value === data?.invoice?.currencyId
     );
+
     viewBooking.setFieldsValue({
       ...data?.booking,
       ...data?.invoice,
@@ -201,6 +220,7 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
     setDetailsBooking(detailBooking || []);
     setIsInvoice(data?.booking.isInvoice);
     setDetailsInvoice(data?.invoice?.invoiceDetail || []);
+    setBillPartner(data?.booking?.partnerBillCode);
 
     setSelected(data?.booking?.serviceBookingId);
 
@@ -478,7 +498,6 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
         booking,
         id: data?.booking?.id,
       });
-      console.log(booking);
     } else {
       notification.error({
         message: 'Vui lòng chọn ngày và giờ giao hàng sau thời gian hiện tại',
@@ -495,20 +514,38 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
     generatorInvoice(data?.booking?.id);
   };
 
+  const handleGeneratorBillPartner = () => {
+    genBillPatner(data?.booking?.id);
+  };
+
   const handleSetStatus = (value: BookingStatusPost) => {
     setStatusBooking(value);
   };
-  const updateStatus = () => {
+  const updateStatus = async () => {
+    const dataCreateBooking: Partial<BookingPost> =
+      await viewBooking.validateFields();
     const { id } = data?.booking;
+    const estimatedDate = moment(dataCreateBooking.estimatedDate).format(
+      'YYYY-MM-DD'
+    );
+    const estimateHour = moment(
+      dataCreateBooking.estimateHour || data?.booking?.estimateHour
+    ).format('HH:mm');
+
     if (id) {
-      mutateUpdateStautsBooking({
-        id,
-        handleSetStatus,
-      });
+      if (moment(`${estimatedDate} ${estimateHour}`).isAfter(Date.now())) {
+        mutateUpdateStautsBooking({
+          id,
+          handleSetStatus,
+        });
+      } else {
+        notification.error({
+          message: 'Vui lòng chọn ngày và giờ giao hàng sau thời gian hiện tại',
+          placement: 'top',
+        });
+      }
     }
   };
-
-  console.log(data?.booking?.status);
 
   return (
     <div>
@@ -523,10 +560,21 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
           In Bill
         </Button>
 
+        {billPartner && (
+          <Button
+            onClick={handleGeneratorBillPartner}
+            type='primary'
+            disabled={!data?.booking?.id}
+            icon={<PrinterOutlined />}
+          >
+            In Bill đối tác
+          </Button>
+        )}
+
         <Button
           onClick={handleGenerataeInvoice}
           type='primary'
-          disabled={!data?.booking?.id}
+          disabled={!data?.booking?.id || !isInvoice}
           icon={<PrinterOutlined />}
         >
           In Invoice
@@ -560,6 +608,7 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
               handleChangeInfoRecei={handleChangeInfoRecei}
               value={value}
               handleSetValue={(e: any) => setValue(e)}
+              handleSetBillPartner={(e) => setBillPartner(e)}
             />
           </Tabs.TabPane>
           <Tabs.TabPane tab='Invoice' key='invoice' disabled={!isInvoice}>

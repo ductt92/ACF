@@ -23,6 +23,7 @@ interface TabsBookingProps {
   handleServicesSelected: (e: any) => void;
   value: any;
   handleSetValue: (e: any) => void;
+  handleSetBillPartner: (e: any) => void;
 }
 
 const TabsBooking = ({
@@ -39,6 +40,7 @@ const TabsBooking = ({
   value,
   handleSetValue,
   handleServicesSelected,
+  handleSetBillPartner,
 }: TabsBookingProps) => {
   return (
     <div>
@@ -54,6 +56,7 @@ const TabsBooking = ({
             handleDeleteRow={handleDeleteRow}
             value={value}
             handleSetvalue={handleSetValue}
+            handleSetBillPartner={handleSetBillPartner}
           />
         </Tabs.TabPane>
 

@@ -44,6 +44,7 @@ interface GeneralInfomationProps {
   handleServicesSelected: (e: any) => void;
   value: any;
   handleSetvalue: (e: any) => void;
+  handleSetBillPartner: (e: any) => void;
 }
 
 const GeneralInfomation = ({
@@ -56,6 +57,7 @@ const GeneralInfomation = ({
   serivcesSelected,
   value,
   handleSetvalue,
+  handleSetBillPartner,
 }: GeneralInfomationProps) => {
   const [isCreate, setIsCreate] = useState<boolean>(false);
   const [isEdit, setIsEdit] = useState<boolean>(false);
@@ -192,7 +194,10 @@ const GeneralInfomation = ({
         <Divider className='bg-yellow' />
         <div className='grid grid-cols-2 gap-x-6'>
           <Form.Item name='partnerBillCode'>
-            <VInput label='Mã bill đối tác' />
+            <VInput
+              label='Mã bill đối tác'
+              onChange={(e) => handleSetBillPartner(e.target.value)}
+            />
           </Form.Item>
 
           <Form.Item

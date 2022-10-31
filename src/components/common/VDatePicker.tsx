@@ -2,7 +2,7 @@ import { DatePicker, DatePickerProps } from 'antd';
 import React from 'react';
 
 type VDatePickerProps = DatePickerProps & {
-  label: string;
+  label?: string;
   required?: boolean;
 };
 
@@ -14,7 +14,8 @@ export default function VDatePicker({
   return (
     <div className='space-y-1'>
       <span className='text-sm'>
-        {label} {required && <span className='text-red-700'>*</span>} :
+        {label &&
+          `${label} ${required && <span className='text-red-700'>*</span>} :`}
       </span>{' '}
       <DatePicker className='block' {...rest} />
     </div>

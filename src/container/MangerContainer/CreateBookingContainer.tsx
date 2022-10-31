@@ -19,6 +19,7 @@ import {
   createBooking,
   fetchUser,
   generateBill,
+  generateBillPatner,
   generateInvoice,
   updateBooking,
   updateStatusBooking,
@@ -55,6 +56,8 @@ const CreateBookingContainer = () => {
   const queryClient = useQueryClient();
 
   const { data: userData } = useQuery(['getuser'], () => fetchUser());
+
+  const [billPartner, setBillPartner] = useState<string | null | undefined>();
 
   const { mutate: mutateCreate } = useMutation(createBooking, {
     onSuccess: () => {
@@ -379,6 +382,22 @@ const CreateBookingContainer = () => {
     setDetailsInvoice(res);
   };
 
+  const { mutate: genBillPatner } = useMutation(generateBillPatner, {
+    onSuccess: () => {
+      queryClient.invalidateQueries(['generateBillPatner']);
+      notification.success({
+        message: 'Tải xuống thành công',
+        placement: 'top',
+      });
+    },
+    onError: () => {
+      notification.error({
+        message: 'Tải xuống thất bại',
+        placement: 'top',
+      });
+    },
+  });
+
   const handleUpdateBookingInvoice = (form: any) => {
     const res = detailsInvoice.map((x, index) => {
       if (form.idKey === index) {
@@ -417,6 +436,11 @@ const CreateBookingContainer = () => {
     }
   };
 
+  const handleGeneratorBillPartner = () => {
+    if (id) {
+      genBillPatner(id);
+    }
+  };
   return (
     <div>
       <p className='text-2xl font-bold text-yellow-primary'>
@@ -427,9 +451,26 @@ const CreateBookingContainer = () => {
           Lưu
         </Button>
 
-        <Button onClick={onSubmit} type='primary' disabled={!id}>
+        <Button
+          onClick={onSubmit}
+          type='primary'
+          disabled={
+            !id || statusBooking !== BookingStatusPost.NOT_YET_HANDED_OVER
+          }
+        >
           Cập nhật đơn hàng
         </Button>
+
+        {billPartner && (
+          <Button
+            onClick={handleGeneratorBillPartner}
+            type='primary'
+            disabled={!id}
+            icon={<PrinterOutlined />}
+          >
+            In Bill đối tác
+          </Button>
+        )}
 
         <Button
           onClick={updateStatus}
@@ -480,6 +521,7 @@ const CreateBookingContainer = () => {
             handleServicesSelected={onSelect}
             value={value}
             handleSetValue={handleSetValue}
+            handleSetBillPartner={(e) => setBillPartner(e)}
           />
         </Tabs.TabPane>
         <Tabs.TabPane tab='Invoice' key='invoice' disabled={!isInvoice}>
