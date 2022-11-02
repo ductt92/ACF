@@ -35,6 +35,27 @@ export const fetchBooking = async ({
   return booking as MyBookingResponse;
 };
 
+export const fetchBookingAdmin = async ({
+  page,
+  pageSize,
+  search,
+  status,
+  createBookingFrom,
+  createBookingTo,
+}: QueryParams3) => {
+  const bookingAdmin = await HttpRequest.get('booking', {
+    params: {
+      page,
+      pageSize,
+      search,
+      status,
+      createBookingFrom,
+      createBookingTo,
+    },
+  });
+  return bookingAdmin as MyBookingResponse;
+};
+
 export const createBooking = async ({
   booking,
   handleSetId,

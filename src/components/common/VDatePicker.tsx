@@ -14,9 +14,13 @@ export default function VDatePicker({
   return (
     <div className='space-y-1'>
       <span className='text-sm'>
-        {label &&
-          `${label} ${required && <span className='text-red-700'>*</span>} :`}
-      </span>{' '}
+        {label && (
+          <span>
+            {label}
+            {required && <span className='text-red-700'>*</span>} :
+          </span>
+        )}
+      </span>
       <DatePicker className='block' {...rest} />
     </div>
   );
