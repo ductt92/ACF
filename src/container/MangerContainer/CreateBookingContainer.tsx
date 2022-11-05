@@ -530,6 +530,7 @@ const CreateBookingContainer = () => {
             dataUser={userData}
             sendAddress={addressCustome}
             detailsInvoice={detailsInvoice}
+            isInvoice={isInvoice}
             receiverCustome={receiverCustome}
             handleAddInvoiceDetails={handleAddInvoiceDetails}
             handleDeleteInvoice={handleDeleteInvoice}

@@ -58,7 +58,12 @@ const ManageContainer = () => {
       createBookingTo: moment(value[1]).format('YYYY-MM-DD'),
     }));
   };
-
+  const handlePagination = (pagination: { current?: number }) => {
+    setQueries((prev) => ({
+      ...prev,
+      page: pagination.current,
+    }));
+  };
   return (
     <div className='mb-20'>
       <div className='gap-4'>
@@ -104,6 +109,7 @@ const ManageContainer = () => {
             rowKey='key'
             className='cursor-pointer px-6'
             dataSource={dataTable || []}
+            onChange={handlePagination}
             pagination={{
               current: data?.pagination?.currentPage,
               total: data?.pagination?.totalCount,

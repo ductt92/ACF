@@ -614,6 +614,7 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
           <Tabs.TabPane tab='Invoice' key='invoice' disabled={!isInvoice}>
             <InVoice
               form={viewBooking}
+              isInvoice={isInvoice}
               dataUser={userData}
               sendAddress={addressCustome}
               detailsInvoice={detailsInvoice}

@@ -3,7 +3,8 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
 import { LOGIN_HOME } from '@/contants/endpoint';
-import { ACCSESS_TOKEN } from '@/contants/Storage';
+import { ACCSESS_TOKEN, USER } from '@/contants/Storage';
+import { UsersRole } from '@/contants/types';
 
 export function withPrivateRouteUser(WrappedComponent: any) {
   return (props: any) => {
@@ -12,11 +13,16 @@ export function withPrivateRouteUser(WrappedComponent: any) {
 
     useEffect(() => {
       const accessToken = localStorage.getItem(ACCSESS_TOKEN);
-      if (!accessToken) {
-        router.replace(LOGIN_HOME);
+      const user = localStorage.getItem(USER);
+      if (user) {
+        if (accessToken && JSON.parse(user).role.name === UsersRole.USER) {
+          setVerified(true);
+          localStorage.setItem(ACCSESS_TOKEN, accessToken || '');
+        } else {
+          router.replace(LOGIN_HOME);
+        }
       } else {
-        setVerified(true);
-        localStorage.setItem(ACCSESS_TOKEN, accessToken);
+        router.replace(LOGIN_HOME);
       }
     }, [router]);
 

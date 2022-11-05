@@ -131,86 +131,117 @@ export const MYBOOKING_COLUMNS: ColumnsType<IMyBooking> = [
   },
 ];
 
-// export const BOOKING_DETAILS: ColumnsType<DetailsBookingPost> = [
-//   {
-//     title: 'Đơn vị',
-//     dataIndex: 'calculationUnit',
-//     key: 'calculationUnit',
-//     align: 'center',
-//     width: 150,
-//     render: (type: string) => {
-//       return <span>{CalculationUnit[type as 'CM_KG']}</span>;
-//     },
-//   },
-//   {
-//     title: 'Nhóm hàng hóa vận chuyển',
-//     dataIndex: 'commoditiesTypeId',
-//     key: 'commoditiesType',
-//     align: 'center',
-//     width: 150,
-//   },
-//   {
-//     title: 'Mặt hàng vận chuyển (Tiếng Việt)',
-//     dataIndex: 'shippingItemViId',
-//     key: 'shippingItemVi ',
-//     align: 'center',
-//     width: 150,
-//     render: (type: any) => {
-//       return <span>{type}</span>;
-//     },
-//   },
-//   {
-//     title: 'Mô tả chi tiết hàng hóa',
-//     dataIndex: 'description',
-//     key: 'description',
-//     align: 'center',
-//     width: 150,
-//   },
-//   {
-//     title: 'Xuất xứ hàng hóa',
-//     dataIndex: 'originItem',
-//     key: 'originItem',
-//     align: 'center',
-//     width: 150,
-//   },
+export const renderBookingDetailsNoAction = (
+  commoditiesType: Array<OpitionType>,
+  shippingType: Array<OpitionType>
+) => {
+  const BOOKING_DETAILS: ColumnsType<DetailsBookingPost> = [
+    {
+      title: 'Đơn vị',
+      dataIndex: 'calculationUnit',
+      key: 'calculationUnit',
+      align: 'center',
+      width: 150,
+      render: (type: string) => {
+        return <span>{CalculationUnit[type as 'CM_KG']}</span>;
+      },
+    },
+    {
+      title: 'Nhóm hàng hóa vận chuyển',
+      dataIndex: 'commoditiesTypeId',
+      key: 'commoditiesTypeId',
+      align: 'center',
+      width: 150,
+      render: (type: string) => {
+        const commoditie = commoditiesType.filter((x) => x.value === type);
+        return commoditie.map((v) => <span key={v.value}>{v.label}</span>);
+      },
+    },
+    {
+      title: 'Mặt hàng vận chuyển (Tiếng Việt)',
+      dataIndex: 'shippingItemViId',
+      key: 'shippingItemVi ',
+      align: 'center',
+      width: 150,
+      render: (type: any) => {
+        const shipping = shippingType?.filter((x) => x.value === type);
+        return shipping.map((v) => (
+          // <span key={v.value} className={clsx(COMMON_CLASS)}>
+          //   {v.label}
+          // </span>
+          <Tooltip placement='bottom' title={v.label} key={v.value}>
+            <p className={clsx(COMMON_CLASS)}>{v.label}</p>
+          </Tooltip>
+        ));
+      },
+    },
+    {
+      title: 'Mô tả chi tiết hàng hóa',
+      dataIndex: 'description',
+      key: 'description',
+      align: 'center',
+      width: 150,
+    },
+    {
+      title: 'Xuất xứ hàng hóa',
+      dataIndex: 'originItem',
+      key: 'originItem',
+      align: 'center',
+      width: 150,
+    },
 
-//   {
-//     title: 'Mặt hàng vận chuyển (Tiếng Anh)',
-//     dataIndex: 'shippingItemEn',
-//     key: 'shippingItemEn ',
-//     align: 'center',
-//     width: 150,
-//   },
-//   {
-//     title: 'Số kiện hàng',
-//     dataIndex: 'quantity',
-//     key: 'quantity',
-//     align: 'center',
-//     width: 150,
-//   },
-//   {
-//     title: 'Chiều dài(cm)',
-//     dataIndex: 'longs',
-//     key: 'longs',
-//     align: 'center',
-//     width: 150,
-//   },
-//   {
-//     title: 'Trọng lượng cồng kềnh(kg)',
-//     dataIndex: 'bulkyWeight',
-//     key: 'bulkyWeight',
-//     align: 'center',
-//     width: 150,
-//   },
-//   {
-//     title: 'Ghi chú',
-//     dataIndex: 'note',
-//     key: 'note-2',
-//     align: 'center',
-//     width: 150,
-//   },
-// ];
-
+    {
+      title: 'Mặt hàng vận chuyển (Tiếng Anh)',
+      dataIndex: 'shippingItemEn',
+      key: 'shippingItemEn ',
+      align: 'center',
+      width: 150,
+    },
+    {
+      title: 'Số kiện hàng',
+      dataIndex: 'quantity',
+      key: 'quantity',
+      align: 'center',
+      width: 150,
+    },
+    {
+      title: 'Chiều dài(cm)',
+      dataIndex: 'longs',
+      key: 'longs',
+      align: 'center',
+      width: 150,
+    },
+    {
+      title: 'Chiều rộng(cm)',
+      dataIndex: 'width',
+      key: 'width',
+      align: 'center',
+      width: 150,
+    },
+    {
+      title: 'Chiều cao(cm)',
+      dataIndex: 'height',
+      key: 'height',
+      align: 'center',
+      width: 150,
+    },
+    {
+      title: 'Trọng lượng cồng kềnh(kg)',
+      dataIndex: 'bulkyWeight',
+      key: 'bulkyWeight',
+      align: 'center',
+      width: 150,
+    },
+    {
+      title: 'Ghi chú',
+      dataIndex: 'note',
+      key: 'note-2',
+      align: 'center',
+      width: 150,
+    },
+  ];
+  return BOOKING_DETAILS;
+};
 export const renderBookingDetails = (
   commoditiesType: Array<OpitionType>,
   shippingType: Array<OpitionType>,
@@ -446,3 +477,134 @@ export const renderInvoiceDetails = (
 
   return INVOICE_DETAILS;
 };
+export const INVOICE_DETAILS_ABC: ColumnsType<DetailsBookingPost> = [
+  {
+    title: 'Tên hàng hóa',
+    dataIndex: 'goodsName',
+    key: 'goodsName',
+    align: 'center',
+    width: 150,
+  },
+  {
+    title: 'Mô tả hàng hóa',
+    dataIndex: 'describe',
+    key: 'describe',
+    align: 'center',
+    width: 150,
+  },
+  {
+    title: 'Số lượng',
+    dataIndex: 'quantity',
+    key: 'quantity',
+    align: 'center',
+    width: 150,
+  },
+  {
+    title: 'Đơn vị tính',
+    dataIndex: 'unitOfMeasure',
+    key: 'unitOfMeasure',
+    align: 'center',
+    width: 150,
+  },
+  {
+    title: 'Đơn giá',
+    dataIndex: 'price',
+    key: 'price',
+    align: 'center',
+    width: 150,
+  },
+  {
+    title: 'Thành tiền',
+    dataIndex: 'totalMoney',
+    key: 'totalMoney',
+    align: 'center',
+    width: 150,
+  },
+  {
+    title: 'Cân nặng',
+    dataIndex: 'weight',
+    key: 'weight',
+    align: 'center',
+    width: 150,
+  },
+  {
+    title: 'Xuất xứ',
+    dataIndex: 'originOfGoods',
+    key: 'originOfGoods',
+    align: 'center',
+    width: 150,
+  },
+  {
+    title: 'HS Code',
+    dataIndex: 'HSCode',
+    key: 'HSCode',
+    align: 'center',
+    width: 150,
+  },
+];
+
+export const INVOICE_DETAILS: ColumnsType<IInvoiceDetails> = [
+  {
+    title: 'Tên hàng hóa',
+    dataIndex: 'goodsName',
+    key: 'goodsName',
+    align: 'center',
+    width: 150,
+  },
+  {
+    title: 'Mô tả hàng hóa',
+    dataIndex: 'describe',
+    key: 'describe',
+    align: 'center',
+    width: 150,
+  },
+  {
+    title: 'Số lượng',
+    dataIndex: 'quantity',
+    key: 'quantity',
+    align: 'center',
+    width: 150,
+  },
+  {
+    title: 'Đơn vị tính',
+    dataIndex: 'unitOfMeasure',
+    key: 'unitOfMeasure',
+    align: 'center',
+    width: 150,
+  },
+  {
+    title: 'Đơn giá',
+    dataIndex: 'price',
+    key: 'price',
+    align: 'center',
+    width: 150,
+  },
+  {
+    title: 'Thành tiền',
+    dataIndex: 'totalMoney',
+    key: 'totalMoney',
+    align: 'center',
+    width: 150,
+  },
+  {
+    title: 'Cân nặng',
+    dataIndex: 'weight',
+    key: 'weight',
+    align: 'center',
+    width: 150,
+  },
+  {
+    title: 'Xuất xứ',
+    dataIndex: 'originOfGoods',
+    key: 'originOfGoods',
+    align: 'center',
+    width: 150,
+  },
+  {
+    title: 'HS Code',
+    dataIndex: 'HSCode',
+    key: 'HSCode',
+    align: 'center',
+    width: 150,
+  },
+];

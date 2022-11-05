@@ -48,6 +48,7 @@ type InvoiceProps = {
   handleUpdateBookingInvoice: (form: IInvoiceDetails) => void;
   handleDeleteInvoice: (id: any) => void;
   serivcesSelected: any;
+  isInvoice: boolean;
 };
 
 const InVoice = ({
@@ -60,6 +61,7 @@ const InVoice = ({
   sendAddress,
   serivcesSelected,
   receiverCustome,
+  isInvoice,
 }: InvoiceProps) => {
   const [isCreate, setIsCreate] = useState<boolean>(false);
   const [isEdit, setIsEdit] = useState<boolean>(false);
@@ -185,7 +187,7 @@ const InVoice = ({
             name='typeItemInvoice'
             rules={[
               {
-                required: true,
+                required: !isInvoice,
                 message: 'Vui lòng chọn loại dịch vụ',
               },
             ]}
@@ -203,7 +205,7 @@ const InVoice = ({
             name='invoiceType'
             rules={[
               {
-                required: true,
+                required: !isInvoice,
                 message: 'Vui lòng chọn loại hóa đơn',
               },
             ]}
@@ -237,7 +239,7 @@ const InVoice = ({
             name='invoiceDate'
             rules={[
               {
-                required: true,
+                required: !isInvoice,
                 message: 'Vui lòng nhập ngày invoice',
               },
             ]}
@@ -279,7 +281,7 @@ const InVoice = ({
             name='currencyId'
             rules={[
               {
-                required: true,
+                required: !isInvoice,
                 message: 'Vui lòng chọn loại tiền tệ',
               },
             ]}
@@ -297,7 +299,7 @@ const InVoice = ({
             name='reasonExport'
             rules={[
               {
-                required: true,
+                required: !isInvoice,
                 message: 'Vui lòng nhập lý do xuất khẩu',
               },
             ]}
@@ -346,6 +348,7 @@ const InVoice = ({
             <ModalUpdateInvoiceDetails
               isOpen={isEdit}
               value={detailsInvoices}
+              isInvoice={isInvoice}
               onClose={() => setIsEdit(false)}
               handleEdiInvoiceDetails={(e) => {
                 handleUpdateBookingInvoice(e);

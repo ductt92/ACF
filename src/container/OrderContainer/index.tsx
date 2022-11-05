@@ -9,7 +9,7 @@ import { QueryParams3 } from '@/contants/common.constants';
 import { QUERY_BOOKING } from '@/contants/query-key/booking.query';
 import { fetchBookingAdmin } from '@/services/booking.services';
 
-import ModalViewBooking from '../MangerContainer/components/ModalViewBooking';
+import ModalViewDetailsBooking from './ModalViewDetailsBooking';
 
 const QUERY_PARAMS: QueryParams3 = {
   page: 1,
@@ -22,7 +22,7 @@ const QUERY_PARAMS: QueryParams3 = {
 const OrderDetails = () => {
   const [queries, setQueries] = useState<QueryParams3>(QUERY_PARAMS);
   const [isViewBooking, setIsViewBooking] = useState<boolean>(false);
-  const [idBooking, setIdbooking] = useState();
+  const [idBooking, setIdbooking] = useState<string | undefined>();
 
   const { data, isLoading, isFetching } = useQuery(
     [QUERY_BOOKING.GET_BOOKING, queries],
@@ -40,6 +40,13 @@ const OrderDetails = () => {
     }));
   }, [data?.data]);
 
+  const handlePagination = (pagination: { current?: number }) => {
+    setQueries((prev) => ({
+      ...prev,
+      page: pagination.current,
+    }));
+  };
+
   return (
     <div>
       <div className='gap-4 px-6'>
@@ -56,6 +63,7 @@ const OrderDetails = () => {
         <Table
           columns={MYBOOKING_COLUMNS}
           rowKey='key'
+          onChange={handlePagination}
           className='cursor-pointer px-6'
           dataSource={dataTable || []}
           pagination={{
@@ -79,7 +87,7 @@ const OrderDetails = () => {
         />
       </Spin>
       {isViewBooking && (
-        <ModalViewBooking
+        <ModalViewDetailsBooking
           id={idBooking}
           onClose={() => setIsViewBooking(false)}
         />

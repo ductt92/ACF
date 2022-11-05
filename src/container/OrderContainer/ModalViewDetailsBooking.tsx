@@ -4,18 +4,18 @@ import { useQuery } from 'react-query';
 
 import { getBookingById } from '@/services/booking.services';
 
-import Viewbooking from './components/ViewBooking';
+import ViewBookingDetails from './components/ViewBookingDetails';
 
 type ModalViewBookingProps = {
+  id?: string;
   onClose: (value: boolean) => void;
-  id?: string | undefined;
 };
-const ModalViewBooking = ({ id, onClose }: ModalViewBookingProps) => {
+
+const ModalViewDetailsBooking = ({ id, onClose }: ModalViewBookingProps) => {
   const { data, isLoading, isFetching } = useQuery(
     ['ModalViewBooking', { id }],
     () => getBookingById(id)
   );
-
   return (
     <Modal
       footer={null}
@@ -25,10 +25,10 @@ const ModalViewBooking = ({ id, onClose }: ModalViewBookingProps) => {
       className='top-[calc(5vh)] w-[calc(70vw)]'
     >
       <Spin spinning={isLoading || isFetching}>
-        <Viewbooking data={data} />
+        <ViewBookingDetails data={data} />
       </Spin>
     </Modal>
   );
 };
 
-export default ModalViewBooking;
+export default ModalViewDetailsBooking;

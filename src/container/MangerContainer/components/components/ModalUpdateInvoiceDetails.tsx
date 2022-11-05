@@ -14,6 +14,7 @@ type ModalInvoiceDetailsProps = {
   onClose: (value: boolean) => void;
   handleEdiInvoiceDetails: (form: any) => void;
   value: any;
+  isInvoice: boolean;
 };
 
 const { Option } = Select;
@@ -23,6 +24,7 @@ const ModalUpdateInvoiceDetails = ({
   onClose,
   handleEdiInvoiceDetails,
   value,
+  isInvoice,
 }: ModalInvoiceDetailsProps) => {
   const [invoiceDetailsForm] = Form.useForm();
 
@@ -70,7 +72,7 @@ const ModalUpdateInvoiceDetails = ({
                 className='w-full'
                 rules={[
                   {
-                    required: true,
+                    required: !isInvoice,
                     message: 'Vui lòng nhập Tên hàng hóa',
                   },
                 ]}
@@ -83,7 +85,7 @@ const ModalUpdateInvoiceDetails = ({
                 className='w-full'
                 rules={[
                   {
-                    required: true,
+                    required: !isInvoice,
                     message: 'Vui lòng nhập mô tả hàng hóa',
                   },
                 ]}
@@ -95,7 +97,7 @@ const ModalUpdateInvoiceDetails = ({
                 name='quantity'
                 rules={[
                   {
-                    required: true,
+                    required: !isInvoice,
                     message: 'Vui lòng nhập số lượng hàng hóa',
                   },
                 ]}
@@ -121,7 +123,7 @@ const ModalUpdateInvoiceDetails = ({
                 name='price'
                 rules={[
                   {
-                    required: true,
+                    required: !isInvoice,
                     message: 'Vui lòng nhập Giá',
                   },
                 ]}
@@ -141,7 +143,7 @@ const ModalUpdateInvoiceDetails = ({
                 name='weight'
                 rules={[
                   {
-                    required: true,
+                    required: !isInvoice,
                     message: 'Vui lòng nhập cân nặng',
                   },
                 ]}
@@ -157,7 +159,7 @@ const ModalUpdateInvoiceDetails = ({
               name='originOfGoods'
               rules={[
                 {
-                  required: true,
+                  required: !isInvoice,
                   message: 'Vui lòng chọn xuất xứ',
                 },
               ]}

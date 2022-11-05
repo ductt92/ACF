@@ -3,7 +3,8 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
 import { ADMINISTATOR_LOGIN } from '@/contants/endpoint';
-import { ACCSESS_TOKEN } from '@/contants/Storage';
+import { ACCSESS_TOKEN, USER } from '@/contants/Storage';
+import { UsersRole } from '@/contants/types';
 
 export function withPrivateRoute(WrappedComponent: any) {
   return (props: any) => {
@@ -12,11 +13,16 @@ export function withPrivateRoute(WrappedComponent: any) {
     const { pathname } = router;
     useEffect(() => {
       const accessToken = localStorage.getItem(ACCSESS_TOKEN);
-      if (!accessToken) {
-        router.replace(ADMINISTATOR_LOGIN);
+      const user = localStorage.getItem(USER);
+      if (user) {
+        if (accessToken && JSON.parse(user).role.name === UsersRole.ADMIN) {
+          setVerified(true);
+          localStorage.setItem(ACCSESS_TOKEN, accessToken || '');
+        } else {
+          router.replace(ADMINISTATOR_LOGIN);
+        }
       } else {
-        setVerified(true);
-        localStorage.setItem(ACCSESS_TOKEN, accessToken || '');
+        router.replace(ADMINISTATOR_LOGIN);
       }
     }, [pathname, router]);
 

@@ -31,6 +31,20 @@ export const createStaffs = async (data: Partial<IStaff>) => {
   return createStaff;
 };
 
+export const updatePartnerBillCode = ({
+  id,
+  partnerBillCode,
+}: {
+  id: string;
+  partnerBillCode: string;
+}) => {
+  const updatePartnerBillCode = HttpRequest.patch(
+    `update-partner-bill-code/${id}`,
+    { partnerBillCode }
+  );
+  return updatePartnerBillCode;
+};
+
 export const updateStaff = async ({
   id,
   data,
