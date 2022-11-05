@@ -19,6 +19,7 @@ import {
   fetchCurrentUnit,
   fetchServicesBooking,
   generateBill,
+  generateBillPatner,
   generateInvoice,
 } from '@/services/booking.services';
 import { updatePartnerBillCode } from '@/services/employee.services';
@@ -30,6 +31,9 @@ const ViewBookingDetails = ({ data }: { data: any }) => {
   const [detailsInVoice, setDetailInvoice] = useState<Array<IInvoiceDetails>>(
     []
   );
+
+  const [billPartner, setBillPartner] = useState<string | null | undefined>();
+
   const [detailsBooking, setDetailsBooking] = useState<
     Array<DetailsBookingPost>
   >([]);
@@ -41,23 +45,28 @@ const ViewBookingDetails = ({ data }: { data: any }) => {
     onSuccess: () => {
       queryClient.invalidateQueries([QUERY_BOOKING.GET_BOOKING]);
       notification.success({
-        message: 'Tải xuống thành công',
+        message: 'Cập nhật bill code thành công',
         placement: 'top',
       });
     },
     onError: () => {
       notification.error({
-        message: 'Tải xuống thất bại',
+        message: 'Cập nhật thất bại',
         placement: 'top',
       });
     },
   });
+
+  const handleSetBillCode = (bill: string) => {
+    setBillPartner(bill);
+  };
   const onSubmit = async () => {
     const res = await viewBooking.getFieldsValue();
     if (res.partnerBillCode) {
       handleSubmit({
         id: data?.booking?.id,
         partnerBillCode: res.partnerBillCode,
+        handleSetBillCode,
       });
     } else {
       notification.error({
@@ -162,6 +171,7 @@ const ViewBookingDetails = ({ data }: { data: any }) => {
     setDetailInvoice(data?.invoice?.invoiceDetail || []);
     setValue(data?.booking.customsDeclarationNumber ? 2 : 1);
     setDetailsBooking(detailBooking || []);
+    setBillPartner(data?.booking?.partnerBillCode);
   }, [data]);
 
   const queryClient = useQueryClient();
@@ -196,12 +206,31 @@ const ViewBookingDetails = ({ data }: { data: any }) => {
       });
     },
   });
+  const { mutate: genBillPatner } = useMutation(generateBillPatner, {
+    onSuccess: () => {
+      queryClient.invalidateQueries(['generateInVoice']);
+      notification.success({
+        message: 'Tải xuống thành công',
+        placement: 'top',
+      });
+    },
+    onError: () => {
+      notification.error({
+        message: 'Tải xuống thất bại',
+        placement: 'top',
+      });
+    },
+  });
 
   const handleGenerataeBill = () => {
     generatorBill(data?.booking?.id);
   };
   const handleGenerataeInvoice = () => {
     generatorInvoice(data?.booking?.id);
+  };
+
+  const handleGeneratorBillPartner = () => {
+    genBillPatner(data?.booking?.id);
   };
 
   return (
@@ -225,6 +254,17 @@ const ViewBookingDetails = ({ data }: { data: any }) => {
         >
           In Invoice
         </Button>
+
+        {billPartner && (
+          <Button
+            onClick={handleGeneratorBillPartner}
+            type='primary'
+            disabled={!data?.booking?.id}
+            icon={<PrinterOutlined />}
+          >
+            In Bill đối tác
+          </Button>
+        )}
       </div>
 
       <div className='h-[calc(70vh)] overflow-y-auto p-5'>

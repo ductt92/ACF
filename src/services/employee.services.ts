@@ -31,17 +31,23 @@ export const createStaffs = async (data: Partial<IStaff>) => {
   return createStaff;
 };
 
-export const updatePartnerBillCode = ({
+export const updatePartnerBillCode = async ({
   id,
   partnerBillCode,
+  handleSetBillCode,
 }: {
   id: string;
   partnerBillCode: string;
+  handleSetBillCode: (bill: string) => void;
 }) => {
-  const updatePartnerBillCode = HttpRequest.patch(
+  const updatePartnerBillCode = await HttpRequest.patch(
     `booking/update-partner-bill-code/${id}`,
     { partnerBillCode }
   );
+  if (updatePartnerBillCode) {
+    // console.log(updatePartnerBillCode);
+    handleSetBillCode(id);
+  }
   return updatePartnerBillCode;
 };
 
