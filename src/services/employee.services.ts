@@ -39,7 +39,7 @@ export const updatePartnerBillCode = ({
   partnerBillCode: string;
 }) => {
   const updatePartnerBillCode = HttpRequest.patch(
-    `update-partner-bill-code/${id}`,
+    `booking/update-partner-bill-code/${id}`,
     { partnerBillCode }
   );
   return updatePartnerBillCode;
