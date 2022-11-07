@@ -153,7 +153,7 @@ export const renderBookingDetailsNoAction = (
       align: 'center',
       width: 150,
       render: (type: string) => {
-        const commoditie = commoditiesType.filter((x) => x.value === type);
+        const commoditie = commoditiesType?.filter((x) => x.value === type);
         return commoditie.map((v) => <span key={v.value}>{v.label}</span>);
       },
     },

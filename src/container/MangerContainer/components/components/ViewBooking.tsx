@@ -445,7 +445,6 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
       },
       invoice: {
         invoiceDetail: configDetailsInvoice,
-
         typeItemInvoice:
           // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           //  @ts-ignore
@@ -493,9 +492,67 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
           dataCreateBooking?.noteInvoice || data?.invoce?.noteInvoice,
       },
     };
+    const booking2 = {
+      booking: {
+        total: total || data?.booking?.total,
+        vat: vat || data?.booking?.vat,
+        amount: amount || data?.booking?.amount,
+        receiverNote: receiverNote || data?.booking?.receiverNote,
+        receiverCountry: receiverCountry || data?.booking?.receiverCountry,
+        receiverContactPerson:
+          receiverContactPerson || data?.booking?.receiverContactPerson,
+        receiverDepartment:
+          receiverDepartment || data?.booking?.receiverDepartment,
+        receiverPhoneNumber:
+          receiverPhoneNumber || data?.booking?.receiverPhoneNumber,
+        otherDeliveryConditions:
+          otherDeliveryConditions || data?.booking?.otherDeliveryConditions,
+        note: note || data?.booking?.note,
+        receiverPostalCode:
+          receiverPostalCode || data?.booking?.receiverPostalCode,
+        receiverAddress: receiverAddress || data?.booking?.receiverAddress,
+        payment: payment || data?.booking?.payment,
+        typeOfPaymentId: typeOfPaymentId || data?.booking?.typeOfPaymentId,
+        partnerBillCode: partnerBillCode || data?.booking?.partnerBillCode,
+        oderAccountForeign:
+          oderAccountForeign || data?.booking?.oderAccountForeign,
+        customsDeclarationNumber:
+          customsDeclarationNumber || data?.booking?.customsDeclarationNumber,
+        type: type || data?.booking?.type,
+        deliveryConditionId:
+          deliveryConditionId || data?.booking?.deliveryConditionId,
+        serviceBookingId: serviceBookingId || data?.booking?.serviceBookingId,
+        estimatedDate: estimatedDate || data?.booking?.estimatedDate,
+        estimateHour: estimateHour,
+        senderNameVi: senderNameVi || data?.booking?.senderNameVi,
+        senderNameEn: senderNameEn || data?.booking?.senderNameEn,
+        senderAddressVi: senderAddressVi || data?.booking?.senderAddressVi,
+        senderAddressEn: senderAddressEn || data?.booking?.senderAddressEn,
+        senderContactPerson:
+          senderContactPerson || data?.booking?.senderContactPerson,
+        senderDepartment: senderDepartment || data?.booking?.senderDepartment,
+        senderPhoneNumber:
+          senderPhoneNumber || data?.booking?.senderPhoneNumber,
+        senderNote: senderNote || data?.booking?.senderNote,
+        senderPostalCode: senderPostalCode || data?.booking?.senderPostalCode,
+        senderProvince: senderProvince || data?.booking?.senderProvince,
+        senderCountry: senderCountry || data?.booking?.senderCountry,
+        receiverName: receiverName || data?.booking?.receiverName,
+        isCustomsDeclaration: false,
+        isInvoice,
+        receiverProvince: receiverProvince || data?.booking?.receiverProvince,
+        bookingDetail: detailsBooking.map((v) => {
+          const { numb22, ...res } = v;
+          return {
+            ...res,
+          };
+        }),
+      },
+    };
+
     if (moment(`${estimatedDate} ${estimateHour}`).isAfter(Date.now())) {
       mutateUpdate({
-        booking,
+        booking: isInvoice ? booking : booking2,
         id: data?.booking?.id,
       });
     } else {

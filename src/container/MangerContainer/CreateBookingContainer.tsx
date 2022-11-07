@@ -269,6 +269,54 @@ const CreateBookingContainer = () => {
       isCustomerCreateDeclaration,
     } = dataCreateBooking;
 
+    const booking2 = {
+      booking: {
+        total,
+        vat,
+        amount,
+        receiverNote,
+        receiverCountry,
+        receiverContactPerson,
+        receiverDepartment,
+        receiverPhoneNumber,
+        otherDeliveryConditions,
+        note,
+        receiverPostalCode,
+        receiverAddress,
+        payment,
+        typeOfPaymentId,
+        partnerBillCode,
+        oderAccountForeign,
+        customsDeclarationNumber,
+        type,
+        deliveryConditionId,
+        serviceBookingId,
+        estimatedDate,
+        estimateHour,
+        senderNameVi,
+        senderNameEn,
+        senderAddressVi,
+        senderAddressEn,
+        senderContactPerson,
+        senderDepartment,
+        senderPhoneNumber,
+        senderNote,
+        senderPostalCode,
+        senderProvince,
+        senderCountry,
+        receiverName,
+        isCustomsDeclaration: false,
+        isInvoice,
+        receiverProvince,
+        isCustomerCreateDeclaration,
+        bookingDetail: detailsBooking.map((v) => {
+          const { numb22, ...res } = v;
+          return {
+            ...res,
+          };
+        }),
+      },
+    };
     const booking = {
       booking: {
         total,
@@ -341,12 +389,12 @@ const CreateBookingContainer = () => {
     if (moment(`${estimatedDate} ${estimateHour}`).isAfter(Date.now())) {
       if (id) {
         mutateUpdate({
-          booking,
+          booking: isInvoice ? booking : booking2,
           id,
         });
       } else {
         mutateCreate({
-          booking,
+          booking: isInvoice ? booking : booking2,
           handleSetId,
           handleSetStatus,
         });
