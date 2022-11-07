@@ -175,7 +175,6 @@ const InVoice = ({
     setDetailsInvoices(record);
     setIsEdit(true);
   };
-
   return (
     <div className='mb-20 h-full'>
       <Form form={form}>
@@ -187,7 +186,7 @@ const InVoice = ({
             name='typeItemInvoice'
             rules={[
               {
-                required: !isInvoice,
+                required: isInvoice,
                 message: 'Vui lòng chọn loại dịch vụ',
               },
             ]}
@@ -205,7 +204,7 @@ const InVoice = ({
             name='invoiceType'
             rules={[
               {
-                required: !isInvoice,
+                required: isInvoice,
                 message: 'Vui lòng chọn loại hóa đơn',
               },
             ]}
@@ -239,7 +238,7 @@ const InVoice = ({
             name='invoiceDate'
             rules={[
               {
-                required: !isInvoice,
+                required: isInvoice,
                 message: 'Vui lòng nhập ngày invoice',
               },
             ]}
@@ -281,7 +280,7 @@ const InVoice = ({
             name='currencyId'
             rules={[
               {
-                required: !isInvoice,
+                required: isInvoice,
                 message: 'Vui lòng chọn loại tiền tệ',
               },
             ]}
@@ -299,7 +298,7 @@ const InVoice = ({
             name='reasonExport'
             rules={[
               {
-                required: !isInvoice,
+                required: isInvoice,
                 message: 'Vui lòng nhập lý do xuất khẩu',
               },
             ]}

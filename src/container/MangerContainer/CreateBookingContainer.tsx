@@ -489,6 +489,7 @@ const CreateBookingContainer = () => {
       genBillPatner(id);
     }
   };
+
   return (
     <div>
       <p className='text-2xl font-bold text-yellow-primary'>
