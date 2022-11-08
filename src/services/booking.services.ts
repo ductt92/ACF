@@ -138,6 +138,19 @@ export const generateBillPatner = (id: string) => {
   });
 };
 
+export const generateSmallBill = (id: string) => {
+  return HttpRequest.get('booking/generate-small-bill', {
+    params: { bookingId: id },
+  }).then((res) => {
+    const blob = new Blob([new Uint8Array(res.data)]);
+    const link = document.createElement('a');
+    link.href = window.URL.createObjectURL(blob);
+    link.download = `bill-${new Date()}.pdf`;
+    link.click();
+  });
+};
+// https://api.acf.vn/booking/generate-small-bill
+
 export const generateInvoice = (id: string) => {
   return HttpRequest.get('booking/generate-bill-invoice', {
     params: { bookingId: id },

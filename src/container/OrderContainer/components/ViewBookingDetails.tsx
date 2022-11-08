@@ -21,6 +21,7 @@ import {
   generateBill,
   generateBillPatner,
   generateInvoice,
+  generateSmallBill,
 } from '@/services/booking.services';
 import { updatePartnerBillCode } from '@/services/employee.services';
 
@@ -221,6 +222,21 @@ const ViewBookingDetails = ({ data }: { data: any }) => {
       });
     },
   });
+  const { mutate: genBillSmall } = useMutation(generateSmallBill, {
+    onSuccess: () => {
+      queryClient.invalidateQueries(['generateInVoice']);
+      notification.success({
+        message: 'Tải xuống thành công',
+        placement: 'top',
+      });
+    },
+    onError: () => {
+      notification.error({
+        message: 'Tải xuống thất bại',
+        placement: 'top',
+      });
+    },
+  });
 
   const handleGenerataeBill = () => {
     generatorBill(data?.booking?.id);
@@ -231,6 +247,9 @@ const ViewBookingDetails = ({ data }: { data: any }) => {
 
   const handleGeneratorBillPartner = () => {
     genBillPatner(data?.booking?.id);
+  };
+  const handleGenSmallBill = () => {
+    genBillSmall(data?.booking?.id);
   };
 
   return (
@@ -265,6 +284,13 @@ const ViewBookingDetails = ({ data }: { data: any }) => {
             In Bill đối tác
           </Button>
         )}
+        <Button
+          onClick={handleGenSmallBill}
+          type='primary'
+          icon={<PrinterOutlined />}
+        >
+          In Bill nhỏ
+        </Button>
       </div>
 
       <div className='h-[calc(70vh)] overflow-y-auto p-5'>
