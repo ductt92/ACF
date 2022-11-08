@@ -222,21 +222,22 @@ const ViewBookingDetails = ({ data }: { data: any }) => {
       });
     },
   });
-  const { mutate: genBillSmall } = useMutation(generateSmallBill, {
-    onSuccess: () => {
-      queryClient.invalidateQueries(['generateInVoice']);
-      notification.success({
-        message: 'Tải xuống thành công',
-        placement: 'top',
-      });
-    },
-    onError: () => {
-      notification.error({
-        message: 'Tải xuống thất bại',
-        placement: 'top',
-      });
-    },
-  });
+  const { mutate: genBillSmall, isLoading: generateSmallBillLoading } =
+    useMutation(generateSmallBill, {
+      onSuccess: () => {
+        queryClient.invalidateQueries(['generateInVoice']);
+        notification.success({
+          message: 'Tải xuống thành công',
+          placement: 'top',
+        });
+      },
+      onError: () => {
+        notification.error({
+          message: 'Tải xuống thất bại',
+          placement: 'top',
+        });
+      },
+    });
 
   const handleGenerataeBill = () => {
     generatorBill(data?.booking?.id);
@@ -268,6 +269,7 @@ const ViewBookingDetails = ({ data }: { data: any }) => {
         <Button
           onClick={handleGenerataeInvoice}
           type='primary'
+          loading={generateSmallBillLoading}
           disabled={!data?.booking?.id || !data?.booking?.isInvoice}
           icon={<PrinterOutlined />}
         >
@@ -287,6 +289,7 @@ const ViewBookingDetails = ({ data }: { data: any }) => {
         <Button
           onClick={handleGenSmallBill}
           type='primary'
+          loading={generateSmallBillLoading}
           icon={<PrinterOutlined />}
         >
           In Bill nhỏ
