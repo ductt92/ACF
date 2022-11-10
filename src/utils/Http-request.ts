@@ -58,6 +58,31 @@ axiosClient.interceptors.response.use(
         }
       }
     }
+    if (originalConfig.url !== '/administrator/login' && error.response) {
+      if (error.response.status === 401) {
+        if (originalConfig.retry) {
+          removeAll();
+          return location('/administrator/login');
+        }
+        const refreshToken = getItem(REFRESH_TOKEN);
+        if (!refreshToken) {
+          removeAll();
+          return location('/administrator/login');
+        }
+        try {
+          originalConfig.retry = true;
+          const res: ILogin = await axiosClient.post(AUTH_REFRESH_TOKEN, {
+            refreshToken: getItem(REFRESH_TOKEN),
+          });
+          setItem(ACCSESS_TOKEN, res.tokens.access.token);
+          setItem(REFRESH_TOKEN, res.tokens.refresh.token);
+          setItem(USER, JSON.stringify(res.user));
+          return axiosClient(originalConfig);
+        } catch (_error) {
+          return Promise.reject(_error);
+        }
+      }
+    }
 
     if (error.message === 'Network Error' && error.response) {
       alert('Please check your internet connection and try again');
