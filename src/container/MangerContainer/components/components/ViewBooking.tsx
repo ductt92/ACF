@@ -643,7 +643,11 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
         >
           Xác nhận đơn hàng
         </Button>
-        <Button onClick={() => setIsInvoice(!isInvoice)} type='primary'>
+        <Button
+          onClick={() => setIsInvoice(!isInvoice)}
+          type='primary'
+          disabled={statusBooking !== BookingStatusPost.NOT_YET_HANDED_OVER}
+        >
           {isInvoice ? 'Không Invoice' : 'Có Invoice'}
         </Button>
       </div>
