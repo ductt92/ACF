@@ -548,7 +548,11 @@ const CreateBookingContainer = () => {
         <Button
           onClick={() => setIsInvoice(!isInvoice)}
           type='primary'
-          disabled={statusBooking !== BookingStatusPost.NOT_YET_HANDED_OVER}
+          disabled={
+            statusBooking === BookingStatusPost.DONE ||
+            statusBooking === BookingStatusPost.CANCEL ||
+            statusBooking === BookingStatusPost.HANDED_OVER
+          }
         >
           {isInvoice ? 'Không Invoice' : 'Có Invoice'}
         </Button>
