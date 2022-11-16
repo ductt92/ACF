@@ -263,10 +263,10 @@ const InVoice = ({
           </Form.Item>
 
           <Form.Item name='totalNetWeight'>
-            <VInputNumber label='Tổng trọng lượng thực (Kg)' />
+            <VInputNumber label='Tổng trọng lượng thực (Kg)' disabled />
           </Form.Item>
           <Form.Item name='totalBulkyWeight'>
-            <VInputNumber label='Tổng trọng lượng cồng kềnh (kg)' />
+            <VInputNumber label='Tổng trọng lượng cồng kềnh (kg)' disabled />
           </Form.Item>
 
           <Form.Item name='goodsSize'>
@@ -274,7 +274,7 @@ const InVoice = ({
           </Form.Item>
 
           <Form.Item name='totalBaleNumber'>
-            <VInputNumber label='Tổng số kiện' />
+            <VInputNumber label='Tổng số kiện' disabled />
           </Form.Item>
           <Form.Item
             name='currencyId'

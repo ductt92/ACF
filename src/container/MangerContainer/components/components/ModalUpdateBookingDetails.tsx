@@ -307,7 +307,7 @@ const ModalUpdateBookingDetails = ({
 
           <div className='mt-4 flex justify-start'>
             <Button type='primary' onClick={handleUpdateBooking}>
-              Cập nhật Booking
+              Cập nhật Hàng hóa
             </Button>
           </div>
         </Form>

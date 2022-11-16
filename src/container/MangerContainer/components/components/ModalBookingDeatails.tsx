@@ -163,11 +163,7 @@ const ModalBookingDetails = ({
                   },
                 ]}
               >
-                <VSelect
-                  label='Hàng hóa vận chuyển (Tiếng Việt)'
-                  required
-                  showSearch
-                >
+                <VSelect label='Nhóm hàng hóa vận chuyển' required showSearch>
                   {OpitionShippingType?.map((v: any) => (
                     <Option value={v.value} key={v.value}>
                       {v.label}
@@ -218,7 +214,7 @@ const ModalBookingDetails = ({
                   },
                 ]}
               >
-                <VInput label='Nhóm hàng hóa vận chuyển(Tiếng Anh)' required />
+                <VInput label='Hàng hóa vận chuyển(Tiếng anh)' required />
               </Form.Item>
 
               <Form.Item
@@ -310,7 +306,7 @@ const ModalBookingDetails = ({
 
           <div className='mt-4 flex justify-start'>
             <Button type='primary' onClick={handleAddBooking}>
-              Tạo mới Booking
+              Tạo mới hàng hóa
             </Button>
           </div>
         </Form>

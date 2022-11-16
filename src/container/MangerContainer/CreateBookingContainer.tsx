@@ -154,7 +154,7 @@ const CreateBookingContainer = () => {
     setValue(value);
   };
 
-  const handleAddBookingDetails = (form: any) => {
+  const handleAddBookingDetails = (detailsForm: any) => {
     const {
       bulkyWeight,
       calculationUnit,
@@ -169,7 +169,7 @@ const CreateBookingContainer = () => {
       shippingItemViId,
       weight,
       width,
-    } = form;
+    } = detailsForm;
     const resForm = {
       bulkyWeight,
       calculationUnit,
@@ -186,6 +186,41 @@ const CreateBookingContainer = () => {
       width,
     };
     setDetailsBooking((prev) => [...prev, resForm]);
+
+    const prevDetails = [...detailsBooking, resForm];
+    const bulkyWeightValue = 0;
+    const quantityValue = 0;
+    const weightValue = 0;
+
+    const totalNetWeight = prevDetails
+      .map(({ weight }) => weight)
+      .reduce(
+        (previousValue, currentValue) =>
+          parseFloat(previousValue) + parseFloat(currentValue),
+        weightValue
+      );
+
+    const totalBulkyWeight = prevDetails
+      .map(({ bulkyWeight }) => bulkyWeight)
+      .reduce(
+        (previousValue, currentValue) =>
+          parseFloat(previousValue) + parseFloat(currentValue),
+        bulkyWeightValue
+      );
+    const totalBaleNumber = prevDetails
+      .map(({ quantity }) => quantity)
+      .reduce(
+        (previousValue, currentValue) =>
+          parseFloat(previousValue) + parseFloat(currentValue),
+        quantityValue
+      );
+    form.setFieldsValue({
+      totalNetWeight,
+      totalBulkyWeight,
+      totalBaleNumber,
+    });
+
+    // form
   };
 
   const handleChangeInfoSender = (name: string, value: any) => {
@@ -418,6 +453,38 @@ const CreateBookingContainer = () => {
     });
 
     setDetailsBooking(res);
+
+    const bulkyWeightValue = 0;
+    const quantityValue = 0;
+    const weightValue = 0;
+
+    const totalNetWeight = res
+      .map(({ weight }) => weight)
+      .reduce(
+        (previousValue, currentValue) =>
+          parseFloat(previousValue) + parseFloat(currentValue),
+        weightValue
+      );
+
+    const totalBulkyWeight = res
+      .map(({ bulkyWeight }) => bulkyWeight)
+      .reduce(
+        (previousValue, currentValue) =>
+          parseFloat(previousValue) + parseFloat(currentValue),
+        bulkyWeightValue
+      );
+    const totalBaleNumber = res
+      .map(({ quantity }) => quantity)
+      .reduce(
+        (previousValue, currentValue) =>
+          parseFloat(previousValue) + parseFloat(currentValue),
+        quantityValue
+      );
+    form.setFieldsValue({
+      totalNetWeight,
+      totalBulkyWeight,
+      totalBaleNumber,
+    });
   };
 
   const handleDeleteRow = (id: any) => {
@@ -473,6 +540,8 @@ const CreateBookingContainer = () => {
   const handleNewForm = () => {
     form.resetFields();
     setId(undefined);
+    setDetailsBooking([]);
+    setDetailsInvoice([]);
   };
 
   const updateStatus = () => {

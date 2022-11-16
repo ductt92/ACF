@@ -304,6 +304,39 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
       width,
     };
     setDetailsBooking((prev) => [...prev, resForm]);
+
+    const prevDetails = [...detailsBooking, resForm];
+    const bulkyWeightValue = 0;
+    const quantityValue = 0;
+    const weightValue = 0;
+
+    const totalNetWeight = prevDetails
+      .map(({ weight }) => weight)
+      .reduce(
+        (previousValue, currentValue) =>
+          parseFloat(previousValue) + parseFloat(currentValue),
+        weightValue
+      );
+
+    const totalBulkyWeight = prevDetails
+      .map(({ bulkyWeight }) => bulkyWeight)
+      .reduce(
+        (previousValue, currentValue) =>
+          parseFloat(previousValue) + parseFloat(currentValue),
+        bulkyWeightValue
+      );
+    const totalBaleNumber = prevDetails
+      .map(({ quantity }) => quantity)
+      .reduce(
+        (previousValue, currentValue) =>
+          parseFloat(previousValue) + parseFloat(currentValue),
+        quantityValue
+      );
+    form.setFieldsValue({
+      totalNetWeight,
+      totalBulkyWeight,
+      totalBaleNumber,
+    });
   };
 
   const handleAddInvoiceDetails = (resForm: any) => {
@@ -320,6 +353,38 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
     });
 
     setDetailsBooking(res);
+
+    const bulkyWeightValue = 0;
+    const quantityValue = 0;
+    const weightValue = 0;
+
+    const totalNetWeight = res
+      .map(({ weight }) => weight)
+      .reduce(
+        (previousValue, currentValue) =>
+          parseFloat(previousValue) + parseFloat(currentValue),
+        weightValue
+      );
+
+    const totalBulkyWeight = res
+      .map(({ bulkyWeight }) => bulkyWeight)
+      .reduce(
+        (previousValue, currentValue) =>
+          parseFloat(previousValue) + parseFloat(currentValue),
+        bulkyWeightValue
+      );
+    const totalBaleNumber = res
+      .map(({ quantity }) => quantity)
+      .reduce(
+        (previousValue, currentValue) =>
+          parseFloat(previousValue) + parseFloat(currentValue),
+        quantityValue
+      );
+    form.setFieldsValue({
+      totalNetWeight,
+      totalBulkyWeight,
+      totalBaleNumber,
+    });
   };
 
   const onSelect = (e: any) => {
