@@ -499,7 +499,6 @@ const CreateBookingContainer = () => {
         <Button onClick={onSubmit} type='primary' disabled={id ? true : false}>
           Lưu
         </Button>
-
         <Button
           onClick={onSubmit}
           type='primary'
@@ -509,7 +508,6 @@ const CreateBookingContainer = () => {
         >
           Cập nhật đơn hàng
         </Button>
-
         {billPartner && (
           <Button
             onClick={handleGeneratorBillPartner}
@@ -528,7 +526,6 @@ const CreateBookingContainer = () => {
         >
           Xác nhận đơn hàng
         </Button>
-
         <Button
           onClick={handleGenerataeBill}
           type='primary'
@@ -556,7 +553,6 @@ const CreateBookingContainer = () => {
         >
           {isInvoice ? 'Không Invoice' : 'Có Invoice'}
         </Button>
-
         <Button onClick={handleNewForm} type='primary'>
           Tạo bookings mới
         </Button>

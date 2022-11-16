@@ -126,6 +126,18 @@ export const generateBill = (id: string) => {
   });
 };
 
+export const generateInvoicePatner = (id: string) => {
+  return HttpRequest.get('booking/generate-partner-bill-invoice', {
+    params: { bookingId: id },
+  }).then((res) => {
+    const blob = new Blob([new Uint8Array(res.data)]);
+    const link = document.createElement('a');
+    link.href = window.URL.createObjectURL(blob);
+    link.download = `bill-${new Date()}.pdf`;
+    link.click();
+  });
+};
+
 export const generateBillPatner = (id: string) => {
   return HttpRequest.get('booking/generate-partner-bill', {
     params: { bookingId: id },

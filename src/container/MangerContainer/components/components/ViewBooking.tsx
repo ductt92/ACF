@@ -9,6 +9,7 @@ import moment from 'moment';
 import React, { useEffect, useMemo, useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 
+import { QUERY_BOOKING } from '@/contants/query-key/booking.query';
 import {
   AddressCustomer,
   BookingPost,
@@ -26,6 +27,7 @@ import {
   generateBill,
   generateBillPatner,
   generateInvoice,
+  generateInvoicePatner,
   updateBooking,
   updateStatusBooking,
 } from '@/services/booking.services';
@@ -563,6 +565,22 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
     }
   };
 
+  const { mutate: genInvoicePartner } = useMutation(generateInvoicePatner, {
+    onSuccess: () => {
+      queryClient.invalidateQueries([QUERY_BOOKING.GET_BOOKING]);
+      notification.success({
+        message: 'Tải xuống thành công',
+        placement: 'top',
+      });
+    },
+    onError: () => {
+      notification.error({
+        message: 'Tải xuống thất bại',
+        placement: 'top',
+      });
+    },
+  });
+
   const handleGenerataeBill = () => {
     generatorBill(data?.booking?.id);
   };
@@ -574,7 +592,11 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
   const handleGeneratorBillPartner = () => {
     genBillPatner(data?.booking?.id);
   };
-
+  const handleGeneratorInvoicePartner = () => {
+    if (data?.booking?.id) {
+      genInvoicePartner(data.booking.id);
+    }
+  };
   const handleSetStatus = (value: BookingStatusPost) => {
     setStatusBooking(value);
   };
@@ -606,8 +628,10 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
 
   return (
     <div>
-      <div className='flex gap-4'>
+      <div className='flex gap-4 text-center'>
         <p className='mb-5 text-lg'>Chi tiết đơn hàng</p>
+      </div>
+      <div className='flex gap-4'>
         <Button
           onClick={handleGenerataeBill}
           type='primary'
@@ -625,6 +649,17 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
             icon={<PrinterOutlined />}
           >
             In Bill đối tác
+          </Button>
+        )}
+
+        {billPartner && isInvoice && (
+          <Button
+            onClick={handleGeneratorInvoicePartner}
+            type='primary'
+            disabled={!data?.booking?.id}
+            icon={<PrinterOutlined />}
+          >
+            In InVoice đối tác
           </Button>
         )}
 

@@ -21,6 +21,7 @@ import {
   generateBill,
   generateBillPatner,
   generateInvoice,
+  generateInvoicePatner,
   generateSmallBill,
 } from '@/services/booking.services';
 import { updatePartnerBillCode } from '@/services/employee.services';
@@ -57,6 +58,28 @@ const ViewBookingDetails = ({ data }: { data: any }) => {
       });
     },
   });
+
+  const { mutate: genInvoicePartner } = useMutation(generateInvoicePatner, {
+    onSuccess: () => {
+      queryClient.invalidateQueries([QUERY_BOOKING.GET_BOOKING]);
+      notification.success({
+        message: 'Tải xuống thành công',
+        placement: 'top',
+      });
+    },
+    onError: () => {
+      notification.error({
+        message: 'Tải xuống thất bại',
+        placement: 'top',
+      });
+    },
+  });
+
+  const handleGeneratorInvoicePartner = () => {
+    if (data?.booking?.id) {
+      genInvoicePartner(data.booking.id);
+    }
+  };
 
   const handleSetBillCode = (bill: string) => {
     setBillPartner(bill);
@@ -257,6 +280,8 @@ const ViewBookingDetails = ({ data }: { data: any }) => {
     <div>
       <div className='flex gap-4'>
         <p className='mb-5 text-lg'>Chi tiết đơn hàng</p>
+      </div>
+      <div className='flex gap-4'>
         <Button
           onClick={handleGenerataeBill}
           type='primary'
@@ -284,6 +309,17 @@ const ViewBookingDetails = ({ data }: { data: any }) => {
             icon={<PrinterOutlined />}
           >
             In Bill đối tác
+          </Button>
+        )}
+
+        {billPartner && data?.booking?.isInvoice && (
+          <Button
+            onClick={handleGeneratorInvoicePartner}
+            type='primary'
+            disabled={!data?.booking?.id}
+            icon={<PrinterOutlined />}
+          >
+            In InVoice đối tác
           </Button>
         )}
         <Button
