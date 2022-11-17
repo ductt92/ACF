@@ -51,7 +51,7 @@ const ManageContainer = () => {
     setQueries((prev) => ({ ...prev, status: value }));
   }, 500);
 
-  const handleFilterDate = (_: any, value: string[]) => {
+  const handleFilterDate = (value: any) => {
     setQueries((prev) => ({
       ...prev,
       createBookingFrom: moment(value[0]).format('YYYY-MM-DD'),
