@@ -332,10 +332,19 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
           parseFloat(previousValue) + parseFloat(currentValue),
         quantityValue
       );
+
+    const goodsSize = prevDetails.map(({ height, width, longs }, index) => {
+      if (index === prevDetails.length - 1) {
+        return `${height} x ${width} x ${longs}`;
+      }
+      return `${height} x ${width} x ${longs},`;
+    });
+
     form.setFieldsValue({
       totalNetWeight,
       totalBulkyWeight,
       totalBaleNumber,
+      goodsSize,
     });
   };
 
@@ -380,10 +389,18 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
           parseFloat(previousValue) + parseFloat(currentValue),
         quantityValue
       );
+    const goodsSize = res.map(({ height, width, longs }, index) => {
+      if (index === res.length - 1) {
+        return `${height} x ${width} x ${longs}`;
+      }
+      return `${height} x ${width} x ${longs},`;
+    });
+
     form.setFieldsValue({
       totalNetWeight,
       totalBulkyWeight,
       totalBaleNumber,
+      goodsSize,
     });
   };
 

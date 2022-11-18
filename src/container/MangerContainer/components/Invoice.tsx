@@ -270,7 +270,7 @@ const InVoice = ({
           </Form.Item>
 
           <Form.Item name='goodsSize'>
-            <VInput label='Kích thước hàng hóa (cm)' />
+            <VInput label='Kích thước hàng hóa (cm)' disabled />
           </Form.Item>
 
           <Form.Item name='totalBaleNumber'>
