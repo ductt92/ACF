@@ -122,7 +122,6 @@ const InVoice = ({
       label: value,
     })
   );
-
   const handleSetField = useCallback(async () => {
     form.setFieldsValue({
       senderInformation: `${sendAddress?.senderNameVi || dataUser?.fullName}\n${
@@ -134,7 +133,9 @@ const InVoice = ({
       }`,
       receiverInformation: `${receiverCustome?.receiverName || ''}\n${
         receiverCustome?.receiverAddress || ''
-      }\n${receiverCustome?.province || ''}\n${
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        //  @ts-ignore
+      }\n${receiverCustome?.receiverProvince || ''}\n${
         receiverCustome?.receiverCountry || ''
       }\n${receiverCustome?.receiverPhoneNumber || ''}\n${
         receiverCustome?.receiverPostalCode || ''

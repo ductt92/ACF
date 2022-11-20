@@ -245,7 +245,7 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
       receiverName: data?.booking?.receiverName,
       receiverPhoneNumber: data?.booking?.receiverPhoneNumber,
       receiverCountry: data?.booking?.receiverCountry,
-      province: data?.booking?.province,
+      province: data?.booking?.receiverProvince,
       receiverAddress: data?.booking?.receiverAddress,
     }));
     setStatusBooking(data?.booking.status);
@@ -255,6 +255,8 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
     const res = detailsBooking.filter((x, index) => id !== index);
     setDetailsBooking(res);
   };
+
+  console.log(data?.booking);
 
   const handleDeleteInvoice = (id: any) => {
     const res = detailsInvoice.filter((x, index) => id !== index);

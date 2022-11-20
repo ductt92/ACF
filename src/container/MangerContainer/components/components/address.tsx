@@ -252,7 +252,7 @@ const Address = ({
               label='Quốc gia'
               required
               showSearch
-              onChange={(e) => handleChangeInfoRecei('receiverPostalCode', e)}
+              onChange={(e) => handleChangeInfoRecei('receiverCountry', e)}
             >
               {countries.map((v) => (
                 <Option value={v.value} key={v.value}>
@@ -283,7 +283,13 @@ const Address = ({
               },
             ]}
           >
-            <VInput label='Số điện thoại người nhận' required />
+            <VInput
+              label='Số điện thoại người nhận'
+              required
+              onChange={(e) =>
+                handleChangeInfoRecei('receiverPhoneNumber', e.target.value)
+              }
+            />
           </Form.Item>
 
           <Form.Item name='receiverDepartment'>
