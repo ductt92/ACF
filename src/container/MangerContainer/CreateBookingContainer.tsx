@@ -551,11 +551,25 @@ const CreateBookingContainer = () => {
     }
   };
 
-  const handleNewForm = () => {
-    form.resetFields();
+  const handleNewForm = async () => {
+    await form.resetFields();
+
     setId(undefined);
     setDetailsBooking([]);
     setDetailsInvoice([]);
+
+    const custome = {
+      senderNameVi: userData?.fullName || '',
+      senderPhoneNumber: userData?.phoneNumber || '',
+      senderCountry: userData?.country || '',
+      senderProvince: userData?.province || '',
+      senderAddressVi: userData?.detailAddress || '',
+      senderPostalCode: userData?.postalCode || '',
+      senderContactPerson: userData?.contactPerson || '',
+    };
+    await form.setFieldsValue({
+      ...custome,
+    });
   };
 
   const updateStatus = () => {
@@ -601,7 +615,6 @@ const CreateBookingContainer = () => {
             In Bill đối tác
           </Button>
         )}
-
         <Button
           onClick={updateStatus}
           type='primary'
