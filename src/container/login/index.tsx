@@ -21,7 +21,10 @@ export default function LoginFormContainer() {
       setError('');
       const res = await AuthenService.login(formValues);
       if (res) {
-        if (res.user.role.name === UsersRole.ADMIN) {
+        if (
+          res.user.role.name === UsersRole.ADMIN ||
+          res.user.role.name === UsersRole.STAFF
+        ) {
           setItem(ACCSESS_TOKEN, res.tokens.access.token);
           setItem(REFRESH_TOKEN, res.tokens.refresh.token);
           setItem(USER, JSON.stringify(res.user));

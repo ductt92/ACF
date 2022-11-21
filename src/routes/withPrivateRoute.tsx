@@ -15,7 +15,11 @@ export function withPrivateRoute(WrappedComponent: any) {
       const accessToken = localStorage.getItem(ACCSESS_TOKEN);
       const user = localStorage.getItem(USER);
       if (user) {
-        if (accessToken && JSON.parse(user).role.name === UsersRole.ADMIN) {
+        if (
+          accessToken &&
+          (JSON.parse(user).role.name === UsersRole.ADMIN ||
+            JSON.parse(user).role.name === UsersRole.STAFF)
+        ) {
           setVerified(true);
           localStorage.setItem(ACCSESS_TOKEN, accessToken || '');
         } else {
