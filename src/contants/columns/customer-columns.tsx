@@ -60,9 +60,9 @@ export const CUSTOMER_COLUMNS: ColumnsType<ICustomer> = [
     width: 150,
   },
   {
-    title: 'MST',
-    dataIndex: 'taxCode',
-    key: 'taxCode',
+    title: 'Mã định danh',
+    dataIndex: 'identifier',
+    key: 'identifier',
     align: 'center',
     width: 150,
   },

@@ -84,6 +84,19 @@ export interface ICustomer {
   postalCode?: string;
   state?: string;
   note?: string;
+  identifier: EIdentifierType;
+
+  //contract
+  serviceRequest: string; // Dịch vụ yêu cầu enum EServiceRequest
+  potentialRevenue: number; // Doanh thu tiềm năng
+  paymentSchedule: Date; // Lịch thanh toán công nợ kể từ ngày chốt bảng kê
+  commitmentRate: number; // Tỷ lệ LNG Cam kết nếu xin giá riêng/Tháng
+  expertise: boolean; // Thẩm định
+  appraisalStaff: string; // Nhân viên thẩm định
+  contractCode: string; // Mã hợp đồng
+  contractName: string; // Tên hợp đồng
+  typeContract: string; // Loại hợp đồng enum ETypeContract
+  noteContract?: string; // ghi chú hợp đồng
 }
 
 export interface IUser {
@@ -107,6 +120,7 @@ export interface IUser {
   postalCode: string;
   state: string;
   note: string;
+  fullNameEn: string;
   createdAt: string | Date;
   updatedAt: string | Date;
   user: {
@@ -121,6 +135,37 @@ export interface IUser {
   contract: [];
 }
 
+export enum EIdentifierType {
+  TAX_CODE = 'Mã số thuế doanh nghiệp', // Mã số thuế doanh nghiệp
+  PEOPLE_ID = 'Mã số căn cước công dân/ Chứng minh thư', // Mã số căn cước công dân/ Chứng minh thư
+}
+
+export enum ECustomerGroup {
+  INDIVIDUAL = 'Cá nhân', // Cá nhân
+  BUSINESS_AGENT = 'Đại lý kinh doanh', // Đại lý kinh doanh
+  PROCESSING_ENTERPRISES = 'Doanh nghiệp chế xuất', // Doanh nghiệp chế xuất
+  ORDINARY_BUSINESS = 'Doanh nghiệp thông thường', // Doanh nghiệp thông thường
+}
+
+export enum EServiceRequest {
+  SPECIALIZE_LINE = 'Chuyên tuyến', // Chuyên tuyến
+  DHL = 'DHL', // DHL
+  UPS = 'UPS', // UPS
+  FEDEX = 'FEDEX', //Fedex
+  SEA_FRIEGHT = 'Sea Frieght', //Sea Frieght
+  AIR_FRIEGHT = 'Air Frieght', //Air Frieght
+  TRUCKING = 'TRUCKING', //TRUCKING
+  CLEARANCE = 'Thông quan', //Thông quan
+  UNOFFICIAL_QUOTA = 'Tiểu ngạch', //Tiểu ngạch
+  BUY_IT = 'Mua hộ', //Mua hộ
+  IMPORT_TAX_BAG = 'Nhập bao thuế', //Nhập bao thuế
+  SPLIT_ENTRY = 'Nhập chia tách', //Nhập chia tách
+}
+
+export enum ETypeContract {
+  INDEFINITE = 'Không xác định',
+  TIME_LIMIT = 'Giới hạn thời gian',
+}
 export enum CustomerType { // Loại khách hàng
   DOMESTIC_COMPANY = 'Doanh nghiệp trong nước', //'Doanh nghiệp trong nước',
   FOREIGN_JOINT_VENTURE_ENTERPRISE = 'Doanh nghiệp liên doanh nước ngoài', //'Doanh nghiệp liên doanh nước ngoài',

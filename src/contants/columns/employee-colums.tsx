@@ -14,6 +14,13 @@ export const EMPLOYEE_COLUMNS: ColumnsType<IStaff> = [
     width: 150,
   },
   {
+    title: 'Mã nhân viên',
+    dataIndex: 'staffCode',
+    key: 'staffCode',
+    align: 'center',
+    width: 150,
+  },
+  {
     title: 'Vị trí làm việc',
     dataIndex: 'position',
     key: 'position',

@@ -1,28 +1,28 @@
-import { Button, Form, Modal, notification, Select } from 'antd';
-import React, { useEffect } from 'react';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { Button, Form, Modal, notification, Tabs } from 'antd';
+import moment from 'moment';
+import React, { useEffect, useState } from 'react';
 import { useMutation, useQueryClient } from 'react-query';
 
-import VInput from '@/components/common/VInput';
-import VSelect from '@/components/common/VSelect';
-
 import { QUERY_CUSTOMER } from '@/contants/query-key/customer.contants';
-import {
-  CustomerType,
-  ICustomer,
-  NetWorkCustomerType,
-  ServiceEnum,
-} from '@/contants/types';
+import { ICustomer } from '@/contants/types';
 import { updateCustomer } from '@/services/customer.services';
+
+import ContractCustomer from './ContractCustomer';
+import InfoCustomer from './InfoCustomer';
 
 interface IProps {
   onClose: (value: boolean) => void;
   value?: ICustomer;
 }
 const ModalEditCustomer = ({ onClose, value }: IProps) => {
+  const [isExpertise, setExpertise] = useState<any>(1);
+
   const queryClient = useQueryClient();
   const [form] = Form.useForm();
-  const { Option } = Select;
-
+  const handleChangeExpertise = (value: any) => {
+    setExpertise(value);
+  };
   const { mutate: mutateCreate, isLoading: isCreating } = useMutation(
     updateCustomer,
     {
@@ -45,35 +45,23 @@ const ModalEditCustomer = ({ onClose, value }: IProps) => {
 
   const onSubmit = async () => {
     const requestData: ICustomer = await form.validateFields();
+    const rs = {
+      ...requestData,
+      expertise: isExpertise === 1 ? true : false,
+    };
     mutateCreate({
       id: value?.id || '',
-      data: requestData,
+      data: rs,
     });
   };
-
-  const OpitionCustomerType = Object.entries(CustomerType).map(
-    ([key, value]) => ({
-      value: key,
-      label: value,
-    })
-  );
-  const OpitionServiceEnum = Object.entries(ServiceEnum).map(
-    ([key, value]) => ({
-      value: key,
-      label: value,
-    })
-  );
-  const OpitionNetWorkCustomerType = Object.entries(NetWorkCustomerType).map(
-    ([key, value]) => ({
-      value: key,
-      label: value,
-    })
-  );
 
   useEffect(() => {
     form.setFieldsValue({
       ...value,
+      paymentSchedule: moment(value?.paymentSchedule),
+      expertise: value?.expertise ? 1 : 0,
     });
+    setExpertise(value?.expertise ? 1 : 0);
     return () => {
       form.resetFields();
     };
@@ -92,213 +80,29 @@ const ModalEditCustomer = ({ onClose, value }: IProps) => {
         </p>
       </div>
       <div>
-        <Form form={form}>
-          <div className='h-[calc(70vh)] overflow-y-auto p-4'>
-            <div className='grid grid-cols-2 gap-x-6'>
-              <Form.Item
-                name='fullName'
-                rules={[{ required: true, message: 'Vui lòng nhập hàng' }]}
-              >
-                <VInput
-                  label='Tên khách hàng'
-                  required
-                  placeholder='Nhập tên khách hàng'
-                />
-              </Form.Item>
-              <Form.Item
-                name='detailAddress'
-                rules={[
-                  { required: true, message: 'Vui lòng địa chỉ chi tiết' },
-                ]}
-              >
-                <VInput
-                  label='Địa chỉ chi tiết'
-                  required
-                  placeholder='Nhập địa chỉ chi tiết'
-                />
-              </Form.Item>
+        <Tabs type='card'>
+          <Tabs.TabPane tab='Thông tin chung' key='infoCustomer'>
+            <InfoCustomer form={form} />
+          </Tabs.TabPane>
+          <Tabs.TabPane tab='Hợp đồng' key='Contract'>
+            <ContractCustomer
+              form={form}
+              expertise={isExpertise}
+              onChangeEx={handleChangeExpertise}
+            />
+          </Tabs.TabPane>
+        </Tabs>
+      </div>
 
-              <Form.Item
-                name='commune'
-                rules={[{ required: true, message: 'Vui lòng xã/phường' }]}
-              >
-                <VInput label='Xã' required placeholder='Nhập xã/phường' />
-              </Form.Item>
-
-              <Form.Item
-                name='district'
-                rules={[{ required: true, message: 'Vui lòng quận/huyện ' }]}
-              >
-                <VInput
-                  label='Quận/Huyện '
-                  required
-                  placeholder='Nhập quận/huyện '
-                />
-              </Form.Item>
-              <Form.Item
-                name='province'
-                rules={[
-                  { required: true, message: 'Vui lòng Tỉnh/Thành phố ' },
-                ]}
-              >
-                <VInput
-                  label='Tỉnh/Thành phố'
-                  required
-                  placeholder='Nhập Tỉnh/Thành phố '
-                />
-              </Form.Item>
-              <Form.Item
-                name='country'
-                rules={[{ required: true, message: 'Vui lòng Quốc gia ' }]}
-              >
-                <VInput
-                  label='Quốc gia'
-                  required
-                  placeholder='Nhập Quốc gia '
-                />
-              </Form.Item>
-              <Form.Item
-                name='taxCode'
-                rules={[{ required: true, message: 'Vui lòng MST ' }]}
-              >
-                <VInput label='MST' required placeholder='Nhập MST' />
-              </Form.Item>
-              <Form.Item
-                name='contactPerson'
-                rules={[
-                  {
-                    required: true,
-                    message: 'Vui lòng người liên hệ của khách hàng ',
-                  },
-                ]}
-              >
-                <VInput
-                  label='Người liên hệ của khách hàng'
-                  required
-                  placeholder='Nhập người liên hệ của khách hàng'
-                />
-              </Form.Item>
-              <Form.Item
-                name='phoneNumber'
-                rules={[
-                  {
-                    required: true,
-                    message: 'Vui lòng nhập sđt ',
-                  },
-                ]}
-              >
-                <VInput label='SĐT' required placeholder='Nhập SĐT' />
-              </Form.Item>
-              <Form.Item
-                name='phoneCode'
-                rules={[
-                  {
-                    required: true,
-                    message: 'Vui lòng nhập mã vùng',
-                  },
-                ]}
-              >
-                <VInput label='Mã vùng' required placeholder='Nhập mã vùng' />
-              </Form.Item>
-              <Form.Item
-                name='email'
-                rules={[
-                  {
-                    required: true,
-                    message: 'Vui lòng nhập email',
-                  },
-                ]}
-              >
-                <VInput label='Email' required placeholder='Nhập mã email' />
-              </Form.Item>
-              <Form.Item
-                name='typeCustomer'
-                rules={[
-                  {
-                    required: true,
-                    message: 'Vui lòng nhập Loại khách hàng',
-                  },
-                ]}
-              >
-                <VSelect
-                  label='Loại khách hàng'
-                  required
-                  placeholder='Nhập  Loại khách hàng'
-                >
-                  {OpitionCustomerType.map((v) => (
-                    <Option value={v.value} key={v.value}>
-                      {v.label}
-                    </Option>
-                  ))}
-                </VSelect>
-              </Form.Item>
-
-              <Form.Item
-                name='service'
-                rules={[
-                  {
-                    required: true,
-                    message: 'Vui lòng nhập Dịch vụ sử dụng',
-                  },
-                ]}
-              >
-                <VSelect
-                  label='Dịch vụ sử dụng'
-                  required
-                  placeholder='Nhập loại Dịch vụ sử dụng'
-                >
-                  {OpitionServiceEnum.map((v) => (
-                    <Option value={v.value} key={v.value}>
-                      {v.label}
-                    </Option>
-                  ))}
-                </VSelect>
-              </Form.Item>
-
-              <Form.Item
-                name='type'
-                rules={[
-                  {
-                    required: true,
-                    message: 'Vui lòng nhập Loại khách hàng vào mạng',
-                  },
-                ]}
-              >
-                <VSelect
-                  label='Loại khách hàng vào mạng'
-                  required
-                  placeholder='Nhập Loại khách hàng vào mạng'
-                >
-                  {OpitionNetWorkCustomerType.map((v) => (
-                    <Option value={v.value} key={v.value}>
-                      {v.label}
-                    </Option>
-                  ))}
-                </VSelect>
-              </Form.Item>
-              <Form.Item name='postCode'>
-                <VInput label='Mã bưu chính' placeholder='Nhập Mã bưu chính' />
-              </Form.Item>
-              <Form.Item name='state'>
-                <VInput label='Tiểu bang' placeholder='Nhập Tiểu bang' />
-              </Form.Item>
-              <Form.Item name='note'>
-                <VInput label='Ghi chú' placeholder='Nhập ghi chú' />
-              </Form.Item>
-            </div>
-          </div>
-
-          <div className='mt-4 flex justify-start'>
-            <Button
-              onClick={onSubmit}
-              loading={isCreating}
-              htmlType='submit'
-              type='primary'
-            >
-              Cập nhật khách hàng
-            </Button>
-          </div>
-        </Form>
+      <div className='mt-4 flex justify-start'>
+        <Button
+          onClick={onSubmit}
+          loading={isCreating}
+          htmlType='submit'
+          type='primary'
+        >
+          Cập nhật thông tin khách hàng
+        </Button>
       </div>
     </Modal>
   );

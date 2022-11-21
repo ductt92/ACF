@@ -583,6 +583,7 @@ const CreateBookingContainer = () => {
       senderAddressVi: userData?.detailAddress || '',
       senderPostalCode: userData?.postalCode || '',
       senderContactPerson: userData?.contactPerson || '',
+      senderNameEn: userData?.fullNameEn || '',
     };
     await form.setFieldsValue({
       ...custome,

@@ -56,6 +56,9 @@ const Address = ({
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       //  @ts-ignore
       senderNote: addressCustome?.senderNote || dataUser?.note,
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      //  @ts-ignore
+      senderNameEn: addressCustome?.senderNameEn || dataUser?.fullNameEn,
     });
   }, []);
 

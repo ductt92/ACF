@@ -31,6 +31,21 @@ export const createCustomer = async (data: Partial<ICustomer>) => {
   return createStaff;
 };
 
+export const getStaff = async () => {
+  const staff = HttpRequest.get('staffs/find-all-staff');
+  return staff;
+};
+
+export const getCompanies = async () => {
+  const companies = HttpRequest.get('companies');
+  return companies;
+};
+
+export const getUnit = async () => {
+  const units = HttpRequest.get('units');
+  return units;
+};
+
 export const updateCustomer = async ({
   id,
   data,
