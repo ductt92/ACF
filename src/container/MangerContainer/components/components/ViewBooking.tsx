@@ -28,6 +28,7 @@ import {
   generateBillPatner,
   generateInvoice,
   generateInvoicePatner,
+  generateSmallBill,
   updateBooking,
   updateStatusBooking,
 } from '@/services/booking.services';
@@ -681,6 +682,23 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
       genInvoicePartner(data.booking.id);
     }
   };
+
+  const { mutate: genBillSmall, isLoading: generateSmallBillLoading } =
+    useMutation(generateSmallBill, {
+      onSuccess: () => {
+        queryClient.invalidateQueries(['generateInVoice']);
+        notification.success({
+          message: 'Tải xuống thành công',
+          placement: 'top',
+        });
+      },
+      onError: () => {
+        notification.error({
+          message: 'Tải xuống thất bại',
+          placement: 'top',
+        });
+      },
+    });
   const handleSetStatus = (value: BookingStatusPost) => {
     setStatusBooking(value);
   };
@@ -710,6 +728,9 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
     }
   };
 
+  const handleGenSmallBill = () => {
+    genBillSmall(data?.booking?.id);
+  };
   return (
     <div>
       <div className='flex gap-4 text-center'>
@@ -772,6 +793,15 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
           }
         >
           {isInvoice ? 'Không Invoice' : 'Có Invoice'}
+        </Button>
+
+        <Button
+          onClick={handleGenSmallBill}
+          type='primary'
+          loading={generateSmallBillLoading}
+          icon={<PrinterOutlined />}
+        >
+          In Bill nhỏ
         </Button>
       </div>
 

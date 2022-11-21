@@ -21,6 +21,7 @@ import {
   generateBill,
   generateBillPatner,
   generateInvoice,
+  generateSmallBill,
   updateBooking,
   updateStatusBooking,
 } from '@/services/booking.services';
@@ -551,6 +552,22 @@ const CreateBookingContainer = () => {
     }
   };
 
+  const { mutate: genBillSmall, isLoading: generateSmallBillLoading } =
+    useMutation(generateSmallBill, {
+      onSuccess: () => {
+        queryClient.invalidateQueries(['generateInVoice']);
+        notification.success({
+          message: 'Tải xuống thành công',
+          placement: 'top',
+        });
+      },
+      onError: () => {
+        notification.error({
+          message: 'Tải xuống thất bại',
+          placement: 'top',
+        });
+      },
+    });
   const handleNewForm = async () => {
     await form.resetFields();
 
@@ -578,6 +595,11 @@ const CreateBookingContainer = () => {
         id,
         handleSetStatus,
       });
+    }
+  };
+  const handleGenSmallBill = () => {
+    if (id) {
+      genBillSmall(id);
     }
   };
 
@@ -651,6 +673,16 @@ const CreateBookingContainer = () => {
         </Button>
         <Button onClick={handleNewForm} type='primary'>
           Tạo bookings mới
+        </Button>
+
+        <Button
+          onClick={handleGenSmallBill}
+          type='primary'
+          disabled={!id}
+          loading={generateSmallBillLoading}
+          icon={<PrinterOutlined />}
+        >
+          In Bill nhỏ
         </Button>
       </div>
 
