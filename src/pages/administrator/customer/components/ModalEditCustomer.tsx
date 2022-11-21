@@ -50,7 +50,7 @@ const ModalEditCustomer = ({ onClose, value }: IProps) => {
       ...value,
       ...requestData,
       expertise: isExpertise === 1 ? true : false,
-      commitmentRate: parseFloat(requestData.commitmentRate.toString()),
+      commitmentRate: parseFloat(requestData.commitmentRate?.toString()) || 0,
     };
     const {
       id,
