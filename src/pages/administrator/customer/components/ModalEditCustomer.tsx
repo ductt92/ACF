@@ -1,3 +1,4 @@
+/* eslint-disable unused-imports/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button, Form, Modal, notification, Tabs } from 'antd';
 import moment from 'moment';
@@ -51,9 +52,24 @@ const ModalEditCustomer = ({ onClose, value }: IProps) => {
       expertise: isExpertise === 1 ? true : false,
       commitmentRate: parseFloat(requestData.commitmentRate.toString()),
     };
+    const {
+      id,
+      customerCode,
+      staffId,
+      userId,
+      gender,
+      dob,
+      addressDetail,
+      createdAt,
+      updatedAt,
+      user,
+      staff,
+      unit,
+      ...res
+    } = rs;
     mutateCreate({
       id: value?.id || '',
-      data: rs,
+      data: res,
     });
   };
 

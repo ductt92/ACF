@@ -85,6 +85,16 @@ export interface ICustomer {
   state?: string;
   note?: string;
   identifier: EIdentifierType;
+  customerCode: string;
+  staffId: string;
+  gender: string;
+  dob: string;
+  addressDetail: string;
+  createdAt: string | Date;
+  updatedAt: string | Date;
+  user: string;
+  staff: string;
+  unit: string;
 
   //contract
   serviceRequest: string; // Dịch vụ yêu cầu enum EServiceRequest
