@@ -46,8 +46,10 @@ const ModalEditCustomer = ({ onClose, value }: IProps) => {
   const onSubmit = async () => {
     const requestData: ICustomer = await form.validateFields();
     const rs = {
+      ...value,
       ...requestData,
       expertise: isExpertise === 1 ? true : false,
+      commitmentRate: parseFloat(requestData.commitmentRate.toString()),
     };
     mutateCreate({
       id: value?.id || '',

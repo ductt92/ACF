@@ -53,6 +53,7 @@ const ModalCreateCustomer = ({ onClose }: IProps) => {
     const res = {
       ...requestData,
       expertise: isExpertise === 1 ? true : false,
+      commitmentRate: parseFloat(requestData.commitmentRate.toString()),
     };
     mutateCreate({
       ...res,
