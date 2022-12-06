@@ -20,7 +20,7 @@ const TextLink = ({
       <Link href={href} {...props}>
         <a
           className={clsx(
-            ' text-[12px] font-medium text-[#222] hover:text-[#222]',
+            ' text-[16px] font-medium text-[#222] hover:text-[#222]',
             styleLabel
           )}
         >

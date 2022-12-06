@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Form, FormInstance, Radio, Select } from 'antd';
+import { DatePicker, Form, FormInstance, Radio, Select } from 'antd';
 import React, { useMemo } from 'react';
 import { useQuery } from 'react-query';
 
@@ -10,6 +10,8 @@ import VSelect from '@/components/common/VSelect';
 import { EServiceRequest, ETypeContract } from '@/contants/types';
 import { getStaff } from '@/services/customer.services';
 const { Option } = Select;
+const { RangePicker } = DatePicker;
+
 const ContractCustomer = ({
   form,
   expertise,
@@ -55,7 +57,7 @@ const ContractCustomer = ({
             name='serviceRequest'
             rules={[{ required: true, message: 'Vui lòng dịch vụ yêu cầu' }]}
           >
-            <VSelect label='dịch vụ yêu cầu' required>
+            <VSelect label='Dịch vụ yêu cầu' required>
               {EServiceRequestOpition.map((v) => (
                 <Option value={v.value} key={v.value}>
                   {v.label}
@@ -155,13 +157,23 @@ const ContractCustomer = ({
             ]}
           >
             <VDatePicker
-              label=' Lịch thanh toán công nợ kể từ ngày chốt bảng kê '
+              label='Lịch thanh toán công nợ kể từ ngày chốt bảng kê '
               format='DD-MM-YYYY'
               required
+              placeholder='Lịch thanh toán công nợ kể từ ngày chốt bảng kê'
             />
           </Form.Item>
           <Form.Item name='noteContract'>
             <VInput label='Ghi chú hợp đồng' />
+          </Form.Item>
+
+          <Form.Item name='timePrice'>
+            <p className='m-0 p-0'>Thời hạn hợp đồng</p>
+            <RangePicker
+              placeholder={['Ngày bắt đầu', 'Ngày kết thúc']}
+              format='DD/MM/YYYY'
+              className='w-full'
+            />
           </Form.Item>
 
           <Form.Item name='expertise'>

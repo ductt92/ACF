@@ -1,7 +1,6 @@
 import useTranslation from 'next-translate/useTranslation';
 import React from 'react';
 
-import TopBar from '@/components/top-bar';
 import BannerContainer from '@/container/banner';
 import Menu from '@/container/menu';
 
@@ -14,13 +13,11 @@ const HeaderHome = () => {
   const dataMenu = lang === 'vi' ? DATA_MOCK_MENU_VI : DATA_MOCK_MENU_EN;
   return (
     <div>
-      <div className='relative flex h-[37px] items-center justify-center bg-[#f3f3f3]'>
+      {/* <div className='relative flex h-[37px] items-center justify-center bg-[#f3f3f3]'>
         <TopBar styledButton='border border-red-500	flex items-center' />
-      </div>
-      <div className='w-full'>
-        <header className='m-auto flex w-[1170px] items-center	justify-between py-2 lg:w-full lg:max-w-[991px] lg:pl-6'>
-          <BannerContainer />
-        </header>
+      </div> */}
+      <div className='h-[150px] w-full '>
+        <BannerContainer />
       </div>
 
       <nav className='w-full border-[#efbd2b] bg-[#efbd2b] sm:hidden'>

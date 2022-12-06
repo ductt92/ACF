@@ -41,6 +41,7 @@ function MyApp({ Component, pageProps }: CustomAppProps) {
           name='viewport'
           content='minimum-scale=1, initial-scale=1, width=device-width'
         />
+        <link href='https://fonts.cdnfonts.com/css/inter' rel='stylesheet' />
       </Head>
       <QueryClientProvider client={queryClient}>
         {/* <Provider store={store}> */}
