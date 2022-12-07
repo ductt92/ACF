@@ -1,35 +1,49 @@
 /* eslint-disable @next/next/no-img-element */
+import { useRouter } from 'next/router';
 import setLanguage from 'next-translate/setLanguage';
 import useTranslation from 'next-translate/useTranslation';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import TextLink from '@/components/links/TextLink';
 
 import {
   DATA_MOCK_MENU_EN,
   DATA_MOCK_MENU_VI,
+  dataMenuManager,
 } from '@/contants/mock-data/mock-data';
+import { ACCSESS_TOKEN } from '@/contants/Storage';
+import { MANAGER_PAGES } from '@/routes/routes';
+import storage from '@/utils/storage';
 
 import ItemMenu from './components/ItemMenu';
 
 const BannerContainer = () => {
   const { t, lang } = useTranslation('common');
   const contactPhone = t(`ContactPhone`);
+  const router = useRouter();
   const hotLine = t(`HotLine`);
   const termsOfUse = t(`TermsOfUse`);
   const policy = t(`Policy`);
   const dataMenu = lang === 'vi' ? DATA_MOCK_MENU_VI : DATA_MOCK_MENU_EN;
+  const [isLogin, setIsLogin] = useState<boolean>(false);
+  useEffect(() => {
+    const accessToken = storage().getItem(ACCSESS_TOKEN);
+    const isManager = router.pathname.search(MANAGER_PAGES);
+    if (accessToken && !isManager) {
+      setIsLogin(true);
+    }
+  }, [router]);
 
   return (
-    <div className='flex flex-row bg-[#FBE51D] pt-4 pb-4 pl-10'>
+    <div className='flex h-[120px] flex-row bg-[#FBE51D] p-1 pb-4 pl-10'>
       <img
         src='images/acf-logo.svg'
         alt='logo'
-        className='h-[124px] w-[360px]'
+        className='h-[108px] w-[284px]'
       />
       <div className='flex w-full flex-col justify-center '>
         <div className='px-14'>
-          <div className='flex h-[60px] flex-row items-center justify-between gap-4'>
+          <div className='flex h-[54px] flex-row items-center justify-between gap-4'>
             <div className='flex flex-row gap-14'>
               <div className='flex h-[60px] flex-row items-center gap-8'>
                 <TextLink href='/' label={policy} />
@@ -65,10 +79,10 @@ const BannerContainer = () => {
 
         <div className='h-[4px] w-full bg-[#000000]' />
 
-        <div className='flex h-[66px] flex-row items-center'>
-          {dataMenu.map((v) => (
-            <ItemMenu key={v.href} label={v.title} />
-          ))}
+        <div className='flex h-full flex-row items-center justify-start gap-20'>
+          {isLogin
+            ? dataMenuManager.map((v) => <ItemMenu key={v.href} value={v} />)
+            : dataMenu.map((v) => <ItemMenu key={v.href} value={v} />)}
         </div>
       </div>
     </div>

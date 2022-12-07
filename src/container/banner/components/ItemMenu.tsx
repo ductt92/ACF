@@ -1,6 +1,13 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
 
-const ItemMenu = ({ label }: { label: string }) => {
-  return <div>{label}</div>;
+import TextLink from '@/components/links/TextLink';
+
+const ItemMenu = ({ value }: { value: any }) => {
+  return (
+    <div>
+      <TextLink href={value.href} label={value.title} />
+    </div>
+  );
 };
 export default ItemMenu;
