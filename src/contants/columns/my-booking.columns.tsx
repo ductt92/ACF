@@ -29,6 +29,18 @@ const CUSTOMER_CLASS = 'w-[150px] cursor-pointer truncate text-center p-2 m-0';
 
 export const MYBOOKING_COLUMNS: ColumnsType<IMyBooking> = [
   {
+    title: 'TT Xử lý',
+    dataIndex: 'is_handle',
+    key: 'is_handle',
+    align: 'center',
+    width: 100,
+    render: (isHandle: string) => (
+      <p className={isHandle ? 'text-green-500	' : 'text-red-500'}>
+        {isHandle ? 'Đã xử lý' : 'Chưa xử lý'}
+      </p>
+    ),
+  },
+  {
     title: 'Mã bưu phẩm bưu kiện ACF',
     dataIndex: 'booking_code',
     key: 'booking_code',

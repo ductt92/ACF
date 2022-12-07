@@ -109,6 +109,11 @@ export const fetchCommoditiesTypeId = () => {
   const users = HttpRequest.get(`commodities-type`);
   return users;
 };
+
+export const fetchServicePartnerService = () => {
+  const users = HttpRequest.get(`/service/partner-service`);
+  return users;
+};
 export const fetchShippingType = () => {
   const users = HttpRequest.get(`shipping-item`);
   return users;
@@ -178,6 +183,11 @@ export const generateInvoice = (id: string) => {
 export const fetchServicesBooking = () => {
   const users = HttpRequest.get(`service`);
   return users;
+};
+
+export const confirmBooking = (id: string) => {
+  const confirmBooking = HttpRequest.patch(`booking/is-handle-booking/${id}`);
+  return confirmBooking;
 };
 
 export const fetchDeliveryCondition = () => {
