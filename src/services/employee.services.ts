@@ -35,17 +35,18 @@ export const updatePartnerBillCode = async ({
   id,
   partnerBillCode,
   handleSetBillCode,
+  partnerService,
 }: {
   id: string;
   partnerBillCode: string;
+  partnerService: string;
   handleSetBillCode: (bill: string) => void;
 }) => {
   const updatePartnerBillCode = await HttpRequest.patch(
     `booking/update-partner-bill-code/${id}`,
-    { partnerBillCode }
+    { partnerBillCode, partnerService }
   );
   if (updatePartnerBillCode) {
-    // console.log(updatePartnerBillCode);
     handleSetBillCode(id);
   }
   return updatePartnerBillCode;

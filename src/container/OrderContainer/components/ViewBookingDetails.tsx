@@ -16,6 +16,7 @@ import {
   OpitionType,
 } from '@/contants/types';
 import {
+  confirmBooking,
   fetchCurrentUnit,
   fetchServicesBooking,
   generateBill,
@@ -90,6 +91,7 @@ const ViewBookingDetails = ({ data }: { data: any }) => {
       handleSubmit({
         id: data?.booking?.id,
         partnerBillCode: res.partnerBillCode,
+        partnerService: res.partnerService,
         handleSetBillCode,
       });
     } else {
@@ -230,6 +232,22 @@ const ViewBookingDetails = ({ data }: { data: any }) => {
       });
     },
   });
+
+  const { mutate: confirmBooking2 } = useMutation(confirmBooking, {
+    onSuccess: () => {
+      queryClient.invalidateQueries(['confirmBooking']);
+      notification.success({
+        message: 'Cập nhật thành công',
+        placement: 'top',
+      });
+    },
+    onError: () => {
+      notification.error({
+        message: 'Cập nhật thất bại',
+        placement: 'top',
+      });
+    },
+  });
   const { mutate: genBillPatner } = useMutation(generateBillPatner, {
     onSuccess: () => {
       queryClient.invalidateQueries(['generateInVoice']);
@@ -276,6 +294,12 @@ const ViewBookingDetails = ({ data }: { data: any }) => {
     genBillSmall(data?.booking?.id);
   };
 
+  const handleConfrimSucces = () => {
+    if (data?.booking?.id) {
+      confirmBooking2(data?.booking?.id);
+    }
+  };
+
   return (
     <div>
       <div className='flex gap-4'>
@@ -301,7 +325,7 @@ const ViewBookingDetails = ({ data }: { data: any }) => {
           In Invoice
         </Button>
 
-        {billPartner && (
+        {billPartner && data?.booking?.partnerService && (
           <Button
             onClick={handleGeneratorBillPartner}
             type='primary'
@@ -330,6 +354,19 @@ const ViewBookingDetails = ({ data }: { data: any }) => {
         >
           In Bill nhỏ
         </Button>
+
+        {billPartner &&
+          data?.booking?.partnerService &&
+          !data?.booking.is_handle && (
+            <Button
+              onClick={handleConfrimSucces}
+              type='primary'
+              loading={generateSmallBillLoading}
+              icon={<PrinterOutlined />}
+            >
+              Xác nhận đã xử lý
+            </Button>
+          )}
       </div>
 
       <div className='h-[calc(70vh)] overflow-y-auto p-5'>
