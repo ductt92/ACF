@@ -9,6 +9,7 @@ import { createCustomer } from '@/services/customer.services';
 
 import ContractCustomer from './ContractCustomer';
 import InfoCustomer from './InfoCustomer';
+import InFoNew from './InforNew';
 
 interface IProps {
   onClose: (value: boolean) => void;
@@ -65,7 +66,7 @@ const ModalCreateCustomer = ({ onClose }: IProps) => {
       footer={null}
       visible={true}
       onCancel={() => onClose(false)}
-      className='top-[calc(5vh)] w-[calc(40vw)]'
+      className='top-[calc(5vh)] w-[calc(60vw)]'
     >
       <div>
         <p className='text-center text-[24px] font-medium'>
@@ -83,6 +84,9 @@ const ModalCreateCustomer = ({ onClose }: IProps) => {
               expertise={isExpertise}
               onChangeEx={handleChangeExpertise}
             />
+          </Tabs.TabPane>
+          <Tabs.TabPane tab='Chi tiết' key='DetailsCustomer'>
+            <InFoNew form={form} />
           </Tabs.TabPane>
         </Tabs>
       </div>

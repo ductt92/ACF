@@ -107,6 +107,46 @@ export interface ICustomer {
   contractName: string; // Tên hợp đồng
   typeContract: string; // Loại hợp đồng enum ETypeContract
   noteContract?: string; // ghi chú hợp đồng
+
+  ///
+
+  beneficiary?: string; // Tên người thụ hưởng
+  jobTitle?: string; // Chức vụ làm việc
+  beneficiaryPhone?: string; // Số điện thoại người thụ hưởng
+  isDirectBeneficiary?: boolean; // Người trực tiếp hưởng hay người thân
+  relationshipBeneficiaries?: string; // Quan hệ với người thụ hưởng
+  beneficiaryAccountNumber?: string; // Số tài khoản thụ hưởng
+  beneficiaryBank?: string; // Ngân hàng thụ hưởng
+  lkdRate?: number; // Tỷ lệ LKD/Giá bán gốc chưa phụ phí
+  beneficiaryNote?: string; // Ghi chú
+
+  // Tài chính
+  typeOfPayment?: string; // Loại thanh toán
+  previousCosingFrom?: Date; // Kỳ chốt cước
+  previousCosingTo?: Date;
+  financeNote?: string; // Ghi chú
+
+  // Thông tin gửi BK
+  notifyEmail?: string; //Email BK theo thông tin KH
+  notifyOtherEmail?: string; //Gửi BK theo danh sách Email bổ sung thêm ngoài email ban đầu
+  notifyContactPerson?: string; // Người liên hệ
+  bookingEmail?: string; //Email bảng kê
+  bookingPhone?: string; //Số điện thoại
+  bookingMobile?: string; //Số di động
+
+  // Thông tin gửi hóa đơn điện tử
+  orderEmailCustomer?: string; //Email hóa đơn theo thông tin KH
+  orderOtherEmail?: string; // Gửi Hóa đơn theo danh sách Email bổ sung thêm ngoài email ban đầu
+  orderContactPerson?: string; // Người liên hệ
+  orderEmail?: string; //Email hóa đơn
+  orderPhone?: string; //Số di động
+
+  // Thông tin thu nợ
+  debtContactPerson?: string; // Người liên hệ
+  debtEmail?: string; // Email thu nợ
+  debtPhone?: string; // Số điện thoại
+  debtMobile?: string; // Số di động
+  debtAddress?: string; // Địa chỉ thu nợ
 }
 
 export interface IUser {
@@ -172,6 +212,32 @@ export enum EServiceRequest {
   SPLIT_ENTRY = 'Nhập chia tách', //Nhập chia tách
 }
 
+export interface IContract {
+  id?: string;
+  serviceRequestId: string; // Dịch vụ yêu cầu /service/small-service
+  potentialRevenueFrom: number; // Doanh thu tiềm năng từ
+  potentialRevenueTo: number; // Doanh thu tiềm năng đến
+  paymentSchedule: Date; // Lịch thanh toán công nợ kể từ ngày chốt bảng kê
+  commitmentRate: number; // Tỷ lệ LNG Cam kết nếu xin giá riêng/Tháng
+  expertise: boolean; // Thẩm định
+  appraisalStaff?: string; // Nhân viên thẩm định
+  contractCode: string; // Mã hợp đồng
+  contractName: string; // Tên hợp đồng
+  typeContract: string; // Loại hợp đồng enum ETypeContract
+  contractTermFrom?: Date; // Từ ngày
+  contractTermTo?: Date; // Đến ngày
+  fixedPriceCode?: string; // Mã bảng giá cố định // Enum EFixedPriceCode
+  otherPrice?: number; // Giá khác
+  countryContractId?: string; // Country hoặc Zone // /service/zone-small-service/:id
+  discountRate?: number; // Tỷ lệ giảm giá (Đánh tỷ lệ %)
+  noteContract?: string; // ghi chú hợp đồng
+  priceListCode: string; // Mã bảng giá
+  timeApplyFrom: Date; // Từ ngày
+  timeApplyTo: Date; // Đến ngày
+  surcharge: number; // Phụ phí xăng dầu áp dụng
+  applicableRate: number; // Tý giá áp dụng
+}
+
 export enum ETypeContract {
   INDEFINITE = 'Không xác định',
   TIME_LIMIT = 'Giới hạn thời gian',
@@ -184,6 +250,20 @@ export enum CustomerType { // Loại khách hàng
   STATE_ENTERPRISES = 'Doanh nghiệp nhà nước', //'Doanh nghiệp nhà nước',
   REPRESENTATIVE_OFFICE = 'Văn phòng đại diện', //'Văn phòng đại diện',
   INDIVIDUAL_CUSTOMER = 'Khách hàng cá nhân', //'Khách hàng cá nhân',
+}
+
+export enum EFixedPriceCode {
+  P1 = 'P1',
+  P2 = 'P2',
+  P3 = 'P3',
+  P4 = 'P4',
+  P5 = 'P5',
+  P6 = 'P6',
+  P7 = 'P7',
+  P8 = 'P8',
+  P9 = 'P9',
+  P10 = 'P10',
+  OTHER_PRICE = 'OTHER PRICE',
 }
 
 export enum ServiceEnum { // Dịch vụ sử dụng

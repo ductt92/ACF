@@ -36,9 +36,24 @@ export const getStaff = async () => {
   return staff;
 };
 
+export const getSmallServices = () => {
+  const smallServices = HttpRequest.get('service/small-service');
+  return smallServices;
+};
+export const getCountry = (id?: string) => {
+  if (id) {
+    const smallServices = HttpRequest.get(`service/zone-small-service/${id}`);
+    return smallServices;
+  }
+};
+
 export const getCompanies = async () => {
   const companies = HttpRequest.get('companies');
   return companies;
+};
+export const getServices = async () => {
+  const service = HttpRequest.get('service');
+  return service;
 };
 
 export const getUnit = async () => {

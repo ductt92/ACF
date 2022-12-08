@@ -11,6 +11,7 @@ import { updateCustomer } from '@/services/customer.services';
 
 import ContractCustomer from './ContractCustomer';
 import InfoCustomer from './InfoCustomer';
+import InFoNew from './InforNew';
 
 interface IProps {
   onClose: (value: boolean) => void;
@@ -18,12 +19,13 @@ interface IProps {
 }
 const ModalEditCustomer = ({ onClose, value }: IProps) => {
   const [isExpertise, setExpertise] = useState<any>(1);
-
   const queryClient = useQueryClient();
   const [form] = Form.useForm();
+
   const handleChangeExpertise = (value: any) => {
     setExpertise(value);
   };
+
   const { mutate: mutateCreate, isLoading: isCreating } = useMutation(
     updateCustomer,
     {
@@ -90,7 +92,7 @@ const ModalEditCustomer = ({ onClose, value }: IProps) => {
       footer={null}
       visible={true}
       onCancel={() => onClose(false)}
-      className='top-[calc(5vh)] w-[calc(40vw)]'
+      className='top-[calc(5vh)] w-[calc(60vw)]'
     >
       <div>
         <p className='text-center text-[24px] font-medium'>
@@ -108,6 +110,9 @@ const ModalEditCustomer = ({ onClose, value }: IProps) => {
               expertise={isExpertise}
               onChangeEx={handleChangeExpertise}
             />
+          </Tabs.TabPane>
+          <Tabs.TabPane tab='Chi tiết' key='DetailsCustomer'>
+            <InFoNew form={form} />
           </Tabs.TabPane>
         </Tabs>
       </div>

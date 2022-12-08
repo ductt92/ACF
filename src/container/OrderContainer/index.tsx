@@ -83,7 +83,7 @@ const OrderDetails = () => {
             };
           }}
           bordered
-          scroll={{ y: 450, x: 800 }}
+          scroll={{ y: 700, x: 800 }}
         />
       </Spin>
       {isViewBooking && (
