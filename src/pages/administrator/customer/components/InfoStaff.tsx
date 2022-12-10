@@ -20,10 +20,10 @@ const InfoStaff = ({ form, handleAddStaff, infoStaff }: InfoStaffProps) => {
     getStaffAll()
   );
   const onHandleAddStaff = async () => {
-    const res = await createStaff.getFieldsValue();
+    const res = await createStaff.validateFields();
     handleAddStaff(res);
-    setIsOpen(false);
     createStaff.resetFields();
+    setIsOpen(false);
   };
 
   const OptionStaff = useMemo(() => {

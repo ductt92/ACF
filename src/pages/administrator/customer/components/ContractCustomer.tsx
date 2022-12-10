@@ -19,7 +19,11 @@ interface ContractCustomer {
   detailsContract: Array<any>;
   handleAddContract: (data: any) => void;
 }
-const ContractCustomer = ({ form, detailsContract }: ContractCustomer) => {
+const ContractCustomer = ({
+  form,
+  detailsContract,
+  handleAddContract,
+}: ContractCustomer) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [contractFrom] = Form.useForm<IContract>();
   const [isExpertise, setExpertise] = useState<any>(0);
@@ -98,16 +102,13 @@ const ContractCustomer = ({ form, detailsContract }: ContractCustomer) => {
     setServicesId(value);
   };
   const onHandleAddContract = async () => {
-    const res = await contractFrom.getFieldsValue();
-
-    console.log(res?.priceListCode);
-    // handleAddContract({ ...res, expertise: isExpertise });
-    // setIsOpen(false);
-    // setExpertise(0);
-    // contractFrom.resetFields();
+    const res = await contractFrom.validateFields();
+    handleAddContract({ ...res, expertise: isExpertise });
+    setIsOpen(false);
+    setExpertise(0);
+    contractFrom.resetFields();
   };
 
-  console.log(detailsContract);
   return (
     <div className='h-[calc(70vh)] overflow-y-auto p-4'>
       <div className='flex flex-col gap-4'>

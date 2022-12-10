@@ -86,7 +86,7 @@ const ViewBookingDetails = ({ data }: { data: any }) => {
     setBillPartner(bill);
   };
   const onSubmit = async () => {
-    const res = await viewBooking.getFieldsValue();
+    const res = await viewBooking.validateFields();
     if (res.partnerBillCode) {
       handleSubmit({
         id: data?.booking?.id,
