@@ -21,8 +21,10 @@ const InfoStaff = ({ form, handleAddStaff, infoStaff }: InfoStaffProps) => {
   );
   const onHandleAddStaff = async () => {
     const res = await createStaff.validateFields();
-    handleAddStaff(res);
-    createStaff.resetFields();
+    if (res.beneficiary || res.typeStaff) {
+      handleAddStaff(res);
+      createStaff.resetFields();
+    }
     setIsOpen(false);
   };
 

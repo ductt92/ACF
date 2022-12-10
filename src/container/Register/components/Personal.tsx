@@ -35,7 +35,7 @@ const Personal = () => {
     },
   });
   const handleSubmit = async () => {
-    const value = await personForm.getFieldsValue();
+    const value = await personForm.validateFields();
     personRegis({ ...value });
   };
 

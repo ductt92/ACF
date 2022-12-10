@@ -29,7 +29,7 @@ const Coprorate = () => {
     },
   });
   const onSubmit = async () => {
-    const value = await company.getFieldsValue();
+    const value = await company.validateFields();
     companyRegis({ ...value });
   };
   return (
