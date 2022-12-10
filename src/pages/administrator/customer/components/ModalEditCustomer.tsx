@@ -21,9 +21,10 @@ const ModalEditCustomer = ({ onClose, value }: IProps) => {
   const [isExpertise, setExpertise] = useState<any>(1);
   const queryClient = useQueryClient();
   const [form] = Form.useForm();
+  const [detailsContract, setDetailsContract] = useState<Array<any>>([]);
 
-  const handleChangeExpertise = (value: any) => {
-    setExpertise(value);
+  const handleAddContract = (data: any) => {
+    setDetailsContract((prev) => [...prev, data]);
   };
 
   const { mutate: mutateCreate, isLoading: isCreating } = useMutation(
@@ -107,8 +108,8 @@ const ModalEditCustomer = ({ onClose, value }: IProps) => {
           <Tabs.TabPane tab='Hợp đồng' key='Contract'>
             <ContractCustomer
               form={form}
-              expertise={isExpertise}
-              onChangeEx={handleChangeExpertise}
+              detailsContract={detailsContract}
+              handleAddContract={handleAddContract}
             />
           </Tabs.TabPane>
           <Tabs.TabPane tab='Chi tiết' key='DetailsCustomer'>

@@ -19,11 +19,7 @@ interface ContractCustomer {
   detailsContract: Array<any>;
   handleAddContract: (data: any) => void;
 }
-const ContractCustomer = ({
-  form,
-  detailsContract,
-  handleAddContract,
-}: ContractCustomer) => {
+const ContractCustomer = ({ form, detailsContract }: ContractCustomer) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [contractFrom] = Form.useForm<IContract>();
   const [isExpertise, setExpertise] = useState<any>(0);
