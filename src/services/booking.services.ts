@@ -100,6 +100,10 @@ export const getBookingById = async (id: any) => {
   return booking as MyBookingResponse;
 };
 
+export const getStaffAll = async () => {
+  return HttpRequest.get(`staffs/find-all-staff`);
+};
+
 export const fetchUser = () => {
   const users = HttpRequest.get(`customer/my-profile`);
   return users as unknown as IUser;

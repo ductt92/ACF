@@ -149,6 +149,20 @@ export interface ICustomer {
   debtAddress?: string; // Địa chỉ thu nợ
 }
 
+export interface IManagementStaff {
+  id?: string;
+  staffId: string; // Tên nhân viên
+  typeStaff: string; // Loại nhân viên
+}
+
+export enum ETypeStaff {
+  DEBT_COLLECTOR = 'Nhân viên thu nợ', // Nhân viên thu nợ
+  CODE_OPENING_STAFF = ' Nhân viên mở mã', // Nhân viên mở mã
+  FORWARDING_STAFF = ' Nhân viên giao nhận', // Nhân viên giao nhận
+  BUSINESS_STAFF = 'Nhân viên kinh doanh', // Nhân viên kinh doanh
+  TELESALE_STAFF = 'Nhân viên Telesales', // Nhân viên Telesales
+  INVOICING_STAFF = 'Nhân viên xuất hóa đơn', // Nhân viên xuất hóa đơn
+}
 export interface IUser {
   id: string;
   unitId?: string;

@@ -10,18 +10,17 @@ import { createCustomer } from '@/services/customer.services';
 import ContractCustomer from './ContractCustomer';
 import InfoCustomer from './InfoCustomer';
 import InFoNew from './InforNew';
+import InfoStaff from './InfoStaff';
 
 interface IProps {
   onClose: (value: boolean) => void;
 }
 const ModalCreateCustomer = ({ onClose }: IProps) => {
-  const [isExpertise, setExpertise] = useState<any>(1);
   const queryClient = useQueryClient();
   const [form] = Form.useForm();
 
-  const handleChangeExpertise = (value: any) => {
-    setExpertise(value);
-  };
+  const [detailsContract, setDetailsContract] = useState<Array<any>>([]);
+  const [infoStaff, setInfoStaff] = useState<Array<any>>([]);
 
   const { mutate: mutateCreate, isLoading: isCreating } = useMutation(
     createCustomer,
@@ -53,12 +52,18 @@ const ModalCreateCustomer = ({ onClose }: IProps) => {
     const requestData: ICustomer = await form.validateFields();
     const res = {
       ...requestData,
-      expertise: isExpertise === 1 ? true : false,
-      commitmentRate: parseFloat(requestData.commitmentRate?.toString()) || 0,
     };
     mutateCreate({
       ...res,
     });
+  };
+
+  const handleAddContract = (data: any) => {
+    setDetailsContract((prev) => [...prev, data]);
+  };
+
+  const handleAddStaff = (data: any) => {
+    setInfoStaff((prev) => [...prev, data]);
   };
 
   return (
@@ -81,12 +86,19 @@ const ModalCreateCustomer = ({ onClose }: IProps) => {
           <Tabs.TabPane tab='Hợp đồng' key='Contract'>
             <ContractCustomer
               form={form}
-              expertise={isExpertise}
-              onChangeEx={handleChangeExpertise}
+              detailsContract={detailsContract}
+              handleAddContract={handleAddContract}
             />
           </Tabs.TabPane>
           <Tabs.TabPane tab='Chi tiết' key='DetailsCustomer'>
             <InFoNew form={form} />
+          </Tabs.TabPane>
+          <Tabs.TabPane tab='Thông tin nhân viên' key='InfoStaff'>
+            <InfoStaff
+              form={form}
+              infoStaff={infoStaff}
+              handleAddStaff={handleAddStaff}
+            />
           </Tabs.TabPane>
         </Tabs>
       </div>

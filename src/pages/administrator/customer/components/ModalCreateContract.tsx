@@ -1,35 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import {
-  Button,
-  DatePicker,
-  Form,
-  FormInstance,
-  Modal,
-  Radio,
-  Select,
-  Spin,
-} from 'antd';
-import React, { useEffect, useMemo } from 'react';
-import { useQuery } from 'react-query';
+import { Button, Form, FormInstance, Modal, Radio, Select, Spin } from 'antd';
+import React from 'react';
 
 import VDatePicker from '@/components/common/VDatePicker';
 import VInput from '@/components/common/VInput';
+import VRangePicker from '@/components/common/VRangeDate';
 import VSelect from '@/components/common/VSelect';
 
-import {
-  EFixedPriceCode,
-  ETypeContract,
-  IContract,
-  OpitionType,
-} from '@/contants/types';
-import {
-  getCountry,
-  getSmallServices,
-  getStaff,
-} from '@/services/customer.services';
+import { IContract, OpitionType } from '@/contants/types';
 
 const { Option } = Select;
-const { RangePicker } = DatePicker;
 
 interface ModalCreateContract {
   onClose: () => void;
@@ -38,8 +18,13 @@ interface ModalCreateContract {
   expertise: any;
   handleChangeEx: (value: any) => void;
   handleChangeServices: (value: string) => void;
-  servicesId?: string;
   handleAddContract: () => void;
+  opitonServices: Array<OpitionType>;
+  opitionTypeContract: Array<OpitionType>;
+  opitionFixedPriceCode: Array<OpitionType>;
+  opitionCountryZone: Array<OpitionType>;
+  opitionStaff: Array<OpitionType>;
+  countryContractLoading: boolean;
 }
 
 const ModalCreateContract = ({
@@ -47,85 +32,16 @@ const ModalCreateContract = ({
   form,
   isOpen,
   expertise,
-  servicesId,
   handleChangeServices,
   handleChangeEx,
   handleAddContract,
+  opitonServices,
+  opitionTypeContract,
+  opitionFixedPriceCode,
+  opitionCountryZone,
+  countryContractLoading,
+  opitionStaff,
 }: ModalCreateContract) => {
-  const { data: dataStaff } = useQuery(['getStaff', {}], () => getStaff());
-  const { data: dataSmallServices } = useQuery(['smallSerices', {}], () =>
-    getSmallServices()
-  );
-  const { data: countryContract, isLoading: countryContractLoading } = useQuery(
-    ['countryContract', { servicesId }],
-    () => getCountry(servicesId)
-  );
-
-  const OpitionStaff = useMemo(() => {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    //  @ts-ignore
-    if (dataStaff?.length < 0) {
-      return [];
-    } else {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      //  @ts-ignore
-      return dataStaff?.map((v) => ({
-        value: v.id,
-        label: `${v.staffCode} - ${v.fullName}`,
-      }));
-    }
-  }, [dataStaff]);
-
-  const OpitionSmallServices = useMemo(() => {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    //  @ts-ignore
-    if (dataSmallServices?.length < 0) {
-      return [];
-    } else {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      //  @ts-ignore
-      return dataSmallServices?.map((v) => ({
-        value: v.id,
-        label: v.name,
-      }));
-    }
-  }, [dataSmallServices]);
-
-  const CountryZoneOpition = useMemo(() => {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    //  @ts-ignore
-    if (countryContract?.length < 0) {
-      return [];
-    } else {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      //  @ts-ignore
-      return countryContract?.map((v) => ({
-        value: v.id,
-        label: v.name,
-      }));
-    }
-  }, [countryContract]);
-
-  const ETypeContractOpition = Object.entries(ETypeContract).map(
-    ([key, value]) => ({
-      value: key,
-      label: value,
-    })
-  );
-
-  const EFixedPriceOpition = Object.entries(EFixedPriceCode).map(
-    ([key, value]) => ({
-      value: key,
-      label: value,
-    })
-  );
-
-  useEffect(() => {
-    return () => {
-      form.resetFields();
-    };
-  }, [form]);
-
   return (
     <Modal
       footer={null}
@@ -136,7 +52,7 @@ const ModalCreateContract = ({
     >
       <Spin spinning={countryContractLoading}>
         <p className='text-center text-2xl'>Tạo mới thông tin hợp đồng</p>
-        <Form form={form}>
+        <Form form={form} name='contractFrom'>
           <div className='h-[calc(70vh)] overflow-y-auto p-4'>
             <div className='grid grid-cols-2 gap-x-6'>
               <Form.Item
@@ -150,7 +66,7 @@ const ModalCreateContract = ({
                   required
                   onChange={handleChangeServices}
                 >
-                  {OpitionSmallServices?.map((v: OpitionType) => (
+                  {opitonServices?.map((v: OpitionType) => (
                     <Option value={v.value} key={v.value}>
                       {v.label}
                     </Option>
@@ -267,7 +183,7 @@ const ModalCreateContract = ({
                 ]}
               >
                 <VSelect label='Loại hợp đồng' required>
-                  {ETypeContractOpition.map((v) => (
+                  {opitionTypeContract.map((v) => (
                     <Option value={v.value} key={v.value}>
                       {v.label}
                     </Option>
@@ -277,7 +193,7 @@ const ModalCreateContract = ({
 
               <Form.Item name='fixedPriceCode'>
                 <VSelect label='Mã bảng giá cố định'>
-                  {EFixedPriceOpition.map((v) => (
+                  {opitionFixedPriceCode.map((v) => (
                     <Option value={v.value} key={v.value}>
                       {v.label}
                     </Option>
@@ -294,13 +210,12 @@ const ModalCreateContract = ({
                   },
                 ]}
               >
-                <p className='m-0 p-0'>
-                  Thời hạn hợp đồng <span className='text-red-500'>*</span>
-                </p>
-                <RangePicker
+                <VRangePicker
                   placeholder={['Ngày bắt đầu', 'Ngày kết thúc']}
                   className='w-full'
                   format='DD/MM/YYYY'
+                  label='Thời hạn hợp đồng'
+                  required
                 />
               </Form.Item>
 
@@ -310,7 +225,7 @@ const ModalCreateContract = ({
 
               <Form.Item name='countryContractId'>
                 <VSelect label='Country hoặc Zone '>
-                  {CountryZoneOpition?.map((v: OpitionType) => (
+                  {opitionCountryZone?.map((v: OpitionType) => (
                     <Option value={v.value} key={v.value}>
                       {v.label}
                     </Option>
@@ -350,18 +265,16 @@ const ModalCreateContract = ({
                 rules={[
                   {
                     required: true,
-                    message: 'Vui lòng chọn thời hạn hợp đồng',
+                    message: 'Vui lòng chọn Thời hạn áp dung mã giảm giá',
                   },
                 ]}
               >
-                <p className='m-0 p-0'>
-                  Thời hạn áp dung mã giảm giá
-                  <span className='text-red-500'>*</span>
-                </p>
-                <RangePicker
+                <VRangePicker
                   placeholder={['Ngày bắt đầu', 'Ngày kết thúc']}
                   className='w-full'
                   format='DD/MM/YYYY'
+                  label='Thời hạn áp dung mã giảm giá'
+                  required
                 />
               </Form.Item>
 
@@ -386,7 +299,7 @@ const ModalCreateContract = ({
                 rules={[
                   {
                     required: true,
-                    message: 'Vui lòng chọn thời hạn hợp đồng',
+                    message: 'Vui lòng chọn tý giá áp dụng',
                   },
                 ]}
               >
@@ -405,8 +318,8 @@ const ModalCreateContract = ({
                   value={expertise}
                   onChange={(e) => handleChangeEx(e.target.value)}
                 >
-                  <Radio value={1}>Đã thẩm định</Radio>
                   <Radio value={0}>Chưa thầm định</Radio>
+                  <Radio value={1}>Đã thẩm định</Radio>
                 </Radio.Group>
               </Form.Item>
 
@@ -421,7 +334,7 @@ const ModalCreateContract = ({
                   ]}
                 >
                   <VSelect label='Nhân viên thẩm định' required>
-                    {OpitionStaff?.map((v: any) => (
+                    {opitionStaff?.map((v: any) => (
                       <Option value={v.value} key={v.value}>
                         {v.label}
                       </Option>

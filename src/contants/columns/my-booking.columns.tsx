@@ -9,6 +9,7 @@ import { Modal, Tooltip } from 'antd';
 import { ColumnsType } from 'antd/lib/table';
 import clsx from 'clsx';
 import dayjs from 'dayjs';
+import moment from 'moment';
 
 import { CLICK_TO_COPY, copyToClipBoard } from '@/utils/helpers';
 
@@ -17,6 +18,7 @@ import {
   BookingStatus,
   BookingType,
   DetailsBookingPost,
+  ETypeStaff,
   IInvoiceDetails,
   IMyBooking,
   OpitionType,
@@ -620,3 +622,278 @@ export const INVOICE_DETAILS: ColumnsType<IInvoiceDetails> = [
     width: 150,
   },
 ];
+
+export const columsStaff = (arrayStaff: Array<OpitionType>) => {
+  const columns: ColumnsType<any> = [
+    {
+      title: 'Tên nhân viên',
+      dataIndex: 'beneficiary',
+      key: 'beneficiary',
+      align: 'center',
+      width: 150,
+      render: (beneficiary: string) => (
+        <div>
+          {arrayStaff.find((x: OpitionType) => x.value === beneficiary)?.label}
+        </div>
+      ),
+    },
+    {
+      title: 'Loại nhân viên',
+      dataIndex: 'typeStaff',
+      key: 'typeStaff',
+      align: 'center',
+      width: 150,
+      render: (typeStaff: string) => (
+        <div>{ETypeStaff[typeStaff as 'DEBT_COLLECTOR']}</div>
+      ),
+    },
+  ];
+  return columns;
+};
+
+export const columnsContract = ({
+  opitionServices,
+  opitionTypeContract,
+  opitionFixedPriceCode,
+  opitionCountryZone,
+  opitionStaff,
+}: {
+  opitionServices: Array<OpitionType>;
+  opitionTypeContract: Array<OpitionType>;
+  opitionFixedPriceCode: Array<OpitionType>;
+  opitionCountryZone: Array<OpitionType>;
+  opitionStaff: Array<OpitionType>;
+}) => {
+  const contract: ColumnsType<any> = [
+    {
+      title: 'Dịch vụ yêu cầu',
+      dataIndex: 'serviceRequestId',
+      key: 'serviceRequestId',
+      align: 'center',
+      width: 150,
+      render: (serviceRequestId: string) => (
+        <div>
+          {
+            opitionServices.find(
+              (x: OpitionType) => x.value === serviceRequestId
+            )?.label
+          }
+        </div>
+      ),
+    },
+    {
+      title: 'Lịch thanh toán công nợ kể từ ngày chốt bảng kê',
+      dataIndex: 'paymentSchedule',
+      key: 'paymentSchedule',
+      align: 'center',
+      width: 150,
+      render: (paymentSchedule: string) => (
+        <div>{moment(paymentSchedule).format('DD-MM-YYYY')}</div>
+      ),
+    },
+    {
+      title: 'Doanh thu tiềm năng từ Doanh thu tiềm năng từ ',
+      dataIndex: 'potentialRevenueFrom',
+      key: 'potentialRevenueFrom',
+      align: 'center',
+      width: 150,
+      render: (potentialRevenueFrom: string) => (
+        <div>{potentialRevenueFrom}</div>
+      ),
+    },
+    {
+      title: 'Doanh thu tiềm năng từ Doanh thu tiềm năng đến ',
+      dataIndex: 'potentialRevenueTo',
+      key: 'potentialRevenueTo',
+      align: 'center',
+      width: 150,
+      render: (potentialRevenueFrom: string) => (
+        <div>{potentialRevenueFrom}</div>
+      ),
+    },
+    {
+      title: 'Tỷ lệ LNG Cam kết nếu xin giá riêng/Tháng',
+      dataIndex: 'commitmentRate',
+      key: 'commitmentRate',
+      align: 'center',
+      width: 150,
+      render: (commitmentRate: string) => <div>{commitmentRate}</div>,
+    },
+    {
+      title: 'Mã hợp đồng',
+      dataIndex: 'contractCode',
+      key: 'contractCode',
+      align: 'center',
+      width: 150,
+      render: (contractCode: string) => <div>{contractCode}</div>,
+    },
+    {
+      title: 'Tên hợp đồng',
+      dataIndex: 'contractName',
+      key: 'contractName',
+      align: 'center',
+      width: 150,
+      render: (contractName: string) => <div>{contractName}</div>,
+    },
+    {
+      title: 'Loại hợp đồng',
+      dataIndex: 'typeContract',
+      key: 'typeContract',
+      align: 'center',
+      width: 150,
+      render: (typeContract: string) => (
+        <div>
+          {
+            opitionTypeContract.find(
+              (x: OpitionType) => x.value === typeContract
+            )?.label
+          }
+        </div>
+      ),
+    },
+    {
+      title: 'Mã bảng giá cố định',
+      dataIndex: 'fixedPriceCode',
+      key: 'fixedPriceCode',
+      align: 'center',
+      width: 150,
+      render: (fixedPriceCode: string) => (
+        <div>
+          {
+            opitionFixedPriceCode.find(
+              (x: OpitionType) => x.value === fixedPriceCode
+            )?.label
+          }
+        </div>
+      ),
+    },
+    {
+      title: 'Thời hạn hợp đồng',
+      dataIndex: 'contactTerm',
+      key: 'contactTerm',
+      align: 'center',
+      width: 140,
+      render: (contactTerm: Array<any>) => (
+        <div>{`Từ: ${moment(contactTerm[0]).format(
+          'DD-MM-YYYY'
+        )} \n Đến :${moment(contactTerm[1]).format('DD-MM-YYYY')}`}</div>
+      ),
+    },
+    {
+      title: 'Giá khác',
+      dataIndex: 'otherPrice',
+      key: 'otherPrice',
+      align: 'center',
+      width: 140,
+      render: (otherPrice: Array<any>) => <div>{otherPrice}</div>,
+    },
+    {
+      title: 'Country hoặc Zone',
+      dataIndex: 'countryContractId',
+      key: 'countryContractId',
+      align: 'center',
+      width: 140,
+      render: (countryContractId: string) => (
+        <div>
+          {
+            opitionCountryZone.find(
+              (x: OpitionType) => x.value === countryContractId
+            )?.label
+          }
+        </div>
+      ),
+    },
+    {
+      title: 'Tỷ lệ giảm giá (Đánh tỷ lệ %)',
+      dataIndex: 'discountRate',
+      key: 'discountRate',
+      align: 'center',
+      width: 140,
+      render: (discountRate: string) => <div>{discountRate}</div>,
+    },
+    {
+      title: 'Ghi chú hợp đồng',
+      dataIndex: 'noteContract',
+      key: 'noteContract',
+      align: 'center',
+      width: 140,
+      render: (noteContract: string) => <div>{noteContract}</div>,
+    },
+    {
+      title: 'Mã bảng giá',
+      dataIndex: 'priceListCode',
+      key: 'priceListCode',
+      align: 'center',
+      width: 140,
+      render: (priceListCode: string) => <div>{priceListCode}</div>,
+    },
+    {
+      title: 'Thời hạn áp dung mã giảm giá',
+      dataIndex: 'timeAplly',
+      key: 'timeAplly',
+      align: 'center',
+      width: 140,
+      render: (timeAplly: Array<any>) => (
+        <div>{`Từ: ${moment(timeAplly[0]).format(
+          'DD-MM-YYYY'
+        )} \n Đến :${moment(timeAplly[1]).format('DD-MM-YYYY')}`}</div>
+      ),
+    },
+    {
+      title: 'Thời hạn áp dung mã giảm giá',
+      dataIndex: 'timeAplly',
+      key: 'timeAplly',
+      align: 'center',
+      width: 140,
+      render: (timeAplly: Array<any>) => (
+        <div>{`Từ: ${moment(timeAplly[0]).format(
+          'DD-MM-YYYY'
+        )} \n Đến :${moment(timeAplly[1]).format('DD-MM-YYYY')}`}</div>
+      ),
+    },
+    {
+      title: 'Phụ phí xăng dầu',
+      dataIndex: 'surcharge',
+      key: 'surcharge',
+      align: 'center',
+      width: 140,
+      render: (surcharge: Array<any>) => <div>{surcharge}</div>,
+    },
+    {
+      title: 'Tý giá áp dụng',
+      dataIndex: 'applicableRate',
+      key: 'applicableRate',
+      align: 'center',
+      width: 140,
+      render: (applicableRate: Array<any>) => <div>{applicableRate}</div>,
+    },
+    {
+      title: 'Thẩm định',
+      dataIndex: 'expertise',
+      key: 'expertise',
+      align: 'center',
+      width: 140,
+      render: (expertise: number) => (
+        <div>{expertise === 1 ? 'Đã thẩm định' : 'Chưa thầm định'}</div>
+      ),
+    },
+    {
+      title: 'Nhân viên thẩm định',
+      dataIndex: 'appraisalStaff',
+      key: 'appraisalStaff',
+      align: 'center',
+      width: 140,
+      render: (appraisalStaff: string) => {
+        return (
+          <div>
+            {
+              opitionStaff.find((x: OpitionType) => x.value === appraisalStaff)
+                ?.label
+            }
+          </div>
+        );
+      },
+    },
+  ];
+  return contract;
+};
