@@ -75,7 +75,7 @@ const ModalCreateCustomer = ({ onClose }: IProps) => {
     };
     const { previousCosing, ...resNew } = res;
     mutateCreate({
-      ...res,
+      ...resNew,
     });
   };
 
