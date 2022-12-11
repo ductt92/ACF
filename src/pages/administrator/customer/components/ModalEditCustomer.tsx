@@ -74,7 +74,21 @@ const ModalEditCustomer = ({ onClose, value }: IProps) => {
       managementStaff: infoStaff,
     };
 
-    const { previousCosing, ...resNew } = res;
+    const {
+      previousCosing,
+      id,
+      customerCode,
+      staffId,
+      userId,
+      gender,
+      dob,
+      createdAt,
+      updatedAt,
+      user,
+      staff,
+      unit,
+      ...resNew
+    } = res;
     mutateCreate({
       id: value?.id || '',
       data: resNew,
