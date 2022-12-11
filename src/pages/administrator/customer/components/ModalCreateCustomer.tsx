@@ -87,6 +87,16 @@ const ModalCreateCustomer = ({ onClose }: IProps) => {
     setInfoStaff((prev) => [...prev, data]);
   };
 
+  const handleDeleteStaff = (id: any) => {
+    const res = infoStaff.filter((x, index) => id !== index);
+    setInfoStaff(res);
+  };
+
+  const handleDeleteContract = (id: any) => {
+    const res = infoStaff.filter((x, index) => id !== index);
+    setInfoStaff(res);
+  };
+
   return (
     <Modal
       footer={null}
@@ -109,6 +119,7 @@ const ModalCreateCustomer = ({ onClose }: IProps) => {
               form={form}
               detailsContract={detailsContract}
               handleAddContract={handleAddContract}
+              handleDeleteContract={handleDeleteContract}
             />
           </Tabs.TabPane>
           <Tabs.TabPane tab='Chi tiết' key='DetailsCustomer'>
@@ -116,6 +127,7 @@ const ModalCreateCustomer = ({ onClose }: IProps) => {
           </Tabs.TabPane>
           <Tabs.TabPane tab='Thông tin nhân viên' key='InfoStaff'>
             <InfoStaff
+              handleDelete={handleDeleteStaff}
               form={form}
               infoStaff={infoStaff}
               handleAddStaff={handleAddStaff}

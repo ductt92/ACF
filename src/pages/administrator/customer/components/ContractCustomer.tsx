@@ -18,10 +18,12 @@ interface ContractCustomer {
   form: FormInstance;
   detailsContract: Array<any>;
   handleAddContract: (data: any) => void;
+  handleDeleteContract: (id: any) => void;
 }
 const ContractCustomer = ({
   form,
   detailsContract,
+  handleDeleteContract,
   handleAddContract,
 }: ContractCustomer) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -127,6 +129,7 @@ const ContractCustomer = ({
             opitionFixedPriceCode: EFixedPriceOpition || [],
             opitionCountryZone: CountryZoneOpition || [],
             opitionStaff: OpitionStaff || [],
+            handleDelete: handleDeleteContract,
           })}
           dataSource={detailsContract}
           bordered

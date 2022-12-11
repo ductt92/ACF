@@ -65,12 +65,12 @@ const ModalEditCustomer = ({ onClose, value }: IProps) => {
           timeApplyTo: moment(timeAplly[1]).format('YYYY-MM-DD'),
         };
       }),
-      previousCosingFrom: moment(requestData.previousCosing[0]).format(
-        'YYYY-MM-DD'
-      ),
-      previousCosingTo: moment(requestData.previousCosing[1]).format(
-        'YYYY-MM-DD'
-      ),
+      previousCosingFrom:
+        moment(requestData.previousCosing?.[0]).format('YYYY-MM-DD') ||
+        value?.previousCosingFrom,
+      previousCosingTo:
+        moment(requestData.previousCosing?.[1]).format('YYYY-MM-DD') ||
+        value?.previousCosingTo,
       managementStaff: infoStaff,
     };
 
@@ -122,6 +122,15 @@ const ModalEditCustomer = ({ onClose, value }: IProps) => {
     setDetailsContract(contactF);
   }, [form, value]);
 
+  const handleDeleteStaff = (id: any) => {
+    const res = infoStaff.filter((x, index) => id !== index);
+    setInfoStaff(res);
+  };
+  const handleDeleteContract = (id: any) => {
+    const res = infoStaff.filter((x, index) => id !== index);
+    setInfoStaff(res);
+  };
+
   return (
     <Modal
       footer={null}
@@ -144,6 +153,7 @@ const ModalEditCustomer = ({ onClose, value }: IProps) => {
               form={form}
               detailsContract={detailsContract}
               handleAddContract={handleAddContract}
+              handleDeleteContract={handleDeleteContract}
             />
           </Tabs.TabPane>
           <Tabs.TabPane tab='Chi tiết' key='DetailsCustomer'>
@@ -154,6 +164,7 @@ const ModalEditCustomer = ({ onClose, value }: IProps) => {
               form={form}
               infoStaff={infoStaff}
               handleAddStaff={handleAddStaff}
+              handleDelete={handleDeleteStaff}
             />
           </Tabs.TabPane>
         </Tabs>

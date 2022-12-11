@@ -623,7 +623,20 @@ export const INVOICE_DETAILS: ColumnsType<IInvoiceDetails> = [
   },
 ];
 
-export const columsStaff = (arrayStaff: Array<OpitionType>) => {
+export const columsStaff = (
+  arrayStaff: Array<OpitionType>,
+  handleDelete: (id: any) => void
+) => {
+  const handleDeleteRow = (row: any) => {
+    Modal.confirm({
+      title: 'Thông báo',
+      icon: <WarningOutlined className='text-red-700' />,
+      content: 'Bạn có chắc chắn muốn xóa nhân viên này không?',
+      okText: 'Đồng ý',
+      cancelText: 'Không',
+      onOk: () => handleDelete(row),
+    });
+  };
   const columns: ColumnsType<any> = [
     {
       title: 'Tên nhân viên',
@@ -647,6 +660,17 @@ export const columsStaff = (arrayStaff: Array<OpitionType>) => {
         <div>{ETypeStaff[typeStaff as 'DEBT_COLLECTOR']}</div>
       ),
     },
+    {
+      title: 'Action',
+      key: 'operation',
+      fixed: 'right',
+      width: 100,
+      render: (type: string, record: any, index) => (
+        <div className='flex flex-row gap-8'>
+          <DeleteOutlined onClick={() => handleDeleteRow(index)} />
+        </div>
+      ),
+    },
   ];
   return columns;
 };
@@ -657,13 +681,25 @@ export const columnsContract = ({
   opitionFixedPriceCode,
   opitionCountryZone,
   opitionStaff,
+  handleDelete,
 }: {
   opitionServices: Array<OpitionType>;
   opitionTypeContract: Array<OpitionType>;
   opitionFixedPriceCode: Array<OpitionType>;
   opitionCountryZone: Array<OpitionType>;
   opitionStaff: Array<OpitionType>;
+  handleDelete: (id: any) => void;
 }) => {
+  const handleDeleteRow = (row: any) => {
+    Modal.confirm({
+      title: 'Thông báo',
+      icon: <WarningOutlined className='text-red-700' />,
+      content: 'Bạn có chắc chắn muốn xóa hàng hóa này không?',
+      okText: 'Đồng ý',
+      cancelText: 'Không',
+      onOk: () => handleDelete(row),
+    });
+  };
   const contract: ColumnsType<any> = [
     {
       title: 'Dịch vụ yêu cầu',
@@ -882,6 +918,17 @@ export const columnsContract = ({
           </div>
         );
       },
+    },
+    {
+      title: 'Action',
+      key: 'operation',
+      fixed: 'right',
+      width: 100,
+      render: (type: string, record: any, index) => (
+        <div className='flex flex-row gap-8'>
+          <DeleteOutlined onClick={() => handleDeleteRow(index)} />
+        </div>
+      ),
     },
   ];
   return contract;

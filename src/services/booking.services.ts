@@ -147,6 +147,24 @@ export const generateInvoicePatner = (id: string) => {
   });
 };
 
+export const generateExcelBooking = ({
+  createBookingFrom,
+  createBookingTo,
+}: {
+  createBookingTo?: Date | string;
+  createBookingFrom?: Date | string;
+}) => {
+  return HttpRequest.get('booking/generate-excel-booking', {
+    params: { createBookingTo, createBookingFrom },
+  }).then((res) => {
+    const blob = new Blob([new Uint8Array(res.data)]);
+    const link = document.createElement('a');
+    link.href = window.URL.createObjectURL(blob);
+    link.download = `bill-${new Date()}.xlsx`;
+    link.click();
+  });
+};
+
 export const generateBillPatner = (id: string) => {
   return HttpRequest.get('booking/generate-partner-bill', {
     params: { bookingId: id },
@@ -192,6 +210,20 @@ export const fetchServicesBooking = () => {
 export const confirmBooking = (id: string) => {
   const confirmBooking = HttpRequest.patch(`booking/is-handle-booking/${id}`);
   return confirmBooking;
+};
+
+export const trackingBooking = (id?: string) => {
+  if (id) {
+    const confirmBooking = HttpRequest.get(
+      `checkpoints/checkpoints-by-bill-code`,
+      {
+        params: {
+          billCode: id,
+        },
+      }
+    );
+    return confirmBooking as unknown as Array<any>;
+  }
 };
 
 export const fetchDeliveryCondition = () => {

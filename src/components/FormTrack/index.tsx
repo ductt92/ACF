@@ -1,8 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { PlusOutlined } from '@ant-design/icons';
 import { Form, Input } from 'antd';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
-import React, { useRef } from 'react';
+import React, { useState } from 'react';
 
 import styles from './styles.module.scss';
 
@@ -14,12 +16,17 @@ const { TextArea } = Input;
 
 const TrackForm = () => {
   const { lang, t } = useTranslation('common');
+  const [searchText, setSearchText] = useState('');
+  const router = useRouter();
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const searchInput = useRef<any>(null);
   const dataMockDetails =
     lang === 'vi' ? DATA_MOCK_DETAIL_TRACK_VI : DATA_MOCK_DETAIL_TRACK_EN;
   const handleFocus = () => {
-    searchInput.current.focus();
+    router.push(`/tracking/${searchText}`);
+  };
+
+  const handleChange = (e: any) => {
+    setSearchText(e.target.value);
   };
   return (
     <>
@@ -38,7 +45,8 @@ const TrackForm = () => {
                 <TextArea
                   rows={4}
                   placeholder={t('Tracking')}
-                  ref={searchInput}
+                  onChange={handleChange}
+                  defaultValue={searchText}
                   style={{
                     borderRadius: '0',
                     background: '#f5f5f5',

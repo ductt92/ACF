@@ -11,9 +11,15 @@ import ModalCreateStaff from './ModalCreateStaff';
 interface InfoStaffProps {
   form: FormInstance;
   infoStaff: Array<any>;
+  handleDelete: (id: any) => void;
   handleAddStaff: (data: any) => void;
 }
-const InfoStaff = ({ form, handleAddStaff, infoStaff }: InfoStaffProps) => {
+const InfoStaff = ({
+  form,
+  handleAddStaff,
+  infoStaff,
+  handleDelete,
+}: InfoStaffProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [createStaff] = Form.useForm();
   const { data: dataStaff } = useQuery(['fetchDeliveryCondition', {}], () =>
@@ -42,6 +48,7 @@ const InfoStaff = ({ form, handleAddStaff, infoStaff }: InfoStaffProps) => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     //  @ts-ignore
   }, [dataStaff]);
+
   return (
     <div className='h-[calc(70vh)] gap-4 overflow-y-auto p-4'>
       <div className='flex flex-col gap-4'>
@@ -53,13 +60,13 @@ const InfoStaff = ({ form, handleAddStaff, infoStaff }: InfoStaffProps) => {
           Thêm mới nhân viên
         </Button>
         <Table
-          columns={columsStaff(OptionStaff)}
+          columns={columsStaff(OptionStaff, handleDelete)}
           dataSource={infoStaff}
           bordered
         />
       </div>
       <ModalCreateStaff
-        form={createStaff}
+        form={form}
         isOpen={isOpen}
         opitonStaff={OptionStaff || []}
         handleClose={() => setIsOpen(false)}

@@ -257,8 +257,6 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
     setDetailsBooking(res);
   };
 
-  console.log(data?.booking);
-
   const handleDeleteInvoice = (id: any) => {
     const res = detailsInvoice.filter((x, index) => id !== index);
     setDetailsInvoice(res);

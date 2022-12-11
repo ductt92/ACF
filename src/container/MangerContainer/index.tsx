@@ -1,17 +1,20 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { SearchOutlined } from '@ant-design/icons';
-import { Button, DatePicker, Input, Spin, Table } from 'antd';
+import { DownloadOutlined, SearchOutlined } from '@ant-design/icons';
+import { Button, DatePicker, Input, notification, Spin, Table } from 'antd';
 import { debounce } from 'lodash';
 import moment from 'moment';
 import React, { ChangeEvent, useMemo, useState } from 'react';
-import { useQuery } from 'react-query';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 
 import { MYBOOKING_COLUMNS } from '@/contants/columns/my-booking.columns';
 import { QueryParams3 } from '@/contants/common.constants';
 import { QUERY_BOOKING } from '@/contants/query-key/booking.query';
 import { BookingStatusPost } from '@/contants/types';
 import { withPrivateRouteUser } from '@/routes/withPrivateRouteUser';
-import { fetchBooking } from '@/services/booking.services';
+import {
+  fetchBooking,
+  generateExcelBooking,
+} from '@/services/booking.services';
 
 import ModalViewBooking from './components/ModalViewBooking';
 
@@ -30,6 +33,22 @@ const ManageContainer = () => {
   const [queries, setQueries] = useState<QueryParams3>(QUERY_PARAMS);
   const [idBooking, setIdbooking] = useState();
   const [isViewBooking, setIsViewBooking] = useState<boolean>(false);
+  const queryClient = useQueryClient();
+  const { mutate: generateExcel } = useMutation(generateExcelBooking, {
+    onSuccess: () => {
+      queryClient.invalidateQueries([QUERY_BOOKING.GET_BOOKING]);
+      notification.success({
+        message: 'Tải xuống thành công',
+        placement: 'top',
+      });
+    },
+    onError: () => {
+      notification.error({
+        message: 'Tải xuống thất bại',
+        placement: 'top',
+      });
+    },
+  });
 
   const { data, isLoading, isFetching } = useQuery(
     [QUERY_BOOKING.GET_BOOKING, queries],
@@ -64,12 +83,19 @@ const ManageContainer = () => {
       page: pagination.current,
     }));
   };
+
+  const handleGenerateExcelBooking = () => {
+    generateExcel({
+      createBookingFrom: queries.createBookingFrom,
+      createBookingTo: queries.createBookingTo,
+    });
+  };
   return (
     <div className='mb-20'>
       <div className='gap-4'>
         <div className='gap-4 px-6'>
           <Input
-            placeholder='Tìm kiếm đơn hàng...'
+            placeholder='Tìm kiếm đơn hàng ...'
             prefix={<SearchOutlined />}
             className='mb-4 mr-4 w-[350px]'
             onChange={(event: ChangeEvent<HTMLInputElement>) =>
@@ -102,6 +128,14 @@ const ManageContainer = () => {
             className='w-[300px]'
             format='DD/MM/YYYY'
           />
+          <Button
+            icon={<DownloadOutlined />}
+            type='primary'
+            className='ml-4 h-8'
+            onClick={handleGenerateExcelBooking}
+          >
+            Xuất excel
+          </Button>
         </div>
         <Spin spinning={isLoading || isFetching}>
           <Table
