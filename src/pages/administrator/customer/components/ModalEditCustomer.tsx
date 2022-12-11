@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable unused-imports/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button, Form, Modal, notification, Tabs } from 'antd';
@@ -72,6 +73,7 @@ const ModalEditCustomer = ({ onClose, value }: IProps) => {
       ),
       managementStaff: infoStaff,
     };
+
     const { previousCosing, ...resNew } = res;
     mutateCreate({
       id: value?.id || '',
@@ -92,6 +94,7 @@ const ModalEditCustomer = ({ onClose, value }: IProps) => {
         moment(value?.previousCosingTo || undefined),
       ],
     });
+
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     //  @ts-ignore
     const contactF = value.contract.map((v) => ({
@@ -102,12 +105,7 @@ const ModalEditCustomer = ({ onClose, value }: IProps) => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     //  @ts-ignore
     setInfoStaff(value?.managementStaff || []);
-
     setDetailsContract(contactF);
-
-    return () => {
-      form.resetFields();
-    };
   }, [form, value]);
 
   return (
