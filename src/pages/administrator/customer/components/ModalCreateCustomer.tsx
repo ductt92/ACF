@@ -1,10 +1,11 @@
+/* eslint-disable unused-imports/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button, Form, Modal, notification, Tabs } from 'antd';
+import moment from 'moment';
 import React, { useEffect, useState } from 'react';
 import { useMutation, useQueryClient } from 'react-query';
 
 import { QUERY_CUSTOMER } from '@/contants/query-key/customer.contants';
-import { ICustomer } from '@/contants/types';
 import { createCustomer } from '@/services/customer.services';
 
 import ContractCustomer from './ContractCustomer';
@@ -49,10 +50,30 @@ const ModalCreateCustomer = ({ onClose }: IProps) => {
   }, [form]);
 
   const onSubmit = async () => {
-    const requestData: ICustomer = await form.validateFields();
+    const requestData: any = await form.validateFields();
+
     const res = {
       ...requestData,
+      contract: detailsContract.map((newRes) => {
+        const { contactTerm, timeAplly, ...detailsContract } = newRes;
+        return {
+          ...detailsContract,
+          expertise: detailsContract.expertise === 1 ? true : false,
+          contractTermFrom: moment(contactTerm[0]).format('YYYY-MM-DD'),
+          contractTermTo: moment(contactTerm[1]).format('YYYY-MM-DD'),
+          timeApplyFrom: moment(timeAplly[0]).format('YYYY-MM-DD'),
+          timeApplyTo: moment(timeAplly[1]).format('YYYY-MM-DD'),
+        };
+      }),
+      previousCosingFrom: moment(requestData.previousCosing[0]).format(
+        'YYYY-MM-DD'
+      ),
+      previousCosingTo: moment(requestData.previousCosing[1]).format(
+        'YYYY-MM-DD'
+      ),
+      managementStaff: infoStaff,
     };
+    const { previousCosing, ...resNew } = res;
     mutateCreate({
       ...res,
     });

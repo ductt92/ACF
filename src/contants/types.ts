@@ -514,6 +514,10 @@ export enum TypeOfPayment {
   COLLECTION = 'Nhờ thu', // Nhờ thu
   LETTER_OF_CREDIT = 'Tín dụng thư', // Tín dụng thư
 }
+export enum ETypePayment {
+  CASH = 'CASH', // Tiền mặt
+  TRANSFER = 'TRANSFER', // Chuyển khoản
+}
 
 export type BookingDetails = {
   id: string;

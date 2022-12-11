@@ -1,10 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { DatePicker, Form, FormInstance, Select } from 'antd';
+import { Form, FormInstance, Select } from 'antd';
 import React from 'react';
 
-import VDatePicker from '@/components/common/VDatePicker';
 import VInput from '@/components/common/VInput';
+import VRangePicker from '@/components/common/VRangeDate';
 import VSelect from '@/components/common/VSelect';
+
+import { ETypePayment } from '@/contants/types';
 
 const { Option } = Select;
 type InFoNew = {
@@ -14,7 +16,12 @@ const DirectBeneficiaryOpititon = [
   { value: true, label: 'Trực tiếp' },
   { value: false, label: 'Người thân' },
 ];
-const { RangePicker } = DatePicker;
+const OpitionTypeofPayment = Object.entries(ETypePayment).map(
+  ([key, value]) => ({
+    value: key,
+    label: value,
+  })
+);
 
 const InFoNew = ({ form }: InFoNew) => {
   return (
@@ -86,25 +93,21 @@ const InFoNew = ({ form }: InFoNew) => {
             <p className='text-xl'>2. Tài chính</p>
             <div className='grid grid-cols-2 gap-x-6'>
               <Form.Item name='typeOfPayment'>
-                <VInput
-                  label=' Loại thanh toán'
-                  placeholder='Nhập Loại thanh toán'
-                />
+                <VSelect label='Loại thanh toán' required>
+                  {OpitionTypeofPayment.map((v) => (
+                    <Option value={v.value} key={v.value}>
+                      {v.label}
+                    </Option>
+                  ))}
+                </VSelect>
               </Form.Item>
 
-              <Form.Item name='previousCosingFrom'>
-                <VDatePicker
-                  format='DD/MM/YYYY'
-                  label='Kỳ chốt cước'
-                  placeholder='Nhập Kỳ chốt cước'
-                />
-              </Form.Item>
-              <Form.Item name='previousCosingFrom'>
-                <p className='m-0 p-0'>Kỳ chốt cước</p>
-                <RangePicker
+              <Form.Item name='previousCosing'>
+                <VRangePicker
                   placeholder={['Ngày bắt đầu', 'Ngày kết thúc']}
                   className='w-full'
                   format='DD/MM/YYYY'
+                  label='Kỳ chốt cước'
                 />
               </Form.Item>
 

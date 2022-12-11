@@ -37,7 +37,7 @@ const ModalCreateStaff = ({
           <p className='text-center text-xl'>Thêm mới nhân viên</p>
           <div className='grid grid-cols-2 gap-x-6'>
             <Form.Item
-              name='beneficiary'
+              name='staffId'
               rules={[
                 {
                   required: true,

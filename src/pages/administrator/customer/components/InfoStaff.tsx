@@ -42,7 +42,6 @@ const InfoStaff = ({ form, handleAddStaff, infoStaff }: InfoStaffProps) => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     //  @ts-ignore
   }, [dataStaff]);
-
   return (
     <div className='h-[calc(70vh)] gap-4 overflow-y-auto p-4'>
       <div className='flex flex-col gap-4'>

@@ -627,13 +627,13 @@ export const columsStaff = (arrayStaff: Array<OpitionType>) => {
   const columns: ColumnsType<any> = [
     {
       title: 'Tên nhân viên',
-      dataIndex: 'beneficiary',
-      key: 'beneficiary',
+      dataIndex: 'staffId',
+      key: 'staffId',
       align: 'center',
       width: 150,
-      render: (beneficiary: string) => (
+      render: (staffId: string) => (
         <div>
-          {arrayStaff.find((x: OpitionType) => x.value === beneficiary)?.label}
+          {arrayStaff.find((x: OpitionType) => x.value === staffId)?.label}
         </div>
       ),
     },
