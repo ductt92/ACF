@@ -633,7 +633,7 @@ export const columsStaff = (arrayStaff: Array<OpitionType>) => {
       width: 150,
       render: (staffId: string) => (
         <div>
-          {arrayStaff.find((x: OpitionType) => x.value === staffId)?.label}
+          {arrayStaff?.find((x: OpitionType) => x.value === staffId)?.label}
         </div>
       ),
     },
@@ -674,7 +674,7 @@ export const columnsContract = ({
       render: (serviceRequestId: string) => (
         <div>
           {
-            opitionServices.find(
+            opitionServices?.find(
               (x: OpitionType) => x.value === serviceRequestId
             )?.label
           }
@@ -744,7 +744,7 @@ export const columnsContract = ({
       render: (typeContract: string) => (
         <div>
           {
-            opitionTypeContract.find(
+            opitionTypeContract?.find(
               (x: OpitionType) => x.value === typeContract
             )?.label
           }
@@ -760,7 +760,7 @@ export const columnsContract = ({
       render: (fixedPriceCode: string) => (
         <div>
           {
-            opitionFixedPriceCode.find(
+            opitionFixedPriceCode?.find(
               (x: OpitionType) => x.value === fixedPriceCode
             )?.label
           }
@@ -796,7 +796,7 @@ export const columnsContract = ({
       render: (countryContractId: string) => (
         <div>
           {
-            opitionCountryZone.find(
+            opitionCountryZone?.find(
               (x: OpitionType) => x.value === countryContractId
             )?.label
           }
@@ -827,18 +827,7 @@ export const columnsContract = ({
       width: 140,
       render: (priceListCode: string) => <div>{priceListCode}</div>,
     },
-    {
-      title: 'Thời hạn áp dung mã giảm giá',
-      dataIndex: 'timeAplly',
-      key: 'timeAplly',
-      align: 'center',
-      width: 140,
-      render: (timeAplly: Array<any>) => (
-        <div>{`Từ: ${moment(timeAplly[0]).format(
-          'DD-MM-YYYY'
-        )} \n Đến :${moment(timeAplly[1]).format('DD-MM-YYYY')}`}</div>
-      ),
-    },
+
     {
       title: 'Thời hạn áp dung mã giảm giá',
       dataIndex: 'timeAplly',
