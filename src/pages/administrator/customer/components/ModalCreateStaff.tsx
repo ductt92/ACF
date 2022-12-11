@@ -36,7 +36,15 @@ const ModalCreateStaff = ({
         <div className='h-[calc(70vh)] '>
           <p className='text-center text-xl'>Thêm mới nhân viên</p>
           <div className='grid grid-cols-2 gap-x-6'>
-            <Form.Item name='beneficiary'>
+            <Form.Item
+              name='beneficiary'
+              rules={[
+                {
+                  required: true,
+                  message: 'Vui lòng chọn tên nhân viên',
+                },
+              ]}
+            >
               <VSelect label='Tên nhân viên' required>
                 {opitonStaff?.map((v: OpitionType) => (
                   <Option value={v.value} key={v.value}>
@@ -46,7 +54,15 @@ const ModalCreateStaff = ({
               </VSelect>
             </Form.Item>
 
-            <Form.Item name='typeStaff'>
+            <Form.Item
+              name='typeStaff'
+              rules={[
+                {
+                  required: true,
+                  message: 'Vui lòng chọn loại nhân viên',
+                },
+              ]}
+            >
               <VSelect label=' Loại nhân viên' required>
                 {typeStaffOption.map((v: OpitionType) => (
                   <Option value={v.value} key={v.value}>
