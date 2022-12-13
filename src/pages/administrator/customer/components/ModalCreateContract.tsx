@@ -133,12 +133,12 @@ const ModalCreateContract = ({
                   {
                     required: true,
                     message:
-                      'Vui lòng nhập Tỷ lệ LNG Cam kết nếu xin giá riêng/Tháng',
+                      'Vui lòng nhập Tỷ lệ LNG Cam kết nếu xin giá riêng/Tháng (Đánh tỷ lệ %)',
                   },
                 ]}
               >
                 <VInput
-                  label='Tỷ lệ LNG Cam kết nếu xin giá riêng/Tháng'
+                  label='Tỷ lệ LNG Cam kết nếu xin giá riêng/Tháng (Đánh tỷ lệ %)'
                   placeholder='Nhập Doanh thu tiềm năng đến'
                   required
                 />

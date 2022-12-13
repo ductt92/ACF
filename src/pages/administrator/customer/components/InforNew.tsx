@@ -128,8 +128,8 @@ const InFoNew = ({ form }: InFoNew) => {
               </Form.Item>
               <Form.Item name='notifyOtherEmail'>
                 <VInput
-                  label='Gửi BK theo danh sách Email bổ sung thêm ngoài email ban đầu'
-                  placeholder='Nhập gửi BK theo danh sách Email bổ sung thêm ngoài email ban đầu'
+                  label='Email bổ sung thêm ngoài email của KH ban đầu'
+                  placeholder='Nhập Email bổ sung thêm ngoài email của KH ban đầu'
                 />
               </Form.Item>
               <Form.Item name='notifyContactPerson'>
@@ -140,8 +140,8 @@ const InFoNew = ({ form }: InFoNew) => {
               </Form.Item>
               <Form.Item name='bookingEmail'>
                 <VInput
-                  label=' Email bảng kê'
-                  placeholder='Nhập Email bảng kê'
+                  label='Danh sách mail gửi bảng kê tự động'
+                  placeholder='Nhập Danh sách mail gửi bảng kê tự động'
                 />
               </Form.Item>
               <Form.Item name='bookingPhone'>
@@ -163,8 +163,8 @@ const InFoNew = ({ form }: InFoNew) => {
               </Form.Item>
               <Form.Item name='orderOtherEmail'>
                 <VInput
-                  label='Gửi Hóa đơn theo danh sách Email bổ sung thêm ngoài email ban đầu'
-                  placeholder='Nhập Gửi Hóa đơn theo danh sách Email bổ sung thêm ngoài email ban đầu'
+                  label='Email bổ sung thêm ngoài email của KH ban đầu'
+                  placeholder='Nhập Email bổ sung thêm ngoài email của KH ban đầu'
                 />
               </Form.Item>
               <Form.Item name='orderContactPerson'>
@@ -175,8 +175,8 @@ const InFoNew = ({ form }: InFoNew) => {
               </Form.Item>
               <Form.Item name='orderEmail'>
                 <VInput
-                  label='Email hóa đơn'
-                  placeholder='Nhập Email hóa đơn'
+                  label='Danh sách mail gửi hóa đơn tự động'
+                  placeholder='Nhập Danh sách mail gửi hóa đơn tự động'
                 />
               </Form.Item>
               <Form.Item name='orderPhone'>

@@ -625,6 +625,7 @@ export const columsStaff = (
       onOk: () => handleDelete(row),
     });
   };
+
   const columns: ColumnsType<any> = [
     {
       title: 'Tên nhân viên',
@@ -738,7 +739,7 @@ export const columnsContract = ({
       ),
     },
     {
-      title: 'Tỷ lệ LNG Cam kết nếu xin giá riêng/Tháng',
+      title: 'Tỷ lệ LNG Cam kết nếu xin giá riêng/Tháng (Đánh tỷ lệ %)',
       dataIndex: 'commitmentRate',
       key: 'commitmentRate',
       align: 'center',

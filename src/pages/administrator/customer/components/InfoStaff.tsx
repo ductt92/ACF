@@ -66,7 +66,7 @@ const InfoStaff = ({
         />
       </div>
       <ModalCreateStaff
-        form={form}
+        form={createStaff}
         isOpen={isOpen}
         opitonStaff={OptionStaff || []}
         handleClose={() => setIsOpen(false)}
