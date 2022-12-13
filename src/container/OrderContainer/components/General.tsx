@@ -161,12 +161,12 @@ const General = ({
   return (
     <div className='mb-20 h-full'>
       <Form form={form}>
-        <p className='m-0 p-0 font-bold'>1.Thông tin chung 2 </p>
+        <p className='m-0 p-0 font-bold'>1.Thông tin chung </p>
         <Divider className='bg-yellow' />
         <div className='grid grid-cols-2 gap-x-6'>
           <div className='grid grid-cols-2 gap-x-6'>
             <Form.Item name='partnerBillCode'>
-              <VInput label='Mã bill đối tác' />
+              <VInput label='Mã bưu đối tác' />
             </Form.Item>
 
             <Form.Item name='partnerService'>

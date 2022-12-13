@@ -139,7 +139,7 @@ const ModalUpdateBookingDetails = ({
       className='top-[calc(5vh)] w-[calc(50vw)]'
     >
       <div>
-        <p className='text-center text-[24px] font-bold'>Chi tiết đơn hàng</p>
+        <p className='text-center text-[24px] font-bold'>Chi tiết đơn hàng </p>
 
         <Form form={detailsBookingForm}>
           <div className='h-[calc(70vh)] overflow-y-auto p-5'>

@@ -2,6 +2,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { DownloadOutlined, SearchOutlined } from '@ant-design/icons';
 import { Button, DatePicker, Input, notification, Spin, Table } from 'antd';
+import { ColumnsType } from 'antd/lib/table';
 import { debounce } from 'lodash';
 import moment from 'moment';
 import React, { ChangeEvent, useMemo, useState } from 'react';
@@ -10,6 +11,7 @@ import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { MYBOOKING_COLUMNS } from '@/contants/columns/my-booking.columns';
 import { QueryParams3 } from '@/contants/common.constants';
 import { QUERY_BOOKING } from '@/contants/query-key/booking.query';
+import { IMyBooking } from '@/contants/types';
 import {
   fetchBookingAdmin,
   generateExcelBooking,
@@ -26,6 +28,20 @@ const QUERY_PARAMS: QueryParams3 = {
   createBookingTo: undefined,
 };
 
+const statusPending: ColumnsType<IMyBooking> = [
+  {
+    title: 'TT Xử lý',
+    dataIndex: 'is_handle',
+    key: 'is_handle',
+    align: 'center',
+    width: 100,
+    render: (isHandle: string) => (
+      <p className={isHandle ? 'text-green-500	' : 'text-red-500'}>
+        {isHandle ? 'Đã xử lý' : 'Chưa xử lý'}
+      </p>
+    ),
+  },
+];
 const { RangePicker } = DatePicker;
 const OrderDetails = () => {
   const [queries, setQueries] = useState<QueryParams3>(QUERY_PARAMS);
@@ -114,7 +130,7 @@ const OrderDetails = () => {
       </div>
       <Spin spinning={isLoading || isFetching}>
         <Table
-          columns={MYBOOKING_COLUMNS}
+          columns={statusPending.concat(MYBOOKING_COLUMNS)}
           rowKey='key'
           onChange={handlePagination}
           className='cursor-pointer px-6'

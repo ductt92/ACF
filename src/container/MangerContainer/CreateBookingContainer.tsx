@@ -635,7 +635,7 @@ const CreateBookingContainer = () => {
             disabled={!id}
             icon={<PrinterOutlined />}
           >
-            In Bill đối tác
+            In bưu đối tác
           </Button>
         )}
         <Button
@@ -683,7 +683,7 @@ const CreateBookingContainer = () => {
           loading={generateSmallBillLoading}
           icon={<PrinterOutlined />}
         >
-          In Bill nhỏ
+          In bưu nhỏ
         </Button>
       </div>
 

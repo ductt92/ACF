@@ -4,6 +4,7 @@ import React from 'react';
 
 import VDatePicker from '@/components/common/VDatePicker';
 import VInput from '@/components/common/VInput';
+import VInputNumber from '@/components/common/VInputNumber';
 import VRangePicker from '@/components/common/VRangeDate';
 import VSelect from '@/components/common/VSelect';
 
@@ -48,7 +49,7 @@ const ModalCreateContract = ({
       destroyOnClose={true}
       visible={isOpen}
       onCancel={onClose}
-      className='top-[calc(5vh)] w-[calc(35vw)]'
+      className='top-[calc(5vh)] w-[calc(45vw)]'
     >
       <Spin spinning={countryContractLoading}>
         <p className='text-center text-2xl'>Tạo mới thông tin hợp đồng</p>
@@ -86,8 +87,8 @@ const ModalCreateContract = ({
               >
                 <VDatePicker
                   format='DD-MM-YYYY'
-                  label='Lịch thanh toán công nợ kể từ ngày chốt bảng kê'
-                  placeholder='Lịch thanh toán công nợ kể từ ngày chốt bảng kê'
+                  label='Lịch thanh toán công nợ kể từ ngày xuất hóa đơn'
+                  placeholder='Lịch thanh toán công nợ kể từ ngày xuất hóa đơn'
                   required
                 />
               </Form.Item>
@@ -97,12 +98,13 @@ const ModalCreateContract = ({
                 rules={[
                   {
                     required: true,
-                    message: 'Vui lòng nhập Doanh thu tiềm năng từ',
+                    message:
+                      'Vui lòng nhập Doanh thu tiềm năng từ (triệu đồng)',
                   },
                 ]}
               >
-                <VInput
-                  label='Doanh thu tiềm năng từ'
+                <VInputNumber
+                  label='Doanh thu tiềm năng từ (triệu đồng)'
                   placeholder='Nhập Doanh thu tiềm năng từ'
                   required
                 />
@@ -113,13 +115,14 @@ const ModalCreateContract = ({
                 rules={[
                   {
                     required: true,
-                    message: 'Vui lòng nhập Doanh thu tiềm năng đến',
+                    message:
+                      'Vui lòng nhập Doanh thu tiềm năng đến (triệu đồng)',
                   },
                 ]}
               >
-                <VInput
-                  label='Doanh thu tiềm năng đến'
-                  placeholder='Nhập Doanh thu tiềm năng đến'
+                <VInputNumber
+                  label='Doanh thu tiềm năng đến (triệu đồng)'
+                  placeholder='Nhập Doanh thu tiềm năng đến (triệu đồng)'
                   required
                 />
               </Form.Item>

@@ -751,7 +751,7 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
             disabled={!data?.booking?.id}
             icon={<PrinterOutlined />}
           >
-            In Bill đối tác
+            In bưu đối tác
           </Button>
         )}
 
@@ -762,7 +762,7 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
             disabled={!data?.booking?.id}
             icon={<PrinterOutlined />}
           >
-            In InVoice đối tác
+            In Invoice đối tác
           </Button>
         )}
 
@@ -799,7 +799,7 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
           loading={generateSmallBillLoading}
           icon={<PrinterOutlined />}
         >
-          In Bill nhỏ
+          In bưu nhỏ
         </Button>
       </div>
 

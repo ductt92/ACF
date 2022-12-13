@@ -254,9 +254,18 @@ const ModalCreateEmployee = ({ onClose }: IProps) => {
 
               <Form.Item
                 name='phoneCode'
-                rules={[{ required: true, message: 'Vui lòng nhập Mã ĐT' }]}
+                rules={[
+                  {
+                    required: true,
+                    message: 'Vui lòng nhập Mã vùng điện thoại của nước sở tại',
+                  },
+                ]}
               >
-                <VInput label='Mã ĐT' placeholder='Nhập Mã ĐT' required />
+                <VInput
+                  label='Mã vùng điện thoại của nước sở tại'
+                  placeholder='Nhập Mã vùng điện thoại của nước sở tại'
+                  required
+                />
               </Form.Item>
 
               <Form.Item
@@ -299,10 +308,18 @@ const ModalCreateEmployee = ({ onClose }: IProps) => {
               <Form.Item
                 name='region'
                 rules={[
-                  { required: true, message: 'Vui lòng nhập Nơi cấp CMT/CCCD' },
+                  {
+                    required: true,
+                    message:
+                      'Vui lòng nhập Khu vực làm việc của nhân viên. Chọn theo các thông tin đơn vị của trường quản lý khách hàng',
+                  },
                 ]}
               >
-                <VInput label='Vùng' placeholder='Nhập Vùng' required />
+                <VInput
+                  label='Khu vực làm việc của nhân viên. Chọn theo các thông tin đơn vị của trường quản lý khách hàng'
+                  placeholder='Nhập Khu vực làm việc của nhân viên. Chọn theo các thông tin đơn vị của trường quản lý khách hàng'
+                  required
+                />
               </Form.Item>
               <Form.Item name='taxCode'>
                 <VInput label='MST' placeholder='Nhập MST' />

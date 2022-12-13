@@ -62,11 +62,11 @@ const ModalInvoiceDetails = ({
                 rules={[
                   {
                     required: true,
-                    message: 'Vui lòng nhập Tên hàng hóa',
+                    message: 'Vui lòng nhập Tên hàng hóa (Tiếng Anh)',
                   },
                 ]}
               >
-                <VInput label='Tên hàng hóa' required />
+                <VInput label='Tên hàng hóa (Tiếng Anh)' required />
               </Form.Item>
 
               <Form.Item

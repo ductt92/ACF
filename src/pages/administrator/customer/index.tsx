@@ -18,6 +18,7 @@ const QUERY_PARAMS: QueryParams = {
   pageSize: 40,
   search: '',
 };
+
 const CustomerPage = () => {
   const [queries, setQueries] = useState<QueryParams>(QUERY_PARAMS);
   const [customer, setCustomer] = useState<ICustomer>();

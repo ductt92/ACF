@@ -274,9 +274,19 @@ const ModalEditEmployee = ({ onClose, value }: IProps) => {
 
                 <Form.Item
                   name='phoneCode'
-                  rules={[{ required: true, message: 'Vui lòng nhập Mã ĐT' }]}
+                  rules={[
+                    {
+                      required: true,
+                      message:
+                        'Vui lòng nhập Mã vùng điện thoại của nước sở tại',
+                    },
+                  ]}
                 >
-                  <VInput label='Mã ĐT' placeholder='Nhập Mã ĐT' required />
+                  <VInput
+                    label='Mã vùng điện thoại của nước sở tại'
+                    placeholder='Nhập Mã vùng điện thoại của nước sở tại'
+                    required
+                  />
                 </Form.Item>
 
                 <Form.Item

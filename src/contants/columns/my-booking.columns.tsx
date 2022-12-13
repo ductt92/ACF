@@ -31,18 +31,6 @@ const CUSTOMER_CLASS = 'w-[150px] cursor-pointer truncate text-center p-2 m-0';
 
 export const MYBOOKING_COLUMNS: ColumnsType<IMyBooking> = [
   {
-    title: 'TT Xử lý',
-    dataIndex: 'is_handle',
-    key: 'is_handle',
-    align: 'center',
-    width: 100,
-    render: (isHandle: string) => (
-      <p className={isHandle ? 'text-green-500	' : 'text-red-500'}>
-        {isHandle ? 'Đã xử lý' : 'Chưa xử lý'}
-      </p>
-    ),
-  },
-  {
     title: 'Mã bưu phẩm bưu kiện ACF',
     dataIndex: 'booking_code',
     key: 'booking_code',
@@ -718,14 +706,16 @@ export const columnsContract = ({
       ),
     },
     {
-      title: 'Lịch thanh toán công nợ kể từ ngày chốt bảng kê',
+      title: 'Lịch thanh toán công nợ kể từ ngày xuất hóa đơn',
       dataIndex: 'paymentSchedule',
       key: 'paymentSchedule',
       align: 'center',
       width: 150,
-      render: (paymentSchedule: string) => (
-        <div>{moment(paymentSchedule).format('DD-MM-YYYY')}</div>
-      ),
+      render: (paymentSchedule: string) => {
+        return (
+          <div>{moment(paymentSchedule || undefined).format('DD-MM-YYYY')}</div>
+        );
+      },
     },
     {
       title: 'Doanh thu tiềm năng từ Doanh thu tiềm năng từ ',

@@ -182,7 +182,7 @@ const ModalBookingDetails = ({
                   },
                 ]}
               >
-                <VInput label='Mô tả chi tiết hàng hóa' required />
+                <VInput label='Mô tả chi tiết hàng hóa (Tiếng việt)' required />
               </Form.Item>
 
               <Form.Item

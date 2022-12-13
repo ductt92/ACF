@@ -57,7 +57,6 @@ const GeneralInfomation = ({
   serivcesSelected,
   value,
   handleSetvalue,
-  handleSetBillPartner,
 }: GeneralInfomationProps) => {
   const [isCreate, setIsCreate] = useState<boolean>(false);
   const [isEdit, setIsEdit] = useState<boolean>(false);
@@ -193,13 +192,6 @@ const GeneralInfomation = ({
         <p className='m-0 p-0 font-bold'>1.Thông tin chung </p>
         <Divider className='bg-yellow' />
         <div className='grid grid-cols-2 gap-x-6'>
-          <Form.Item name='partnerBillCode'>
-            <VInput
-              label='Mã bill đối tác'
-              onChange={(e) => handleSetBillPartner(e.target.value)}
-            />
-          </Form.Item>
-
           <Form.Item
             name='serviceBookingId'
             rules={[
@@ -290,7 +282,7 @@ const GeneralInfomation = ({
           </div>
 
           <Form.Item name='note'>
-            <VInput label='Note' />
+            <VInput label='Ghi chú' />
           </Form.Item>
         </div>
 

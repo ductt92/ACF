@@ -73,11 +73,11 @@ const ModalUpdateInvoiceDetails = ({
                 rules={[
                   {
                     required: !isInvoice,
-                    message: 'Vui lòng nhập Tên hàng hóa',
+                    message: 'Vui lòng nhập Tên hàng hóa (Tiếng Anh)',
                   },
                 ]}
               >
-                <VInput label='Tên hàng hóa' required />
+                <VInput label='Tên hàng hóa (Tiếng Anh)' required />
               </Form.Item>
 
               <Form.Item
@@ -86,11 +86,15 @@ const ModalUpdateInvoiceDetails = ({
                 rules={[
                   {
                     required: !isInvoice,
-                    message: 'Vui lòng nhập mô tả hàng hóa',
+                    message:
+                      'Vui lòng nhập mô tả hàng hóa (Chất liệu, thành phần ... hàng hóa) (Tiếng Anh) ',
                   },
                 ]}
               >
-                <VInput label='Mô tả hàng hóa' required />
+                <VInput
+                  label='Mô tả hàng hóa (Chất liệu, thành phần ... hàng hóa) (Tiếng Anh)'
+                  required
+                />
               </Form.Item>
 
               <Form.Item

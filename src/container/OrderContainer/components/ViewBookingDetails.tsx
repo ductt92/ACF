@@ -48,7 +48,7 @@ const ViewBookingDetails = ({ data }: { data: any }) => {
     onSuccess: () => {
       queryClient.invalidateQueries([QUERY_BOOKING.GET_BOOKING]);
       notification.success({
-        message: 'Cập nhật bill code thành công',
+        message: 'Cập nhật bưu code thành công',
         placement: 'top',
       });
     },
@@ -96,7 +96,7 @@ const ViewBookingDetails = ({ data }: { data: any }) => {
       });
     } else {
       notification.error({
-        message: 'Vui lòng nhập mã bill đối tác',
+        message: 'Vui lòng nhập mã bưu đối tác',
         placement: 'top',
       });
     }
@@ -332,7 +332,7 @@ const ViewBookingDetails = ({ data }: { data: any }) => {
             disabled={!data?.booking?.id}
             icon={<PrinterOutlined />}
           >
-            In Bill đối tác
+            In bưu đối tác
           </Button>
         )}
 
@@ -343,7 +343,7 @@ const ViewBookingDetails = ({ data }: { data: any }) => {
             disabled={!data?.booking?.id}
             icon={<PrinterOutlined />}
           >
-            In InVoice đối tác
+            In Invoice đối tác
           </Button>
         )}
         <Button
@@ -352,7 +352,7 @@ const ViewBookingDetails = ({ data }: { data: any }) => {
           loading={generateSmallBillLoading}
           icon={<PrinterOutlined />}
         >
-          In Bill nhỏ
+          In bưu nhỏ
         </Button>
 
         {billPartner &&
@@ -388,7 +388,7 @@ const ViewBookingDetails = ({ data }: { data: any }) => {
       </div>
 
       <Button className='mt-5' type='primary' onClick={onSubmit}>
-        Cập nhật bill đối tác
+        Cập nhật bưu đối tác
       </Button>
     </div>
   );

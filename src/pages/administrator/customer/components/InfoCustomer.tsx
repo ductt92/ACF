@@ -125,10 +125,13 @@ const InfoCustomer = ({ form }: { form: FormInstance }) => {
           <Form.Item
             name='companyId'
             rules={[
-              { required: true, message: 'Vui lòng chọn thông tin công ty' },
+              {
+                required: true,
+                message: 'Vui lòng chọn Công ty quản lý khách hàng',
+              },
             ]}
           >
-            <VSelect label='Thông tin công ty' required>
+            <VSelect label='Công ty quản lý khách hàng' required>
               {OpitionCompanies?.map((v: any) => (
                 <Option value={v.value} key={v.value}>
                   {v.label}
@@ -195,7 +198,7 @@ const InfoCustomer = ({ form }: { form: FormInstance }) => {
             rules={[{ required: true, message: 'Vui lòng Tỉnh/Thành phố ' }]}
           >
             <VInput
-              label='Tỉnh/Thành phố'
+              label='Tỉnh/Thành phố 2'
               required
               placeholder='Nhập Tỉnh/Thành phố '
             />
