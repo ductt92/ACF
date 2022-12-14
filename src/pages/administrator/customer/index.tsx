@@ -11,8 +11,8 @@ import { ICustomer } from '@/contants/types';
 import AdminLayOut from '@/layout/AdminLayOut';
 import { fetchCustomer } from '@/services/customer.services';
 
-import ModalCreateCustomer from './components/ModalCreateCustomer';
-import ModalEditCustomer from './components/ModalEditCustomer';
+import ModalCreateCustomer from './container/ModalCreateCustomer';
+import ModalEditCustomer from './container/ModalEditCustomer';
 const QUERY_PARAMS: QueryParams = {
   page: 1,
   pageSize: 40,

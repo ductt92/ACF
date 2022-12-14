@@ -3,7 +3,6 @@ import { Form, FormInstance, Select } from 'antd';
 import React from 'react';
 
 import VInput from '@/components/common/VInput';
-import VRangePicker from '@/components/common/VRangeDate';
 import VSelect from '@/components/common/VSelect';
 
 import { ETypePayment } from '@/contants/types';
@@ -103,12 +102,7 @@ const InFoNew = ({ form }: InFoNew) => {
               </Form.Item>
 
               <Form.Item name='previousCosing'>
-                <VRangePicker
-                  placeholder={['Ngày bắt đầu', 'Ngày kết thúc']}
-                  className='w-full'
-                  format='DD/MM/YYYY'
-                  label='Kỳ chốt cước'
-                />
+                <VInput className='w-full' label='Kỳ chốt cước' />
               </Form.Item>
 
               <Form.Item name='financeNote'>
@@ -120,12 +114,6 @@ const InFoNew = ({ form }: InFoNew) => {
           <div>
             <p className='text-xl'>3. Thông tin gửi Bảng kê</p>
             <div className='grid grid-cols-2 gap-x-6'>
-              <Form.Item name='notifyEmail'>
-                <VInput
-                  label='Email bảng kê theo thông tin KH'
-                  placeholder='Nhập Email Bảng kê theo thông tin KH'
-                />
-              </Form.Item>
               <Form.Item name='notifyOtherEmail'>
                 <VInput
                   label='Email bổ sung thêm ngoài email của KH ban đầu'
@@ -155,18 +143,6 @@ const InFoNew = ({ form }: InFoNew) => {
           <div>
             <p className='text-xl'>4. Thông tin gửi hóa đơn điện tử</p>
             <div className='grid grid-cols-2 gap-x-6'>
-              <Form.Item name='orderEmailCustomer'>
-                <VInput
-                  label='Email hóa đơn theo thông tin KH'
-                  placeholder='Nhập Email hóa đơn theo thông tin KH'
-                />
-              </Form.Item>
-              <Form.Item name='orderOtherEmail'>
-                <VInput
-                  label='Email bổ sung thêm ngoài email của KH ban đầu'
-                  placeholder='Nhập Email bổ sung thêm ngoài email của KH ban đầu'
-                />
-              </Form.Item>
               <Form.Item name='orderContactPerson'>
                 <VInput
                   label='Người liên hệ'

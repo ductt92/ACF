@@ -277,7 +277,7 @@ export enum EFixedPriceCode {
   P8 = 'P8',
   P9 = 'P9',
   P10 = 'P10',
-  OTHER_PRICE = 'OTHER PRICE',
+  OTHER_PRICE = 'Giá khác',
 }
 
 export enum ServiceEnum { // Dịch vụ sử dụng

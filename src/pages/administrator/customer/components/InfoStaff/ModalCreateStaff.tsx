@@ -8,6 +8,7 @@ import { ETypeStaff, OpitionType } from '@/contants/types';
 interface ModalCreateStaffProps {
   form: FormInstance;
   isOpen: boolean;
+  isUpdate: boolean;
   handleClose: () => void;
   handleAddStaff: () => void;
   opitonStaff: Array<OpitionType>;
@@ -18,6 +19,7 @@ const ModalCreateStaff = ({
   handleClose,
   handleAddStaff,
   opitonStaff,
+  isUpdate,
 }: ModalCreateStaffProps) => {
   const typeStaffOption = Object.entries(ETypeStaff).map(([key, value]) => ({
     value: key,
@@ -27,14 +29,16 @@ const ModalCreateStaff = ({
   return (
     <Modal
       footer={null}
-      visible={isOpen}
+      visible={isOpen || isUpdate}
       onCancel={handleClose}
       destroyOnClose
       className='top-[calc(5vh)] w-[calc(40vw)]'
     >
       <Form form={form}>
         <div className='h-[calc(70vh)] '>
-          <p className='text-center text-xl'>Thêm mới nhân viên</p>
+          <p className='text-center text-xl'>
+            {isUpdate ? 'Cập nhật nhân viên' : 'Thêm mới nhân viên'}
+          </p>
           <div className='grid grid-cols-2 gap-x-6'>
             <Form.Item
               name='staffId'
@@ -74,7 +78,7 @@ const ModalCreateStaff = ({
           </div>
         </div>
         <Button type='primary' onClick={handleAddStaff}>
-          Tạo mới nhân viên
+          {isUpdate ? 'Cập nhật nhân viên' : 'Tạo mới nhân viên'}
         </Button>
       </Form>
     </Modal>

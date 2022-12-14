@@ -6,12 +6,8 @@ import React, { useMemo, useState } from 'react';
 import { useQuery } from 'react-query';
 
 import { columnsContract } from '@/contants/columns/my-booking.columns';
-import { EFixedPriceCode, ETypeContract, IContract } from '@/contants/types';
-import {
-  getCountry,
-  getSmallServices,
-  getStaff,
-} from '@/services/customer.services';
+import { ETypeContract, IContract } from '@/contants/types';
+import { getStaff } from '@/services/customer.services';
 
 import ModalCreateContract from './ModalCreateContract';
 interface ContractCustomer {
@@ -19,24 +15,21 @@ interface ContractCustomer {
   detailsContract: Array<any>;
   handleAddContract: (data: any) => void;
   handleDeleteContract: (id: any) => void;
+  handleUpdateContract: (id: any) => void;
 }
 const ContractCustomer = ({
   form,
   detailsContract,
   handleDeleteContract,
   handleAddContract,
+  handleUpdateContract,
 }: ContractCustomer) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [contractFrom] = Form.useForm<IContract>();
   const [isExpertise, setExpertise] = useState<any>(0);
-  const [servicesId, setServicesId] = useState<string>();
-  const { data: dataSmallServices } = useQuery(['smallSerices', {}], () =>
-    getSmallServices()
-  );
-  const { data: countryContract, isLoading: countryContractLoading } = useQuery(
-    ['countryContract', { servicesId }],
-    () => getCountry(servicesId)
-  );
+  const [isUpdate, setIsUpdate] = useState<boolean>(false);
+  const [idUpdate, setIdUpdate] = useState('');
+
   const handleChangeExpertise = (value: any) => {
     setExpertise(value);
   };
@@ -58,42 +51,6 @@ const ContractCustomer = ({
     }
   }, [dataStaff]);
 
-  const CountryZoneOpition = useMemo(() => {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    //  @ts-ignore
-    if (countryContract?.length < 0) {
-      return [];
-    } else {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      //  @ts-ignore
-      return countryContract?.map((v) => ({
-        value: v.id,
-        label: v.name,
-      }));
-    }
-  }, [countryContract]);
-
-  const OpitionSmallServices = useMemo(() => {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    //  @ts-ignore
-    if (dataSmallServices?.length < 0) {
-      return [];
-    } else {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      //  @ts-ignore
-      return dataSmallServices?.map((v) => ({
-        value: v.id,
-        label: v.name,
-      }));
-    }
-  }, [dataSmallServices]);
-  const EFixedPriceOpition = Object.entries(EFixedPriceCode).map(
-    ([key, value]) => ({
-      value: key,
-      label: value,
-    })
-  );
-
   const ETypeContractOpition = Object.entries(ETypeContract).map(
     ([key, value]) => ({
       value: key,
@@ -101,17 +58,38 @@ const ContractCustomer = ({
     })
   );
 
-  const handleChangeServices = (value: string) => {
-    setServicesId(value);
-  };
   const onHandleAddContract = async () => {
     const res = await contractFrom.validateFields();
-    handleAddContract({ ...res, expertise: isExpertise });
-    setIsOpen(false);
-    setExpertise(0);
-    contractFrom.resetFields();
+
+    if (isUpdate) {
+      const updateStaff = detailsContract.map((x, index) => {
+        if (parseInt(idUpdate) === index) {
+          return res;
+        } else {
+          return x;
+        }
+      });
+      handleUpdateContract(updateStaff);
+      setIsOpen(false);
+      setIsUpdate(false);
+      setIdUpdate('');
+    } else {
+      handleAddContract({ ...res, expertise: isExpertise });
+      setIsOpen(false);
+      setExpertise(0);
+      contractFrom.resetFields();
+    }
   };
 
+  const actionUpdateContract = (record: any) => {
+    console.log(record);
+    setIsUpdate(true);
+    contractFrom.setFieldsValue({
+      ...record,
+    });
+    setIdUpdate(record.idKey);
+    setExpertise(record.expertise);
+  };
   return (
     <div className='h-[calc(70vh)] overflow-y-auto p-4'>
       <div className='flex flex-col gap-4'>
@@ -124,12 +102,10 @@ const ContractCustomer = ({
         </Button>
         <Table
           columns={columnsContract({
-            opitionServices: OpitionSmallServices || [],
             opitionTypeContract: ETypeContractOpition || [],
-            opitionFixedPriceCode: EFixedPriceOpition || [],
-            opitionCountryZone: CountryZoneOpition || [],
             opitionStaff: OpitionStaff || [],
             handleDelete: handleDeleteContract,
+            handleUpdate: actionUpdateContract,
           })}
           dataSource={detailsContract}
           bordered
@@ -140,16 +116,12 @@ const ContractCustomer = ({
       <ModalCreateContract
         form={contractFrom}
         isOpen={isOpen}
-        onClose={() => setIsOpen(false)}
+        isUpdate={isUpdate}
+        onClose={() => (isUpdate ? setIsUpdate(false) : setIsOpen(false))}
         expertise={isExpertise}
         handleChangeEx={handleChangeExpertise}
-        opitonServices={OpitionSmallServices}
-        handleChangeServices={handleChangeServices}
         handleAddContract={onHandleAddContract}
         opitionTypeContract={ETypeContractOpition}
-        opitionFixedPriceCode={EFixedPriceOpition}
-        opitionCountryZone={CountryZoneOpition}
-        countryContractLoading={countryContractLoading}
         opitionStaff={OpitionStaff}
       />
     </div>

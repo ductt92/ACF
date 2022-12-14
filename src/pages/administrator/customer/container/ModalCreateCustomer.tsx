@@ -8,10 +8,11 @@ import { useMutation, useQueryClient } from 'react-query';
 import { QUERY_CUSTOMER } from '@/contants/query-key/customer.contants';
 import { createCustomer } from '@/services/customer.services';
 
-import ContractCustomer from './ContractCustomer';
-import InfoCustomer from './InfoCustomer';
-import InFoNew from './InforNew';
-import InfoStaff from './InfoStaff';
+import ContractCustomer from '../components/ContractCustomer/ContractCustomer';
+import InfoCustomer from '../components/InfoCustomer/InfoCustomer';
+import InFoNew from '../components/InfoNew/InforNew';
+import InfoStaff from '../components/InfoStaff/InfoStaff';
+import OrdersCode from '../components/OrdersCode/OrdersCode';
 
 interface IProps {
   onClose: (value: boolean) => void;
@@ -23,6 +24,7 @@ const ModalCreateCustomer = ({ onClose }: IProps) => {
   const [detailsContract, setDetailsContract] = useState<Array<any>>([]);
   const [infoStaff, setInfoStaff] = useState<Array<any>>([]);
 
+  const [detailsOrder, setDetailsOrder] = useState<Array<any>>([]);
   const { mutate: mutateCreate, isLoading: isCreating } = useMutation(
     createCustomer,
     {
@@ -61,19 +63,14 @@ const ModalCreateCustomer = ({ onClose }: IProps) => {
           expertise: detailsContract.expertise === 1 ? true : false,
           contractTermFrom: moment(contactTerm[0]).format('YYYY-MM-DD'),
           contractTermTo: moment(contactTerm[1]).format('YYYY-MM-DD'),
-          timeApplyFrom: moment(timeAplly[0]).format('YYYY-MM-DD'),
-          timeApplyTo: moment(timeAplly[1]).format('YYYY-MM-DD'),
+          // timeApplyFrom: moment(timeAplly[0]).format('YYYY-MM-DD'),
+          // timeApplyTo: moment(timeAplly[1]).format('YYYY-MM-DD'),
         };
       }),
-      previousCosingFrom: moment(requestData.previousCosing[0]).format(
-        'YYYY-MM-DD'
-      ),
-      previousCosingTo: moment(requestData.previousCosing[1]).format(
-        'YYYY-MM-DD'
-      ),
+
       managementStaff: infoStaff,
     };
-    const { previousCosing, ...resNew } = res;
+    const { ...resNew } = res;
     mutateCreate({
       ...resNew,
     });
@@ -82,9 +79,15 @@ const ModalCreateCustomer = ({ onClose }: IProps) => {
   const handleAddContract = (data: any) => {
     setDetailsContract((prev) => [...prev, data]);
   };
+  const handleUpdateContract = (data: any) => {
+    setDetailsContract(data);
+  };
 
   const handleAddStaff = (data: any) => {
     setInfoStaff((prev) => [...prev, data]);
+  };
+  const handleUpdateStaff = (data: any) => {
+    setInfoStaff(data);
   };
 
   const handleDeleteStaff = (id: any) => {
@@ -95,6 +98,14 @@ const ModalCreateCustomer = ({ onClose }: IProps) => {
   const handleDeleteContract = (id: any) => {
     const res = infoStaff.filter((x, index) => id !== index);
     setInfoStaff(res);
+  };
+
+  const handleAddOrder = (data: any) => {
+    setDetailsOrder((prev) => [...prev, data]);
+  };
+
+  const handleUpdateOrder = (data: any) => {
+    setDetailsOrder(data);
   };
 
   return (
@@ -120,8 +131,20 @@ const ModalCreateCustomer = ({ onClose }: IProps) => {
               detailsContract={detailsContract}
               handleAddContract={handleAddContract}
               handleDeleteContract={handleDeleteContract}
+              handleUpdateContract={handleUpdateContract}
             />
           </Tabs.TabPane>
+
+          <Tabs.TabPane tab='Bảng giá' key='Orderss'>
+            <OrdersCode
+              // form={form}
+              detailsOrder={detailsOrder}
+              handleAddOrder={handleAddOrder}
+              handleUpdateOrder={handleUpdateOrder}
+              handleDeleteContract={handleDeleteContract}
+            />
+          </Tabs.TabPane>
+
           <Tabs.TabPane tab='Chi tiết' key='DetailsCustomer'>
             <InFoNew form={form} />
           </Tabs.TabPane>
@@ -131,6 +154,7 @@ const ModalCreateCustomer = ({ onClose }: IProps) => {
               form={form}
               infoStaff={infoStaff}
               handleAddStaff={handleAddStaff}
+              handleUpdateStaff={handleUpdateStaff}
             />
           </Tabs.TabPane>
         </Tabs>

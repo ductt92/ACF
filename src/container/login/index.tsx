@@ -9,7 +9,7 @@ import { UsersRole } from '@/contants/types';
 import AuthenService from '@/services/Authen.service';
 import storage from '@/utils/storage';
 
-export default function LoginFormContainer() {
+function LoginFormContainer() {
   const router = useRouter();
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>('');
@@ -48,3 +48,4 @@ export default function LoginFormContainer() {
     <LoginForm onSubmit={handleOnSubmit} loading={loading} errorMsg={error} />
   );
 }
+export default LoginFormContainer;

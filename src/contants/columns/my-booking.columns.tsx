@@ -9,7 +9,6 @@ import { Modal, Tooltip } from 'antd';
 import { ColumnsType } from 'antd/lib/table';
 import clsx from 'clsx';
 import dayjs from 'dayjs';
-import moment from 'moment';
 
 import { CLICK_TO_COPY, copyToClipBoard } from '@/utils/helpers';
 
@@ -611,10 +610,15 @@ export const INVOICE_DETAILS: ColumnsType<IInvoiceDetails> = [
   },
 ];
 
-export const columsStaff = (
-  arrayStaff: Array<OpitionType>,
-  handleDelete: (id: any) => void
-) => {
+export const columsStaff = ({
+  arrayStaff,
+  handleDelete,
+  handleUpdate,
+}: {
+  arrayStaff: Array<OpitionType>;
+  handleDelete: (id: any) => void;
+  handleUpdate: (record: any) => void;
+}) => {
   const handleDeleteRow = (row: any) => {
     Modal.confirm({
       title: 'Thông báo',
@@ -656,6 +660,9 @@ export const columsStaff = (
       width: 100,
       render: (type: string, record: any, index) => (
         <div className='flex flex-row gap-8'>
+          <EditOutlined
+            onClick={() => handleUpdate({ ...record, idKey: index })}
+          />
           <DeleteOutlined onClick={() => handleDeleteRow(index)} />
         </div>
       ),
@@ -665,19 +672,15 @@ export const columsStaff = (
 };
 
 export const columnsContract = ({
-  opitionServices,
   opitionTypeContract,
-  opitionFixedPriceCode,
-  opitionCountryZone,
   opitionStaff,
   handleDelete,
+  handleUpdate,
 }: {
-  opitionServices: Array<OpitionType>;
   opitionTypeContract: Array<OpitionType>;
-  opitionFixedPriceCode: Array<OpitionType>;
-  opitionCountryZone: Array<OpitionType>;
   opitionStaff: Array<OpitionType>;
   handleDelete: (id: any) => void;
+  handleUpdate: (record: any) => void;
 }) => {
   const handleDeleteRow = (row: any) => {
     Modal.confirm({
@@ -690,62 +693,14 @@ export const columnsContract = ({
     });
   };
   const contract: ColumnsType<any> = [
-    {
-      title: 'Dịch vụ yêu cầu',
-      dataIndex: 'serviceRequestId',
-      key: 'serviceRequestId',
-      align: 'center',
-      width: 150,
-      render: (serviceRequestId: string) => (
-        <div>
-          {
-            opitionServices?.find(
-              (x: OpitionType) => x.value === serviceRequestId
-            )?.label
-          }
-        </div>
-      ),
-    },
-    {
-      title: 'Lịch thanh toán công nợ kể từ ngày xuất hóa đơn',
-      dataIndex: 'paymentSchedule',
-      key: 'paymentSchedule',
-      align: 'center',
-      width: 150,
-      render: (paymentSchedule: string) => {
-        return (
-          <div>{moment(paymentSchedule || undefined).format('DD-MM-YYYY')}</div>
-        );
-      },
-    },
-    {
-      title: 'Doanh thu tiềm năng từ Doanh thu tiềm năng từ ',
-      dataIndex: 'potentialRevenueFrom',
-      key: 'potentialRevenueFrom',
-      align: 'center',
-      width: 150,
-      render: (potentialRevenueFrom: string) => (
-        <div>{potentialRevenueFrom}</div>
-      ),
-    },
-    {
-      title: 'Doanh thu tiềm năng từ Doanh thu tiềm năng đến ',
-      dataIndex: 'potentialRevenueTo',
-      key: 'potentialRevenueTo',
-      align: 'center',
-      width: 150,
-      render: (potentialRevenueFrom: string) => (
-        <div>{potentialRevenueFrom}</div>
-      ),
-    },
-    {
-      title: 'Tỷ lệ LNG Cam kết nếu xin giá riêng/Tháng (Đánh tỷ lệ %)',
-      dataIndex: 'commitmentRate',
-      key: 'commitmentRate',
-      align: 'center',
-      width: 150,
-      render: (commitmentRate: string) => <div>{commitmentRate}</div>,
-    },
+    // {
+    //   title: 'Tỷ lệ LNG Cam kết nếu xin giá riêng/Tháng (Đánh tỷ lệ %)',
+    //   dataIndex: 'commitmentRate',
+    //   key: 'commitmentRate',
+    //   align: 'center',
+    //   width: 150,
+    //   render: (commitmentRate: string) => <div>{commitmentRate}</div>,
+    // },
     {
       title: 'Mã hợp đồng',
       dataIndex: 'contractCode',
@@ -779,21 +734,18 @@ export const columnsContract = ({
       ),
     },
     {
-      title: 'Mã bảng giá cố định',
-      dataIndex: 'fixedPriceCode',
-      key: 'fixedPriceCode',
+      title: 'Lịch thanh toán công nợ kể từ ngày xuất hóa đơn',
+      dataIndex: 'paymentSchedule',
+      key: 'paymentSchedule',
       align: 'center',
       width: 150,
-      render: (fixedPriceCode: string) => (
-        <div>
-          {
-            opitionFixedPriceCode?.find(
-              (x: OpitionType) => x.value === fixedPriceCode
-            )?.label
-          }
-        </div>
-      ),
+      render: (paymentSchedule: string) => {
+        return (
+          <div>{dayjs(paymentSchedule || undefined).format('DD-MM-YYYY')}</div>
+        );
+      },
     },
+
     {
       title: 'Thời hạn hợp đồng',
       dataIndex: 'contactTerm',
@@ -801,88 +753,81 @@ export const columnsContract = ({
       align: 'center',
       width: 140,
       render: (contactTerm: Array<any>) => (
-        <div>{`Từ: ${moment(contactTerm[0]).format(
+        <div>{`Từ: ${dayjs(contactTerm[0]).format(
           'DD-MM-YYYY'
-        )} \n Đến :${moment(contactTerm[1]).format('DD-MM-YYYY')}`}</div>
+        )} \n Đến :${dayjs(contactTerm[1]).format('DD-MM-YYYY')}`}</div>
       ),
-    },
-    {
-      title: 'Giá khác',
-      dataIndex: 'otherPrice',
-      key: 'otherPrice',
-      align: 'center',
-      width: 140,
-      render: (otherPrice: Array<any>) => <div>{otherPrice}</div>,
-    },
-    {
-      title: 'Country hoặc Zone',
-      dataIndex: 'countryContractId',
-      key: 'countryContractId',
-      align: 'center',
-      width: 140,
-      render: (countryContractId: string) => (
-        <div>
-          {
-            opitionCountryZone?.find(
-              (x: OpitionType) => x.value === countryContractId
-            )?.label
-          }
-        </div>
-      ),
-    },
-    {
-      title: 'Tỷ lệ giảm giá (Đánh tỷ lệ %)',
-      dataIndex: 'discountRate',
-      key: 'discountRate',
-      align: 'center',
-      width: 140,
-      render: (discountRate: string) => <div>{discountRate}</div>,
-    },
-    {
-      title: 'Ghi chú hợp đồng',
-      dataIndex: 'noteContract',
-      key: 'noteContract',
-      align: 'center',
-      width: 140,
-      render: (noteContract: string) => <div>{noteContract}</div>,
-    },
-    {
-      title: 'Mã bảng giá',
-      dataIndex: 'priceListCode',
-      key: 'priceListCode',
-      align: 'center',
-      width: 140,
-      render: (priceListCode: string) => <div>{priceListCode}</div>,
     },
 
-    {
-      title: 'Thời hạn áp dung mã giảm giá',
-      dataIndex: 'timeAplly',
-      key: 'timeAplly',
-      align: 'center',
-      width: 140,
-      render: (timeAplly: Array<any>) => (
-        <div>{`Từ: ${moment(timeAplly[0]).format(
-          'DD-MM-YYYY'
-        )} \n Đến :${moment(timeAplly[1]).format('DD-MM-YYYY')}`}</div>
-      ),
-    },
-    {
-      title: 'Phụ phí xăng dầu',
-      dataIndex: 'surcharge',
-      key: 'surcharge',
-      align: 'center',
-      width: 140,
-      render: (surcharge: Array<any>) => <div>{surcharge}</div>,
-    },
-    {
-      title: 'Tý giá áp dụng',
-      dataIndex: 'applicableRate',
-      key: 'applicableRate',
-      align: 'center',
-      width: 140,
-      render: (applicableRate: Array<any>) => <div>{applicableRate}</div>,
-    },
+    // {
+    //   title: 'Country hoặc Zone',
+    //   dataIndex: 'countryContractId',
+    //   key: 'countryContractId',
+    //   align: 'center',
+    //   width: 140,
+    //   render: (countryContractId: string) => (
+    //     <div>
+    //       {
+    //         opitionCountryZone?.find(
+    //           (x: OpitionType) => x.value === countryContractId
+    //         )?.label
+    //       }
+    //     </div>
+    //   ),
+    // },
+    // {
+    //   title: 'Tỷ lệ giảm giá (Đánh tỷ lệ %)',
+    //   dataIndex: 'discountRate',
+    //   key: 'discountRate',
+    //   align: 'center',
+    //   width: 140,
+    //   render: (discountRate: string) => <div>{discountRate}</div>,
+    // },
+    // {
+    //   title: 'Ghi chú hợp đồng',
+    //   dataIndex: 'noteContract',
+    //   key: 'noteContract',
+    //   align: 'center',
+    //   width: 140,
+    //   render: (noteContract: string) => <div>{noteContract}</div>,
+    // },
+    // {
+    //   title: 'Mã bảng giá',
+    //   dataIndex: 'priceListCode',
+    //   key: 'priceListCode',
+    //   align: 'center',
+    //   width: 140,
+    //   render: (priceListCode: string) => <div>{priceListCode}</div>,
+    // },
+
+    // {
+    //   title: 'Thời hạn áp dung mã giảm giá',
+    //   dataIndex: 'timeAplly',
+    //   key: 'timeAplly',
+    //   align: 'center',
+    //   width: 140,
+    //   render: (timeAplly: Array<any>) => (
+    //     <div>{`Từ: ${moment(timeAplly[0]).format(
+    //       'DD-MM-YYYY'
+    //     )} \n Đến :${moment(timeAplly[1]).format('DD-MM-YYYY')}`}</div>
+    //   ),
+    // },
+    // {
+    //   title: 'Phụ phí xăng dầu',
+    //   dataIndex: 'surcharge',
+    //   key: 'surcharge',
+    //   align: 'center',
+    //   width: 140,
+    //   render: (surcharge: Array<any>) => <div>{surcharge}</div>,
+    // },
+    // {
+    //   title: 'Tý giá áp dụng',
+    //   dataIndex: 'applicableRate',
+    //   key: 'applicableRate',
+    //   align: 'center',
+    //   width: 140,
+    //   render: (applicableRate: Array<any>) => <div>{applicableRate}</div>,
+    // },
     {
       title: 'Thẩm định',
       dataIndex: 'expertise',
@@ -917,10 +862,114 @@ export const columnsContract = ({
       width: 100,
       render: (type: string, record: any, index) => (
         <div className='flex flex-row gap-8'>
+          <EditOutlined
+            onClick={() => handleUpdate({ ...record, idKey: index })}
+          />
           <DeleteOutlined onClick={() => handleDeleteRow(index)} />
         </div>
       ),
     },
   ];
   return contract;
+};
+
+export const columsOrdersCode = ({
+  opitionServices,
+  opitionFixedPriceCode,
+  handleDelete,
+  handleUpdate,
+}: {
+  opitionServices: Array<OpitionType>;
+  opitionFixedPriceCode: Array<OpitionType>;
+  handleDelete: (id: any) => void;
+  handleUpdate: (record: any) => void;
+}) => {
+  const handleDeleteRow = (row: any) => {
+    Modal.confirm({
+      title: 'Thông báo',
+      icon: <WarningOutlined className='text-red-700' />,
+      content: 'Bạn có chắc chắn muốn xóa hàng hóa này không?',
+      okText: 'Đồng ý',
+      cancelText: 'Không',
+      onOk: () => handleDelete(row),
+    });
+  };
+  const ordersCode: ColumnsType<any> = [
+    {
+      title: 'Dịch vụ yêu cầu',
+      dataIndex: 'serviceRequestId',
+      key: 'serviceRequestId',
+      align: 'center',
+      width: 150,
+      render: (serviceRequestId: string) => (
+        <div>
+          {
+            opitionServices?.find(
+              (x: OpitionType) => x.value === serviceRequestId
+            )?.label
+          }
+        </div>
+      ),
+    },
+
+    {
+      title: 'Doanh thu tiềm năng từ  ',
+      dataIndex: 'potentialRevenueFrom',
+      key: 'potentialRevenueFrom',
+      align: 'center',
+      width: 150,
+      render: (potentialRevenueFrom: string) => (
+        <div>{potentialRevenueFrom}</div>
+      ),
+    },
+    {
+      title: 'Doanh thu tiềm năng đến ',
+      dataIndex: 'potentialRevenueTo',
+      key: 'potentialRevenueTo',
+      align: 'center',
+      width: 150,
+      render: (potentialRevenueFrom: string) => (
+        <div>{potentialRevenueFrom}</div>
+      ),
+    },
+    {
+      title: 'Mã bảng giá cố định',
+      dataIndex: 'fixedPriceCode',
+      key: 'fixedPriceCode',
+      align: 'center',
+      width: 150,
+      render: (fixedPriceCode: string) => (
+        <div>
+          {
+            opitionFixedPriceCode?.find(
+              (x: OpitionType) => x.value === fixedPriceCode
+            )?.label
+          }
+        </div>
+      ),
+    },
+    {
+      title: 'Giá khác',
+      dataIndex: 'otherPrice',
+      key: 'otherPrice',
+      align: 'center',
+      width: 140,
+      render: (otherPrice: Array<any>) => <div>{otherPrice}</div>,
+    },
+    {
+      title: 'Action',
+      key: 'operation',
+      fixed: 'right',
+      width: 100,
+      render: (type: string, record: any, index) => (
+        <div className='flex flex-row gap-8'>
+          <EditOutlined
+            onClick={() => handleUpdate({ ...record, idKey: index })}
+          />
+          <DeleteOutlined onClick={() => handleDeleteRow(index)} />
+        </div>
+      ),
+    },
+  ];
+  return ordersCode;
 };

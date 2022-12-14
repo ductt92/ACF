@@ -2,9 +2,7 @@
 import { Button, Form, FormInstance, Modal, Radio, Select, Spin } from 'antd';
 import React from 'react';
 
-import VDatePicker from '@/components/common/VDatePicker';
 import VInput from '@/components/common/VInput';
-import VInputNumber from '@/components/common/VInputNumber';
 import VRangePicker from '@/components/common/VRangeDate';
 import VSelect from '@/components/common/VSelect';
 
@@ -16,47 +14,43 @@ interface ModalCreateContract {
   onClose: () => void;
   form: FormInstance<IContract>;
   isOpen: boolean;
+  isUpdate: boolean;
   expertise: any;
   handleChangeEx: (value: any) => void;
-  handleChangeServices: (value: string) => void;
   handleAddContract: () => void;
-  opitonServices: Array<OpitionType>;
   opitionTypeContract: Array<OpitionType>;
-  opitionFixedPriceCode: Array<OpitionType>;
-  opitionCountryZone: Array<OpitionType>;
   opitionStaff: Array<OpitionType>;
-  countryContractLoading: boolean;
 }
 
 const ModalCreateContract = ({
   onClose,
   form,
   isOpen,
+  isUpdate,
   expertise,
-  handleChangeServices,
   handleChangeEx,
   handleAddContract,
-  opitonServices,
   opitionTypeContract,
-  opitionFixedPriceCode,
-  opitionCountryZone,
-  countryContractLoading,
   opitionStaff,
 }: ModalCreateContract) => {
   return (
     <Modal
       footer={null}
       destroyOnClose={true}
-      visible={isOpen}
+      visible={isOpen || isUpdate}
       onCancel={onClose}
       className='top-[calc(5vh)] w-[calc(45vw)]'
     >
-      <Spin spinning={countryContractLoading}>
-        <p className='text-center text-2xl'>Tạo mới thông tin hợp đồng</p>
+      <Spin spinning={false}>
+        <p className='text-center text-2xl'>
+          {isUpdate
+            ? 'Cập nhật thông tin hợp đồng'
+            : 'Tạo mới thông tin hợp đồng'}
+        </p>
         <Form form={form} name='contractFrom'>
           <div className='h-[calc(70vh)] overflow-y-auto p-4'>
             <div className='grid grid-cols-2 gap-x-6'>
-              <Form.Item
+              {/* <Form.Item
                 name='serviceRequestId'
                 rules={[
                   { required: true, message: 'Vui lòng chọn dịch vụ yêu cầu' },
@@ -73,60 +67,9 @@ const ModalCreateContract = ({
                     </Option>
                   ))}
                 </VSelect>
-              </Form.Item>
+              </Form.Item> */}
 
-              <Form.Item
-                name='paymentSchedule'
-                rules={[
-                  {
-                    required: true,
-                    message:
-                      'Vui lòng chọn lịch thanh toán công nợ kể từ ngày chốt bảng kê',
-                  },
-                ]}
-              >
-                <VDatePicker
-                  format='DD-MM-YYYY'
-                  label='Lịch thanh toán công nợ kể từ ngày xuất hóa đơn'
-                  placeholder='Lịch thanh toán công nợ kể từ ngày xuất hóa đơn'
-                  required
-                />
-              </Form.Item>
-
-              <Form.Item
-                name='potentialRevenueFrom'
-                rules={[
-                  {
-                    required: true,
-                    message:
-                      'Vui lòng nhập Doanh thu tiềm năng từ (triệu đồng)',
-                  },
-                ]}
-              >
-                <VInputNumber
-                  label='Doanh thu tiềm năng từ (triệu đồng)'
-                  placeholder='Nhập Doanh thu tiềm năng từ'
-                  required
-                />
-              </Form.Item>
-
-              <Form.Item
-                name='potentialRevenueTo'
-                rules={[
-                  {
-                    required: true,
-                    message:
-                      'Vui lòng nhập Doanh thu tiềm năng đến (triệu đồng)',
-                  },
-                ]}
-              >
-                <VInputNumber
-                  label='Doanh thu tiềm năng đến (triệu đồng)'
-                  placeholder='Nhập Doanh thu tiềm năng đến (triệu đồng)'
-                  required
-                />
-              </Form.Item>
-
+              {/* 
               <Form.Item
                 name='commitmentRate'
                 rules={[
@@ -142,7 +85,7 @@ const ModalCreateContract = ({
                   placeholder='Nhập Doanh thu tiềm năng đến'
                   required
                 />
-              </Form.Item>
+              </Form.Item> */}
 
               <Form.Item
                 name='contractCode'
@@ -185,7 +128,11 @@ const ModalCreateContract = ({
                   },
                 ]}
               >
-                <VSelect label='Loại hợp đồng' required>
+                <VSelect
+                  label='Loại hợp đồng'
+                  required
+                  placeholder='Chọn loại hợp đồng'
+                >
                   {opitionTypeContract.map((v) => (
                     <Option value={v.value} key={v.value}>
                       {v.label}
@@ -194,14 +141,21 @@ const ModalCreateContract = ({
                 </VSelect>
               </Form.Item>
 
-              <Form.Item name='fixedPriceCode'>
-                <VSelect label='Mã bảng giá cố định'>
-                  {opitionFixedPriceCode.map((v) => (
-                    <Option value={v.value} key={v.value}>
-                      {v.label}
-                    </Option>
-                  ))}
-                </VSelect>
+              <Form.Item
+                name='paymentSchedule'
+                rules={[
+                  {
+                    required: true,
+                    message:
+                      'Vui lòng nhập lịch thanh toán công nợ kể từ ngày chốt bảng kê',
+                  },
+                ]}
+              >
+                <VInput
+                  label='Lịch thanh toán công nợ kể từ ngày xuất hóa đơn'
+                  placeholder='Lịch thanh toán công nợ kể từ ngày xuất hóa đơn'
+                  required
+                />
               </Form.Item>
 
               <Form.Item
@@ -222,7 +176,7 @@ const ModalCreateContract = ({
                 />
               </Form.Item>
 
-              <Form.Item name='otherPrice'>
+              {/* <Form.Item name='otherPrice'>
                 <VInput label='Giá khác' placeholder='Giá khác' required />
               </Form.Item>
 
@@ -311,7 +265,7 @@ const ModalCreateContract = ({
                   placeholder='Nhập tý giá áp dụng'
                   required
                 />
-              </Form.Item>
+              </Form.Item> */}
             </div>
 
             <div className='grid grid-cols-2 gap-x-6'>
@@ -350,7 +304,7 @@ const ModalCreateContract = ({
         </Form>
 
         <Button type='primary' onClick={handleAddContract}>
-          Thêm hợp đồng
+          {isUpdate ? 'Cập nhật hợp đồng' : ' Thêm hợp đồng'}
         </Button>
       </Spin>
     </Modal>
