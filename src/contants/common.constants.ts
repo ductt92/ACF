@@ -22,6 +22,7 @@ export interface QueryParams2 {
   pageSize?: number;
   startDate?: string | Date;
   endDate?: string | Date;
+  isHandle?: boolean;
 }
 export interface QueryParams3 {
   page?: number;
@@ -30,6 +31,7 @@ export interface QueryParams3 {
   status?: BookingStatusPost;
   createBookingFrom?: string | Date;
   createBookingTo?: string | Date;
+  isHandle?: boolean;
 }
 
 export const QUERY_PARAMS: QueryParams = {

@@ -42,6 +42,7 @@ export const fetchBookingAdmin = async ({
   status,
   createBookingFrom,
   createBookingTo,
+  isHandle,
 }: QueryParams3) => {
   const bookingAdmin = await HttpRequest.get('booking', {
     params: {
@@ -51,6 +52,7 @@ export const fetchBookingAdmin = async ({
       status,
       createBookingFrom,
       createBookingTo,
+      isHandle,
     },
   });
   return bookingAdmin as MyBookingResponse;

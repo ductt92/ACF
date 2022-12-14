@@ -26,6 +26,7 @@ const QUERY_PARAMS: QueryParams3 = {
   status: undefined,
   createBookingFrom: undefined,
   createBookingTo: undefined,
+  isHandle: undefined,
 };
 
 const statusPending: ColumnsType<IMyBooking> = [
@@ -100,6 +101,13 @@ const OrderDetails = () => {
       createBookingTo: queries.createBookingTo,
     });
   };
+
+  const handleChangeIsHandle = (value: boolean) => {
+    setQueries((prev) => ({
+      ...prev,
+      isHandle: value,
+    }));
+  };
   return (
     <div>
       <div className='flex flex-row gap-4 px-6'>
@@ -126,6 +134,21 @@ const OrderDetails = () => {
           onClick={handleGenerateExcelBooking}
         >
           Xuất excel
+        </Button>
+        <Button
+          type='primary'
+          className='h-8'
+          onClick={() => handleChangeIsHandle(true)}
+        >
+          Đã xử lý
+        </Button>
+        <Button
+          type='primary'
+          className='h-8'
+          onClick={() => handleChangeIsHandle(false)}
+          danger
+        >
+          Chưa xử lý
         </Button>
       </div>
       <Spin spinning={isLoading || isFetching}>
