@@ -100,6 +100,7 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
       });
     },
   });
+
   const { mutate: genBillPatner } = useMutation(generateBillPatner, {
     onSuccess: () => {
       queryClient.invalidateQueries(['generateBillPatner']);

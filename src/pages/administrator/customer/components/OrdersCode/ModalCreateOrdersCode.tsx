@@ -8,26 +8,30 @@ import VInputNumber from '@/components/common/VInputNumber';
 import VSelect from '@/components/common/VSelect';
 
 import { OpitionType } from '@/contants/types';
+import { mockdataDemo } from '@/utils/ultils';
 interface ModalCreateStaffProps {
   form: FormInstance;
   isOpen: boolean;
-
   isUpdate: boolean;
+  otherPrice: any;
   handleClose: () => void;
-
   opitonServices: Array<OpitionType>;
-
+  servicesId?: string;
   opitionFixedPriceCode: Array<OpitionType>;
   handleAddOrder: (data: any) => void;
   handleChangeServices: (id: string) => void;
+  handleChangeOtherPrice: (value: any) => void;
 }
 const ModalCreateOrdersCode = ({
   form,
   isOpen,
+  otherPrice,
+  handleChangeOtherPrice,
   handleClose,
   opitonServices,
   isUpdate,
   opitionFixedPriceCode,
+  servicesId,
   handleChangeServices,
   handleAddOrder,
 }: ModalCreateStaffProps) => {
@@ -41,7 +45,7 @@ const ModalCreateOrdersCode = ({
     >
       <Form form={form}>
         <Spin spinning={false}>
-          <div className='h-[calc(70vh)] '>
+          <div className='h-[calc(70vh)] overflow-y-auto p-4'>
             <p className='text-center text-xl'>
               {isUpdate ? 'Cập nhật bảng giá' : 'Thêm mới bảng giá'}
             </p>
@@ -99,20 +103,69 @@ const ModalCreateOrdersCode = ({
                 />
               </Form.Item>
 
-              <Form.Item name='fixedPriceCode'>
-                <VSelect label='Mã bảng giá cố định'>
-                  {opitionFixedPriceCode.map((v) => (
-                    <Option value={v.value} key={v.value}>
-                      {v.label}
-                    </Option>
-                  ))}
-                </VSelect>
-              </Form.Item>
+              {servicesId && (
+                <Form.Item name='fixedPriceCode'>
+                  <VSelect
+                    label='Mã bảng giá cố định'
+                    onChange={handleChangeOtherPrice}
+                  >
+                    {opitionFixedPriceCode.map((v) => (
+                      <Option value={v.value} key={v.value}>
+                        {v.label}
+                      </Option>
+                    ))}
+                  </VSelect>
+                </Form.Item>
+              )}
 
-              <Form.Item name='otherPrice'>
-                <VInput label='Giá khác' placeholder='Giá khác' required />
-              </Form.Item>
+              {otherPrice === 'OTHER_PRICE' &&
+                mockdataDemo(servicesId).length === 0 && (
+                  <Form.Item name='otherPrice'>
+                    <VInput label='Giá khác' placeholder='Giá khác' required />
+                  </Form.Item>
+                )}
+
+              {otherPrice === 'OTHER_PRICE' &&
+                mockdataDemo(servicesId).length === 0 && (
+                  <Form.Item
+                    name='otherPrice'
+                    rules={[
+                      {
+                        required: true,
+                        message:
+                          'Vui lòng nhập Doanh thu tiềm năng đến (triệu đồng)',
+                      },
+                    ]}
+                  >
+                    <VInput
+                      label='Tỷ lệ giảm giá (Đánh tỷ lệ %)'
+                      placeholder='Tỷ lệ giảm giá (Đánh tỷ lệ %)'
+                      required
+                    />
+                  </Form.Item>
+                )}
+
+              {otherPrice === 'OTHER_PRICE' &&
+                mockdataDemo(servicesId).length === 0 && (
+                  <Form.Item name='notePrice'>
+                    <VInput label='Ghi chú' placeholder='Nhập ghi chú' />
+                  </Form.Item>
+                )}
             </div>
+
+            {otherPrice === 'OTHER_PRICE' &&
+              mockdataDemo(servicesId).length > 0 &&
+              mockdataDemo(servicesId).map((v) => (
+                <div key={v} className='grid grid-cols-2 gap-x-6'>
+                  <Form.Item name={v} key={v}>
+                    <VInput label={`Nhập Tỷ lệ giảm giá (Đánh tỷ lệ %) ${v}`} />
+                  </Form.Item>
+
+                  <Form.Item name='notePrice'>
+                    <VInput label={`Ghi chú ${v}`} placeholder='Nhập ghi chú' />
+                  </Form.Item>
+                </div>
+              ))}
           </div>
         </Spin>
         <Button type='primary' onClick={handleAddOrder}>

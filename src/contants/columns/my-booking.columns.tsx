@@ -10,7 +10,11 @@ import { ColumnsType } from 'antd/lib/table';
 import clsx from 'clsx';
 import dayjs from 'dayjs';
 
-import { CLICK_TO_COPY, copyToClipBoard } from '@/utils/helpers';
+import {
+  CLICK_TO_COPY,
+  copyToClipBoard,
+  numberWithCommas,
+} from '@/utils/helpers';
 
 import { CalculationUnit } from '../common.constants';
 import {
@@ -674,11 +678,13 @@ export const columsStaff = ({
 export const columnsContract = ({
   opitionTypeContract,
   opitionStaff,
+  opitionServices,
   handleDelete,
   handleUpdate,
 }: {
   opitionTypeContract: Array<OpitionType>;
   opitionStaff: Array<OpitionType>;
+  opitionServices: Array<OpitionType>;
   handleDelete: (id: any) => void;
   handleUpdate: (record: any) => void;
 }) => {
@@ -693,14 +699,16 @@ export const columnsContract = ({
     });
   };
   const contract: ColumnsType<any> = [
-    // {
-    //   title: 'Tỷ lệ LNG Cam kết nếu xin giá riêng/Tháng (Đánh tỷ lệ %)',
-    //   dataIndex: 'commitmentRate',
-    //   key: 'commitmentRate',
-    //   align: 'center',
-    //   width: 150,
-    //   render: (commitmentRate: string) => <div>{commitmentRate}</div>,
-    // },
+    {
+      title: 'Ngày tạo',
+      dataIndex: 'createdAt',
+      key: 'createdAt',
+      align: 'center',
+      width: 150,
+      render: (createdAt: string) => (
+        <div>{dayjs(createdAt).format('DD-MM-YYYY  HH:mm:ss')}</div>
+      ),
+    },
     {
       title: 'Mã phụ lục hợp đồng',
       dataIndex: 'contractCode',
@@ -716,6 +724,21 @@ export const columnsContract = ({
       align: 'center',
       width: 150,
       render: (contractName: string) => <div>{contractName}</div>,
+    },
+    {
+      title: 'Dịch vụ sử dụng',
+      dataIndex: 'service',
+      key: 'service',
+      align: 'center',
+      width: 150,
+      render: (service: string) => (
+        <div>
+          {
+            opitionServices?.find((x: OpitionType) => x.value === service)
+              ?.label
+          }
+        </div>
+      ),
     },
     {
       title: 'Loại phụ lục hợp đồng',
@@ -913,23 +936,23 @@ export const columsOrdersCode = ({
     },
 
     {
-      title: 'Doanh thu tiềm năng từ  ',
+      title: 'Doanh thu tiềm năng từ (triệu đồng)',
       dataIndex: 'potentialRevenueFrom',
       key: 'potentialRevenueFrom',
       align: 'center',
       width: 150,
       render: (potentialRevenueFrom: string) => (
-        <div>{potentialRevenueFrom}</div>
+        <div>{numberWithCommas(potentialRevenueFrom)}</div>
       ),
     },
     {
-      title: 'Doanh thu tiềm năng đến ',
+      title: 'Doanh thu tiềm năng đến (triệu đồng)',
       dataIndex: 'potentialRevenueTo',
       key: 'potentialRevenueTo',
       align: 'center',
       width: 150,
       render: (potentialRevenueFrom: string) => (
-        <div>{potentialRevenueFrom}</div>
+        <div>{numberWithCommas(potentialRevenueFrom)}</div>
       ),
     },
     {

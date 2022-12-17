@@ -105,10 +105,10 @@ const ModalEditCustomer = ({ onClose, value }: IProps) => {
     form.setFieldsValue({
       ...value,
       paymentSchedule: moment(value?.paymentSchedule),
-      previousCosing: [
-        moment(value?.previousCosingFrom || undefined),
-        moment(value?.previousCosingTo || undefined),
-      ],
+      // previousCosing: [
+      //   moment(value?.previousCosingFrom || undefined),
+      //   moment(value?.previousCosingTo || undefined),
+      // ],
     });
 
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment

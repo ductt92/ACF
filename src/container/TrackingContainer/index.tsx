@@ -2,7 +2,7 @@ import { Button, Col, Row, Spin, Timeline } from 'antd';
 import TextArea from 'antd/lib/input/TextArea';
 import moment from 'moment';
 import { useRouter } from 'next/router';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
 
 import { trackingBooking } from '@/services/booking.services';
@@ -10,17 +10,35 @@ import { getStatusTracking } from '@/utils/ultils';
 
 const TrackingContainer = () => {
   const router = useRouter();
+  const [query, setQueries] = useState({
+    search: '',
+    page: 1,
+    pageSize: 10,
+    billCodes: [] as string[],
+  });
   const { id } = router.query;
   const [search, setSearch] = useState('');
 
   const { data: dataDelivery, isLoading } = useQuery(
-    ['trackingBooking', { id }],
-    () => trackingBooking(id as string)
+    ['trackingBooking', { query }],
+    () => trackingBooking(query)
   );
+
+  console.log(dataDelivery);
 
   const handleSearch = () => {
     router.push(`/tracking/${search}`);
   };
+
+  useEffect(() => {
+    if (id) {
+      const billCodes = [id] as string[];
+      setQueries((prev) => ({
+        ...prev,
+        billCodes: billCodes,
+      }));
+    }
+  }, [id]);
 
   return (
     <div className='m-auto flex w-[1024px] flex-col gap-8 p-4'>

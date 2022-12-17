@@ -1,7 +1,7 @@
 import { Button, Form, Modal, notification, Select } from 'antd';
 import dayjs from 'dayjs';
-import React from 'react';
-import { useMutation, useQueryClient } from 'react-query';
+import React, { useMemo } from 'react';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 
 import VDatePicker from '@/components/common/VDatePicker';
 import VInput from '@/components/common/VInput';
@@ -9,7 +9,8 @@ import VSelect from '@/components/common/VSelect';
 
 import { DEFAULT_DATE_FORMAT, LevelStaff } from '@/contants/common.constants';
 import { QUERY_EMPLOYEE } from '@/contants/query-key/employee.contants';
-import { GENDER, IStaff, Marital } from '@/contants/types';
+import { GENDER, IStaff, Marital, OpitionType } from '@/contants/types';
+import { getUnit } from '@/services/customer.services';
 import { createStaffs } from '@/services/employee.services';
 
 interface IProps {
@@ -19,7 +20,7 @@ const ModalCreateEmployee = ({ onClose }: IProps) => {
   const queryClient = useQueryClient();
   const [form] = Form.useForm();
   const { Option } = Select;
-
+  // OpitionUnits
   const { mutate: mutateCreate, isLoading: isCreating } = useMutation(
     createStaffs,
     {
@@ -39,6 +40,7 @@ const ModalCreateEmployee = ({ onClose }: IProps) => {
       },
     }
   );
+  const { data: dataUnits } = useQuery(['getUnit', {}], () => getUnit());
 
   const onSubmit = async () => {
     const requestData: IStaff = await form.validateFields();
@@ -54,7 +56,20 @@ const ModalCreateEmployee = ({ onClose }: IProps) => {
       ).format(DEFAULT_DATE_FORMAT),
     });
   };
-
+  const OpitionUnits = useMemo(() => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    //  @ts-ignore
+    if (dataUnits?.length < 0) {
+      return [];
+    } else {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      //  @ts-ignore
+      return dataUnits?.map((v) => ({
+        value: v.id,
+        label: `${v.name}`,
+      }));
+    }
+  }, [dataUnits]);
   const OpitionGender = Object.entries(GENDER).map(([key, value]) => ({
     value: key,
     label: value,
@@ -311,15 +326,22 @@ const ModalCreateEmployee = ({ onClose }: IProps) => {
                   {
                     required: true,
                     message:
-                      'Vui lòng nhập Khu vực làm việc của nhân viên. Chọn theo các thông tin đơn vị của trường quản lý khách hàng',
+                      'Vui lòng chọn Khu vực làm việc của nhân viên. Chọn theo các thông tin đơn vị của trường quản lý khách hàng',
                   },
                 ]}
               >
-                <VInput
+                <VSelect
+                  showSearch
                   label='Khu vực làm việc của nhân viên. Chọn theo các thông tin đơn vị của trường quản lý khách hàng'
                   placeholder='Nhập Khu vực làm việc của nhân viên. Chọn theo các thông tin đơn vị của trường quản lý khách hàng'
                   required
-                />
+                >
+                  {OpitionUnits.map((v: OpitionType) => (
+                    <Option key={v.value} value={v.value}>
+                      {v.label}
+                    </Option>
+                  ))}
+                </VSelect>
               </Form.Item>
               <Form.Item name='taxCode'>
                 <VInput label='MST' placeholder='Nhập MST' />

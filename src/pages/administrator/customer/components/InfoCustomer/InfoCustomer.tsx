@@ -146,7 +146,7 @@ const InfoCustomer = ({ form }: { form: FormInstance }) => {
               { required: true, message: 'Vui lòng chọn thông tin đơn vị' },
             ]}
           >
-            <VSelect label='Thông tin đơn vị' required>
+            <VSelect label='Thông tin đơn vị' required showSearch>
               {OpitionUnits?.map((v: any) => (
                 <Option value={v.value} key={v.value}>
                   {v.label}
@@ -198,7 +198,7 @@ const InfoCustomer = ({ form }: { form: FormInstance }) => {
             rules={[{ required: true, message: 'Vui lòng Tỉnh/Thành phố ' }]}
           >
             <VInput
-              label='Tỉnh/Thành phố 2'
+              label='Tỉnh/Thành phố'
               required
               placeholder='Nhập Tỉnh/Thành phố '
             />

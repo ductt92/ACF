@@ -23,7 +23,9 @@ const OrdersCode = ({
 }) => {
   const [servicesId, setServicesId] = useState<string>();
   const [idUpdate, setIdUpdate] = useState('');
-
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isUpdate, setIsUpdate] = useState<boolean>(false);
+  const [otherPrice, setOtherPrice] = useState<any>();
   const [orderForm] = Form.useForm();
 
   const { data: dataSmallServices } = useQuery(['smallSerices', {}], () =>
@@ -54,8 +56,9 @@ const OrdersCode = ({
   const handleChangeServices = (value: string) => {
     setServicesId(value);
   };
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [isUpdate, setIsUpdate] = useState<boolean>(false);
+  const handleChangeOtherPrice = (value: any) => {
+    setOtherPrice(value);
+  };
 
   const actionUpdate = (record: any) => {
     setIsUpdate(true);
@@ -109,10 +112,13 @@ const OrdersCode = ({
 
         <ModalCreateOrdersCode
           form={orderForm}
+          servicesId={servicesId}
           isOpen={isOpen || isUpdate}
           handleClose={() => (isUpdate ? setIsUpdate(false) : setIsOpen(false))}
           opitonServices={OpitionSmallServices || []}
           isUpdate={isUpdate}
+          otherPrice={otherPrice}
+          handleChangeOtherPrice={handleChangeOtherPrice}
           opitionFixedPriceCode={EFixedPriceOpition || []}
           handleAddOrder={ActionhandleAddOrder}
           handleChangeServices={handleChangeServices}

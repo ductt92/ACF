@@ -20,6 +20,7 @@ interface ModalCreateContract {
   handleAddContract: () => void;
   opitionTypeContract: Array<OpitionType>;
   opitionStaff: Array<OpitionType>;
+  opitionServices: Array<OpitionType>;
 }
 
 const ModalCreateContract = ({
@@ -32,6 +33,7 @@ const ModalCreateContract = ({
   handleAddContract,
   opitionTypeContract,
   opitionStaff,
+  opitionServices,
 }: ModalCreateContract) => {
   return (
     <Modal
@@ -50,43 +52,6 @@ const ModalCreateContract = ({
         <Form form={form} name='contractFrom'>
           <div className='h-[calc(70vh)] overflow-y-auto p-4'>
             <div className='grid grid-cols-2 gap-x-6'>
-              {/* <Form.Item
-                name='serviceRequestId'
-                rules={[
-                  { required: true, message: 'Vui lòng chọn dịch vụ yêu cầu' },
-                ]}
-              >
-                <VSelect
-                  label='Dịch vụ yêu cầu'
-                  required
-                  onChange={handleChangeServices}
-                >
-                  {opitonServices?.map((v: OpitionType) => (
-                    <Option value={v.value} key={v.value}>
-                      {v.label}
-                    </Option>
-                  ))}
-                </VSelect>
-              </Form.Item> */}
-
-              {/* 
-              <Form.Item
-                name='commitmentRate'
-                rules={[
-                  {
-                    required: true,
-                    message:
-                      'Vui lòng nhập Tỷ lệ LNG Cam kết nếu xin giá riêng/Tháng (Đánh tỷ lệ %)',
-                  },
-                ]}
-              >
-                <VInput
-                  label='Tỷ lệ LNG Cam kết nếu xin giá riêng/Tháng (Đánh tỷ lệ %)'
-                  placeholder='Nhập Doanh thu tiềm năng đến'
-                  required
-                />
-              </Form.Item> */}
-
               <Form.Item
                 name='contractCode'
                 rules={[
@@ -117,6 +82,28 @@ const ModalCreateContract = ({
                   placeholder='Nhập Tên phụ lục hợp đồng'
                   required
                 />
+              </Form.Item>
+
+              <Form.Item
+                name='service'
+                rules={[
+                  {
+                    required: true,
+                    message: 'Vui lòng chọn loại dịch vụ sử dụng',
+                  },
+                ]}
+              >
+                <VSelect
+                  label='Dịch vụ sử dụng'
+                  required
+                  placeholder='Chọn loại dịch vụ sử dụng'
+                >
+                  {opitionServices?.map((v) => (
+                    <Option value={v.value} key={v.value}>
+                      {v.label}
+                    </Option>
+                  ))}
+                </VSelect>
               </Form.Item>
 
               <Form.Item
@@ -176,96 +163,12 @@ const ModalCreateContract = ({
                 />
               </Form.Item>
 
-              {/* <Form.Item name='otherPrice'>
-                <VInput label='Giá khác' placeholder='Giá khác' required />
-              </Form.Item>
-
-              <Form.Item name='countryContractId'>
-                <VSelect label='Country hoặc Zone '>
-                  {opitionCountryZone?.map((v: OpitionType) => (
-                    <Option value={v.value} key={v.value}>
-                      {v.label}
-                    </Option>
-                  ))}
-                </VSelect>
-              </Form.Item>
-
-              <Form.Item name='discountRate'>
-                <VInput
-                  label='Tỷ lệ giảm giá (Đánh tỷ lệ %)'
-                  placeholder='Nhập Tỷ lệ giảm giá (Đánh tỷ lệ %)'
-                />
-              </Form.Item>
               <Form.Item name='noteContract'>
                 <VInput
                   label='Ghi chú hợp đồng'
                   placeholder='Nhập ghi chú hợp đồng'
                 />
               </Form.Item>
-              <Form.Item
-                name='priceListCode'
-                rules={[
-                  {
-                    required: true,
-                    message: 'Vui lòng nhập Mã bảng giá',
-                  },
-                ]}
-              >
-                <VInput
-                  label='Mã bảng giá'
-                  placeholder='Nhập Mã bảng giá'
-                  required
-                />
-              </Form.Item>
-              <Form.Item
-                name='timeAplly'
-                rules={[
-                  {
-                    required: true,
-                    message: 'Vui lòng chọn Thời hạn áp dung mã giảm giá',
-                  },
-                ]}
-              >
-                <VRangePicker
-                  placeholder={['Ngày bắt đầu', 'Ngày kết thúc']}
-                  className='w-full'
-                  format='DD/MM/YYYY'
-                  label='Thời hạn áp dung mã giảm giá'
-                  required
-                />
-              </Form.Item>
-
-              <Form.Item
-                name='surcharge'
-                rules={[
-                  {
-                    required: true,
-                    message: 'Vui lòng chọn thời hạn hợp đồng',
-                  },
-                ]}
-              >
-                <VInput
-                  label='Phụ phí xăng dầu'
-                  placeholder='Nhập phụ phí xăng dầu'
-                  required
-                />
-              </Form.Item>
-
-              <Form.Item
-                name='applicableRate'
-                rules={[
-                  {
-                    required: true,
-                    message: 'Vui lòng chọn tý giá áp dụng',
-                  },
-                ]}
-              >
-                <VInput
-                  label='Tý giá áp dụng'
-                  placeholder='Nhập tý giá áp dụng'
-                  required
-                />
-              </Form.Item> */}
             </div>
 
             <div className='grid grid-cols-2 gap-x-6'>

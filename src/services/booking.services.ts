@@ -214,16 +214,27 @@ export const confirmBooking = (id: string) => {
   return confirmBooking;
 };
 
-export const trackingBooking = (id?: string) => {
-  if (id) {
-    const confirmBooking = HttpRequest.get(
-      `checkpoints/checkpoints-by-bill-code`,
-      {
-        params: {
-          billCode: id,
-        },
-      }
-    );
+export const trackingBooking = ({
+  search,
+  page,
+  pageSize,
+  billCodes,
+}: {
+  search?: string;
+  page: number;
+  pageSize: number;
+  billCodes: Array<string>;
+}) => {
+  console.log(billCodes);
+  if (billCodes && billCodes.length > 0) {
+    const confirmBooking = HttpRequest.get(`trackings`, {
+      params: {
+        search,
+        page,
+        pageSize,
+        billCodes,
+      },
+    });
     return confirmBooking as unknown as Array<any>;
   }
 };

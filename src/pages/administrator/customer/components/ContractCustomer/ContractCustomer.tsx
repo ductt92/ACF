@@ -7,7 +7,7 @@ import { useQuery } from 'react-query';
 
 import { columnsContract } from '@/contants/columns/my-booking.columns';
 import { ETypeContract, IContract } from '@/contants/types';
-import { getStaff } from '@/services/customer.services';
+import { getServices, getStaff } from '@/services/customer.services';
 
 import ModalCreateContract from './ModalCreateContract';
 interface ContractCustomer {
@@ -35,6 +35,9 @@ const ContractCustomer = ({
   };
 
   const { data: dataStaff } = useQuery(['getStaff', {}], () => getStaff());
+  const { data: dataService } = useQuery(['getDataServices', {}], () =>
+    getServices()
+  );
 
   const OpitionStaff = useMemo(() => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -51,6 +54,21 @@ const ContractCustomer = ({
     }
   }, [dataStaff]);
 
+  const OpitionServices = useMemo(() => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    //  @ts-ignore
+    if (dataService?.length < 0) {
+      return [];
+    } else {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      //  @ts-ignore
+      return dataService?.map((v) => ({
+        value: v.id,
+        label: v.name,
+      }));
+    }
+  }, [dataService]);
+
   const ETypeContractOpition = Object.entries(ETypeContract).map(
     ([key, value]) => ({
       value: key,
@@ -64,7 +82,7 @@ const ContractCustomer = ({
     if (isUpdate) {
       const updateStaff = detailsContract.map((x, index) => {
         if (parseInt(idUpdate) === index) {
-          return res;
+          return { ...res, createdAt: Date.now() };
         } else {
           return x;
         }
@@ -74,7 +92,11 @@ const ContractCustomer = ({
       setIsUpdate(false);
       setIdUpdate('');
     } else {
-      handleAddContract({ ...res, expertise: isExpertise });
+      handleAddContract({
+        ...res,
+        expertise: isExpertise,
+        createdAt: Date.now(),
+      });
       setIsOpen(false);
       setExpertise(0);
       contractFrom.resetFields();
@@ -82,7 +104,6 @@ const ContractCustomer = ({
   };
 
   const actionUpdateContract = (record: any) => {
-    console.log(record);
     setIsUpdate(true);
     contractFrom.setFieldsValue({
       ...record,
@@ -106,6 +127,7 @@ const ContractCustomer = ({
             opitionStaff: OpitionStaff || [],
             handleDelete: handleDeleteContract,
             handleUpdate: actionUpdateContract,
+            opitionServices: OpitionServices || [],
           })}
           dataSource={detailsContract}
           bordered
@@ -123,6 +145,7 @@ const ContractCustomer = ({
         handleAddContract={onHandleAddContract}
         opitionTypeContract={ETypeContractOpition}
         opitionStaff={OpitionStaff}
+        opitionServices={OpitionServices}
       />
     </div>
   );
