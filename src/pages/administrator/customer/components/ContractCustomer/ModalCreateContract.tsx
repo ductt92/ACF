@@ -92,13 +92,13 @@ const ModalCreateContract = ({
                 rules={[
                   {
                     required: true,
-                    message: 'Vui lòng nhập Mã hợp đồng',
+                    message: 'Vui lòng nhập Mã phụ lục hợp đồng',
                   },
                 ]}
               >
                 <VInput
-                  label='Mã hợp đồng'
-                  placeholder='Nhập Mã hợp đồng'
+                  label='Mã phụ lục hợp đồng'
+                  placeholder='Nhập Mã phụ lục hợp đồng'
                   required
                 />
               </Form.Item>
@@ -108,13 +108,13 @@ const ModalCreateContract = ({
                 rules={[
                   {
                     required: true,
-                    message: 'Vui lòng nhập Tên hợp đồng',
+                    message: 'Vui lòng nhập Tên phụ lục hợp đồng',
                   },
                 ]}
               >
                 <VInput
-                  label='Tên hợp đồng'
-                  placeholder='Nhập Tên hợp đồng'
+                  label='Tên phụ lục hợp đồng'
+                  placeholder='Nhập Tên phụ lục hợp đồng'
                   required
                 />
               </Form.Item>
@@ -124,14 +124,14 @@ const ModalCreateContract = ({
                 rules={[
                   {
                     required: true,
-                    message: 'Vui lòng chọn loại hợp đồng',
+                    message: 'Vui lòng chọn loại phụ lục hợp đồng',
                   },
                 ]}
               >
                 <VSelect
-                  label='Loại hợp đồng'
+                  label='Loại phụ lục hợp đồng'
                   required
-                  placeholder='Chọn loại hợp đồng'
+                  placeholder='Chọn loại phụ lục hợp đồng'
                 >
                   {opitionTypeContract.map((v) => (
                     <Option value={v.value} key={v.value}>
@@ -163,7 +163,7 @@ const ModalCreateContract = ({
                 rules={[
                   {
                     required: true,
-                    message: 'Vui lòng chọn thời hạn hợp đồng',
+                    message: 'Vui lòng chọn thời hạn phụ lục hợp đồng',
                   },
                 ]}
               >
@@ -171,7 +171,7 @@ const ModalCreateContract = ({
                   placeholder={['Ngày bắt đầu', 'Ngày kết thúc']}
                   className='w-full'
                   format='DD/MM/YYYY'
-                  label='Thời hạn hợp đồng'
+                  label='Thời hạn phụ lục hợp đồng'
                   required
                 />
               </Form.Item>

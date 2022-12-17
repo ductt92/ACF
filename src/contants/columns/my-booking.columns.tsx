@@ -702,7 +702,7 @@ export const columnsContract = ({
     //   render: (commitmentRate: string) => <div>{commitmentRate}</div>,
     // },
     {
-      title: 'Mã hợp đồng',
+      title: 'Mã phụ lục hợp đồng',
       dataIndex: 'contractCode',
       key: 'contractCode',
       align: 'center',
@@ -710,7 +710,7 @@ export const columnsContract = ({
       render: (contractCode: string) => <div>{contractCode}</div>,
     },
     {
-      title: 'Tên hợp đồng',
+      title: 'Tên phụ lục hợp đồng',
       dataIndex: 'contractName',
       key: 'contractName',
       align: 'center',
@@ -718,7 +718,7 @@ export const columnsContract = ({
       render: (contractName: string) => <div>{contractName}</div>,
     },
     {
-      title: 'Loại hợp đồng',
+      title: 'Loại phụ lục hợp đồng',
       dataIndex: 'typeContract',
       key: 'typeContract',
       align: 'center',
