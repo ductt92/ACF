@@ -225,7 +225,6 @@ export const trackingBooking = ({
   pageSize: number;
   billCodes: Array<string>;
 }) => {
-  console.log(billCodes);
   if (billCodes && billCodes.length > 0) {
     const confirmBooking = HttpRequest.get(`trackings`, {
       params: {

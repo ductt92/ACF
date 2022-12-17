@@ -336,7 +336,7 @@ const ModalCreateEmployee = ({ onClose }: IProps) => {
                   placeholder='Nhập Khu vực làm việc của nhân viên. Chọn theo các thông tin đơn vị của trường quản lý khách hàng'
                   required
                 >
-                  {OpitionUnits.map((v: OpitionType) => (
+                  {OpitionUnits?.map((v: OpitionType) => (
                     <Option key={v.value} value={v.value}>
                       {v.label}
                     </Option>

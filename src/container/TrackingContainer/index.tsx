@@ -24,8 +24,6 @@ const TrackingContainer = () => {
     () => trackingBooking(query)
   );
 
-  console.log(dataDelivery);
-
   const handleSearch = () => {
     router.push(`/tracking/${search}`);
   };
