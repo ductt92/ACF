@@ -4,7 +4,6 @@ import { Form, Input } from 'antd';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
-import queryString from 'query-string';
 import React, { useState } from 'react';
 
 import styles from './styles.module.scss';
@@ -23,12 +22,7 @@ const TrackForm = () => {
   const dataMockDetails =
     lang === 'vi' ? DATA_MOCK_DETAIL_TRACK_VI : DATA_MOCK_DETAIL_TRACK_EN;
   const handleFocus = () => {
-    const qs = queryString.stringify(
-      { billCodes: searchText.split('\n') },
-      { arrayFormat: 'bracket' }
-    );
-
-    router.push(`/tracking/${qs}`);
+    router.push(`/tracking/${searchText}`);
   };
 
   const handleChange = (e: any) => {
