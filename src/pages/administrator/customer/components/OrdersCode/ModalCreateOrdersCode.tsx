@@ -40,9 +40,8 @@ const ModalCreateOrdersCode = ({
   handleSetForm,
 }: ModalCreateStaffProps) => {
   useEffect(() => {
-    if (otherPrice === 'OTHER_PRICE') handleSetForm(dataZone);
-  }, [dataZone, handleSetForm, otherPrice]);
-
+    if (otherPrice === 'OTHER_PRICE' && !isUpdate) handleSetForm(dataZone);
+  }, [dataZone, handleSetForm, isUpdate, otherPrice]);
   return (
     <Modal
       footer={null}
@@ -167,7 +166,7 @@ const ModalCreateOrdersCode = ({
               )}
             </div>
 
-            {otherPrice === 'OTHER_PRICE' && dataZone?.length > 0 && (
+            {otherPrice === 'OTHER_PRICE' && (
               <Form.List name='otherPrices'>
                 {(fields) => (
                   <div className='grid grid-cols-2 gap-x-6'>

@@ -57,7 +57,7 @@ const OrdersCode = ({
     })
   );
 
-  const handleSetForm = (value: any) => {
+  const handleSetForm = async (value: any) => {
     orderForm.setFieldsValue({
       otherPrices: value?.map((v: any) => ({
         countryContractId: v?.id,
@@ -78,7 +78,9 @@ const OrdersCode = ({
       ...record,
       timeApply: [dayjs(record.timeApplyFrom), dayjs(record.timeApplyTo)],
     });
+    setOtherPrice(record.fixedPriceCode);
     setIdUpdate(record.idKey);
+    setServicesId(record.serviceRequestId);
   };
 
   const ActionhandleAddOrder = async () => {
@@ -87,7 +89,6 @@ const OrdersCode = ({
       const updateStaff = detailsOrder.map((x, index) => {
         if (parseInt(idUpdate) === index) {
           const { idKey, ...resetForm } = res;
-
           return resetForm;
         } else {
           return x;
