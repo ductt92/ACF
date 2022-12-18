@@ -57,13 +57,13 @@ const ModalCreateContract = ({
                 rules={[
                   {
                     required: true,
-                    message: 'Vui lòng nhập Mã phụ lục hợp đồng',
+                    message: 'Vui lòng nhập Mã hợp đồng/Mã phụ lục hợp đồng',
                   },
                 ]}
               >
                 <VInput
-                  label='Mã phụ lục hợp đồng'
-                  placeholder='Nhập Mã phụ lục hợp đồng'
+                  label='Mã hợp đồng/Mã phụ lục hợp đồng'
+                  placeholder='Nhập Mã hợp đồng/Mã phụ lục hợp đồng'
                   required
                 />
               </Form.Item>
@@ -73,13 +73,13 @@ const ModalCreateContract = ({
                 rules={[
                   {
                     required: true,
-                    message: 'Vui lòng nhập Tên phụ lục hợp đồng',
+                    message: 'Vui lòng nhập Tên hợp đồng/Tên phụ lục hợp đồng',
                   },
                 ]}
               >
                 <VInput
-                  label='Tên phụ lục hợp đồng'
-                  placeholder='Nhập Tên phụ lục hợp đồng'
+                  label='Tên hợp đồng/Tên phụ lục hợp đồng'
+                  placeholder='Nhập Tên hợp đồng/Tên phụ lục hợp đồng'
                   required
                 />
               </Form.Item>
@@ -146,7 +146,7 @@ const ModalCreateContract = ({
               </Form.Item>
 
               <Form.Item
-                name='timeAplly'
+                name='contactTerm'
                 rules={[
                   {
                     required: true,

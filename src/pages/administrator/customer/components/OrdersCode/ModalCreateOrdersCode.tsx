@@ -119,6 +119,9 @@ const ModalCreateOrdersCode = ({
                 />
               </Form.Item>
 
+              <Form.Item name='exchangeRate'>
+                <VInput label='Tỷ giá' placeholder='Nhập Tỷ giá' />
+              </Form.Item>
               <Form.Item name='notePriceList'>
                 <VInput label='Ghi chú' placeholder='Nhập ghi chú' />
               </Form.Item>

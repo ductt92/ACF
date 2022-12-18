@@ -65,12 +65,6 @@ const ModalEditCustomer = ({ onClose, value }: IProps) => {
           contractTermTo: moment(contactTerm[1]).format('YYYY-MM-DD'),
         };
       }),
-      // previousCosingFrom:
-      //   moment(requestData.previousCosing?.[0]).format('YYYY-MM-DD') ||
-      //   value?.previousCosingFrom,
-      // previousCosingTo:
-      //   moment(requestData.previousCosing?.[1]).format('YYYY-MM-DD') ||
-      //   value?.previousCosingTo,
       managementStaff: infoStaff,
       priceList: detailsOrder.map((v) => {
         const { timeApply, ...resDetails } = v;
@@ -123,12 +117,20 @@ const ModalEditCustomer = ({ onClose, value }: IProps) => {
     const contactF = value.contract.map((v) => ({
       ...v,
       contactTerm: [v.contractTermFrom, v.contractTermTo],
-      timeAplly: [v.timeApplyFrom, v.timeApplyTo],
     }));
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     //  @ts-ignore
     setInfoStaff(value?.managementStaff || []);
     setDetailsContract(contactF);
+
+    setDetailsOrder(
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      //  @ts-ignore
+      value?.priceList.map((v: any) => ({
+        ...v,
+        timeApply: [v.timeApplyFrom, v.timeApplyTo],
+      }))
+    );
   }, [form, value]);
 
   const handleDeleteStaff = (id: any) => {
