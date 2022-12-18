@@ -16,6 +16,16 @@ export interface MyBookingResponse {
   };
 }
 
+export interface ITrackingResponse {
+  data?: any[];
+  pagination?: {
+    currentPage: number;
+    pageSize: number;
+    totalCount: number;
+    totalPage: number;
+  };
+}
+
 export const fetchBooking = async ({
   page,
   pageSize,
@@ -192,7 +202,6 @@ export const generateSmallBill = (id: string) => {
     link.click();
   });
 };
-// https://api.acf.vn/booking/generate-small-bill
 
 export const generateInvoice = (id: string) => {
   return HttpRequest.get('booking/generate-bill-invoice', {
@@ -239,7 +248,7 @@ export const trackingBooking = ({
         pageSize,
       },
     });
-    return confirmBooking as unknown as Array<any>;
+    return confirmBooking as unknown as ITrackingResponse;
   }
 };
 

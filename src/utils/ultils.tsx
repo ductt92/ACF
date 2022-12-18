@@ -14,7 +14,7 @@ export enum StatusType {
   Pending = 'Pending',
   InfoReceived = 'InfoReceived',
   InTransit = 'InTransit',
-  OutForDelivery = 'InTransit',
+  OutForDelivery = 'OutForDelivery',
   AttemptFail = 'AttemptFail',
   Delivered = 'Delivered',
   AvailableForPickup = 'AvailableForPickup',
