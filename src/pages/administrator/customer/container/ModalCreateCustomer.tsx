@@ -63,12 +63,19 @@ const ModalCreateCustomer = ({ onClose }: IProps) => {
           expertise: detailsContract.expertise === 1 ? true : false,
           contractTermFrom: moment(contactTerm[0]).format('YYYY-MM-DD'),
           contractTermTo: moment(contactTerm[1]).format('YYYY-MM-DD'),
-          // timeApplyFrom: moment(timeAplly[0]).format('YYYY-MM-DD'),
-          // timeApplyTo: moment(timeAplly[1]).format('YYYY-MM-DD'),
         };
       }),
 
       managementStaff: infoStaff,
+      priceList: detailsOrder.map((v) => {
+        const { timeApply, ...resDetails } = v;
+        return {
+          ...resDetails,
+          timeApplyFrom: moment(timeApply[0]).format('YYYY-MM-DD'),
+          timeApplyTo: moment(timeApply[1]).format('YYYY-MM-DD'),
+          surcharge: resDetails.surcharge.toString(),
+        };
+      }),
     };
     const { ...resNew } = res;
     mutateCreate({

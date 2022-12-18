@@ -824,18 +824,6 @@ export const columnsContract = ({
     // },
 
     // {
-    //   title: 'Thời hạn áp dung mã giảm giá',
-    //   dataIndex: 'timeAplly',
-    //   key: 'timeAplly',
-    //   align: 'center',
-    //   width: 140,
-    //   render: (timeAplly: Array<any>) => (
-    //     <div>{`Từ: ${moment(timeAplly[0]).format(
-    //       'DD-MM-YYYY'
-    //     )} \n Đến :${moment(timeAplly[1]).format('DD-MM-YYYY')}`}</div>
-    //   ),
-    // },
-    // {
     //   title: 'Phụ phí xăng dầu',
     //   dataIndex: 'surcharge',
     //   key: 'surcharge',
@@ -978,6 +966,21 @@ export const columsOrdersCode = ({
       align: 'center',
       width: 140,
       render: (otherPrice: Array<any>) => <div>{otherPrice}</div>,
+    },
+
+    {
+      title: 'Thời hạn áp dung mã giảm giá',
+      dataIndex: 'timeApply',
+      key: 'timeApply',
+      align: 'center',
+      width: 140,
+      render: (timeApply: Array<any>) => (
+        <div>
+          {`Từ: ${dayjs(timeApply[0]).format('DD-MM-YYYY')}\nĐến :${dayjs(
+            timeApply[1]
+          ).format('DD-MM-YYYY')}`}
+        </div>
+      ),
     },
     {
       title: 'Action',

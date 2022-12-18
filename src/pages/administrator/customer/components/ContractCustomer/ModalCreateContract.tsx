@@ -146,7 +146,7 @@ const ModalCreateContract = ({
               </Form.Item>
 
               <Form.Item
-                name='contactTerm'
+                name='timeAplly'
                 rules={[
                   {
                     required: true,

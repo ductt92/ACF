@@ -5,6 +5,7 @@ const { Option } = Select;
 
 import VInput from '@/components/common/VInput';
 import VInputNumber from '@/components/common/VInputNumber';
+import VRangePicker from '@/components/common/VRangeDate';
 import VSelect from '@/components/common/VSelect';
 
 import { OpitionType } from '@/contants/types';
@@ -75,7 +76,15 @@ const ModalCreateOrdersCode = ({
                   ))}
                 </VSelect>
               </Form.Item>
-
+              <Form.Item name='timeApply'>
+                <VRangePicker
+                  placeholder={['Ngày bắt đầu', 'Ngày kết thúc']}
+                  className='w-full'
+                  format='DD/MM/YYYY'
+                  label='Thời hạn áp dụng'
+                  required
+                />
+              </Form.Item>
               <Form.Item
                 name='potentialRevenueFrom'
                 rules={[
@@ -89,22 +98,6 @@ const ModalCreateOrdersCode = ({
                 <VInputNumber
                   label='Doanh thu tiềm năng từ (triệu đồng)'
                   placeholder='Nhập Doanh thu tiềm năng từ'
-                  required
-                />
-              </Form.Item>
-
-              <Form.Item
-                name='surcharge'
-                rules={[
-                  {
-                    required: true,
-                    message: 'Vui lòng nhập phụ phí xăng dầu',
-                  },
-                ]}
-              >
-                <VInputNumber
-                  label='Phụ phí xăng dầu'
-                  placeholder='Nhập phụ phí xăng dầu'
                   required
                 />
               </Form.Item>
@@ -127,7 +120,7 @@ const ModalCreateOrdersCode = ({
               </Form.Item>
 
               <Form.Item name='notePriceList'>
-                <VInputNumber label='Ghi chú' placeholder='Nhập ghi chú' />
+                <VInput label='Ghi chú' placeholder='Nhập ghi chú' />
               </Form.Item>
               <Form.Item
                 name='surcharge'
