@@ -82,14 +82,28 @@ const Fedex = [
   'Zone H',
 ];
 
-export const mockdataDemo = (id?: string) => {
+export enum EServiceRequest {
+  SPECIALIZE_LINE = 'SPECIALIZE_LINE', // Chuyên tuyến
+  DHL = 'DHL', // DHL
+  UPS = 'UPS', // UPS
+  FEDEX = 'FEDEX', //Fedex
+  SEA_FRIEGHT = 'SEA_FRIEGHT', //Sea Frieght
+  AIR_FRIEGHT = 'AIR_FRIEGHT', //Air Frieght
+  TRUCKING = 'TRUCKING', //TRUCKING
+  CLEARANCE = 'CLEARANCE', //Thông quan
+  UNOFFICIAL_QUOTA = 'UNOFFICIAL_QUOTA', //Tiểu ngạch
+  BUY_IT = 'BUY_IT', //Mua hộ
+  IMPORT_TAX_BAG = 'IMPORT_TAX_BAG', //Nhập bao thuế
+  SPLIT_ENTRY = 'SPLIT_ENTRY', //Nhập chia tách
+}
+export const mockdataDemo = (id?: EServiceRequest) => {
   switch (id) {
-    case '35178f8d-4f47-4e56-a743-26242790a11d':
+    case EServiceRequest.SPECIALIZE_LINE:
       return SPECIALIZE_LINE;
-    case '7aa5eaf6-0fb9-4738-b320-ec6d235e91a2':
+    case EServiceRequest.DHL:
+    case EServiceRequest.UPS:
       return DHL;
-    case '4782d312-66e0-43ea-9ba1-7ffee07128e0':
-    case '336247e8-050b-46a2-9a48-d6a6789716db':
+    case EServiceRequest.FEDEX:
       return Fedex;
     default:
       return [];

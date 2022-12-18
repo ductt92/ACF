@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+import queryString from 'query-string';
+
 import { QueryParams3 } from '@/contants/common.constants';
 import { BookingStatusPost, IMyBooking, IUser } from '@/contants/types';
 import HttpRequest from '@/utils/Http-request';
@@ -226,12 +228,15 @@ export const trackingBooking = ({
   billCodes: Array<string>;
 }) => {
   if (billCodes && billCodes.length > 0) {
-    const confirmBooking = HttpRequest.get(`trackings`, {
+    const qs = queryString.stringify(
+      { billCodes: billCodes },
+      { arrayFormat: 'bracket' }
+    );
+    const confirmBooking = HttpRequest.get(`trackings?${qs}`, {
       params: {
         search,
         page,
         pageSize,
-        billCodes,
       },
     });
     return confirmBooking as unknown as Array<any>;

@@ -250,6 +250,7 @@ export interface IContract {
   timeApplyTo: Date; // Đến ngày
   surcharge: number; // Phụ phí xăng dầu áp dụng
   applicableRate: number; // Tý giá áp dụng
+  notePriceList: string;
 }
 
 export enum ETypeContract {

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button, Form, FormInstance, Modal, Select, Spin } from 'antd';
-import React from 'react';
+import React, { useEffect } from 'react';
 const { Option } = Select;
 
 import VInput from '@/components/common/VInput';
@@ -8,7 +8,6 @@ import VInputNumber from '@/components/common/VInputNumber';
 import VSelect from '@/components/common/VSelect';
 
 import { OpitionType } from '@/contants/types';
-import { mockdataDemo } from '@/utils/ultils';
 interface ModalCreateStaffProps {
   form: FormInstance;
   isOpen: boolean;
@@ -21,6 +20,8 @@ interface ModalCreateStaffProps {
   handleAddOrder: (data: any) => void;
   handleChangeServices: (id: string) => void;
   handleChangeOtherPrice: (value: any) => void;
+  dataZone?: any;
+  handleSetForm: (value: any) => void;
 }
 const ModalCreateOrdersCode = ({
   form,
@@ -34,7 +35,13 @@ const ModalCreateOrdersCode = ({
   servicesId,
   handleChangeServices,
   handleAddOrder,
+  dataZone,
+  handleSetForm,
 }: ModalCreateStaffProps) => {
+  useEffect(() => {
+    if (otherPrice === 'OTHER_PRICE') handleSetForm(dataZone);
+  }, [dataZone, handleSetForm, otherPrice]);
+
   return (
     <Modal
       footer={null}
@@ -87,6 +94,22 @@ const ModalCreateOrdersCode = ({
               </Form.Item>
 
               <Form.Item
+                name='surcharge'
+                rules={[
+                  {
+                    required: true,
+                    message: 'Vui lòng nhập phụ phí xăng dầu',
+                  },
+                ]}
+              >
+                <VInputNumber
+                  label='Phụ phí xăng dầu'
+                  placeholder='Nhập phụ phí xăng dầu'
+                  required
+                />
+              </Form.Item>
+
+              <Form.Item
                 name='potentialRevenueTo'
                 rules={[
                   {
@@ -99,6 +122,25 @@ const ModalCreateOrdersCode = ({
                 <VInputNumber
                   label='Doanh thu tiềm năng đến (triệu đồng)'
                   placeholder='Nhập Doanh thu tiềm năng đến (triệu đồng)'
+                  required
+                />
+              </Form.Item>
+
+              <Form.Item name='notePriceList'>
+                <VInputNumber label='Ghi chú' placeholder='Nhập ghi chú' />
+              </Form.Item>
+              <Form.Item
+                name='surcharge'
+                rules={[
+                  {
+                    required: true,
+                    message: 'Vui lòng nhập phụ phí xăng dầu',
+                  },
+                ]}
+              >
+                <VInputNumber
+                  label='Phụ phí xăng dầu'
+                  placeholder='Nhập phụ phí xăng dầu'
                   required
                 />
               </Form.Item>
@@ -117,55 +159,45 @@ const ModalCreateOrdersCode = ({
                   </VSelect>
                 </Form.Item>
               )}
-
-              {otherPrice === 'OTHER_PRICE' &&
-                mockdataDemo(servicesId).length === 0 && (
-                  <Form.Item name='otherPrice'>
-                    <VInput label='Giá khác' placeholder='Giá khác' required />
-                  </Form.Item>
-                )}
-
-              {otherPrice === 'OTHER_PRICE' &&
-                mockdataDemo(servicesId).length === 0 && (
-                  <Form.Item
-                    name='otherPrice'
-                    rules={[
-                      {
-                        required: true,
-                        message:
-                          'Vui lòng nhập Doanh thu tiềm năng đến (triệu đồng)',
-                      },
-                    ]}
-                  >
-                    <VInput
-                      label='Tỷ lệ giảm giá (Đánh tỷ lệ %)'
-                      placeholder='Tỷ lệ giảm giá (Đánh tỷ lệ %)'
-                      required
-                    />
-                  </Form.Item>
-                )}
-
-              {otherPrice === 'OTHER_PRICE' &&
-                mockdataDemo(servicesId).length === 0 && (
-                  <Form.Item name='notePrice'>
-                    <VInput label='Ghi chú' placeholder='Nhập ghi chú' />
-                  </Form.Item>
-                )}
+              {otherPrice === 'OTHER_PRICE' && dataZone?.length <= 0 && (
+                <Form.Item name='otherPrice'>
+                  <VInput label='Giá khác' />
+                </Form.Item>
+              )}
+              {otherPrice === 'OTHER_PRICE' && dataZone?.length <= 0 && (
+                <Form.Item name='discountRate'>
+                  <VInput label='Tỷ lệ giảm giá (Đánh tỷ lệ %)' />
+                </Form.Item>
+              )}
             </div>
 
-            {otherPrice === 'OTHER_PRICE' &&
-              mockdataDemo(servicesId).length > 0 &&
-              mockdataDemo(servicesId).map((v) => (
-                <div key={v} className='grid grid-cols-2 gap-x-6'>
-                  <Form.Item name={v} key={v}>
-                    <VInput label={`Nhập Tỷ lệ giảm giá (Đánh tỷ lệ %) ${v}`} />
-                  </Form.Item>
-
-                  <Form.Item name='notePrice'>
-                    <VInput label={`Ghi chú ${v}`} placeholder='Nhập ghi chú' />
-                  </Form.Item>
-                </div>
-              ))}
+            {otherPrice === 'OTHER_PRICE' && dataZone?.length > 0 && (
+              <Form.List name='otherPrices'>
+                {(fields) => (
+                  <div className='grid grid-cols-2 gap-x-6'>
+                    {fields.map(({ key, name, ...restField }) => (
+                      <div key={key}>
+                        <Form.Item
+                          name={[name, 'discountRate']}
+                          {...restField}
+                          rules={[
+                            {
+                              required: true,
+                              message: `Nhập Tỷ lệ giảm giá (Đánh tỷ lệ %) ${dataZone?.[key]?.name} `,
+                            },
+                          ]}
+                        >
+                          <VInput
+                            label={`Nhập Tỷ lệ giảm giá (Đánh tỷ lệ %) ${dataZone?.[key]?.name} `}
+                            required
+                          />
+                        </Form.Item>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </Form.List>
+            )}
           </div>
         </Spin>
         <Button type='primary' onClick={handleAddOrder}>

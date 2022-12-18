@@ -6,7 +6,7 @@ import { useQuery } from 'react-query';
 
 import { columsOrdersCode } from '@/contants/columns/my-booking.columns';
 import { EFixedPriceCode } from '@/contants/types';
-import { getSmallServices } from '@/services/customer.services';
+import { getCountry, getSmallServices } from '@/services/customer.services';
 
 import ModalCreateOrdersCode from './ModalCreateOrdersCode';
 
@@ -31,6 +31,9 @@ const OrdersCode = ({
   const { data: dataSmallServices } = useQuery(['smallSerices', {}], () =>
     getSmallServices()
   );
+  const { data: dataZone } = useQuery(['dataZone', { servicesId }], () =>
+    getCountry(servicesId)
+  );
 
   const OpitionSmallServices = useMemo(() => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -52,6 +55,14 @@ const OrdersCode = ({
       label: value,
     })
   );
+
+  const handleSetForm = (value: any) => {
+    orderForm.setFieldsValue({
+      otherPrices: value?.map((v: any) => ({
+        countryContractId: v?.id,
+      })),
+    });
+  };
 
   const handleChangeServices = (value: string) => {
     setServicesId(value);
@@ -117,7 +128,9 @@ const OrdersCode = ({
           handleClose={() => (isUpdate ? setIsUpdate(false) : setIsOpen(false))}
           opitonServices={OpitionSmallServices || []}
           isUpdate={isUpdate}
+          dataZone={dataZone}
           otherPrice={otherPrice}
+          handleSetForm={handleSetForm}
           handleChangeOtherPrice={handleChangeOtherPrice}
           opitionFixedPriceCode={EFixedPriceOpition || []}
           handleAddOrder={ActionhandleAddOrder}

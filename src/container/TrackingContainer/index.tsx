@@ -25,7 +25,7 @@ const TrackingContainer = () => {
   );
 
   const handleSearch = () => {
-    router.push(`/tracking/${search}`);
+    setQueries((prev) => ({ ...prev, billCodes: search.split('\n') }));
   };
 
   useEffect(() => {
