@@ -1,6 +1,7 @@
 /* eslint-disable unused-imports/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button, Form, Table } from 'antd';
+import dayjs from 'dayjs';
 import React, { useMemo, useState } from 'react';
 import { useQuery } from 'react-query';
 
@@ -73,7 +74,10 @@ const OrdersCode = ({
 
   const actionUpdate = (record: any) => {
     setIsUpdate(true);
-    orderForm.setFieldsValue({ ...record });
+    orderForm.setFieldsValue({
+      ...record,
+      timeApply: [dayjs(record.timeApplyFrom), dayjs(record.timeApplyTo)],
+    });
     setIdUpdate(record.idKey);
   };
 
@@ -83,6 +87,7 @@ const OrdersCode = ({
       const updateStaff = detailsOrder.map((x, index) => {
         if (parseInt(idUpdate) === index) {
           const { idKey, ...resetForm } = res;
+
           return resetForm;
         } else {
           return x;
