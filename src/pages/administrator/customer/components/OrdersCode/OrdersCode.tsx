@@ -16,11 +16,15 @@ const OrdersCode = ({
   handleDeleteContract,
   handleAddOrder,
   handleUpdateOrder,
+  handleGenOrderCode,
+  generateSmallBillLoading,
 }: {
   detailsOrder: Array<any>;
   handleDeleteContract: (id: any) => void;
   handleAddOrder: (id: any) => void;
   handleUpdateOrder: (data: any) => void;
+  generateSmallBillLoading?: boolean;
+  handleGenOrderCode?: () => void;
 }) => {
   const [servicesId, setServicesId] = useState<string>();
   const [idUpdate, setIdUpdate] = useState('');
@@ -108,13 +112,25 @@ const OrdersCode = ({
   return (
     <div className='h-[calc(70vh)] overflow-y-auto p-4'>
       <div className='flex flex-col gap-4'>
-        <Button
-          onClick={() => setIsOpen(true)}
-          type='primary'
-          className='w-[150px]'
-        >
-          Thêm mới bảng giá
-        </Button>
+        <div className='flex flex-row gap-4'>
+          <Button
+            onClick={() => setIsOpen(true)}
+            type='primary'
+            className='w-[150px]'
+          >
+            Thêm mới bảng giá
+          </Button>
+          {isUpdate && (
+            <Button
+              onClick={handleGenOrderCode}
+              type='primary'
+              className='w-[150px]'
+              loading={generateSmallBillLoading}
+            >
+              Export Bảng giá
+            </Button>
+          )}
+        </div>
         <Table
           columns={columsOrdersCode({
             opitionServices: OpitionSmallServices || [],

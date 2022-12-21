@@ -203,6 +203,17 @@ export const generateSmallBill = (id: string) => {
   });
 };
 
+export const generateOrderCode = (id: string) => {
+  return HttpRequest.get(`customer/generate-excel-price-list/${id}`).then(
+    (res) => {
+      const blob = new Blob([new Uint8Array(res.data)]);
+      const link = document.createElement('a');
+      link.href = window.URL.createObjectURL(blob);
+      link.download = `bill-${new Date()}.xlsx`;
+      link.click();
+    }
+  );
+};
 export const generateInvoice = (id: string) => {
   return HttpRequest.get('booking/generate-bill-invoice', {
     params: { bookingId: id },

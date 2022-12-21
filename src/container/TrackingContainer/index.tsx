@@ -45,15 +45,25 @@ const TrackingContainer = () => {
 
   const renderHeader = (v: any) => {
     return (
-      <div className='flex flex-row items-center gap-4'>
+      <div className='flex w-full flex-row items-center gap-4'>
         <div>{getStatusTracking(v.tag)}</div>
-        <div className='flex flex-col gap-x-4 '>
-          <div className='flex flex-row items-center gap-4 '>
-            <p className='m-0 p-0'>{v.trackingNumber} </p>
-            <CopyOutlined onClick={() => copyToClipBoard(v.trackingNumber)} />
-          </div>
-          <div>
-            <p className='m-0 p-0 text-blue-400'>{v.subtagMessage}</p>
+        <div className=' flex w-full  flex-row gap-x-4'>
+          <div className='flex w-full flex-row items-center justify-between'>
+            <div>
+              <div className='flex flex-row items-center gap-4 '>
+                <p className='m-0 p-0'>{v.trackingNumber} </p>
+                <CopyOutlined
+                  onClick={() => copyToClipBoard(v.trackingNumber)}
+                />
+              </div>
+              <div>
+                <p className='m-0 p-0 text-blue-400'>{v.subtagMessage}</p>
+              </div>
+            </div>
+
+            <div>{`${dayjs(v.shipmentDeliveryDate).format(
+              'DD-MM-YYYY HH:mm'
+            )} - ${v.subtagMessage}`}</div>
           </div>
         </div>
       </div>
@@ -81,7 +91,7 @@ const TrackingContainer = () => {
                         }
                         showInfo={false}
                       />
-
+                      <p>{`${v.originCountryIso3} to ${v.descriptionCountryIso3}  ·  Transit to ${v.deliveryTime} days`}</p>
                       <Timeline className='pt-4'>
                         {v.checkpoints.map((checkpoints: any) => (
                           <Timeline.Item
@@ -97,7 +107,8 @@ const TrackingContainer = () => {
                               <p className='text-4 '>
                                 {dayjs(checkpoints.checkpointTime).format(
                                   'DD-MM-YYYY HH:ss:mm'
-                                )}{' '}
+                                )}
+                                {' · '}
                                 <span>{checkpoints.location}</span>
                               </p>
                             </div>

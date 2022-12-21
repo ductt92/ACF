@@ -8,6 +8,7 @@ import { useMutation, useQueryClient } from 'react-query';
 
 import { QUERY_CUSTOMER } from '@/contants/query-key/customer.contants';
 import { ICustomer } from '@/contants/types';
+import { generateOrderCode } from '@/services/booking.services';
 import { updateCustomer } from '@/services/customer.services';
 
 import ContractCustomer from '../components/ContractCustomer/ContractCustomer';
@@ -21,12 +22,29 @@ interface IProps {
   value?: ICustomer;
 }
 const ModalEditCustomer = ({ onClose, value }: IProps) => {
-  const queryClient = useQueryClient();
   const [form] = Form.useForm();
   const [detailsContract, setDetailsContract] = useState<Array<any>>([]);
   const [infoStaff, setInfoStaff] = useState<Array<any>>([]);
   const [detailsOrder, setDetailsOrder] = useState<Array<any>>([]);
 
+  const queryClient = useQueryClient();
+
+  const { mutate: genOrderCode, isLoading: generateSmallBillLoading } =
+    useMutation(generateOrderCode, {
+      onSuccess: () => {
+        queryClient.invalidateQueries(['generateInVoice']);
+        notification.success({
+          message: 'Tải xuống thành công',
+          placement: 'top',
+        });
+      },
+      onError: () => {
+        notification.error({
+          message: 'Tải xuống thất bại',
+          placement: 'top',
+        });
+      },
+    });
   const handleAddContract = (data: any) => {
     setDetailsContract((prev) => [...prev, data]);
   };
@@ -106,10 +124,6 @@ const ModalEditCustomer = ({ onClose, value }: IProps) => {
     form.setFieldsValue({
       ...value,
       paymentSchedule: moment(value?.paymentSchedule),
-      // previousCosing: [
-      //   moment(value?.previousCosingFrom || undefined),
-      //   moment(value?.previousCosingTo || undefined),
-      // ],
     });
 
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -157,6 +171,12 @@ const ModalEditCustomer = ({ onClose, value }: IProps) => {
     setDetailsOrder(data);
   };
 
+  const handleGenOrderCode = () => {
+    if (value?.id) {
+      genOrderCode(value?.id);
+    }
+  };
+
   return (
     <Modal
       footer={null}
@@ -187,7 +207,9 @@ const ModalEditCustomer = ({ onClose, value }: IProps) => {
           <Tabs.TabPane tab='Bảng giá' key='Orderss'>
             <OrdersCode
               // form={form}
+              generateSmallBillLoading={generateSmallBillLoading}
               detailsOrder={detailsOrder}
+              handleGenOrderCode={handleGenOrderCode}
               handleAddOrder={handleAddOrder}
               handleUpdateOrder={handleUpdateOrder}
               handleDeleteContract={handleDeleteContract}
