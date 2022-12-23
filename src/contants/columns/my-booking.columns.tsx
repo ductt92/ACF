@@ -763,9 +763,7 @@ export const columnsContract = ({
       align: 'center',
       width: 150,
       render: (paymentSchedule: string) => {
-        return (
-          <div>{dayjs(paymentSchedule || undefined).format('DD-MM-YYYY')}</div>
-        );
+        return <div>{paymentSchedule}</div>;
       },
     },
 
@@ -781,64 +779,6 @@ export const columnsContract = ({
         )} \n Đến :${dayjs(contactTerm[1]).format('DD-MM-YYYY')}`}</div>
       ),
     },
-
-    // {
-    //   title: 'Country hoặc Zone',
-    //   dataIndex: 'countryContractId',
-    //   key: 'countryContractId',
-    //   align: 'center',
-    //   width: 140,
-    //   render: (countryContractId: string) => (
-    //     <div>
-    //       {
-    //         opitionCountryZone?.find(
-    //           (x: OpitionType) => x.value === countryContractId
-    //         )?.label
-    //       }
-    //     </div>
-    //   ),
-    // },
-    // {
-    //   title: 'Tỷ lệ giảm giá (Đánh tỷ lệ %)',
-    //   dataIndex: 'discountRate',
-    //   key: 'discountRate',
-    //   align: 'center',
-    //   width: 140,
-    //   render: (discountRate: string) => <div>{discountRate}</div>,
-    // },
-    // {
-    //   title: 'Ghi chú hợp đồng',
-    //   dataIndex: 'noteContract',
-    //   key: 'noteContract',
-    //   align: 'center',
-    //   width: 140,
-    //   render: (noteContract: string) => <div>{noteContract}</div>,
-    // },
-    // {
-    //   title: 'Mã bảng giá',
-    //   dataIndex: 'priceListCode',
-    //   key: 'priceListCode',
-    //   align: 'center',
-    //   width: 140,
-    //   render: (priceListCode: string) => <div>{priceListCode}</div>,
-    // },
-
-    // {
-    //   title: 'Phụ phí xăng dầu',
-    //   dataIndex: 'surcharge',
-    //   key: 'surcharge',
-    //   align: 'center',
-    //   width: 140,
-    //   render: (surcharge: Array<any>) => <div>{surcharge}</div>,
-    // },
-    // {
-    //   title: 'Tý giá áp dụng',
-    //   dataIndex: 'applicableRate',
-    //   key: 'applicableRate',
-    //   align: 'center',
-    //   width: 140,
-    //   render: (applicableRate: Array<any>) => <div>{applicableRate}</div>,
-    // },
     {
       title: 'Thẩm định',
       dataIndex: 'expertise',

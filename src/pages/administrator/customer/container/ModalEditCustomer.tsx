@@ -123,7 +123,6 @@ const ModalEditCustomer = ({ onClose, value }: IProps) => {
   useEffect(() => {
     form.setFieldsValue({
       ...value,
-      paymentSchedule: moment(value?.paymentSchedule),
     });
 
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment

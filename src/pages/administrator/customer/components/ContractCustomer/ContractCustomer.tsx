@@ -2,6 +2,7 @@
 /* eslint-disable unused-imports/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button, Form, FormInstance, Table } from 'antd';
+import dayjs from 'dayjs';
 import React, { useMemo, useState } from 'react';
 import { useQuery } from 'react-query';
 
@@ -104,12 +105,14 @@ const ContractCustomer = ({
   };
 
   const actionUpdateContract = (record: any) => {
+    console.log(record);
     setIsUpdate(true);
     contractFrom.setFieldsValue({
       ...record,
+      contactTerm: record.contactTerm?.map((v: any) => dayjs(v)),
     });
     setIdUpdate(record.idKey);
-    setExpertise(record.expertise);
+    setExpertise(record.expertise ? 0 : 1);
   };
   return (
     <div className='h-[calc(70vh)] overflow-y-auto p-4'>

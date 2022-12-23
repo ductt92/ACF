@@ -99,7 +99,7 @@ export interface ICustomer {
   //contract
   serviceRequest: string; // Dịch vụ yêu cầu enum EServiceRequest
   potentialRevenue: number; // Doanh thu tiềm năng
-  paymentSchedule: Date; // Lịch thanh toán công nợ kể từ ngày chốt bảng kê
+  paymentSchedule: string; // Lịch thanh toán công nợ kể từ ngày chốt bảng kê
   commitmentRate: number; // Tỷ lệ LNG Cam kết nếu xin giá riêng/Tháng
   expertise: boolean; // Thẩm định
   appraisalStaff: string; // Nhân viên thẩm định
@@ -231,7 +231,7 @@ export interface IContract {
   serviceRequestId: string; // Dịch vụ yêu cầu /service/small-service
   potentialRevenueFrom: number; // Doanh thu tiềm năng từ
   potentialRevenueTo: number; // Doanh thu tiềm năng đến
-  paymentSchedule: Date; // Lịch thanh toán công nợ kể từ ngày chốt bảng kê
+  paymentSchedule: string; // Lịch thanh toán công nợ kể từ ngày chốt bảng kê
   commitmentRate: number; // Tỷ lệ LNG Cam kết nếu xin giá riêng/Tháng
   expertise: boolean; // Thẩm định
   appraisalStaff?: string; // Nhân viên thẩm định

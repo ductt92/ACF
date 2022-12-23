@@ -119,7 +119,7 @@ const ModalCreateOrdersCode = ({
               </Form.Item>
 
               <Form.Item name='exchangeRate'>
-                <VInput label='Tỷ giá' placeholder='Nhập Tỷ giá' />
+                <VInputNumber label='Tỷ giá' placeholder='Nhập Tỷ giá' />
               </Form.Item>
               <Form.Item name='notePriceList'>
                 <VInput label='Ghi chú' placeholder='Nhập ghi chú' />
@@ -134,7 +134,7 @@ const ModalCreateOrdersCode = ({
                 ]}
               >
                 <VInputNumber
-                  label='Phụ phí xăng dầu'
+                  label='Phụ phí xăng dầu (%)'
                   placeholder='Nhập phụ phí xăng dầu'
                   required
                 />
@@ -161,7 +161,7 @@ const ModalCreateOrdersCode = ({
               )}
               {otherPrice === 'OTHER_PRICE' && dataZone?.length <= 0 && (
                 <Form.Item name='discountRate'>
-                  <VInput label='Tỷ lệ giảm giá (Đánh tỷ lệ %)' />
+                  <VInput label='Lợi Nhuận gộp (Doanh thu/Chi phí) cam kết/Tháng (Theo hóa đơn) đạt tỷ lệ tối thiểu (Đánh tỷ lệ %)' />
                 </Form.Item>
               )}
             </div>

@@ -180,7 +180,7 @@ const InfoCustomer = ({ form }: { form: FormInstance }) => {
             name='commune'
             rules={[{ required: true, message: 'Vui lòng xã/phường' }]}
           >
-            <VInput label='Xã' required placeholder='Nhập xã/phường' />
+            <VInput label='Xã/Phường' required placeholder='Nhập xã/phường' />
           </Form.Item>
 
           <Form.Item
@@ -263,7 +263,11 @@ const InfoCustomer = ({ form }: { form: FormInstance }) => {
               },
             ]}
           >
-            <VInput label='SĐT' required placeholder='Nhập SĐT công ty' />
+            <VInput
+              label='SĐT cố định'
+              required
+              placeholder='Nhập SĐT cố định'
+            />
           </Form.Item>
 
           <Form.Item
