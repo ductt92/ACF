@@ -48,7 +48,7 @@ const ViewBookingDetails = ({ data }: { data: any }) => {
     onSuccess: () => {
       queryClient.invalidateQueries([QUERY_BOOKING.GET_BOOKING]);
       notification.success({
-        message: 'Cập nhật bill code thành công',
+        message: 'Cập nhật bưu code thành công',
         placement: 'top',
       });
     },
@@ -86,7 +86,7 @@ const ViewBookingDetails = ({ data }: { data: any }) => {
     setBillPartner(bill);
   };
   const onSubmit = async () => {
-    const res = await viewBooking.getFieldsValue();
+    const res = await viewBooking.validateFields();
     if (res.partnerBillCode) {
       handleSubmit({
         id: data?.booking?.id,
@@ -96,7 +96,7 @@ const ViewBookingDetails = ({ data }: { data: any }) => {
       });
     } else {
       notification.error({
-        message: 'Vui lòng nhập mã bill đối tác',
+        message: 'Vui lòng nhập mã bưu đối tác',
         placement: 'top',
       });
     }
@@ -303,9 +303,6 @@ const ViewBookingDetails = ({ data }: { data: any }) => {
   return (
     <div>
       <div className='flex gap-4'>
-        <p className='mb-5 text-lg'>Chi tiết đơn hàng</p>
-      </div>
-      <div className='flex gap-4'>
         <Button
           onClick={handleGenerataeBill}
           type='primary'
@@ -332,7 +329,7 @@ const ViewBookingDetails = ({ data }: { data: any }) => {
             disabled={!data?.booking?.id}
             icon={<PrinterOutlined />}
           >
-            In Bill đối tác
+            In bưu đối tác
           </Button>
         )}
 
@@ -343,7 +340,7 @@ const ViewBookingDetails = ({ data }: { data: any }) => {
             disabled={!data?.booking?.id}
             icon={<PrinterOutlined />}
           >
-            In InVoice đối tác
+            In Invoice đối tác
           </Button>
         )}
         <Button
@@ -352,7 +349,7 @@ const ViewBookingDetails = ({ data }: { data: any }) => {
           loading={generateSmallBillLoading}
           icon={<PrinterOutlined />}
         >
-          In Bill nhỏ
+          In bưu nhỏ
         </Button>
 
         {billPartner &&
@@ -388,7 +385,7 @@ const ViewBookingDetails = ({ data }: { data: any }) => {
       </div>
 
       <Button className='mt-5' type='primary' onClick={onSubmit}>
-        Cập nhật bill đối tác
+        Cập nhật bưu đối tác
       </Button>
     </div>
   );

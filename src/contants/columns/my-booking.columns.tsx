@@ -10,13 +10,18 @@ import { ColumnsType } from 'antd/lib/table';
 import clsx from 'clsx';
 import dayjs from 'dayjs';
 
-import { CLICK_TO_COPY, copyToClipBoard } from '@/utils/helpers';
+import {
+  CLICK_TO_COPY,
+  copyToClipBoard,
+  numberWithCommas,
+} from '@/utils/helpers';
 
 import { CalculationUnit } from '../common.constants';
 import {
   BookingStatus,
   BookingType,
   DetailsBookingPost,
+  ETypeStaff,
   IInvoiceDetails,
   IMyBooking,
   OpitionType,
@@ -28,18 +33,6 @@ const DEFAULT_CONTAINER = 'min-h-[32px] min-w-[50px] text-center';
 const CUSTOMER_CLASS = 'w-[150px] cursor-pointer truncate text-center p-2 m-0';
 
 export const MYBOOKING_COLUMNS: ColumnsType<IMyBooking> = [
-  {
-    title: 'TT Xử lý',
-    dataIndex: 'is_handle',
-    key: 'is_handle',
-    align: 'center',
-    width: 100,
-    render: (isHandle: string) => (
-      <p className={isHandle ? 'text-green-500	' : 'text-red-500'}>
-        {isHandle ? 'Đã xử lý' : 'Chưa xử lý'}
-      </p>
-    ),
-  },
   {
     title: 'Mã bưu phẩm bưu kiện ACF',
     dataIndex: 'booking_code',
@@ -80,7 +73,7 @@ export const MYBOOKING_COLUMNS: ColumnsType<IMyBooking> = [
     dataIndex: 'estimate_date',
     key: 'estimate_date',
     align: 'center',
-    width: 150,
+    width: 180,
     render: (estimatedDate: string) => {
       return <span>{dayjs(estimatedDate).format('DD/MM/YYYY HH:mm:ss')}</span>;
     },
@@ -114,14 +107,14 @@ export const MYBOOKING_COLUMNS: ColumnsType<IMyBooking> = [
     dataIndex: 'services_name',
     key: 'services_name',
     align: 'center',
-    width: 150,
+    width: 200,
   },
   {
     title: 'Thông tin người nhận',
     dataIndex: 'receiver_contact_person',
     key: 'receiver_contact_person',
     align: 'center',
-    width: 150,
+    width: 200,
   },
   {
     title: 'Ghi chú',
@@ -136,7 +129,7 @@ export const MYBOOKING_COLUMNS: ColumnsType<IMyBooking> = [
     dataIndex: 'created_at',
     key: 'created_at',
     align: 'center',
-    width: 150,
+    width: 180,
     render: (created_at: string) => {
       return <span>{dayjs(created_at).format('DD/MM/YYYY HH:mm:ss')}</span>;
     },
@@ -620,3 +613,329 @@ export const INVOICE_DETAILS: ColumnsType<IInvoiceDetails> = [
     width: 150,
   },
 ];
+
+export const columsStaff = ({
+  arrayStaff,
+  handleDelete,
+  handleUpdate,
+}: {
+  arrayStaff: Array<OpitionType>;
+  handleDelete: (id: any) => void;
+  handleUpdate: (record: any) => void;
+}) => {
+  const handleDeleteRow = (row: any) => {
+    Modal.confirm({
+      title: 'Thông báo',
+      icon: <WarningOutlined className='text-red-700' />,
+      content: 'Bạn có chắc chắn muốn xóa nhân viên này không?',
+      okText: 'Đồng ý',
+      cancelText: 'Không',
+      onOk: () => handleDelete(row),
+    });
+  };
+
+  const columns: ColumnsType<any> = [
+    {
+      title: 'Tên nhân viên',
+      dataIndex: 'staffId',
+      key: 'staffId',
+      align: 'center',
+      width: 150,
+      render: (staffId: string) => (
+        <div>
+          {arrayStaff?.find((x: OpitionType) => x.value === staffId)?.label}
+        </div>
+      ),
+    },
+    {
+      title: 'Loại nhân viên',
+      dataIndex: 'typeStaff',
+      key: 'typeStaff',
+      align: 'center',
+      width: 150,
+      render: (typeStaff: string) => (
+        <div>{ETypeStaff[typeStaff as 'DEBT_COLLECTOR']}</div>
+      ),
+    },
+    {
+      title: 'Action',
+      key: 'operation',
+      fixed: 'right',
+      width: 100,
+      render: (type: string, record: any, index) => (
+        <div className='flex flex-row gap-8'>
+          <EditOutlined
+            onClick={() => handleUpdate({ ...record, idKey: index })}
+          />
+          <DeleteOutlined onClick={() => handleDeleteRow(index)} />
+        </div>
+      ),
+    },
+  ];
+  return columns;
+};
+
+export const columnsContract = ({
+  opitionTypeContract,
+  opitionStaff,
+  opitionServices,
+  handleDelete,
+  handleUpdate,
+}: {
+  opitionTypeContract: Array<OpitionType>;
+  opitionStaff: Array<OpitionType>;
+  opitionServices: Array<OpitionType>;
+  handleDelete: (id: any) => void;
+  handleUpdate: (record: any) => void;
+}) => {
+  const handleDeleteRow = (row: any) => {
+    Modal.confirm({
+      title: 'Thông báo',
+      icon: <WarningOutlined className='text-red-700' />,
+      content: 'Bạn có chắc chắn muốn xóa hàng hóa này không?',
+      okText: 'Đồng ý',
+      cancelText: 'Không',
+      onOk: () => handleDelete(row),
+    });
+  };
+  const contract: ColumnsType<any> = [
+    {
+      title: 'Ngày tạo',
+      dataIndex: 'createdAt',
+      key: 'createdAt',
+      align: 'center',
+      width: 150,
+      render: (createdAt: string) => (
+        <div>{dayjs(createdAt).format('DD-MM-YYYY  HH:mm:ss')}</div>
+      ),
+    },
+    {
+      title: 'Mã phụ lục hợp đồng',
+      dataIndex: 'contractCode',
+      key: 'contractCode',
+      align: 'center',
+      width: 150,
+      render: (contractCode: string) => <div>{contractCode}</div>,
+    },
+    {
+      title: 'Tên phụ lục hợp đồng',
+      dataIndex: 'contractName',
+      key: 'contractName',
+      align: 'center',
+      width: 150,
+      render: (contractName: string) => <div>{contractName}</div>,
+    },
+    {
+      title: 'Dịch vụ sử dụng',
+      dataIndex: 'service',
+      key: 'service',
+      align: 'center',
+      width: 150,
+      render: (service: string) => (
+        <div>
+          {
+            opitionServices?.find((x: OpitionType) => x.value === service)
+              ?.label
+          }
+        </div>
+      ),
+    },
+    {
+      title: 'Loại phụ lục hợp đồng',
+      dataIndex: 'typeContract',
+      key: 'typeContract',
+      align: 'center',
+      width: 150,
+      render: (typeContract: string) => (
+        <div>
+          {
+            opitionTypeContract?.find(
+              (x: OpitionType) => x.value === typeContract
+            )?.label
+          }
+        </div>
+      ),
+    },
+    {
+      title: 'Lịch thanh toán công nợ kể từ ngày xuất hóa đơn',
+      dataIndex: 'paymentSchedule',
+      key: 'paymentSchedule',
+      align: 'center',
+      width: 150,
+      render: (paymentSchedule: string) => {
+        return <div>{paymentSchedule}</div>;
+      },
+    },
+
+    {
+      title: 'Thời hạn hợp đồng',
+      dataIndex: 'contactTerm',
+      key: 'contactTerm',
+      align: 'center',
+      width: 140,
+      render: (contactTerm: Array<any>) => (
+        <div>{`Từ: ${dayjs(contactTerm[0]).format(
+          'DD-MM-YYYY'
+        )} \n Đến :${dayjs(contactTerm[1]).format('DD-MM-YYYY')}`}</div>
+      ),
+    },
+    {
+      title: 'Thẩm định',
+      dataIndex: 'expertise',
+      key: 'expertise',
+      align: 'center',
+      width: 140,
+      render: (expertise: number) => (
+        <div>{expertise === 1 ? 'Đã thẩm định' : 'Chưa thầm định'}</div>
+      ),
+    },
+    {
+      title: 'Nhân viên thẩm định',
+      dataIndex: 'appraisalStaff',
+      key: 'appraisalStaff',
+      align: 'center',
+      width: 140,
+      render: (appraisalStaff: string) => {
+        return (
+          <div>
+            {
+              opitionStaff.find((x: OpitionType) => x.value === appraisalStaff)
+                ?.label
+            }
+          </div>
+        );
+      },
+    },
+    {
+      title: 'Action',
+      key: 'operation',
+      fixed: 'right',
+      width: 100,
+      render: (type: string, record: any, index) => (
+        <div className='flex flex-row gap-8'>
+          <EditOutlined
+            onClick={() => handleUpdate({ ...record, idKey: index })}
+          />
+          <DeleteOutlined onClick={() => handleDeleteRow(index)} />
+        </div>
+      ),
+    },
+  ];
+  return contract;
+};
+
+export const columsOrdersCode = ({
+  opitionServices,
+  opitionFixedPriceCode,
+  handleDelete,
+  handleUpdate,
+}: {
+  opitionServices: Array<OpitionType>;
+  opitionFixedPriceCode: Array<OpitionType>;
+  handleDelete: (id: any) => void;
+  handleUpdate: (record: any) => void;
+}) => {
+  const handleDeleteRow = (row: any) => {
+    Modal.confirm({
+      title: 'Thông báo',
+      icon: <WarningOutlined className='text-red-700' />,
+      content: 'Bạn có chắc chắn muốn xóa hàng hóa này không?',
+      okText: 'Đồng ý',
+      cancelText: 'Không',
+      onOk: () => handleDelete(row),
+    });
+  };
+  const ordersCode: ColumnsType<any> = [
+    {
+      title: 'Dịch vụ yêu cầu',
+      dataIndex: 'serviceRequestId',
+      key: 'serviceRequestId',
+      align: 'center',
+      width: 150,
+      render: (serviceRequestId: string) => (
+        <div>
+          {
+            opitionServices?.find(
+              (x: OpitionType) => x.value === serviceRequestId
+            )?.label
+          }
+        </div>
+      ),
+    },
+
+    {
+      title: 'Doanh thu tiềm năng từ (triệu đồng)',
+      dataIndex: 'potentialRevenueFrom',
+      key: 'potentialRevenueFrom',
+      align: 'center',
+      width: 150,
+      render: (potentialRevenueFrom: string) => (
+        <div>{numberWithCommas(potentialRevenueFrom)}</div>
+      ),
+    },
+    {
+      title: 'Doanh thu tiềm năng đến (triệu đồng)',
+      dataIndex: 'potentialRevenueTo',
+      key: 'potentialRevenueTo',
+      align: 'center',
+      width: 150,
+      render: (potentialRevenueFrom: string) => (
+        <div>{numberWithCommas(potentialRevenueFrom)}</div>
+      ),
+    },
+    {
+      title: 'Mã bảng giá cố định',
+      dataIndex: 'fixedPriceCode',
+      key: 'fixedPriceCode',
+      align: 'center',
+      width: 150,
+      render: (fixedPriceCode: string) => (
+        <div>
+          {
+            opitionFixedPriceCode?.find(
+              (x: OpitionType) => x.value === fixedPriceCode
+            )?.label
+          }
+        </div>
+      ),
+    },
+    {
+      title: 'Giá khác',
+      dataIndex: 'otherPrice',
+      key: 'otherPrice',
+      align: 'center',
+      width: 140,
+      render: (otherPrice: Array<any>) => <div>{otherPrice}</div>,
+    },
+
+    {
+      title: 'Thời hạn áp dung mã giảm giá',
+      dataIndex: 'timeApply',
+      key: 'timeApply',
+      align: 'center',
+      width: 140,
+      render: (timeApply: Array<any>) => (
+        <div>
+          {`Từ: ${dayjs(timeApply[0]).format('DD-MM-YYYY')}\nĐến :${dayjs(
+            timeApply[1]
+          ).format('DD-MM-YYYY')}`}
+        </div>
+      ),
+    },
+    {
+      title: 'Action',
+      key: 'operation',
+      fixed: 'right',
+      width: 100,
+      render: (type: string, record: any, index) => (
+        <div className='flex flex-row gap-8'>
+          <EditOutlined
+            onClick={() => handleUpdate({ ...record, idKey: index })}
+          />
+          <DeleteOutlined onClick={() => handleDeleteRow(index)} />
+        </div>
+      ),
+    },
+  ];
+  return ordersCode;
+};

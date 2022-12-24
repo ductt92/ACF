@@ -14,8 +14,8 @@ export default function VSelect({
   ...rest
 }: VSelectProps) {
   return (
-    <div className='space-y-1'>
-      <span className='text-sm font-medium'>
+    <div className='grid grid-cols-[200px_minmax(200px,_1fr)_auto]'>
+      <span className=' w-[174px] text-sm font-medium '>
         {label} {required && <span className='text-red-700'>*</span>} :
       </span>
       <Select

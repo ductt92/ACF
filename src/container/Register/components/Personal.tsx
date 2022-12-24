@@ -35,7 +35,7 @@ const Personal = () => {
     },
   });
   const handleSubmit = async () => {
-    const value = await personForm.getFieldsValue();
+    const value = await personForm.validateFields();
     personRegis({ ...value });
   };
 
@@ -62,7 +62,7 @@ const Personal = () => {
             <Form.Item
               name='gender'
               label={t('Gender')}
-              rules={[{ required: true }]}
+              rules={[{ required: true, message: 'Vui lòng chọn giới tính' }]}
             >
               <Select placeholder={t('SelectGender')}>
                 <Option value='Male'>{t('Male')}</Option>
@@ -74,7 +74,7 @@ const Personal = () => {
             <Form.Item
               name='detailAddress'
               label={t('Address')}
-              rules={[{ required: true }]}
+              rules={[{ required: true, message: 'Vui lòng nhập địa chỉ' }]}
             >
               <Input placeholder={t('EnterAddress')} />
             </Form.Item>
@@ -83,7 +83,7 @@ const Personal = () => {
             <Form.Item
               name='dob'
               label={t('Birthday')}
-              rules={[{ required: true }]}
+              rules={[{ required: true, message: 'Vui lòng nhập ngày sinh' }]}
             >
               <VDatePicker format='DD/MM/YYYY' placeholder='Nhập ngày sinh' />
             </Form.Item>

@@ -16,11 +16,11 @@ const TextLink = ({
   ...props
 }: ITextLink) => {
   return (
-    <div className={clsx('', styleBody)} style={{ fontFamily: 'Roboto' }}>
+    <div className={clsx('', styleBody)}>
       <Link href={href} {...props}>
         <a
           className={clsx(
-            ' text-[20px] font-bold text-[#222] hover:text-[#222]',
+            ' text-[16px] font-bold text-[#222] hover:text-[#222]',
             styleLabel
           )}
         >

@@ -86,8 +86,16 @@ const Address = ({
             />
           </Form.Item>
 
-          <Form.Item name='senderNameEn'>
-            <VInput label='Tên công ty gửi (Tiếng Anh)' />
+          <Form.Item
+            name='senderNameEn'
+            rules={[
+              {
+                required: true,
+                message: 'Vui lòng nhập Tên công ty gửi (Tiếng Anh)',
+              },
+            ]}
+          >
+            <VInput label='Tên công ty gửi (Tiếng Anh)' required />
           </Form.Item>
 
           <Form.Item
@@ -108,12 +116,28 @@ const Address = ({
             />
           </Form.Item>
 
-          <Form.Item name='senderAddressEn'>
-            <VInput label='Địa chỉ chi tiết (Tiếng Anh)' />
+          <Form.Item
+            name='senderAddressEn'
+            rules={[
+              {
+                required: true,
+                message: 'Vui lòng nhập Địa chỉ chi tiết (Tiếng Anh)',
+              },
+            ]}
+          >
+            <VInput label='Địa chỉ chi tiết (Tiếng Anh)' required />
           </Form.Item>
 
-          <Form.Item name='senderContactPerson'>
-            <VInput label='Tên người gửi hàng' />
+          <Form.Item
+            name='senderContactPerson'
+            rules={[
+              {
+                required: true,
+                message: 'Vui lòng nhập Tên người gửi hàng',
+              },
+            ]}
+          >
+            <VInput label='Tên người gửi hàng' required />
           </Form.Item>
 
           <Form.Item name='senderDepartment'>
@@ -138,8 +162,17 @@ const Address = ({
             />
           </Form.Item>
 
-          <Form.Item name='senderProvince'>
+          <Form.Item
+            name='senderProvince'
+            rules={[
+              {
+                required: true,
+                message: 'Vui lòng nhập tỉnh/thành phố',
+              },
+            ]}
+          >
             <VInput
+              required
               label='Tỉnh/Thành phố'
               onChange={(e) =>
                 handleChangeInfoSender('senderProvince', e.target.value)
@@ -215,8 +248,17 @@ const Address = ({
             />
           </Form.Item>
 
-          <Form.Item name='receiverProvince'>
+          <Form.Item
+            name='receiverProvince'
+            rules={[
+              {
+                required: true,
+                message: 'Vui lòng nhập thành phố',
+              },
+            ]}
+          >
             <VInput
+              required
               label='Thành phố'
               onChange={(e) =>
                 handleChangeInfoRecei('receiverProvince', e.target.value)

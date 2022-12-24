@@ -47,10 +47,7 @@ const ListNew = (props: IProps) => {
             </h3>
           </Link>
 
-          <p
-            className='float-left mb-0 h-[50px] text-[14px] font-medium leading-[16px] text-[#222]'
-            style={{ fontFamily: 'Roboto' }}
-          >
+          <p className='float-left mb-0 h-[50px] text-[14px] font-medium leading-[16px] text-[#222]'>
             {desc}
           </p>
           <Link href={`/detail-post/${slug}`}>

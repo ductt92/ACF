@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { CloseOutlined } from '@ant-design/icons';
 import { Button, Form, Modal, notification, Tabs } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useMutation, useQueryClient } from 'react-query';
@@ -8,7 +9,7 @@ import { ICustomer } from '@/contants/types';
 import { createCustomer } from '@/services/customer.services';
 
 import ContractCustomer from './ContractCustomer';
-import InfoCustomer from './InfoCustomer';
+import InfoCustomer from './InfoCustomer/InfoCustomer';
 import PriceCustomer from './PriceCustomer';
 
 interface IProps {
@@ -60,19 +61,25 @@ const ModalCreateCustomer = ({ onClose }: IProps) => {
       ...res,
     });
   };
-
+  const renderHeader = () => {
+    return (
+      <div
+        className='bg-[#FBE51D] text-center text-[24px]
+      font-bold'
+      >
+        Tạo mới khách hàng
+      </div>
+    );
+  };
   return (
     <Modal
       footer={null}
       visible={true}
+      title={renderHeader()}
+      closeIcon={<CloseOutlined className='text-[24px]' />}
       onCancel={() => onClose(false)}
       className='top-[calc(5vh)] w-[calc(60vw)]'
     >
-      <div>
-        <p className='text-center text-[24px] font-medium'>
-          Tạo mới khách hàng
-        </p>
-      </div>
       <div>
         <Tabs type='card'>
           <Tabs.TabPane tab='Thông tin chung' key='infoCustomer'>

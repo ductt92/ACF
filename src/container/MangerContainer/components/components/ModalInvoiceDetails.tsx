@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { CloseOutlined } from '@ant-design/icons';
 import { Button, Form, Modal, Select } from 'antd';
 import React from 'react';
 
@@ -43,16 +44,27 @@ const ModalInvoiceDetails = ({
     handleAddInvoiceDetails(resForm);
   };
 
+  const renderHeader = () => {
+    return (
+      <div
+        className='bg-[#FBE51D] text-center text-[24px]
+      font-bold'
+      >
+        Chi tiết Invoice
+      </div>
+    );
+  };
+
   return (
     <Modal
       footer={null}
       visible={isOpen}
+      title={renderHeader()}
+      closeIcon={<CloseOutlined className='text-[24px]' />}
       onCancel={() => onClose(false)}
       className='top-[calc(5vh)] w-[calc(50vw)]'
     >
       <div>
-        <p className='text-center text-[24px] font-bold'>Chi tiết Invoice</p>
-
         <Form form={invoiceDetailsForm}>
           <div className='h-[calc(70vh)] overflow-y-auto p-5'>
             <div className='grid grid-cols-2 gap-x-6'>
@@ -62,11 +74,11 @@ const ModalInvoiceDetails = ({
                 rules={[
                   {
                     required: true,
-                    message: 'Vui lòng nhập Tên hàng hóa',
+                    message: 'Vui lòng nhập Tên hàng hóa (Tiếng Anh)',
                   },
                 ]}
               >
-                <VInput label='Tên hàng hóa' required />
+                <VInput label='Tên hàng hóa (Tiếng Anh)' required />
               </Form.Item>
 
               <Form.Item
@@ -163,9 +175,9 @@ const ModalInvoiceDetails = ({
             </Form.Item>
           </div>
 
-          <div className='mt-4 flex justify-start'>
+          <div className='mt-4 flex justify-end'>
             <Button
-              type='primary'
+              className='h-8 rounded-md bg-[#FBE51D] px-4 outline-none'
               onClick={() => {
                 handleDetails(invoiceDetailsForm);
                 onClose(false);

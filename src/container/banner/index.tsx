@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+import { Divider } from 'antd';
 import { useRouter } from 'next/router';
 import setLanguage from 'next-translate/setLanguage';
 import useTranslation from 'next-translate/useTranslation';
@@ -37,21 +38,22 @@ const BannerContainer = () => {
   return (
     <div className='flex h-[120px] flex-row bg-[#FBE51D] p-1 pb-4 pl-10'>
       <img
-        src='images/acf-logo.svg'
+        src='/images/acf-logo.svg'
         alt='logo'
-        className='h-[108px] w-[284px]'
+        className='h-[108px] w-[284px] cursor-pointer'
+        onClick={() => router.push('/')}
       />
-      <div className='flex w-full flex-col justify-center '>
-        <div className='px-14'>
+      <div className='flex  w-full flex-col'>
+        <div className='px-4'>
           <div className='flex h-[54px] flex-row items-center justify-between gap-4'>
-            <div className='flex flex-row gap-14'>
-              <div className='flex h-[60px] flex-row items-center gap-8'>
+            <div className='flex flex-row gap-4'>
+              <div className='flex h-[60px] flex-row items-center gap-4'>
                 <TextLink href='/' label={policy} />
                 <TextLink href='/' label={termsOfUse} />
               </div>
               <div className='flex h-[66px] flex-row items-center gap-8'>
                 <img
-                  src='images/ic-vi.svg'
+                  src='/images/ic-vi.svg'
                   alt='ic-vi'
                   onClick={() => setLanguage('vi')}
                   width={56}
@@ -59,7 +61,7 @@ const BannerContainer = () => {
                   className='cursor-pointer'
                 />
                 <img
-                  src='images/ic-eng.svg'
+                  src='/images/ic-eng.svg'
                   alt='ic-eng'
                   onClick={() => setLanguage('en')}
                   width={56}
@@ -69,20 +71,39 @@ const BannerContainer = () => {
               </div>
             </div>
             <div className='flex h-[66px] flex-row items-center gap-8'>
-              <div className='text-[16px] font-medium'>
+              <div className='text-[16px] font-bold'>
                 {contactPhone} :(+84) 968 02 22 57
               </div>
-              <div className='text-[16px] font-medium'>{hotLine} :19008972</div>
+              <div className='text-[16px] font-bold'>{hotLine} :19008972</div>
+              <button
+                className='h-[50px] w-[130px] bg-[#FBE51D] font-bold text-[red] shadow-2xl outline-0'
+                onClick={() => router.push('/login-home')}
+              >
+                {t('Login')}
+              </button>
             </div>
           </div>
         </div>
 
-        <div className='h-[4px] w-full bg-[#000000]' />
-
-        <div className='flex h-full flex-row items-center justify-start gap-20'>
-          {isLogin
-            ? dataMenuManager.map((v) => <ItemMenu key={v.href} value={v} />)
-            : dataMenu.map((v) => <ItemMenu key={v.href} value={v} />)}
+        <Divider className='border-t-1 m-0 border-[#000] bg-[#000]' />
+        <div className='w-full] h-[60px]'>
+          <div className='flex h-full w-full flex-row items-center justify-between p-4'>
+            <div className='flex flex-1 flex-row items-center justify-between p-4'>
+              {isLogin
+                ? dataMenuManager.map((v) => (
+                    <ItemMenu key={v.href} value={v} />
+                  ))
+                : dataMenu.map((v) => <ItemMenu key={v.href} value={v} />)}
+            </div>
+            <div>
+              <button
+                className='h-[50px] w-[130px] bg-[#FBE51D] font-bold text-[red] shadow-2xl outline-0'
+                onClick={() => router.push('/register')}
+              >
+                {t('Register')}
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>

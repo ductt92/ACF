@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { CloseOutlined } from '@ant-design/icons';
 import { Button, Form, Modal, Select } from 'antd';
 import React, { useEffect } from 'react';
 
@@ -53,12 +54,23 @@ const ModalUpdateInvoiceDetails = ({
       ...value,
     });
   }, [invoiceDetailsForm, value]);
-
+  const renderHeader = () => {
+    return (
+      <div
+        className='bg-[#FBE51D] text-center text-[24px]
+      font-bold'
+      >
+        Chi tiết đơn hàng
+      </div>
+    );
+  };
   return (
     <Modal
       footer={null}
       visible={isOpen}
+      title={renderHeader()}
       onCancel={() => onClose(false)}
+      closeIcon={<CloseOutlined className='text-[24px]' />}
       className='top-[calc(5vh)] w-[calc(50vw)]'
     >
       <div>
@@ -73,11 +85,11 @@ const ModalUpdateInvoiceDetails = ({
                 rules={[
                   {
                     required: !isInvoice,
-                    message: 'Vui lòng nhập Tên hàng hóa',
+                    message: 'Vui lòng nhập Tên hàng hóa (Tiếng Anh)',
                   },
                 ]}
               >
-                <VInput label='Tên hàng hóa' required />
+                <VInput label='Tên hàng hóa (Tiếng Anh)' required />
               </Form.Item>
 
               <Form.Item
@@ -86,11 +98,15 @@ const ModalUpdateInvoiceDetails = ({
                 rules={[
                   {
                     required: !isInvoice,
-                    message: 'Vui lòng nhập mô tả hàng hóa',
+                    message:
+                      'Vui lòng nhập mô tả hàng hóa (Chất liệu, thành phần ... hàng hóa) (Tiếng Anh) ',
                   },
                 ]}
               >
-                <VInput label='Mô tả hàng hóa' required />
+                <VInput
+                  label='Mô tả hàng hóa (Chất liệu, thành phần ... hàng hóa) (Tiếng Anh)'
+                  required
+                />
               </Form.Item>
 
               <Form.Item

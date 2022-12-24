@@ -23,7 +23,8 @@ module.exports = {
         primary: ['Inter', ...fontFamily.sans],
       },
       colors: {
-        "yellow-primary": "#efbd2b",
+        'yellow-primary': '#efbd2b',
+        'pussy-color': 'rgba(178, 173, 173, 0.13)',
         primary: {
           // Customize it on globals.css :root
           50: withOpacityValue('--tw-color-primary-50'),

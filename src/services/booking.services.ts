@@ -1,11 +1,23 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+import queryString from 'query-string';
+
 import { QueryParams3 } from '@/contants/common.constants';
 import { BookingStatusPost, IMyBooking, IUser } from '@/contants/types';
 import HttpRequest from '@/utils/Http-request';
 
 export interface MyBookingResponse {
   data?: IMyBooking[];
+  pagination?: {
+    currentPage: number;
+    pageSize: number;
+    totalCount: number;
+    totalPage: number;
+  };
+}
+
+export interface ITrackingResponse {
+  data?: any[];
   pagination?: {
     currentPage: number;
     pageSize: number;
@@ -42,6 +54,7 @@ export const fetchBookingAdmin = async ({
   status,
   createBookingFrom,
   createBookingTo,
+  isHandle,
 }: QueryParams3) => {
   const bookingAdmin = await HttpRequest.get('booking', {
     params: {
@@ -51,6 +64,7 @@ export const fetchBookingAdmin = async ({
       status,
       createBookingFrom,
       createBookingTo,
+      isHandle,
     },
   });
   return bookingAdmin as MyBookingResponse;
@@ -100,6 +114,10 @@ export const getBookingById = async (id: any) => {
   return booking as MyBookingResponse;
 };
 
+export const getStaffAll = async () => {
+  return HttpRequest.get(`staffs/find-all-staff`);
+};
+
 export const fetchUser = () => {
   const users = HttpRequest.get(`customer/my-profile`);
   return users as unknown as IUser;
@@ -143,6 +161,24 @@ export const generateInvoicePatner = (id: string) => {
   });
 };
 
+export const generateExcelBooking = ({
+  createBookingFrom,
+  createBookingTo,
+}: {
+  createBookingTo?: Date | string;
+  createBookingFrom?: Date | string;
+}) => {
+  return HttpRequest.get('booking/generate-excel-booking', {
+    params: { createBookingTo, createBookingFrom },
+  }).then((res) => {
+    const blob = new Blob([new Uint8Array(res.data)]);
+    const link = document.createElement('a');
+    link.href = window.URL.createObjectURL(blob);
+    link.download = `bill-${new Date()}.xlsx`;
+    link.click();
+  });
+};
+
 export const generateBillPatner = (id: string) => {
   return HttpRequest.get('booking/generate-partner-bill', {
     params: { bookingId: id },
@@ -166,8 +202,18 @@ export const generateSmallBill = (id: string) => {
     link.click();
   });
 };
-// https://api.acf.vn/booking/generate-small-bill
 
+export const generateOrderCode = (id: string) => {
+  return HttpRequest.get(`customer/generate-excel-price-list/${id}`).then(
+    (res) => {
+      const blob = new Blob([new Uint8Array(res.data)]);
+      const link = document.createElement('a');
+      link.href = window.URL.createObjectURL(blob);
+      link.download = `bill-${new Date()}.xlsx`;
+      link.click();
+    }
+  );
+};
 export const generateInvoice = (id: string) => {
   return HttpRequest.get('booking/generate-bill-invoice', {
     params: { bookingId: id },
@@ -188,6 +234,33 @@ export const fetchServicesBooking = () => {
 export const confirmBooking = (id: string) => {
   const confirmBooking = HttpRequest.patch(`booking/is-handle-booking/${id}`);
   return confirmBooking;
+};
+
+export const trackingBooking = ({
+  search,
+  page,
+  pageSize,
+  billCodes,
+}: {
+  search?: string;
+  page: number;
+  pageSize: number;
+  billCodes: Array<string>;
+}) => {
+  if (billCodes && billCodes.length > 0) {
+    const qs = queryString.stringify(
+      { billCodes: billCodes },
+      { arrayFormat: 'bracket' }
+    );
+    const confirmBooking = HttpRequest.get(`trackings?${qs}`, {
+      params: {
+        search,
+        page,
+        pageSize,
+      },
+    });
+    return confirmBooking as unknown as ITrackingResponse;
+  }
 };
 
 export const fetchDeliveryCondition = () => {

@@ -11,14 +11,21 @@ import {
   ECustomerGroup,
   EIdentifierType,
   NetWorkCustomerType,
-  ServiceEnum,
+  OpitionType,
 } from '@/contants/types';
-import { getCompanies, getUnit } from '@/services/customer.services';
+import {
+  getCompanies,
+  getServices,
+  getUnit,
+} from '@/services/customer.services';
 
 const { Option } = Select;
 const InfoCustomer = ({ form }: { form: FormInstance }) => {
   const { data: dataCompanies } = useQuery(['getCompanies', {}], () =>
     getCompanies()
+  );
+  const { data: dataGetServices } = useQuery(['getServices', {}], () =>
+    getServices()
   );
   const { data: dataUnits } = useQuery(['getUnit', {}], () => getUnit());
 
@@ -36,6 +43,21 @@ const InfoCustomer = ({ form }: { form: FormInstance }) => {
       }));
     }
   }, [dataCompanies]);
+
+  const OpitionServices = useMemo(() => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    //  @ts-ignore
+    if (dataGetServices?.length < 0) {
+      return [];
+    } else {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      //  @ts-ignore
+      return dataGetServices?.map((v) => ({
+        value: v.id,
+        label: `${v.name}`,
+      }));
+    }
+  }, [dataGetServices]);
 
   const OpitionUnits = useMemo(() => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -58,12 +80,7 @@ const InfoCustomer = ({ form }: { form: FormInstance }) => {
       label: value,
     })
   );
-  const OpitionServiceEnum = Object.entries(ServiceEnum).map(
-    ([key, value]) => ({
-      value: key,
-      label: value,
-    })
-  );
+
   const OpitionNetWorkCustomerType = Object.entries(NetWorkCustomerType).map(
     ([key, value]) => ({
       value: key,
@@ -108,10 +125,13 @@ const InfoCustomer = ({ form }: { form: FormInstance }) => {
           <Form.Item
             name='companyId'
             rules={[
-              { required: true, message: 'Vui lòng chọn thông tin công ty' },
+              {
+                required: true,
+                message: 'Vui lòng chọn Công ty quản lý khách hàng',
+              },
             ]}
           >
-            <VSelect label='Thông tin công ty' required>
+            <VSelect label='Công ty quản lý khách hàng' required>
               {OpitionCompanies?.map((v: any) => (
                 <Option value={v.value} key={v.value}>
                   {v.label}
@@ -126,7 +146,7 @@ const InfoCustomer = ({ form }: { form: FormInstance }) => {
               { required: true, message: 'Vui lòng chọn thông tin đơn vị' },
             ]}
           >
-            <VSelect label='Thông tin đơn vị' required>
+            <VSelect label='Thông tin đơn vị' required showSearch>
               {OpitionUnits?.map((v: any) => (
                 <Option value={v.value} key={v.value}>
                   {v.label}
@@ -160,7 +180,7 @@ const InfoCustomer = ({ form }: { form: FormInstance }) => {
             name='commune'
             rules={[{ required: true, message: 'Vui lòng xã/phường' }]}
           >
-            <VInput label='Xã' required placeholder='Nhập xã/phường' />
+            <VInput label='Xã/Phường' required placeholder='Nhập xã/phường' />
           </Form.Item>
 
           <Form.Item
@@ -243,7 +263,11 @@ const InfoCustomer = ({ form }: { form: FormInstance }) => {
               },
             ]}
           >
-            <VInput label='SĐT' required placeholder='Nhập SĐT công ty' />
+            <VInput
+              label='SĐT cố định'
+              required
+              placeholder='Nhập SĐT cố định'
+            />
           </Form.Item>
 
           <Form.Item
@@ -326,9 +350,10 @@ const InfoCustomer = ({ form }: { form: FormInstance }) => {
             <VSelect
               label='Dịch vụ sử dụng'
               required
+              mode='multiple'
               placeholder='Nhập loại Dịch vụ sử dụng'
             >
-              {OpitionServiceEnum.map((v) => (
+              {OpitionServices?.map((v: OpitionType) => (
                 <Option value={v.value} key={v.value}>
                   {v.label}
                 </Option>

@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { CloseOutlined } from '@ant-design/icons';
 import { Button, Form, Modal, Select } from 'antd';
 import React, { useEffect, useMemo } from 'react';
 import { useQuery } from 'react-query';
@@ -129,18 +130,27 @@ const ModalUpdateBookingDetails = ({
       ...value,
     });
   }, [detailsBookingForm, value]);
-
+  const renderHeader = () => {
+    return (
+      <div
+        className='bg-[#FBE51D] text-center text-[24px]
+      font-bold'
+      >
+        Chi tiết đơn hàng
+      </div>
+    );
+  };
   return (
     <Modal
       footer={null}
       visible={isOpen}
+      title={renderHeader()}
       destroyOnClose
+      closeIcon={<CloseOutlined className='text-[24px]' />}
       onCancel={() => onClose(false)}
       className='top-[calc(5vh)] w-[calc(50vw)]'
     >
       <div>
-        <p className='text-center text-[24px] font-bold'>Chi tiết đơn hàng</p>
-
         <Form form={detailsBookingForm}>
           <div className='h-[calc(70vh)] overflow-y-auto p-5'>
             <div className='grid grid-cols-2 gap-x-6'>

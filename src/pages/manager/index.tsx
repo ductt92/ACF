@@ -2,7 +2,7 @@ import React from 'react';
 
 import ManageContainer from '@/container/MangerContainer';
 
-import NewLayout from '@/layout/NewLayout';
+import HomeLayout from '@/layout/HomeLayout';
 
 const ManagePage = () => {
   return (
@@ -12,5 +12,5 @@ const ManagePage = () => {
   );
 };
 
-ManagePage.Layout = NewLayout;
+ManagePage.Layout = HomeLayout;
 export default ManagePage;

@@ -2,11 +2,11 @@ import React from 'react';
 
 import CreateBookingContainer from '@/container/MangerContainer/CreateBookingContainer';
 
-import NewLayout from '@/layout/NewLayout';
+import HomeLayout from '@/layout/HomeLayout';
 
 const CreateBooking = () => {
   return <CreateBookingContainer />;
 };
 
-CreateBooking.Layout = NewLayout;
+CreateBooking.Layout = HomeLayout;
 export default CreateBooking;

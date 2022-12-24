@@ -42,16 +42,17 @@ export const DATA_MOCK_DETAIL_EN = [
 
 export const dataMenuManager = [
   {
-    title: 'Quản lý booking',
-    href: 'manager/booking',
+    title: 'Trang Chủ',
+    href: '/manager',
   },
   {
-    title: 'Trang Chủ',
-    href: 'manager/',
+    title: 'Quản lý booking',
+    href: '/manager/booking',
   },
+
   {
     title: 'Tạo booking',
-    href: 'manager/create-booking',
+    href: '/manager/create-booking',
   },
 ];
 

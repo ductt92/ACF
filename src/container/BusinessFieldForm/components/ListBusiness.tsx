@@ -19,10 +19,7 @@ const ListBusiness = () => {
           return (
             <Link href={`/detail-post/${v.href}`} key={index}>
               <li className='border-t-[1px] border-[#bfbfbf]'>
-                <a
-                  className='block h-auto bg-[#fff] p-[10px_16px_10px_7px] text-[14px] font-bold leading-[21px] text-[#222] hover:text-[#ec3236] active:text-[#ec3236]'
-                  style={{ fontFamily: 'Roboto' }}
-                >
+                <a className='block h-auto bg-[#fff] p-[10px_16px_10px_7px] text-[14px] font-bold leading-[21px] text-[#222] hover:text-[#ec3236] active:text-[#ec3236]'>
                   {v.title}
                 </a>
               </li>

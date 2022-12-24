@@ -318,7 +318,10 @@ const InVoice = ({
               prefix={<SearchOutlined />}
               className='mb-4 mr-4 w-[350px]'
             />
-            <Button type='primary' onClick={() => setIsCreate(true)}>
+            <Button
+              onClick={() => setIsCreate(true)}
+              className='h-8 rounded-md bg-[#FBE51D] px-4 outline-none'
+            >
               Thêm Invoice
             </Button>
           </div>

@@ -131,7 +131,7 @@ export const EMPLOYEE_COLUMNS: ColumnsType<IStaff> = [
     width: 150,
   },
   {
-    title: 'Mã ĐT',
+    title: 'Mã vùng điện thoại của nước sở tại',
     dataIndex: 'phoneCode',
     key: 'phoneCode',
     align: 'center',
@@ -162,7 +162,8 @@ export const EMPLOYEE_COLUMNS: ColumnsType<IStaff> = [
     width: 150,
   },
   {
-    title: 'Vùng',
+    title:
+      'Khu vực làm việc của nhân viên. Chọn theo các thông tin đơn vị của trường quản lý khách hàng',
     dataIndex: 'region',
     key: 'region',
     align: 'center',

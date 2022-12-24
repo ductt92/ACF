@@ -100,6 +100,7 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
       });
     },
   });
+
   const { mutate: genBillPatner } = useMutation(generateBillPatner, {
     onSuccess: () => {
       queryClient.invalidateQueries(['generateBillPatner']);
@@ -256,8 +257,6 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
     const res = detailsBooking.filter((x, index) => id !== index);
     setDetailsBooking(res);
   };
-
-  console.log(data?.booking);
 
   const handleDeleteInvoice = (id: any) => {
     const res = detailsInvoice.filter((x, index) => id !== index);
@@ -733,10 +732,7 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
   };
   return (
     <div>
-      <div className='flex gap-4 text-center'>
-        <p className='mb-5 text-lg'>Chi tiết đơn hàng</p>
-      </div>
-      <div className='flex gap-4'>
+      <div className='mb-2 flex gap-4 px-4'>
         <Button
           onClick={handleGenerataeBill}
           type='primary'
@@ -753,7 +749,7 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
             disabled={!data?.booking?.id}
             icon={<PrinterOutlined />}
           >
-            In Bill đối tác
+            In bưu đối tác
           </Button>
         )}
 
@@ -764,7 +760,7 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
             disabled={!data?.booking?.id}
             icon={<PrinterOutlined />}
           >
-            In InVoice đối tác
+            In Invoice đối tác
           </Button>
         )}
 
@@ -801,7 +797,7 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
           loading={generateSmallBillLoading}
           icon={<PrinterOutlined />}
         >
-          In Bill nhỏ
+          In bưu nhỏ
         </Button>
       </div>
 

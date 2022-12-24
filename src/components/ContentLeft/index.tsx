@@ -78,10 +78,7 @@ const ContentLeft = () => {
                       <a className='float-left mr-[8px] object-cover object-center'>
                         <Image src={value.img} alt='' height={78} width={73} />
                       </a>
-                      <a
-                        className='float-left mt-[-3px] mb-[5px] w-[141px] text-[13px] font-semibold leading-[16px] text-[#222] '
-                        style={{ fontFamily: 'Roboto' }}
-                      >
+                      <a className='float-left mt-[-3px] mb-[5px] w-[141px] text-[13px] font-semibold leading-[16px] text-[#222] '>
                         {value.title}
                       </a>
                     </div>

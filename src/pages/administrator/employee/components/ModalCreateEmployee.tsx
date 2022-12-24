@@ -1,7 +1,8 @@
+import { CloseOutlined } from '@ant-design/icons';
 import { Button, Form, Modal, notification, Select } from 'antd';
 import dayjs from 'dayjs';
-import React from 'react';
-import { useMutation, useQueryClient } from 'react-query';
+import React, { useMemo } from 'react';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 
 import VDatePicker from '@/components/common/VDatePicker';
 import VInput from '@/components/common/VInput';
@@ -9,7 +10,8 @@ import VSelect from '@/components/common/VSelect';
 
 import { DEFAULT_DATE_FORMAT, LevelStaff } from '@/contants/common.constants';
 import { QUERY_EMPLOYEE } from '@/contants/query-key/employee.contants';
-import { GENDER, IStaff, Marital } from '@/contants/types';
+import { GENDER, IStaff, Marital, OpitionType } from '@/contants/types';
+import { getUnit } from '@/services/customer.services';
 import { createStaffs } from '@/services/employee.services';
 
 interface IProps {
@@ -19,7 +21,7 @@ const ModalCreateEmployee = ({ onClose }: IProps) => {
   const queryClient = useQueryClient();
   const [form] = Form.useForm();
   const { Option } = Select;
-
+  // OpitionUnits
   const { mutate: mutateCreate, isLoading: isCreating } = useMutation(
     createStaffs,
     {
@@ -39,6 +41,7 @@ const ModalCreateEmployee = ({ onClose }: IProps) => {
       },
     }
   );
+  const { data: dataUnits } = useQuery(['getUnit', {}], () => getUnit());
 
   const onSubmit = async () => {
     const requestData: IStaff = await form.validateFields();
@@ -54,7 +57,20 @@ const ModalCreateEmployee = ({ onClose }: IProps) => {
       ).format(DEFAULT_DATE_FORMAT),
     });
   };
-
+  const OpitionUnits = useMemo(() => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    //  @ts-ignore
+    if (dataUnits?.length < 0) {
+      return [];
+    } else {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      //  @ts-ignore
+      return dataUnits?.map((v) => ({
+        value: v.id,
+        label: `${v.name}`,
+      }));
+    }
+  }, [dataUnits]);
   const OpitionGender = Object.entries(GENDER).map(([key, value]) => ({
     value: key,
     label: value,
@@ -68,17 +84,26 @@ const ModalCreateEmployee = ({ onClose }: IProps) => {
     value: key,
     label: value,
   }));
+  const renderHeader = () => {
+    return (
+      <div
+        className='bg-[#FBE51D] text-center text-[24px]
+      font-bold'
+      >
+        Tạo mới nhân viên
+      </div>
+    );
+  };
 
   return (
     <Modal
       footer={null}
+      title={renderHeader()}
       visible={true}
       onCancel={() => onClose(false)}
+      closeIcon={<CloseOutlined className='text-[24px]' />}
       className='top-[calc(5vh)] w-[calc(40vw)]'
     >
-      <div>
-        <p className='text-center text-[24px] font-medium'>Tạo mới nhân viên</p>
-      </div>
       <div>
         <Form form={form}>
           <div className='h-[calc(70vh)] overflow-y-auto p-4'>
@@ -254,9 +279,18 @@ const ModalCreateEmployee = ({ onClose }: IProps) => {
 
               <Form.Item
                 name='phoneCode'
-                rules={[{ required: true, message: 'Vui lòng nhập Mã ĐT' }]}
+                rules={[
+                  {
+                    required: true,
+                    message: 'Vui lòng nhập Mã vùng điện thoại của nước sở tại',
+                  },
+                ]}
               >
-                <VInput label='Mã ĐT' placeholder='Nhập Mã ĐT' required />
+                <VInput
+                  label='Mã vùng điện thoại của nước sở tại'
+                  placeholder='Nhập Mã vùng điện thoại của nước sở tại'
+                  required
+                />
               </Form.Item>
 
               <Form.Item
@@ -299,10 +333,25 @@ const ModalCreateEmployee = ({ onClose }: IProps) => {
               <Form.Item
                 name='region'
                 rules={[
-                  { required: true, message: 'Vui lòng nhập Nơi cấp CMT/CCCD' },
+                  {
+                    required: true,
+                    message:
+                      'Vui lòng chọn Khu vực làm việc của nhân viên. Chọn theo các thông tin đơn vị của trường quản lý khách hàng',
+                  },
                 ]}
               >
-                <VInput label='Vùng' placeholder='Nhập Vùng' required />
+                <VSelect
+                  showSearch
+                  label='Khu vực làm việc của nhân viên. Chọn theo các thông tin đơn vị của trường quản lý khách hàng'
+                  placeholder='Nhập Khu vực làm việc của nhân viên. Chọn theo các thông tin đơn vị của trường quản lý khách hàng'
+                  required
+                >
+                  {OpitionUnits?.map((v: OpitionType) => (
+                    <Option key={v.value} value={v.value}>
+                      {v.label}
+                    </Option>
+                  ))}
+                </VSelect>
               </Form.Item>
               <Form.Item name='taxCode'>
                 <VInput label='MST' placeholder='Nhập MST' />
