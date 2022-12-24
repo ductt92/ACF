@@ -29,13 +29,12 @@ const CustomerPage = () => {
     isLoading: isUserLoading,
     data: dataCustomer,
     isFetching: customerFetching,
-  } = useQuery([QUERY_CUSTOMER.GET_CUSTOMER], () =>
+  } = useQuery([QUERY_CUSTOMER.GET_CUSTOMER, { queries }], () =>
     fetchCustomer({ ...queries })
   );
   const handleClose = () => {
     setCreate(false);
   };
-
   const handleSearch = debounce((value: string) => {
     setQueries((prev) => ({ ...prev, search: value }));
   }, 500);

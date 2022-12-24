@@ -21,14 +21,14 @@ export const CUSTOMER_COLUMNS: ColumnsType<ICustomer> = [
     dataIndex: 'fullName',
     key: 'fullName',
     align: 'center',
-    width: 150,
+    width: 200,
   },
   {
     title: 'Địa chỉ chi tiết',
     dataIndex: 'detailAddress',
     key: 'detailAddress',
     align: 'center',
-    width: 150,
+    width: 300,
   },
   {
     title: 'Phường/Xã',

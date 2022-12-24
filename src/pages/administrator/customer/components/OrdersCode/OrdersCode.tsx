@@ -39,7 +39,6 @@ const OrdersCode = ({
   const { data: dataZone } = useQuery(['dataZone', { servicesId }], () =>
     getCountry(servicesId)
   );
-
   const OpitionSmallServices = useMemo(() => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     //  @ts-ignore
@@ -104,7 +103,11 @@ const OrdersCode = ({
       setIdUpdate('');
       orderForm.resetFields();
     } else {
-      handleAddOrder(res);
+      handleAddOrder({
+        ...res,
+        exchangeRate: res.exchangeRate.toString(),
+        createdAt: dayjs(Date.now()).format('YYYY/MM/DD HH:mm:ss'),
+      });
       orderForm.resetFields();
       setIsOpen(false);
     }
@@ -120,7 +123,7 @@ const OrdersCode = ({
           >
             Thêm mới bảng giá
           </Button>
-          {isUpdate && (
+          {detailsOrder.length > 0 && (
             <Button
               onClick={handleGenOrderCode}
               type='primary'
@@ -133,6 +136,7 @@ const OrdersCode = ({
         </div>
         <Table
           columns={columsOrdersCode({
+            dataZone: (dataZone as unknown as Array<any>) || [],
             opitionServices: OpitionSmallServices || [],
             opitionFixedPriceCode: EFixedPriceOpition || [],
             handleDelete: handleDeleteContract,

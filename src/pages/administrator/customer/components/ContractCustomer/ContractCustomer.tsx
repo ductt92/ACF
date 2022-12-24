@@ -96,7 +96,7 @@ const ContractCustomer = ({
       handleAddContract({
         ...res,
         expertise: isExpertise,
-        createdAt: Date.now(),
+        createdAt: dayjs(Date.now()).format('YYYY/MM/DD HH:mm:ss'),
       });
       setIsOpen(false);
       setExpertise(0);

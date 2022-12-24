@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-key */
 /* eslint-disable unused-imports/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {
@@ -829,9 +830,11 @@ export const columsOrdersCode = ({
   opitionFixedPriceCode,
   handleDelete,
   handleUpdate,
+  dataZone,
 }: {
   opitionServices: Array<OpitionType>;
   opitionFixedPriceCode: Array<OpitionType>;
+  dataZone?: Array<any>;
   handleDelete: (id: any) => void;
   handleUpdate: (record: any) => void;
 }) => {
@@ -839,13 +842,23 @@ export const columsOrdersCode = ({
     Modal.confirm({
       title: 'Thông báo',
       icon: <WarningOutlined className='text-red-700' />,
-      content: 'Bạn có chắc chắn muốn xóa hàng hóa này không?',
+      content: 'Bạn có chắc chắn muốn xóa bảng giá này không?',
       okText: 'Đồng ý',
       cancelText: 'Không',
       onOk: () => handleDelete(row),
     });
   };
   const ordersCode: ColumnsType<any> = [
+    {
+      title: 'Thời gian cập nhật',
+      dataIndex: 'createdAt',
+      key: 'createdAt',
+      align: 'center',
+      width: 150,
+      render: (createdAt: string | Date) => (
+        <div>{dayjs(createdAt).format('DD-MM-YYYY HH:mm:ss')}</div>
+      ),
+    },
     {
       title: 'Dịch vụ yêu cầu',
       dataIndex: 'serviceRequestId',
@@ -904,8 +917,25 @@ export const columsOrdersCode = ({
       dataIndex: 'otherPrice',
       key: 'otherPrice',
       align: 'center',
-      width: 140,
-      render: (otherPrice: Array<any>) => <div>{otherPrice}</div>,
+      width: 180,
+      render: (otherPrice: Array<any>, record: any) => {
+        return dataZone &&
+          dataZone?.length > 0 &&
+          record?.otherPrices.length > 0 ? (
+          <div>
+            {dataZone.map((v, index) => (
+              <div className='grid grid-cols-2'>
+                <p className='m-0 p-0'> {v?.name}</p>
+                <p className='m-0 p-0'>
+                  {record?.otherPrices[index].discountRate}%
+                </p>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div>{otherPrice}</div>
+        );
+      },
     },
 
     {
@@ -916,11 +946,25 @@ export const columsOrdersCode = ({
       width: 140,
       render: (timeApply: Array<any>) => (
         <div>
-          {`Từ: ${dayjs(timeApply[0]).format('DD-MM-YYYY')}\nĐến :${dayjs(
-            timeApply[1]
+          {`Từ: ${dayjs(timeApply?.[0]).format('DD-MM-YYYY')}\nĐến :${dayjs(
+            timeApply?.[1]
           ).format('DD-MM-YYYY')}`}
         </div>
       ),
+    },
+    {
+      title: 'Phụ phí xăng dầu',
+      dataIndex: 'surcharge',
+      key: 'surcharge',
+      align: 'center',
+      width: 140,
+    },
+    {
+      title: 'Tỉ giá (VNĐ)',
+      dataIndex: 'exchangeRate',
+      key: 'exchangeRate',
+      align: 'center',
+      width: 140,
     },
     {
       title: 'Action',
