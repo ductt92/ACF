@@ -1,12 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { SearchOutlined } from '@ant-design/icons';
-import { Button, Input, notification, Spin, Table } from 'antd';
+import { Button, DatePicker, Input, notification, Spin, Table } from 'antd';
 import dayjs from 'dayjs';
 import { debounce } from 'lodash';
 import React, { ChangeEvent, useMemo, useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 
-import VDatePicker from '@/components/common/VDatePicker';
 import ExcelIcon from '@/components/Icon/ExcelIcon';
 
 import { MYBOOKING_COLUMNS } from '@/contants/columns/my-booking.columns';
@@ -134,14 +133,14 @@ const ManageContainer = () => {
           </div>
           <div className='flex flex-col items-center gap-2'>
             <div className='text-center'>Từ ngày</div>
-            <VDatePicker
+            <DatePicker
               format='DD-MM-YYYY'
               className='w-[200px]'
               placeholder='Chọn ngày'
               onChange={(e) => handleFilterDate('createBookingFrom', e)}
             />
             <div className='text-center'>Đến ngày</div>
-            <VDatePicker
+            <DatePicker
               format='DD-MM-YYYY'
               className='w-[200px]'
               placeholder='Chọn ngày'

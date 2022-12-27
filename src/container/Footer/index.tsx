@@ -21,6 +21,11 @@ const Footer = () => {
   return (
     <>
       <footer className='footer'>
+        <div className='mt-[42px] flex h-[155px] w-full bg-cover bg-no-repeat'>
+          <div className=' m-auto block w-[1174px] lg:w-full'>
+            {/* <Partner dataImage={dataImage} /> */}
+          </div>
+        </div>
         <div className='mt-[35px] w-full bg-[url(/images/bg_footer.png)] bg-cover pb-[15px] text-white sm:h-auto'>
           <div className=' sm-h-auto m-auto w-[1174px] lg:w-full'>
             <div className='my-[15px] inline-block w-full pl-[44px] sm:text-center '>
@@ -101,8 +106,8 @@ const Footer = () => {
             </div>
           </div>
         </div>
-        <div className='flex h-[30px] w-full items-center bg-[#FBE51D] pl-[32px] text-[12px] '>
-          <div className='m-auto w-[1174px] text-center italic sm:text-center lg:w-full'>
+        <div className='flex h-[30px] w-full items-center bg-[#0066c8] pl-[32px] text-[12px] text-white'>
+          <div className='m-auto w-[1174px] italic sm:text-center lg:w-full'>
             Copyright 2018 by ACF Vietnamese
           </div>
         </div>
