@@ -5,6 +5,7 @@ import React from 'react';
 import VInput from '@/components/common/VInput';
 import VRangePicker from '@/components/common/VRangeDate';
 import VSelect from '@/components/common/VSelect';
+import FileUpload from '@/components/FileUpLoad';
 
 import { IContract, OpitionType } from '@/contants/types';
 
@@ -21,6 +22,8 @@ interface ModalCreateContract {
   opitionTypeContract: Array<OpitionType>;
   opitionStaff: Array<OpitionType>;
   opitionServices: Array<OpitionType>;
+  fileList: any;
+  handleSetFileList: (data: any) => void;
 }
 
 const ModalCreateContract = ({
@@ -34,6 +37,8 @@ const ModalCreateContract = ({
   opitionTypeContract,
   opitionStaff,
   opitionServices,
+  handleSetFileList,
+  fileList,
 }: ModalCreateContract) => {
   return (
     <Modal
@@ -167,6 +172,14 @@ const ModalCreateContract = ({
                 <VInput
                   label='Ghi chú hợp đồng'
                   placeholder='Nhập ghi chú hợp đồng'
+                />
+              </Form.Item>
+
+              <Form.Item name='file' className='space-y-1'>
+                <p className='m-0 p-0'>File</p>
+                <FileUpload
+                  handleSetFileList={handleSetFileList}
+                  fileList={fileList}
                 />
               </Form.Item>
             </div>

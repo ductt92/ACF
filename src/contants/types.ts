@@ -251,6 +251,7 @@ export interface IContract {
   surcharge: number; // Phụ phí xăng dầu áp dụng
   applicableRate: number; // Tý giá áp dụng
   notePriceList: string;
+  file: any;
 }
 
 export enum ETypeContract {

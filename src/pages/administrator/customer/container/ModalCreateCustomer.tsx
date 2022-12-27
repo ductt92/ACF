@@ -53,7 +53,6 @@ const ModalCreateCustomer = ({ onClose }: IProps) => {
 
   const onSubmit = async () => {
     const requestData: any = await form.validateFields();
-
     const res = {
       ...requestData,
       contract: detailsContract.map((newRes) => {

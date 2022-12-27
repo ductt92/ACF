@@ -1,11 +1,13 @@
 /* eslint-disable unused-imports/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button, Form, Table } from 'antd';
+import axios from 'axios';
 import dayjs from 'dayjs';
 import React, { useMemo, useState } from 'react';
 import { useQuery } from 'react-query';
 
 import { columsOrdersCode } from '@/contants/columns/my-booking.columns';
+import { BASE_URL } from '@/contants/common.constants';
 import { EFixedPriceCode } from '@/contants/types';
 import { getCountry, getSmallServices } from '@/services/customer.services';
 
@@ -31,6 +33,8 @@ const OrdersCode = ({
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isUpdate, setIsUpdate] = useState<boolean>(false);
   const [otherPrice, setOtherPrice] = useState<any>();
+  const [fileList, setFileList] = useState<any | null>(null);
+
   const [orderForm] = Form.useForm();
 
   const { data: dataSmallServices } = useQuery(['smallSerices', {}], () =>
@@ -60,6 +64,26 @@ const OrdersCode = ({
     })
   );
 
+  const handleSetFileList = async (data: any) => {
+    setFileList(data);
+    if (data.length > 0) {
+      const files = data ? [...data] : [];
+      const dataUpload = new FormData();
+      files.forEach((file, i) => {
+        dataUpload.append(`files`, file, file.name);
+      });
+      const upload = await axios({
+        method: 'POST',
+        url: `${BASE_URL}/upload-file`,
+        data: dataUpload,
+      });
+      if (upload.data.data) {
+        orderForm.setFieldsValue({
+          file: upload.data.data,
+        });
+      }
+    }
+  };
   const handleSetForm = async (value: any) => {
     orderForm.setFieldsValue({
       otherPrices: value?.map((v: any) => ({
@@ -149,6 +173,8 @@ const OrdersCode = ({
 
         <ModalCreateOrdersCode
           form={orderForm}
+          fileList={fileList}
+          handleSetFileList={handleSetFileList}
           servicesId={servicesId}
           isOpen={isOpen || isUpdate}
           handleClose={() => (isUpdate ? setIsUpdate(false) : setIsOpen(false))}

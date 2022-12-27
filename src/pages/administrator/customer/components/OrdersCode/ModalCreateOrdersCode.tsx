@@ -7,6 +7,7 @@ import VInput from '@/components/common/VInput';
 import VInputNumber from '@/components/common/VInputNumber';
 import VRangePicker from '@/components/common/VRangeDate';
 import VSelect from '@/components/common/VSelect';
+import FileUpload from '@/components/FileUpLoad';
 
 import { OpitionType } from '@/contants/types';
 interface ModalCreateStaffProps {
@@ -23,6 +24,8 @@ interface ModalCreateStaffProps {
   handleChangeOtherPrice: (value: any) => void;
   dataZone?: any;
   handleSetForm: (value: any) => void;
+  fileList: any;
+  handleSetFileList: (data: any) => void;
 }
 const ModalCreateOrdersCode = ({
   form,
@@ -38,6 +41,8 @@ const ModalCreateOrdersCode = ({
   handleAddOrder,
   dataZone,
   handleSetForm,
+  fileList,
+  handleSetFileList,
 }: ModalCreateStaffProps) => {
   useEffect(() => {
     if (otherPrice === 'OTHER_PRICE' && !isUpdate) handleSetForm(dataZone);
@@ -137,6 +142,13 @@ const ModalCreateOrdersCode = ({
                   label='Phụ phí xăng dầu (%)'
                   placeholder='Nhập phụ phí xăng dầu'
                   required
+                />
+              </Form.Item>
+              <Form.Item name='file' className='space-y-1'>
+                <p className='m-0 p-0'>File</p>
+                <FileUpload
+                  handleSetFileList={handleSetFileList}
+                  fileList={fileList}
                 />
               </Form.Item>
 

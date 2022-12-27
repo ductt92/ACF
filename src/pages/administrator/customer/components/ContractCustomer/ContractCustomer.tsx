@@ -2,11 +2,13 @@
 /* eslint-disable unused-imports/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button, Form, FormInstance, Table } from 'antd';
+import axios from 'axios';
 import dayjs from 'dayjs';
 import React, { useMemo, useState } from 'react';
 import { useQuery } from 'react-query';
 
 import { columnsContract } from '@/contants/columns/my-booking.columns';
+import { BASE_URL } from '@/contants/common.constants';
 import { ETypeContract, IContract } from '@/contants/types';
 import { getServices, getStaff } from '@/services/customer.services';
 
@@ -30,6 +32,7 @@ const ContractCustomer = ({
   const [isExpertise, setExpertise] = useState<any>(0);
   const [isUpdate, setIsUpdate] = useState<boolean>(false);
   const [idUpdate, setIdUpdate] = useState('');
+  const [fileList, setFileList] = useState<any | null>(null);
 
   const handleChangeExpertise = (value: any) => {
     setExpertise(value);
@@ -76,10 +79,29 @@ const ContractCustomer = ({
       label: value,
     })
   );
+  const handleSetFileList = async (data: any) => {
+    setFileList(data);
+    if (data.length > 0) {
+      const files = data ? [...data] : [];
+      const dataUpload = new FormData();
+      files.forEach((file, i) => {
+        dataUpload.append(`files`, file, file.name);
+      });
+      const upload = await axios({
+        method: 'POST',
+        url: `${BASE_URL}/upload-file`,
+        data: dataUpload,
+      });
+      if (upload.data.data) {
+        contractFrom.setFieldsValue({
+          file: upload.data.data,
+        });
+      }
+    }
+  };
 
   const onHandleAddContract = async () => {
     const res = await contractFrom.validateFields();
-
     if (isUpdate) {
       const updateStaff = detailsContract.map((x, index) => {
         if (parseInt(idUpdate) === index) {
@@ -105,7 +127,6 @@ const ContractCustomer = ({
   };
 
   const actionUpdateContract = (record: any) => {
-    console.log(record);
     setIsUpdate(true);
     contractFrom.setFieldsValue({
       ...record,
@@ -140,6 +161,8 @@ const ContractCustomer = ({
 
       <ModalCreateContract
         form={contractFrom}
+        fileList={fileList}
+        handleSetFileList={handleSetFileList}
         isOpen={isOpen}
         isUpdate={isUpdate}
         onClose={() => (isUpdate ? setIsUpdate(false) : setIsOpen(false))}
