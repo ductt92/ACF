@@ -188,9 +188,9 @@ const GeneralInfomation = ({
   return (
     <div className='h-full'>
       <Form form={form} className='gap-4'>
-        <div className='m-auto mb-[18px] w-[1200px] rounded-md bg-pussy-color p-4'>
-          <p className='m-0 p-0 font-bold'>Thông tin chung</p>
-          <div className='grid grid-cols-2 gap-x-6 p-4 px-[86px]'>
+        <div className='m-auto mb-[18px] w-[1200px]  rounded-md bg-pussy-color  p-4 sm:w-full'>
+          <p className='m-0 mb-[20px] p-0 font-bold'>Thông tin chung</p>
+          <div className='grid grid-cols-2 gap-x-6 px-[86px]  sm:grid-cols-1 sm:px-2'>
             <Form.Item
               name='serviceBookingId'
               rules={[
@@ -287,10 +287,10 @@ const GeneralInfomation = ({
           </div>
         </div>
 
-        <div className='m-auto mb-[18px] w-[1200px] rounded-md bg-pussy-color p-4'>
+        <div className='m-auto mb-[18px] w-[1200px] rounded-md bg-pussy-color p-4 sm:w-full'>
           <p className='m-0 p-0 font-bold'>Hình thức thanh toán </p>
 
-          <div className='grid gap-x-6 px-[86px] '>
+          <div className='grid gap-x-6 px-[86px] sm:grid-cols-1 sm:px-2 '>
             <Form.Item
               name='typeOfPaymentId'
               className='py-4'
@@ -313,7 +313,7 @@ const GeneralInfomation = ({
           </div>
         </div>
 
-        <div className='m-auto mb-[18px] w-[1200px] rounded-md bg-pussy-color p-4'>
+        <div className='m-auto mb-[18px] w-[1200px] rounded-md bg-pussy-color p-4 sm:w-full'>
           <p className='m-0 p-0 font-bold'>Tờ khai hải quan</p>
           <div className='flex flex-col gap-4'>
             <Radio.Group onChange={onChange} value={value}>
@@ -352,10 +352,10 @@ const GeneralInfomation = ({
           </div>
         </div>
 
-        <div className='m-auto mb-[18px] w-[1200px] rounded-md bg-pussy-color p-4'>
-          <p className='m-0 p-0 font-bold'>Chi tiết booking </p>
+        <div className='m-auto mb-[18px] w-[1200px] rounded-md bg-pussy-color p-4 sm:w-full'>
+          <p className='m-0 mb-[20px] p-0 font-bold'>Chi tiết booking </p>
 
-          <div>
+          <div className='p-4'>
             <div className='flex flex-row pb-6'>
               <Input
                 placeholder='Tìm kiếm đơn hàng...'

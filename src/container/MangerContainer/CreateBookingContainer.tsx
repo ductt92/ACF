@@ -612,7 +612,7 @@ const CreateBookingContainer = () => {
 
   return (
     <div>
-      <div className='my-5 flex w-full flex-row items-center justify-center gap-4'>
+      <div className='my-5 flex w-full flex-row flex-wrap items-center justify-center gap-4'>
         <Button
           onClick={onSubmit}
           disabled={id ? true : false}

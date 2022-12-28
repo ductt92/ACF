@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { Divider } from 'antd';
+import Hamburger from 'hamburger-react';
 import { useRouter } from 'next/router';
 import setLanguage from 'next-translate/setLanguage';
 import useTranslation from 'next-translate/useTranslation';
@@ -27,6 +28,8 @@ const BannerContainer = () => {
   const policy = t(`Policy`);
   const dataMenu = lang === 'vi' ? DATA_MOCK_MENU_VI : DATA_MOCK_MENU_EN;
   const [isLogin, setIsLogin] = useState<boolean>(false);
+  const [isOpen, setOpen] = useState(false);
+
   useEffect(() => {
     const accessToken = storage().getItem(ACCSESS_TOKEN);
     const isManager = router.pathname.search(MANAGER_PAGES);
@@ -36,14 +39,14 @@ const BannerContainer = () => {
   }, [router]);
 
   return (
-    <div className='flex h-[120px] flex-row bg-[#FBE51D] p-1 pb-4 pl-10'>
+    <div className='flex h-[120px] flex-row bg-[#FBE51D] p-1 pb-4 pl-10 sm:grid sm:h-[70px] sm:grid-cols-2 sm:p-0'>
       <img
         src='/images/acf-logo.svg'
         alt='logo'
-        className='h-[108px] w-[284px] cursor-pointer'
+        className='h-[108px] w-[284px] cursor-pointer sm:h-[70px] sm:w-[179px]'
         onClick={() => router.push('/')}
       />
-      <div className='flex  w-full flex-col'>
+      <div className='flex w-full flex-col sm:hidden'>
         <div className='px-4'>
           <div className='flex h-[54px] flex-row items-center justify-between gap-4'>
             <div className='flex flex-row gap-4'>
@@ -104,6 +107,28 @@ const BannerContainer = () => {
               </button>
             </div>
           </div>
+        </div>
+      </div>
+
+      <div className='hidden h-full sm:block '>
+        <div className='flex h-full flex-row items-center justify-center gap-4'>
+          <img
+            src='/images/ic-vi.svg'
+            alt='ic-vi'
+            onClick={() => setLanguage('vi')}
+            width={56}
+            height={39}
+            className='cursor-pointer'
+          />
+          <img
+            src='/images/ic-eng.svg'
+            alt='ic-eng'
+            onClick={() => setLanguage('en')}
+            width={56}
+            className='cursor-pointer'
+            height={39}
+          />
+          <Hamburger toggled={isOpen} toggle={setOpen} />
         </div>
       </div>
     </div>

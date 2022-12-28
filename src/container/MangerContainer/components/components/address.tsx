@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Divider, Form, FormInstance, Select } from 'antd';
+import { Form, FormInstance, Select } from 'antd';
 import React, { useEffect } from 'react';
 
 import VInput from '@/components/common/VInput';
@@ -64,285 +64,311 @@ const Address = ({
 
   return (
     <div className='mb-24'>
-      <Form form={form}>
-        <p className='m-0 p-0 font-bold'>1.Địa chỉ người gửi</p>
-        <Divider className='bg-yellow' />
-        <div className='grid grid-cols-2 gap-x-6'>
-          <Form.Item
-            name='senderNameVi'
-            rules={[
-              {
-                required: true,
-                message: 'Vui lòng nhập Tên công ty gửi (Tiếng Việt)',
-              },
-            ]}
-          >
-            <VInput
-              label='Tên công ty gửi (Tiếng Việt)'
-              required
-              onChange={(e) =>
-                handleChangeInfoSender('senderNameVi', e.target.value)
-              }
-            />
-          </Form.Item>
-
-          <Form.Item
-            name='senderNameEn'
-            rules={[
-              {
-                required: true,
-                message: 'Vui lòng nhập Tên công ty gửi (Tiếng Anh)',
-              },
-            ]}
-          >
-            <VInput label='Tên công ty gửi (Tiếng Anh)' required />
-          </Form.Item>
-
-          <Form.Item
-            name='senderAddressVi'
-            rules={[
-              {
-                required: true,
-                message: 'Vui lòng nhập Địa chỉ chi tiết (Tiếng Việt)',
-              },
-            ]}
-          >
-            <VInput
-              label='Địa chỉ chi tiết (Tiếng Việt)'
-              required
-              onChange={(e) =>
-                handleChangeInfoSender('senderAddressVi', e.target.value)
-              }
-            />
-          </Form.Item>
-
-          <Form.Item
-            name='senderAddressEn'
-            rules={[
-              {
-                required: true,
-                message: 'Vui lòng nhập Địa chỉ chi tiết (Tiếng Anh)',
-              },
-            ]}
-          >
-            <VInput label='Địa chỉ chi tiết (Tiếng Anh)' required />
-          </Form.Item>
-
-          <Form.Item
-            name='senderContactPerson'
-            rules={[
-              {
-                required: true,
-                message: 'Vui lòng nhập Tên người gửi hàng',
-              },
-            ]}
-          >
-            <VInput label='Tên người gửi hàng' required />
-          </Form.Item>
-
-          <Form.Item name='senderDepartment'>
-            <VInput label='Phòng ban gửi' />
-          </Form.Item>
-
-          <Form.Item
-            name='senderPhoneNumber'
-            rules={[
-              {
-                required: true,
-                message: 'Số điện thoại gửi',
-              },
-            ]}
-          >
-            <VInput
-              label='Số điện thoại gửi'
-              required
-              onChange={(e) =>
-                handleChangeInfoSender('senderPhoneNumber', e.target.value)
-              }
-            />
-          </Form.Item>
-
-          <Form.Item
-            name='senderProvince'
-            rules={[
-              {
-                required: true,
-                message: 'Vui lòng nhập tỉnh/thành phố',
-              },
-            ]}
-          >
-            <VInput
-              required
-              label='Tỉnh/Thành phố'
-              onChange={(e) =>
-                handleChangeInfoSender('senderProvince', e.target.value)
-              }
-            />
-          </Form.Item>
-
-          <Form.Item name='senderCountry'>
-            <VSelect
-              label='Quốc gia'
-              required
-              showSearch
-              onChange={(e) => handleChangeInfoSender('senderCountry', e)}
+      <Form
+        form={form}
+        className=' flex flex-row items-stretch justify-center gap-4 sm:flex-col'
+      >
+        <div className='mx-auto w-[605px] rounded-[16px] bg-pussy-color p-[32px] sm:w-full sm:rounded-none'>
+          <p className='m-0 mb-[32px] p-0 font-bold'>Địa chỉ người gửi</p>
+          <div>
+            <Form.Item
+              name='senderNameVi'
+              rules={[
+                {
+                  required: true,
+                  message: 'Vui lòng nhập Tên công ty gửi (Tiếng Việt)',
+                },
+              ]}
             >
-              {countries.map((v) => (
-                <Option value={v.value} key={v.value}>
-                  {v.label}
-                </Option>
-              ))}
-            </VSelect>
-          </Form.Item>
+              <VInput
+                isHorizal
+                label='Tên công ty gửi (Tiếng Việt)'
+                required
+                onChange={(e) =>
+                  handleChangeInfoSender('senderNameVi', e.target.value)
+                }
+              />
+            </Form.Item>
 
-          <Form.Item name='senderPostalCode'>
-            <VInput
-              label='Mã bưu chính (postcode)'
-              onChange={(e) =>
-                handleChangeInfoSender('senderPostalCode', e.target.value)
-              }
-            />
-          </Form.Item>
+            <Form.Item
+              name='senderNameEn'
+              rules={[
+                {
+                  required: true,
+                  message: 'Vui lòng nhập Tên công ty gửi (Tiếng Anh)',
+                },
+              ]}
+            >
+              <VInput isHorizal label='Tên công ty gửi (Tiếng Anh)' required />
+            </Form.Item>
 
-          <Form.Item name='senderNote'>
-            <VInput label='Ghi chú' />
-          </Form.Item>
+            <Form.Item
+              name='senderAddressVi'
+              rules={[
+                {
+                  required: true,
+                  message: 'Vui lòng nhập Địa chỉ chi tiết (Tiếng Việt)',
+                },
+              ]}
+            >
+              <VInput
+                isHorizal
+                label='Địa chỉ chi tiết (Tiếng Việt)'
+                required
+                onChange={(e) =>
+                  handleChangeInfoSender('senderAddressVi', e.target.value)
+                }
+              />
+            </Form.Item>
+
+            <Form.Item
+              name='senderAddressEn'
+              rules={[
+                {
+                  required: true,
+                  message: 'Vui lòng nhập Địa chỉ chi tiết (Tiếng Anh)',
+                },
+              ]}
+            >
+              <VInput isHorizal label='Địa chỉ chi tiết (Tiếng Anh)' required />
+            </Form.Item>
+
+            <Form.Item
+              name='senderContactPerson'
+              rules={[
+                {
+                  required: true,
+                  message: 'Vui lòng nhập Tên người gửi hàng',
+                },
+              ]}
+            >
+              <VInput isHorizal label='Tên người gửi hàng' required />
+            </Form.Item>
+
+            <div className='grid grid-cols-2 gap-4'>
+              <Form.Item name='senderDepartment'>
+                <VInput isHorizal label='Phòng ban gửi' />
+              </Form.Item>
+
+              <Form.Item name='senderPostalCode'>
+                <VInput
+                  isHorizal
+                  label='Mã bưu chính (postcode)'
+                  onChange={(e) =>
+                    handleChangeInfoSender('senderPostalCode', e.target.value)
+                  }
+                />
+              </Form.Item>
+            </div>
+
+            <div className='grid grid-cols-3 gap-4'>
+              <Form.Item
+                name='senderPhoneNumber'
+                rules={[
+                  {
+                    required: true,
+                    message: 'Số điện thoại gửi',
+                  },
+                ]}
+              >
+                <VInput
+                  isHorizal
+                  label='Số điện thoại gửi'
+                  required
+                  onChange={(e) =>
+                    handleChangeInfoSender('senderPhoneNumber', e.target.value)
+                  }
+                />
+              </Form.Item>
+
+              <Form.Item
+                name='senderProvince'
+                rules={[
+                  {
+                    required: true,
+                    message: 'Vui lòng nhập tỉnh/thành phố',
+                  },
+                ]}
+              >
+                <VInput
+                  isHorizal
+                  required
+                  label='Tỉnh/Thành phố'
+                  onChange={(e) =>
+                    handleChangeInfoSender('senderProvince', e.target.value)
+                  }
+                />
+              </Form.Item>
+
+              <Form.Item name='senderCountry'>
+                <VSelect
+                  label='Quốc gia'
+                  required
+                  isHorizal
+                  showSearch
+                  onChange={(e) => handleChangeInfoSender('senderCountry', e)}
+                >
+                  {countries.map((v) => (
+                    <Option value={v.value} key={v.value}>
+                      {v.label}
+                    </Option>
+                  ))}
+                </VSelect>
+              </Form.Item>
+            </div>
+
+            <Form.Item name='senderNote'>
+              <VInput isHorizal label='Ghi chú' />
+            </Form.Item>
+          </div>
         </div>
 
-        <p className='m-0 p-0 font-bold'>2.Địa chỉ người nhận</p>
-        <Divider className='bg-yellow' />
+        <div className='mx-auto w-[605px] rounded-[16px] bg-pussy-color p-[32px] sm:w-full sm:rounded-none'>
+          <p className='m-0 mb-[32px] p-0 font-bold'>Địa chỉ người nhận</p>
 
-        <div className='grid grid-cols-2 gap-x-6'>
-          <Form.Item
-            name='receiverName'
-            rules={[
-              {
-                required: true,
-                message: 'Vui lòng nhập Tên công ty nhận',
-              },
-            ]}
-          >
-            <VInput
-              label='Tên công ty nhận'
-              required
-              onChange={(e) =>
-                handleChangeInfoRecei('receiverName', e.target.value)
-              }
-            />
-          </Form.Item>
-          <Form.Item
-            name='receiverAddress'
-            rules={[
-              {
-                required: true,
-                message: 'Vui lòng nhập Địa chỉ nhận hàng chi tiết',
-              },
-            ]}
-          >
-            <VInput
-              label='Địa chỉ nhận hàng chi tiết'
-              required
-              onChange={(e) =>
-                handleChangeInfoRecei('receiverAddress', e.target.value)
-              }
-            />
-          </Form.Item>
-
-          <Form.Item
-            name='receiverProvince'
-            rules={[
-              {
-                required: true,
-                message: 'Vui lòng nhập thành phố',
-              },
-            ]}
-          >
-            <VInput
-              required
-              label='Thành phố'
-              onChange={(e) =>
-                handleChangeInfoRecei('receiverProvince', e.target.value)
-              }
-            />
-          </Form.Item>
-
-          <Form.Item
-            name='receiverPostalCode'
-            rules={[
-              {
-                required: true,
-                message: 'Vui lòng nhập Mã bưu chính (postcode)',
-              },
-            ]}
-          >
-            <VInput
-              label='Mã bưu chính (postcode)'
-              required
-              onChange={(e) =>
-                handleChangeInfoRecei('receiverPostalCode', e.target.value)
-              }
-            />
-          </Form.Item>
-
-          <Form.Item
-            name='receiverCountry'
-            rules={[
-              {
-                required: true,
-                message: 'Vui lòng nhập quốc gia',
-              },
-            ]}
-          >
-            <VSelect
-              label='Quốc gia'
-              required
-              showSearch
-              onChange={(e) => handleChangeInfoRecei('receiverCountry', e)}
+          <div>
+            <Form.Item
+              name='receiverName'
+              rules={[
+                {
+                  required: true,
+                  message: 'Vui lòng nhập Tên công ty nhận',
+                },
+              ]}
             >
-              {countries.map((v) => (
-                <Option value={v.value} key={v.value}>
-                  {v.label}
-                </Option>
-              ))}
-            </VSelect>
-          </Form.Item>
+              <VInput
+                label='Tên công ty nhận'
+                required
+                isHorizal
+                onChange={(e) =>
+                  handleChangeInfoRecei('receiverName', e.target.value)
+                }
+              />
+            </Form.Item>
+            <Form.Item
+              name='receiverAddress'
+              rules={[
+                {
+                  required: true,
+                  message: 'Vui lòng nhập Địa chỉ nhận hàng chi tiết',
+                },
+              ]}
+            >
+              <VInput
+                isHorizal
+                label='Địa chỉ nhận hàng chi tiết'
+                required
+                onChange={(e) =>
+                  handleChangeInfoRecei('receiverAddress', e.target.value)
+                }
+              />
+            </Form.Item>
 
-          <Form.Item
-            name='receiverContactPerson'
-            rules={[
-              {
-                required: true,
-                message: 'Vui lòng nhập Người nhận hàng',
-              },
-            ]}
-          >
-            <VInput label='Người nhận hàng' required />
-          </Form.Item>
+            <Form.Item
+              name='receiverContactPerson'
+              rules={[
+                {
+                  required: true,
+                  message: 'Vui lòng nhập Người nhận hàng',
+                },
+              ]}
+            >
+              <VInput isHorizal label='Người nhận hàng' required />
+            </Form.Item>
 
-          <Form.Item
-            name='receiverPhoneNumber'
-            rules={[
-              {
-                required: true,
-                message: 'Vui lòng nhập Số điện thoại người nhận',
-              },
-            ]}
-          >
-            <VInput
-              label='Số điện thoại người nhận'
-              required
-              onChange={(e) =>
-                handleChangeInfoRecei('receiverPhoneNumber', e.target.value)
-              }
-            />
-          </Form.Item>
+            <div className='grid grid-cols-2 gap-4'>
+              <Form.Item name='receiverDepartment'>
+                <VInput isHorizal label='Phòng ban nhận hàng' />
+              </Form.Item>
 
-          <Form.Item name='receiverDepartment'>
-            <VInput label='Phòng ban nhận hàng' />
-          </Form.Item>
-          <Form.Item name='receiverNote'>
-            <VInput label='Ghi chú' />
-          </Form.Item>
+              <Form.Item
+                name='receiverPostalCode'
+                rules={[
+                  {
+                    required: true,
+                    message: 'Vui lòng nhập Mã bưu chính (postcode)',
+                  },
+                ]}
+              >
+                <VInput
+                  isHorizal
+                  label='Mã bưu chính (postcode)'
+                  required
+                  onChange={(e) =>
+                    handleChangeInfoRecei('receiverPostalCode', e.target.value)
+                  }
+                />
+              </Form.Item>
+            </div>
+
+            <div className='grid grid-cols-3 gap-4'>
+              <Form.Item
+                name='receiverPhoneNumber'
+                rules={[
+                  {
+                    required: true,
+                    message: 'Vui lòng nhập Số điện thoại người nhận',
+                  },
+                ]}
+              >
+                <VInput
+                  isHorizal
+                  label='Số điện thoại người nhận'
+                  required
+                  onChange={(e) =>
+                    handleChangeInfoRecei('receiverPhoneNumber', e.target.value)
+                  }
+                />
+              </Form.Item>
+
+              <Form.Item
+                name='receiverProvince'
+                rules={[
+                  {
+                    required: true,
+                    message: 'Vui lòng nhập thành phố',
+                  },
+                ]}
+              >
+                <VInput
+                  isHorizal
+                  required
+                  label='Thành phố'
+                  onChange={(e) =>
+                    handleChangeInfoRecei('receiverProvince', e.target.value)
+                  }
+                />
+              </Form.Item>
+
+              <Form.Item
+                name='receiverCountry'
+                rules={[
+                  {
+                    required: true,
+                    message: 'Vui lòng nhập quốc gia',
+                  },
+                ]}
+              >
+                <VSelect
+                  label='Quốc gia'
+                  required
+                  isHorizal
+                  showSearch
+                  onChange={(e) => handleChangeInfoRecei('receiverCountry', e)}
+                >
+                  {countries.map((v) => (
+                    <Option value={v.value} key={v.value}>
+                      {v.label}
+                    </Option>
+                  ))}
+                </VSelect>
+              </Form.Item>
+            </div>
+
+            <Form.Item name='receiverNote'>
+              <VInput isHorizal label='Ghi chú' />
+            </Form.Item>
+          </div>
         </div>
       </Form>
     </div>

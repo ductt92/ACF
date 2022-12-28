@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { CloseOutlined } from '@ant-design/icons';
 import { Button, Form, Modal, Select } from 'antd';
@@ -126,10 +127,21 @@ const ModalUpdateBookingDetails = ({
   }, [DataShippingType]);
 
   useEffect(() => {
+    const width = value.width;
+    const height = value.height;
+    const longs = value.longs;
+    const quantity = value.quantity;
+
+    const bulkyWeight =
+      (width * height * longs) / getBulkyWeight(services || '') || 0;
+    detailsBookingForm.setFieldsValue({ bulkyWeight });
+
+    const numb22 = bulkyWeight * quantity || 0;
     detailsBookingForm.setFieldsValue({
       ...value,
+      numb22: numb22,
     });
-  }, [detailsBookingForm, value]);
+  }, [detailsBookingForm, getBulkyWeight, services, value]);
   const renderHeader = () => {
     return (
       <div
@@ -148,11 +160,11 @@ const ModalUpdateBookingDetails = ({
       destroyOnClose
       closeIcon={<CloseOutlined className='text-[24px]' />}
       onCancel={() => onClose(false)}
-      className='top-[calc(5vh)] w-[calc(50vw)]'
+      className='top-[calc(5vh)] w-[calc(70vw)]'
     >
       <div>
         <Form form={detailsBookingForm}>
-          <div className='h-[calc(70vh)] overflow-y-auto p-5'>
+          <div className=' overflow-y-auto p-5'>
             <div className='grid grid-cols-2 gap-x-6'>
               <Form.Item
                 name='commoditiesTypeId'
@@ -164,7 +176,12 @@ const ModalUpdateBookingDetails = ({
                   },
                 ]}
               >
-                <VSelect label='Nhóm hàng hóa vận chuyển' required showSearch>
+                <VSelect
+                  label='Nhóm hàng hóa vận chuyển'
+                  required
+                  showSearch
+                  isHorizal
+                >
                   {OpitionCommoditiesTypeId?.map((v: any) => (
                     <Option value={v.value} key={v.value}>
                       {v.label}
@@ -186,6 +203,7 @@ const ModalUpdateBookingDetails = ({
                   label='Nhóm hàng hóa vận chuyển (Tiếng Việt)'
                   required
                   showSearch
+                  isHorizal
                 >
                   {OpitionShippingType?.map((v: any) => (
                     <Option value={v.value} key={v.value}>
@@ -205,26 +223,7 @@ const ModalUpdateBookingDetails = ({
                   },
                 ]}
               >
-                <VInput label='Mô tả chi tiết hàng hóa' required />
-              </Form.Item>
-
-              <Form.Item
-                name='originItem'
-                className='w-full'
-                rules={[
-                  {
-                    required: true,
-                    message: 'Vui lòng chọn xuất xứ hàng hóa',
-                  },
-                ]}
-              >
-                <VSelect label='Xuất xứ hàng hóa' required showSearch>
-                  {countries.map((v) => (
-                    <Option value={v.value} key={v.value}>
-                      {v.label}
-                    </Option>
-                  ))}
-                </VSelect>
+                <VInput label='Mô tả chi tiết hàng hóa' required isHorizal />
               </Form.Item>
 
               <Form.Item
@@ -237,41 +236,80 @@ const ModalUpdateBookingDetails = ({
                   },
                 ]}
               >
-                <VInput label='Nhóm hàng hóa vận chuyển(Tiếng Anh)' required />
-              </Form.Item>
-
-              <Form.Item name='quantity'>
-                <VInputNumber
-                  label='Số kiện'
+                <VInput
+                  label='Nhóm hàng hóa vận chuyển(Tiếng Anh)'
                   required
-                  onChange={handleChange}
+                  isHorizal
                 />
               </Form.Item>
 
+              <div className='grid grid-cols-2 gap-4'>
+                <Form.Item
+                  name='originItem'
+                  className='w-full'
+                  rules={[
+                    {
+                      required: true,
+                      message: 'Vui lòng chọn xuất xứ hàng hóa',
+                    },
+                  ]}
+                >
+                  <VSelect
+                    label='Xuất xứ hàng hóa'
+                    required
+                    showSearch
+                    isHorizal
+                  >
+                    {countries.map((v) => (
+                      <Option value={v.value} key={v.value}>
+                        {v.label}
+                      </Option>
+                    ))}
+                  </VSelect>
+                </Form.Item>
+
+                <Form.Item name='quantity'>
+                  <VInputNumber
+                    label='Số kiện'
+                    required
+                    isHorizal
+                    onChange={handleChange}
+                  />
+                </Form.Item>
+              </div>
+
+              <div className='grid grid-cols-3 gap-4'>
+                <Form.Item name='longs'>
+                  <VInputNumber
+                    label='Chiều dài (cm)'
+                    onChange={handleChange}
+                    required
+                    isHorizal
+                  />
+                </Form.Item>
+
+                <Form.Item name='width'>
+                  <VInputNumber
+                    label='Chiều rộng (cm)'
+                    onChange={handleChange}
+                    required
+                    isHorizal
+                  />
+                </Form.Item>
+                <Form.Item name='height'>
+                  <VInputNumber
+                    label='Chiều cao (cm)'
+                    onChange={handleChange}
+                    required
+                    isHorizal
+                  />
+                </Form.Item>
+              </div>
               <Form.Item name='weight'>
-                <VInputNumber label='Tổng trọng lượng thực (kg)' required />
-              </Form.Item>
-              <Form.Item name='height'>
                 <VInputNumber
-                  label='Chiều cao (cm)'
-                  onChange={handleChange}
+                  label='Tổng trọng lượng thực (kg)'
                   required
-                />
-              </Form.Item>
-
-              <Form.Item name='width'>
-                <VInputNumber
-                  label='Chiều rộng (cm)'
-                  onChange={handleChange}
-                  required
-                />
-              </Form.Item>
-
-              <Form.Item name='longs'>
-                <VInputNumber
-                  label='Chiều dài (cm)'
-                  onChange={handleChange}
-                  required
+                  isHorizal
                 />
               </Form.Item>
 
@@ -280,6 +318,7 @@ const ModalUpdateBookingDetails = ({
                   label='Trọng lượng cồng kềnh (kg) tạm tính'
                   required
                   disabled
+                  isHorizal
                 />
               </Form.Item>
 
@@ -288,6 +327,7 @@ const ModalUpdateBookingDetails = ({
                   label='Tổng trọng lượng cồng kềnh (kg) tạm tính'
                   required
                   disabled
+                  isHorizal
                 />
               </Form.Item>
 
@@ -300,7 +340,7 @@ const ModalUpdateBookingDetails = ({
                   },
                 ]}
               >
-                <VSelect label='Đơn vị' required showSearch>
+                <VSelect label='Đơn vị' required showSearch isHorizal>
                   {OpitionCalculationUnit.map((v) => (
                     <Option value={v.value} key={v.value}>
                       {v.label}
@@ -308,15 +348,18 @@ const ModalUpdateBookingDetails = ({
                   ))}
                 </VSelect>
               </Form.Item>
-
-              <Form.Item name='note'>
-                <VInput label='Ghi chú' />
-              </Form.Item>
             </div>
+            <Form.Item name='note'>
+              <VInput label='Ghi chú' isHorizal />
+            </Form.Item>
           </div>
 
-          <div className='mt-4 flex justify-start'>
-            <Button type='primary' onClick={handleUpdateBooking}>
+          <div className='mt-4 flex justify-end'>
+            <Button
+              type='primary'
+              onClick={handleUpdateBooking}
+              className='h-8 rounded-md bg-[#FBE51D] px-4 outline-none'
+            >
               Cập nhật Hàng hóa
             </Button>
           </div>

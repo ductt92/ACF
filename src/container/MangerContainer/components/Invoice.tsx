@@ -1,15 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { SearchOutlined } from '@ant-design/icons';
-import {
-  Button,
-  Divider,
-  Form,
-  FormInstance,
-  Input,
-  Select,
-  Table,
-} from 'antd';
+import { Button, Form, FormInstance, Input, Select, Table } from 'antd';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useQuery } from 'react-query';
 
@@ -177,188 +169,192 @@ const InVoice = ({
     setIsEdit(true);
   };
   return (
-    <div className='mb-20 h-full'>
-      <Form form={form}>
-        <div className='grid grid-cols-2 gap-x-6'>
-          <p className='m-0 p-0 font-bold'>1.Thông tin chung </p>
-          <Divider className='bg-yellow' />
+    <div className='m-auto h-full'>
+      <Form form={form} className=''>
+        <div className='m-auto mb-[18px] w-[1200px] rounded-md bg-pussy-color p-4 sm:w-full'>
+          <p className='m-0 mb-[20px] p-0 text-xl font-bold'>Thông tin chung</p>
 
-          <Form.Item
-            name='typeItemInvoice'
-            rules={[
-              {
-                required: isInvoice,
-                message: 'Vui lòng chọn loại dịch vụ',
-              },
-            ]}
-          >
-            <VSelect label='Loại hàng hóa' required>
-              {OpitionInvoiceItemType.map((v) => (
-                <Option value={v.value} key={v.value}>
-                  {v.label}
-                </Option>
-              ))}
-            </VSelect>
-          </Form.Item>
+          <div className='grid grid-cols-2 gap-x-6 px-[86px] sm:grid-cols-1 sm:p-2'>
+            <Form.Item
+              name='typeItemInvoice'
+              rules={[
+                {
+                  required: isInvoice,
+                  message: 'Vui lòng chọn loại dịch vụ',
+                },
+              ]}
+            >
+              <VSelect label='Loại hàng hóa' required>
+                {OpitionInvoiceItemType.map((v) => (
+                  <Option value={v.value} key={v.value}>
+                    {v.label}
+                  </Option>
+                ))}
+              </VSelect>
+            </Form.Item>
 
-          <Form.Item
-            name='invoiceType'
-            rules={[
-              {
-                required: isInvoice,
-                message: 'Vui lòng chọn loại hóa đơn',
-              },
-            ]}
-          >
-            <VSelect label='Loại hóa đơn' required>
-              {OpitionInvoiceType.map((v) => (
-                <Option value={v.value} key={v.value}>
-                  {v.label}
-                </Option>
-              ))}
-            </VSelect>
-          </Form.Item>
+            <Form.Item
+              name='invoiceType'
+              rules={[
+                {
+                  required: isInvoice,
+                  message: 'Vui lòng chọn loại hóa đơn',
+                },
+              ]}
+            >
+              <VSelect label='Loại hóa đơn' required>
+                {OpitionInvoiceType.map((v) => (
+                  <Option value={v.value} key={v.value}>
+                    {v.label}
+                  </Option>
+                ))}
+              </VSelect>
+            </Form.Item>
 
-          <Form.Item name='senderInformation'>
-            <VTextArea
-              label='Thông tin người gửi'
-              disabled
-              className='h-[130px]'
-            />
-          </Form.Item>
+            <Form.Item name='senderInformation'>
+              <VTextArea
+                label='Thông tin người gửi'
+                disabled
+                className='h-[130px]'
+              />
+            </Form.Item>
 
-          <Form.Item name='receiverInformation'>
-            <VTextArea
-              label='Thông tin người nhận '
-              disabled
-              className='h-[130px]'
-            />
-          </Form.Item>
+            <Form.Item name='receiverInformation'>
+              <VTextArea
+                label='Thông tin người nhận '
+                disabled
+                className='h-[130px]'
+              />
+            </Form.Item>
 
-          <Form.Item
-            name='invoiceDate'
-            rules={[
-              {
-                required: isInvoice,
-                message: 'Vui lòng nhập ngày invoice',
-              },
-            ]}
-          >
-            <VDatePicker
-              format='DD/MM/YYYY'
-              label='Ngày invoice'
-              placeholder='Nhập ngày invoice'
-              required
-            />
-          </Form.Item>
+            <Form.Item
+              name='invoiceDate'
+              rules={[
+                {
+                  required: isInvoice,
+                  message: 'Vui lòng nhập ngày invoice',
+                },
+              ]}
+            >
+              <VDatePicker
+                format='DD/MM/YYYY'
+                label='Ngày invoice'
+                placeholder='Nhập ngày invoice'
+                required
+              />
+            </Form.Item>
 
-          <Form.Item name='invoiceNumber'>
-            <VInput label='Số invoice' />
-          </Form.Item>
-          <Form.Item name='importProceduresPerson'>
-            <VTextArea label='Thông tin người làm thủ tục nhập khẩu' />
-          </Form.Item>
+            <Form.Item name='invoiceNumber'>
+              <VInput label='Số invoice' />
+            </Form.Item>
+            <Form.Item name='importProceduresPerson'>
+              <VTextArea label='Thông tin người làm thủ tục nhập khẩu' />
+            </Form.Item>
 
-          <Form.Item name='serviceId'>
-            <VInput label='Dịch vụ sử dụng' disabled />
-          </Form.Item>
+            <Form.Item name='serviceId'>
+              <VInput label='Dịch vụ sử dụng' disabled />
+            </Form.Item>
 
-          <Form.Item name='totalNetWeight'>
-            <VInputNumber label='Tổng trọng lượng thực (Kg)' disabled />
-          </Form.Item>
-          <Form.Item name='totalBulkyWeight'>
-            <VInputNumber label='Tổng trọng lượng cồng kềnh (kg)' disabled />
-          </Form.Item>
+            <Form.Item name='totalNetWeight'>
+              <VInputNumber label='Tổng trọng lượng thực (Kg)' disabled />
+            </Form.Item>
+            <Form.Item name='totalBulkyWeight'>
+              <VInputNumber label='Tổng trọng lượng cồng kềnh (kg)' disabled />
+            </Form.Item>
 
-          <Form.Item name='goodsSize'>
-            <VInput label='Kích thước hàng hóa (cm)' disabled />
-          </Form.Item>
+            <Form.Item name='goodsSize'>
+              <VInput label='Kích thước hàng hóa (cm)' disabled />
+            </Form.Item>
 
-          <Form.Item name='totalBaleNumber'>
-            <VInputNumber label='Tổng số kiện' disabled />
-          </Form.Item>
-          <Form.Item
-            name='currencyId'
-            rules={[
-              {
-                required: isInvoice,
-                message: 'Vui lòng chọn loại tiền tệ',
-              },
-            ]}
-          >
-            <VSelect label='Loại tiền tệ' showSearch required>
-              {OpitionCurrencyUnit?.map((v: any) => (
-                <Option value={v.value} key={v.value}>
-                  {v.label}
-                </Option>
-              ))}
-            </VSelect>
-          </Form.Item>
+            <Form.Item name='totalBaleNumber'>
+              <VInputNumber label='Tổng số kiện' disabled />
+            </Form.Item>
+            <Form.Item
+              name='currencyId'
+              rules={[
+                {
+                  required: isInvoice,
+                  message: 'Vui lòng chọn loại tiền tệ',
+                },
+              ]}
+            >
+              <VSelect label='Loại tiền tệ' showSearch required>
+                {OpitionCurrencyUnit?.map((v: any) => (
+                  <Option value={v.value} key={v.value}>
+                    {v.label}
+                  </Option>
+                ))}
+              </VSelect>
+            </Form.Item>
 
-          <Form.Item
-            name='reasonExport'
-            rules={[
-              {
-                required: isInvoice,
-                message: 'Vui lòng nhập lý do xuất khẩu',
-              },
-            ]}
-          >
-            <VInput label='Lý do xuất khẩu' required />
-          </Form.Item>
+            <Form.Item
+              name='reasonExport'
+              rules={[
+                {
+                  required: isInvoice,
+                  message: 'Vui lòng nhập lý do xuất khẩu',
+                },
+              ]}
+            >
+              <VInput label='Lý do xuất khẩu' required />
+            </Form.Item>
+          </div>
         </div>
 
-        <p className='m-0 p-0 font-bold'>2.Chi tiết Booking Express Invoice </p>
-        <Divider className='bg-yellow' />
+        <div className='m-auto mb-[18px] w-[1200px] rounded-md bg-pussy-color p-4 sm:w-full'>
+          <p className='m-0 mb-[20px] p-0 text-xl font-bold'>
+            Chi tiết Booking Express Invoice
+          </p>
 
-        <div>
-          <div className='flex flex-row pb-6'>
-            <Input
-              placeholder='Tìm kiếm ....'
-              prefix={<SearchOutlined />}
-              className='mb-4 mr-4 w-[350px]'
-            />
-            <Button
-              onClick={() => setIsCreate(true)}
-              className='h-8 rounded-md bg-[#FBE51D] px-4 outline-none'
-            >
-              Thêm Invoice
-            </Button>
-          </div>
+          <div className='p-4'>
+            <div className='flex flex-row  pb-6'>
+              <Input
+                placeholder='Tìm kiếm ....'
+                prefix={<SearchOutlined />}
+                className='mb-4 mr-4 w-[350px]'
+              />
+              <Button
+                onClick={() => setIsCreate(true)}
+                className='h-8 rounded-md bg-[#FBE51D] px-4 outline-none'
+              >
+                Thêm Invoice
+              </Button>
+            </div>
 
-          <Table
-            columns={renderInvoiceDetails(
-              handleDeleteInvoice,
-              handleUpdateInVoice
-            )}
-            rowKey='key-HSCode'
-            className='cursor-pointer'
-            dataSource={detailsInvoice}
-            pagination={{
-              showSizeChanger: false,
-            }}
-            bordered
-          />
-          {isCreate && (
-            <ModalInvoiceDetails
-              isOpen={isCreate}
-              handleAddInvoiceDetails={handleAddInvoiceDetails}
-              onClose={() => setIsCreate(false)}
-            />
-          )}
-
-          {isEdit && (
-            <ModalUpdateInvoiceDetails
-              isOpen={isEdit}
-              value={detailsInvoices}
-              isInvoice={isInvoice}
-              onClose={() => setIsEdit(false)}
-              handleEdiInvoiceDetails={(e) => {
-                handleUpdateBookingInvoice(e);
-                setIsEdit(false);
+            <Table
+              columns={renderInvoiceDetails(
+                handleDeleteInvoice,
+                handleUpdateInVoice
+              )}
+              rowKey='key-HSCode'
+              className='cursor-pointer'
+              dataSource={detailsInvoice}
+              pagination={{
+                showSizeChanger: false,
               }}
+              bordered
             />
-          )}
+            {isCreate && (
+              <ModalInvoiceDetails
+                isOpen={isCreate}
+                handleAddInvoiceDetails={handleAddInvoiceDetails}
+                onClose={() => setIsCreate(false)}
+              />
+            )}
+
+            {isEdit && (
+              <ModalUpdateInvoiceDetails
+                isOpen={isEdit}
+                value={detailsInvoices}
+                isInvoice={isInvoice}
+                onClose={() => setIsEdit(false)}
+                handleEdiInvoiceDetails={(e) => {
+                  handleUpdateBookingInvoice(e);
+                  setIsEdit(false);
+                }}
+              />
+            )}
+          </div>
         </div>
       </Form>
     </div>
