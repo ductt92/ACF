@@ -235,7 +235,7 @@ const ViewBookingDetails = ({ data }: { data: any }) => {
 
   const { mutate: confirmBooking2 } = useMutation(confirmBooking, {
     onSuccess: () => {
-      queryClient.invalidateQueries(['confirmBooking']);
+      queryClient.invalidateQueries([QUERY_BOOKING.GET_BOOKING]);
       notification.success({
         message: 'Cập nhật thành công',
         placement: 'top',

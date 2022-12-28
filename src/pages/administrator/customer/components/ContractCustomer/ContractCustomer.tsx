@@ -94,7 +94,7 @@ const ContractCustomer = ({
       });
       if (upload.data.data) {
         contractFrom.setFieldsValue({
-          file: upload.data.data,
+          files: upload.data.data,
         });
       }
     }
