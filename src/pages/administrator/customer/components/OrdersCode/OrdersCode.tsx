@@ -79,7 +79,7 @@ const OrdersCode = ({
       });
       if (upload.data.data) {
         orderForm.setFieldsValue({
-          file: upload.data.data,
+          files: upload.data.data,
         });
       }
     }

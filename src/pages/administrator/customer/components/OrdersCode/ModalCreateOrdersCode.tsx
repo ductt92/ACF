@@ -144,7 +144,7 @@ const ModalCreateOrdersCode = ({
                   required
                 />
               </Form.Item>
-              <Form.Item name='file' className='space-y-1'>
+              <Form.Item name='files' className='space-y-1'>
                 <p className='m-0 p-0'>File</p>
                 <FileUpload
                   handleSetFileList={handleSetFileList}
