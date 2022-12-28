@@ -155,8 +155,9 @@ const ModalEditCustomer = ({ onClose, value }: IProps) => {
     setDetailsContract(data);
   };
   const handleDeleteContract = (id: any) => {
-    const res = infoStaff.filter((x, index) => id !== index);
-    setInfoStaff(res);
+    console.log(id);
+    const res = detailsOrder.filter((x, index) => id !== index);
+    setDetailsOrder(res);
   };
 
   const handleUpdateStaff = (data: any) => {

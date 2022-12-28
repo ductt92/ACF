@@ -1,3 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import axios from 'axios';
+
+import { BASE_URL } from '@/contants/common.constants';
 import { ICustomer } from '@/contants/types';
 import HttpRequest from '@/utils/Http-request';
 
@@ -45,6 +49,16 @@ export const getCountry = (id?: string) => {
     const smallServices = HttpRequest.get(`service/zone-small-service/${id}`);
     return smallServices;
   }
+};
+
+export const uploadFile = async (data: any) => {
+  const upload = await axios({
+    method: 'post',
+    url: `${BASE_URL}/upload-file`,
+    data,
+  });
+
+  return upload;
 };
 
 export const getCompanies = async () => {
