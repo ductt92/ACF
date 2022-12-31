@@ -1,8 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable unused-imports/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { PrinterOutlined } from '@ant-design/icons';
-import { Button, Form, notification, Tabs } from 'antd';
+import { PrinterOutlined, WarningOutlined } from '@ant-design/icons';
+import { Button, Form, Modal, notification, Tabs } from 'antd';
 import moment from 'moment';
 import React, { useEffect, useMemo, useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
@@ -16,6 +16,7 @@ import {
   OpitionType,
 } from '@/contants/types';
 import {
+  cancelBill,
   confirmBooking,
   fetchCurrentUnit,
   fetchServicesBooking,
@@ -248,6 +249,22 @@ const ViewBookingDetails = ({ data }: { data: any }) => {
       });
     },
   });
+
+  const { mutate: cancelBillOrder } = useMutation(cancelBill, {
+    onSuccess: () => {
+      queryClient.invalidateQueries([QUERY_BOOKING.GET_BOOKING]);
+      notification.success({
+        message: 'Hủy đơn  thành công',
+        placement: 'top',
+      });
+    },
+    onError: () => {
+      notification.error({
+        message: 'Hủy đơn thất bại',
+        placement: 'top',
+      });
+    },
+  });
   const { mutate: genBillPatner } = useMutation(generateBillPatner, {
     onSuccess: () => {
       queryClient.invalidateQueries(['generateInVoice']);
@@ -300,6 +317,22 @@ const ViewBookingDetails = ({ data }: { data: any }) => {
     }
   };
 
+  const handleCancelBill = () => {
+    if (data?.booking?.id) {
+      confirmBooking2(data?.booking?.id);
+    }
+  };
+
+  const handleDeleteBill = (row: any) => {
+    Modal.confirm({
+      title: 'Thông báo',
+      icon: <WarningOutlined className='text-red-700' />,
+      content: 'Bạn có chắc chắn muốn xóa hàng hóa này không?',
+      okText: 'Đồng ý',
+      cancelText: 'Không',
+      onOk: () => handleCancelBill(),
+    });
+  };
   return (
     <div>
       <div className='flex gap-4'>
@@ -387,9 +420,19 @@ const ViewBookingDetails = ({ data }: { data: any }) => {
         </Tabs>
       </div>
 
-      <Button className='mt-5' type='primary' onClick={onSubmit}>
-        Cập nhật bưu đối tác
-      </Button>
+      <div className='flex flex-row gap-4'>
+        <Button className='mt-5' type='primary' onClick={onSubmit}>
+          Cập nhật bưu đối tác
+        </Button>
+        <Button
+          className='mt-5'
+          type='primary'
+          onClick={handleDeleteBill}
+          danger
+        >
+          Hủy bill
+        </Button>
+      </div>
     </div>
   );
 };

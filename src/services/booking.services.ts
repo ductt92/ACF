@@ -290,3 +290,9 @@ export const updateStatusBooking = async ({
   handleSetStatus(resStatus.status);
   return resStatus;
 };
+export const cancelBill = async (id: string) => {
+  const cancelBillOrder = await HttpRequest.patch(
+    `booking/cancel-booking/${id}`
+  );
+  return cancelBillOrder;
+};
