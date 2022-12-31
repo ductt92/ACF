@@ -5,6 +5,7 @@
 body {
   background: #fff !important;
   font-family: 'Inter', sans-serif !important;
+  font-size: 12px !;
 }
 .ant-modal-header {
   background: #fbe51d !important;
@@ -39,8 +40,10 @@ body {
 }
 .ant-btn:active,
 .ant-btn:hover,
+.ant-btn::selection,
 .ant-btn:focus {
   border-color: none !important;
+  background: none;
 }
 .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
   color: #000000 !important;
@@ -214,4 +217,14 @@ body {
   outline: none;
   -webkit-box-shadow: none;
   box-shadow: none;
+}
+
+@media screen and (max-width: 767px) {
+  .ant-modal-body {
+    padding: 0px !important;
+  }
+  .ant-modal {
+    max-width: 100vw !important;
+    margin: 0 !important;
+  }
 }

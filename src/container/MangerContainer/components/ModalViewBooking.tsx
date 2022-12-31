@@ -34,7 +34,7 @@ const ModalViewBooking = ({ id, onClose }: ModalViewBookingProps) => {
       destroyOnClose
       closeIcon={<CloseOutlined className='text-[24px]' />}
       onCancel={() => onClose(false)}
-      className='top-[calc(5vh)] w-[calc(70vw)]'
+      className='top-[calc(5vh)] w-[calc(70vw)] sm:top-0 sm:w-screen'
     >
       <Spin spinning={isLoading || isFetching}>
         <Viewbooking data={data} />

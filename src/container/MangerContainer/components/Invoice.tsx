@@ -192,7 +192,6 @@ const InVoice = ({
                 ))}
               </VSelect>
             </Form.Item>
-
             <Form.Item
               name='invoiceType'
               rules={[
@@ -210,7 +209,6 @@ const InVoice = ({
                 ))}
               </VSelect>
             </Form.Item>
-
             <Form.Item name='senderInformation'>
               <VTextArea
                 label='Thông tin người gửi'
@@ -218,7 +216,6 @@ const InVoice = ({
                 className='h-[130px]'
               />
             </Form.Item>
-
             <Form.Item name='receiverInformation'>
               <VTextArea
                 label='Thông tin người nhận '
@@ -226,7 +223,6 @@ const InVoice = ({
                 className='h-[130px]'
               />
             </Form.Item>
-
             <Form.Item
               name='invoiceDate'
               rules={[
@@ -243,32 +239,45 @@ const InVoice = ({
                 required
               />
             </Form.Item>
-
-            <Form.Item name='invoiceNumber'>
-              <VInput label='Số invoice' />
-            </Form.Item>
-            <Form.Item name='importProceduresPerson'>
-              <VTextArea label='Thông tin người làm thủ tục nhập khẩu' />
-            </Form.Item>
-
             <Form.Item name='serviceId'>
               <VInput label='Dịch vụ sử dụng' disabled />
             </Form.Item>
+          </div>
+
+          <div className='px-[86px] sm:p-2'>
+            <Form.Item name='importProceduresPerson'>
+              <VTextArea label='Thông tin người làm thủ tục nhập khẩu' />
+            </Form.Item>
+          </div>
+
+          <div className='grid grid-cols-5 gap-4 px-[86px] sm:grid-cols-2 sm:p-2'>
+            <Form.Item name='invoiceNumber'>
+              <VInput label='Số invoice' isHorizal />
+            </Form.Item>
 
             <Form.Item name='totalNetWeight'>
-              <VInputNumber label='Tổng trọng lượng thực (Kg)' disabled />
+              <VInputNumber
+                label='Tổng trọng lượng thực (Kg)'
+                disabled
+                isHorizal
+              />
             </Form.Item>
             <Form.Item name='totalBulkyWeight'>
-              <VInputNumber label='Tổng trọng lượng cồng kềnh (kg)' disabled />
+              <VInputNumber
+                label='Tổng trọng lượng cồng kềnh'
+                disabled
+                isHorizal
+              />
             </Form.Item>
-
             <Form.Item name='goodsSize'>
-              <VInput label='Kích thước hàng hóa (cm)' disabled />
+              <VInput label='Kích thước hàng hóa (cm)' disabled isHorizal />
             </Form.Item>
-
             <Form.Item name='totalBaleNumber'>
-              <VInputNumber label='Tổng số kiện' disabled />
+              <VInputNumber label='Tổng số kiện' disabled isHorizal />
             </Form.Item>
+          </div>
+
+          <div className=' grid grid-cols-2 gap-4 px-[86px] sm:p-2'>
             <Form.Item
               name='currencyId'
               rules={[
@@ -278,7 +287,7 @@ const InVoice = ({
                 },
               ]}
             >
-              <VSelect label='Loại tiền tệ' showSearch required>
+              <VSelect label='Loại tiền tệ' showSearch required isHorizal>
                 {OpitionCurrencyUnit?.map((v: any) => (
                   <Option value={v.value} key={v.value}>
                     {v.label}
@@ -286,7 +295,6 @@ const InVoice = ({
                 ))}
               </VSelect>
             </Form.Item>
-
             <Form.Item
               name='reasonExport'
               rules={[
@@ -296,7 +304,7 @@ const InVoice = ({
                 },
               ]}
             >
-              <VInput label='Lý do xuất khẩu' required />
+              <VInput label='Lý do xuất khẩu' required isHorizal />
             </Form.Item>
           </div>
         </div>

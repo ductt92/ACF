@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
-import { Divider } from 'antd';
+import { CloseOutlined, WarningOutlined } from '@ant-design/icons';
+import { Divider, Drawer, Modal } from 'antd';
 import Hamburger from 'hamburger-react';
 import { useRouter } from 'next/router';
 import setLanguage from 'next-translate/setLanguage';
@@ -22,6 +23,8 @@ import ItemMenu from './components/ItemMenu';
 const BannerContainer = () => {
   const { t, lang } = useTranslation('common');
   const contactPhone = t(`ContactPhone`);
+  const { removeAll } = storage();
+
   const router = useRouter();
   const hotLine = t(`HotLine`);
   const termsOfUse = t(`TermsOfUse`);
@@ -37,6 +40,51 @@ const BannerContainer = () => {
       setIsLogin(true);
     }
   }, [router]);
+  const handleLogout = async () => {
+    removeAll();
+    setIsLogin(false);
+    await router.push('/');
+  };
+  const handleOpenLogout = () => {
+    Modal.confirm({
+      title: 'Thông báo',
+      icon: <WarningOutlined className='text-red-700' />,
+      content: 'Bạn có chắc chắn muốn đăng xuất tài khoản',
+      okText: 'Đồng ý',
+      cancelText: 'Không',
+      onOk: handleLogout,
+    });
+  };
+  const rendeDrawerHeader = () => {
+    return (
+      <div>
+        <div className=' flex flex-row items-center justify-between'>
+          <img
+            src='/images/acf-logo.svg'
+            alt='logo'
+            className='h-[108px] w-[284px] cursor-pointer sm:h-[70px] sm:w-[179px]'
+            onClick={() => router.push('/')}
+          />
+          <CloseOutlined onClick={() => setOpen(false)} />
+        </div>
+        {isLogin ? (
+          <button
+            className='h-[50px] w-[130px] rounded-sm font-bold text-[red] shadow-2xl outline-0'
+            onClick={handleOpenLogout}
+          >
+            Đăng xuất
+          </button>
+        ) : (
+          <button
+            className='h-[50px] w-[130px] font-bold text-[red] shadow-2xl outline-0'
+            onClick={() => router.push('/register')}
+          >
+            {t('Register')}
+          </button>
+        )}
+      </div>
+    );
+  };
 
   return (
     <div className='flex h-[120px] flex-row bg-[#FBE51D] p-1 pb-4 pl-10 sm:grid sm:h-[70px] sm:grid-cols-2 sm:p-0'>
@@ -78,12 +126,14 @@ const BannerContainer = () => {
                 {contactPhone} :(+84) 968 02 22 57
               </div>
               <div className='text-[16px] font-bold'>{hotLine} :19008972</div>
-              <button
-                className='h-[50px] w-[130px] bg-[#FBE51D] font-bold text-[red] shadow-2xl outline-0'
-                onClick={() => router.push('/login-home')}
-              >
-                {t('Login')}
-              </button>
+              {!isLogin && (
+                <button
+                  className='h-[50px] w-[130px] bg-[#FBE51D] font-bold text-[red] shadow-2xl outline-0'
+                  onClick={() => router.push('/login-home')}
+                >
+                  {t('Login')}
+                </button>
+              )}
             </div>
           </div>
         </div>
@@ -99,12 +149,21 @@ const BannerContainer = () => {
                 : dataMenu.map((v) => <ItemMenu key={v.href} value={v} />)}
             </div>
             <div>
-              <button
-                className='h-[50px] w-[130px] bg-[#FBE51D] font-bold text-[red] shadow-2xl outline-0'
-                onClick={() => router.push('/register')}
-              >
-                {t('Register')}
-              </button>
+              {isLogin ? (
+                <button
+                  className='h-[50px] w-[130px] bg-[#FBE51D] font-bold text-[red] shadow-2xl outline-0'
+                  onClick={handleOpenLogout}
+                >
+                  Đăng xuất
+                </button>
+              ) : (
+                <button
+                  className='h-[50px] w-[130px] bg-[#FBE51D] font-bold text-[red] shadow-2xl outline-0'
+                  onClick={() => router.push('/register')}
+                >
+                  {t('Register')}
+                </button>
+              )}
             </div>
           </div>
         </div>
@@ -130,6 +189,32 @@ const BannerContainer = () => {
           />
           <Hamburger toggled={isOpen} toggle={setOpen} />
         </div>
+
+        <Drawer
+          title={rendeDrawerHeader()}
+          placement='left'
+          destroyOnClose={true}
+          visible={isOpen}
+          closeIcon={<span></span>}
+          onClose={() => setOpen(false)}
+        >
+          <div>
+            {isLogin
+              ? dataMenuManager.map((v) => (
+                  <div key={v.href} className='flex flex-col'>
+                    <ItemMenu value={v} handleAction={() => setOpen(false)} />
+                    <Divider />
+                  </div>
+                ))
+              : dataMenu.map((v) => (
+                  <ItemMenu
+                    key={v.href}
+                    value={v}
+                    handleAction={() => setOpen(false)}
+                  />
+                ))}
+          </div>
+        </Drawer>
       </div>
     </div>
   );

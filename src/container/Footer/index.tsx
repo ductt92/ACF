@@ -96,7 +96,7 @@ const Footer = () => {
               </div>
             </div>
 
-            <div>
+            <div className='hidden'>
               <Link href='/#' passHref>
                 <a className={styles.messChat}>
                   <div className={styles.numberChat}>1</div>
@@ -106,7 +106,7 @@ const Footer = () => {
             </div>
           </div>
         </div>
-        <div className='flex h-[30px] w-full items-center bg-[#0066c8] pl-[32px] text-[12px] text-white'>
+        <div className='flex h-[30px] w-full items-center bg-[#FBE51D] pl-[32px] text-[12px] text-white'>
           <div className='m-auto w-[1174px] italic sm:text-center lg:w-full'>
             Copyright 2018 by ACF Vietnamese
           </div>

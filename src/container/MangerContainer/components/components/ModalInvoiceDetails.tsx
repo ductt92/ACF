@@ -62,12 +62,12 @@ const ModalInvoiceDetails = ({
       title={renderHeader()}
       closeIcon={<CloseOutlined className='text-[24px]' />}
       onCancel={() => onClose(false)}
-      className='top-[calc(5vh)] w-[calc(70vw)]'
+      className='top-[calc(5vh)] w-[calc(70vw)] sm:top-0 sm:w-screen'
     >
       <div>
         <Form form={invoiceDetailsForm}>
           <div className=' overflow-y-auto p-5'>
-            <div className='grid grid-cols-2 gap-x-6'>
+            <div className='grid grid-cols-2 gap-x-6 sm:grid-cols-1'>
               <Form.Item
                 name='goodsName'
                 className='w-full'

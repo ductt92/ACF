@@ -732,11 +732,12 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
   };
   return (
     <div>
-      <div className='mb-2 flex gap-4 px-4'>
+      <div className='mb-2 mt-2 flex flex-wrap gap-4 px-4'>
         <Button
           onClick={handleGenerataeBill}
           type='primary'
           disabled={!data?.booking?.id}
+          className='h-8 rounded-md bg-[#FBE51D] px-4 outline-none'
           icon={<PrinterOutlined />}
         >
           In Bill
@@ -748,6 +749,7 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
             type='primary'
             disabled={!data?.booking?.id}
             icon={<PrinterOutlined />}
+            className='h-8 rounded-md bg-[#FBE51D] px-4 outline-none'
           >
             In bưu đối tác
           </Button>
@@ -759,6 +761,7 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
             type='primary'
             disabled={!data?.booking?.id}
             icon={<PrinterOutlined />}
+            className='h-8 rounded-md bg-[#FBE51D] px-4 outline-none'
           >
             In Invoice đối tác
           </Button>
@@ -769,6 +772,7 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
           type='primary'
           disabled={!data?.booking?.id || !isInvoice}
           icon={<PrinterOutlined />}
+          className='h-8 rounded-md bg-[#FBE51D] px-4 outline-none'
         >
           In Invoice
         </Button>
@@ -776,12 +780,14 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
           onClick={updateStatus}
           type='primary'
           disabled={statusBooking === BookingStatusPost.HANDED_OVER}
+          className='h-8 rounded-md bg-[#FBE51D] px-4 outline-none'
         >
           Xác nhận đơn hàng
         </Button>
         <Button
           onClick={() => setIsInvoice(!isInvoice)}
           type='primary'
+          className='h-8 rounded-md bg-[#FBE51D] px-4 outline-none'
           disabled={
             statusBooking === BookingStatusPost.DONE ||
             statusBooking === BookingStatusPost.CANCEL ||
@@ -794,6 +800,7 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
         <Button
           onClick={handleGenSmallBill}
           type='primary'
+          className='h-8 rounded-md bg-[#FBE51D] px-4 outline-none'
           loading={generateSmallBillLoading}
           icon={<PrinterOutlined />}
         >
@@ -801,7 +808,7 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
         </Button>
       </div>
 
-      <div className='h-[calc(70vh)] overflow-y-auto p-5'>
+      <div className='h-[calc(70vh)] overflow-y-auto p-5 sm:p-0'>
         <Tabs type='card'>
           <Tabs.TabPane tab='Booking' key='Booking'>
             <TabsBooking
@@ -838,7 +845,11 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
         </Tabs>
       </div>
 
-      <Button className='mt-5' type='primary' onClick={onSubmit}>
+      <Button
+        type='primary'
+        onClick={onSubmit}
+        className='mt-5 mb-5 h-8 rounded-md bg-[#FBE51D] px-4 outline-none'
+      >
         Cập nhật đơn Hàng
       </Button>
     </div>

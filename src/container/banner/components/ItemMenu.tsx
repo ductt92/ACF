@@ -3,7 +3,15 @@ import React from 'react';
 
 import TextLink from '@/components/links/TextLink';
 
-const ItemMenu = ({ value }: { value: any }) => {
-  return <TextLink href={value.href} label={value.title} />;
+interface ItemMenuProps {
+  value: any;
+  handleAction?: () => void;
+}
+const ItemMenu = ({ value, handleAction }: ItemMenuProps) => {
+  return (
+    <div onClick={handleAction && handleAction}>
+      <TextLink href={value.href} label={value.title} />
+    </div>
+  );
 };
 export default ItemMenu;

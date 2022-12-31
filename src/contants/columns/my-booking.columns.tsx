@@ -31,7 +31,7 @@ import {
 const COMMON_CLASS = 'cursor-pointer truncate text-center';
 const HIGH_LIGHT_CLASS = 'text-[#1890ff]';
 const DEFAULT_CONTAINER = 'min-h-[32px] min-w-[50px] text-center';
-const CUSTOMER_CLASS = 'w-[150px] cursor-pointer truncate text-center p-2 m-0';
+const CUSTOMER_CLASS = 'w-[180px] cursor-pointer truncate text-center p-2 m-0';
 
 export const MYBOOKING_COLUMNS: ColumnsType<IMyBooking> = [
   {
@@ -39,7 +39,7 @@ export const MYBOOKING_COLUMNS: ColumnsType<IMyBooking> = [
     dataIndex: 'booking_code',
     key: 'booking_code',
     align: 'center',
-    width: 150,
+    width: 180,
     render: (bookingCode: string) => (
       <Tooltip placement='bottom' title={CLICK_TO_COPY}>
         <p
@@ -57,14 +57,14 @@ export const MYBOOKING_COLUMNS: ColumnsType<IMyBooking> = [
     dataIndex: 'partner_bill_code',
     key: 'partner_bill_code',
     align: 'center',
-    width: 150,
+    width: 180,
   },
   {
     title: 'Trạng thái đơn hàng',
     dataIndex: 'booking_status',
     key: 'booking_status',
     align: 'center',
-    width: 150,
+    width: 180,
     render: (type: string) => {
       return <span>{BookingStatus[type as 'NOT_YET_HANDED_OVER']}</span>;
     },
@@ -84,7 +84,7 @@ export const MYBOOKING_COLUMNS: ColumnsType<IMyBooking> = [
     dataIndex: 'booking_type',
     key: 'booking_type',
     align: 'center',
-    width: 150,
+    width: 180,
     render: (type: string) => {
       return <span>{BookingType[type as 'LICENSE']}</span>;
     },
@@ -94,14 +94,14 @@ export const MYBOOKING_COLUMNS: ColumnsType<IMyBooking> = [
     dataIndex: 'weight',
     key: 'weight',
     align: 'center',
-    width: 150,
+    width: 180,
   },
   {
     title: 'Cân nặng cồng kềnh (kg)',
     dataIndex: 'bulky_weight',
     key: 'bulky_weight',
     align: 'center',
-    width: 150,
+    width: 180,
   },
   {
     title: 'Dịch vụ',
@@ -122,7 +122,7 @@ export const MYBOOKING_COLUMNS: ColumnsType<IMyBooking> = [
     dataIndex: 'booking_note',
     key: 'booking_note',
     align: 'center',
-    width: 150,
+    width: 180,
   },
 
   {
@@ -147,7 +147,7 @@ export const renderBookingDetailsNoAction = (
       dataIndex: 'calculationUnit',
       key: 'calculationUnit',
       align: 'center',
-      width: 150,
+      width: 180,
       render: (type: string) => {
         return <span>{CalculationUnit[type as 'CM_KG']}</span>;
       },
@@ -157,7 +157,7 @@ export const renderBookingDetailsNoAction = (
       dataIndex: 'commoditiesTypeId',
       key: 'commoditiesTypeId',
       align: 'center',
-      width: 150,
+      width: 180,
       render: (type: string) => {
         const commoditie = commoditiesType?.filter((x) => x.value === type);
         return commoditie.map((v) => <span key={v.value}>{v.label}</span>);
@@ -168,7 +168,7 @@ export const renderBookingDetailsNoAction = (
       dataIndex: 'shippingItemViId',
       key: 'shippingItemVi ',
       align: 'center',
-      width: 150,
+      width: 180,
       render: (type: any) => {
         const shipping = shippingType?.filter((x) => x.value === type);
         return shipping.map((v) => (
@@ -186,14 +186,14 @@ export const renderBookingDetailsNoAction = (
       dataIndex: 'description',
       key: 'description',
       align: 'center',
-      width: 150,
+      width: 180,
     },
     {
       title: 'Xuất xứ hàng hóa',
       dataIndex: 'originItem',
       key: 'originItem',
       align: 'center',
-      width: 150,
+      width: 180,
     },
 
     {
@@ -201,49 +201,49 @@ export const renderBookingDetailsNoAction = (
       dataIndex: 'shippingItemEn',
       key: 'shippingItemEn ',
       align: 'center',
-      width: 150,
+      width: 180,
     },
     {
       title: 'Số kiện hàng',
       dataIndex: 'quantity',
       key: 'quantity',
       align: 'center',
-      width: 150,
+      width: 180,
     },
     {
       title: 'Chiều dài(cm)',
       dataIndex: 'longs',
       key: 'longs',
       align: 'center',
-      width: 150,
+      width: 180,
     },
     {
       title: 'Chiều rộng(cm)',
       dataIndex: 'width',
       key: 'width',
       align: 'center',
-      width: 150,
+      width: 180,
     },
     {
       title: 'Chiều cao(cm)',
       dataIndex: 'height',
       key: 'height',
       align: 'center',
-      width: 150,
+      width: 180,
     },
     {
       title: 'Trọng lượng cồng kềnh(kg)',
       dataIndex: 'bulkyWeight',
       key: 'bulkyWeight',
       align: 'center',
-      width: 150,
+      width: 180,
     },
     {
       title: 'Ghi chú',
       dataIndex: 'note',
       key: 'note-2',
       align: 'center',
-      width: 150,
+      width: 180,
     },
   ];
   return BOOKING_DETAILS;
@@ -270,7 +270,7 @@ export const renderBookingDetails = (
       dataIndex: 'calculationUnit',
       key: 'calculationUnit',
       align: 'center',
-      width: 150,
+      width: 180,
       render: (type: string) => {
         return <span>{CalculationUnit[type as 'CM_KG']}</span>;
       },
@@ -280,7 +280,7 @@ export const renderBookingDetails = (
       dataIndex: 'commoditiesTypeId',
       key: 'commoditiesTypeId',
       align: 'center',
-      width: 150,
+      width: 180,
       render: (type: string) => {
         const commoditie = commoditiesType.filter((x) => x.value === type);
         return commoditie.map((v) => <span key={v.value}>{v.label}</span>);
@@ -291,7 +291,7 @@ export const renderBookingDetails = (
       dataIndex: 'shippingItemViId',
       key: 'shippingItemVi ',
       align: 'center',
-      width: 150,
+      width: 180,
       render: (type: any) => {
         const shipping = shippingType?.filter((x) => x.value === type);
         return shipping.map((v) => (
@@ -309,14 +309,14 @@ export const renderBookingDetails = (
       dataIndex: 'description',
       key: 'description',
       align: 'center',
-      width: 150,
+      width: 180,
     },
     {
       title: 'Xuất xứ hàng hóa',
       dataIndex: 'originItem',
       key: 'originItem',
       align: 'center',
-      width: 150,
+      width: 180,
     },
 
     {
@@ -324,49 +324,49 @@ export const renderBookingDetails = (
       dataIndex: 'shippingItemEn',
       key: 'shippingItemEn ',
       align: 'center',
-      width: 150,
+      width: 180,
     },
     {
       title: 'Số kiện hàng',
       dataIndex: 'quantity',
       key: 'quantity',
       align: 'center',
-      width: 150,
+      width: 180,
     },
     {
       title: 'Chiều dài(cm)',
       dataIndex: 'longs',
       key: 'longs',
       align: 'center',
-      width: 150,
+      width: 180,
     },
     {
       title: 'Chiều rộng(cm)',
       dataIndex: 'width',
       key: 'width',
       align: 'center',
-      width: 150,
+      width: 180,
     },
     {
       title: 'Chiều cao(cm)',
       dataIndex: 'height',
       key: 'height',
       align: 'center',
-      width: 150,
+      width: 180,
     },
     {
       title: 'Trọng lượng cồng kềnh(kg)',
       dataIndex: 'bulkyWeight',
       key: 'bulkyWeight',
       align: 'center',
-      width: 150,
+      width: 180,
     },
     {
       title: 'Ghi chú',
       dataIndex: 'note',
       key: 'note-2',
       align: 'center',
-      width: 150,
+      width: 180,
     },
     {
       title: 'Action',
@@ -406,63 +406,63 @@ export const renderInvoiceDetails = (
       dataIndex: 'goodsName',
       key: 'goodsName',
       align: 'center',
-      width: 150,
+      width: 180,
     },
     {
       title: 'Mô tả hàng hóa',
       dataIndex: 'describe',
       key: 'describe',
       align: 'center',
-      width: 150,
+      width: 200,
     },
     {
       title: 'Số lượng',
       dataIndex: 'quantity',
       key: 'quantity',
       align: 'center',
-      width: 150,
+      width: 180,
     },
     {
       title: 'Đơn vị tính',
       dataIndex: 'unitOfMeasure',
       key: 'unitOfMeasure',
       align: 'center',
-      width: 150,
+      width: 180,
     },
     {
       title: 'Đơn giá',
       dataIndex: 'price',
       key: 'price',
       align: 'center',
-      width: 150,
+      width: 180,
     },
     {
       title: 'Thành tiền',
       dataIndex: 'totalMoney',
       key: 'totalMoney',
       align: 'center',
-      width: 150,
+      width: 180,
     },
     {
       title: 'Cân nặng',
       dataIndex: 'weight',
       key: 'weight',
       align: 'center',
-      width: 150,
+      width: 180,
     },
     {
       title: 'Xuất xứ',
       dataIndex: 'originOfGoods',
       key: 'originOfGoods',
       align: 'center',
-      width: 150,
+      width: 180,
     },
     {
       title: 'HS Code',
       dataIndex: 'HSCode',
       key: 'HSCode',
       align: 'center',
-      width: 150,
+      width: 180,
     },
 
     {
@@ -489,63 +489,63 @@ export const INVOICE_DETAILS_ABC: ColumnsType<DetailsBookingPost> = [
     dataIndex: 'goodsName',
     key: 'goodsName',
     align: 'center',
-    width: 150,
+    width: 180,
   },
   {
     title: 'Mô tả hàng hóa',
     dataIndex: 'describe',
     key: 'describe',
     align: 'center',
-    width: 150,
+    width: 180,
   },
   {
     title: 'Số lượng',
     dataIndex: 'quantity',
     key: 'quantity',
     align: 'center',
-    width: 150,
+    width: 180,
   },
   {
     title: 'Đơn vị tính',
     dataIndex: 'unitOfMeasure',
     key: 'unitOfMeasure',
     align: 'center',
-    width: 150,
+    width: 180,
   },
   {
     title: 'Đơn giá',
     dataIndex: 'price',
     key: 'price',
     align: 'center',
-    width: 150,
+    width: 180,
   },
   {
     title: 'Thành tiền',
     dataIndex: 'totalMoney',
     key: 'totalMoney',
     align: 'center',
-    width: 150,
+    width: 180,
   },
   {
     title: 'Cân nặng',
     dataIndex: 'weight',
     key: 'weight',
     align: 'center',
-    width: 150,
+    width: 180,
   },
   {
     title: 'Xuất xứ',
     dataIndex: 'originOfGoods',
     key: 'originOfGoods',
     align: 'center',
-    width: 150,
+    width: 180,
   },
   {
     title: 'HS Code',
     dataIndex: 'HSCode',
     key: 'HSCode',
     align: 'center',
-    width: 150,
+    width: 180,
   },
 ];
 
@@ -555,63 +555,63 @@ export const INVOICE_DETAILS: ColumnsType<IInvoiceDetails> = [
     dataIndex: 'goodsName',
     key: 'goodsName',
     align: 'center',
-    width: 150,
+    width: 180,
   },
   {
     title: 'Mô tả hàng hóa',
     dataIndex: 'describe',
     key: 'describe',
     align: 'center',
-    width: 150,
+    width: 180,
   },
   {
     title: 'Số lượng',
     dataIndex: 'quantity',
     key: 'quantity',
     align: 'center',
-    width: 150,
+    width: 180,
   },
   {
     title: 'Đơn vị tính',
     dataIndex: 'unitOfMeasure',
     key: 'unitOfMeasure',
     align: 'center',
-    width: 150,
+    width: 180,
   },
   {
     title: 'Đơn giá',
     dataIndex: 'price',
     key: 'price',
     align: 'center',
-    width: 150,
+    width: 180,
   },
   {
     title: 'Thành tiền',
     dataIndex: 'totalMoney',
     key: 'totalMoney',
     align: 'center',
-    width: 150,
+    width: 180,
   },
   {
     title: 'Cân nặng',
     dataIndex: 'weight',
     key: 'weight',
     align: 'center',
-    width: 150,
+    width: 180,
   },
   {
     title: 'Xuất xứ',
     dataIndex: 'originOfGoods',
     key: 'originOfGoods',
     align: 'center',
-    width: 150,
+    width: 180,
   },
   {
     title: 'HS Code',
     dataIndex: 'HSCode',
     key: 'HSCode',
     align: 'center',
-    width: 150,
+    width: 180,
   },
 ];
 
@@ -641,7 +641,7 @@ export const columsStaff = ({
       dataIndex: 'staffId',
       key: 'staffId',
       align: 'center',
-      width: 150,
+      width: 180,
       render: (staffId: string) => (
         <div>
           {arrayStaff?.find((x: OpitionType) => x.value === staffId)?.label}
@@ -653,7 +653,7 @@ export const columsStaff = ({
       dataIndex: 'typeStaff',
       key: 'typeStaff',
       align: 'center',
-      width: 150,
+      width: 180,
       render: (typeStaff: string) => (
         <div>{ETypeStaff[typeStaff as 'DEBT_COLLECTOR']}</div>
       ),
@@ -705,7 +705,7 @@ export const columnsContract = ({
       dataIndex: 'createdAt',
       key: 'createdAt',
       align: 'center',
-      width: 150,
+      width: 180,
       render: (createdAt: string) => (
         <div>{dayjs(createdAt).format('DD-MM-YYYY  HH:mm:ss')}</div>
       ),
@@ -715,7 +715,7 @@ export const columnsContract = ({
       dataIndex: 'contractCode',
       key: 'contractCode',
       align: 'center',
-      width: 150,
+      width: 180,
       render: (contractCode: string) => <div>{contractCode}</div>,
     },
     {
@@ -723,7 +723,7 @@ export const columnsContract = ({
       dataIndex: 'contractName',
       key: 'contractName',
       align: 'center',
-      width: 150,
+      width: 180,
       render: (contractName: string) => <div>{contractName}</div>,
     },
     {
@@ -731,7 +731,7 @@ export const columnsContract = ({
       dataIndex: 'service',
       key: 'service',
       align: 'center',
-      width: 150,
+      width: 180,
       render: (service: string) => (
         <div>
           {
@@ -746,7 +746,7 @@ export const columnsContract = ({
       dataIndex: 'typeContract',
       key: 'typeContract',
       align: 'center',
-      width: 150,
+      width: 180,
       render: (typeContract: string) => (
         <div>
           {
@@ -762,7 +762,7 @@ export const columnsContract = ({
       dataIndex: 'paymentSchedule',
       key: 'paymentSchedule',
       align: 'center',
-      width: 150,
+      width: 180,
       render: (paymentSchedule: string) => {
         return <div>{paymentSchedule}</div>;
       },
@@ -854,7 +854,7 @@ export const columsOrdersCode = ({
       dataIndex: 'createdAt',
       key: 'createdAt',
       align: 'center',
-      width: 150,
+      width: 180,
       render: (createdAt: string | Date) => (
         <div>{dayjs(createdAt).format('DD-MM-YYYY HH:mm:ss')}</div>
       ),
@@ -864,7 +864,7 @@ export const columsOrdersCode = ({
       dataIndex: 'serviceRequestId',
       key: 'serviceRequestId',
       align: 'center',
-      width: 150,
+      width: 180,
       render: (serviceRequestId: string) => (
         <div>
           {
@@ -881,7 +881,7 @@ export const columsOrdersCode = ({
       dataIndex: 'potentialRevenueFrom',
       key: 'potentialRevenueFrom',
       align: 'center',
-      width: 150,
+      width: 180,
       render: (potentialRevenueFrom: string) => (
         <div>{numberWithCommas(potentialRevenueFrom)}</div>
       ),
@@ -891,7 +891,7 @@ export const columsOrdersCode = ({
       dataIndex: 'potentialRevenueTo',
       key: 'potentialRevenueTo',
       align: 'center',
-      width: 150,
+      width: 180,
       render: (potentialRevenueFrom: string) => (
         <div>{numberWithCommas(potentialRevenueFrom)}</div>
       ),
@@ -901,7 +901,7 @@ export const columsOrdersCode = ({
       dataIndex: 'fixedPriceCode',
       key: 'fixedPriceCode',
       align: 'center',
-      width: 150,
+      width: 180,
       render: (fixedPriceCode: string) => (
         <div>
           {

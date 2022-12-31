@@ -612,60 +612,66 @@ const CreateBookingContainer = () => {
 
   return (
     <div>
-      <div className='my-5 flex w-full flex-row flex-wrap items-center justify-center gap-4'>
+      <div className='my-5 flex flex-wrap items-center justify-center gap-4'>
         <Button
           onClick={onSubmit}
+          type='primary'
           disabled={id ? true : false}
-          className='h-8 rounded-md bg-[#FBE51D] px-4 text-[#000] outline-none '
+          className='h-8 rounded-md bg-[#FBE51D] px-4 outline-none'
         >
           Lưu
         </Button>
         <Button
           onClick={onSubmit}
-          className='h-8 rounded-md bg-[#FBE51D] px-4 text-[#000] outline-none'
+          type='primary'
+          className='h-8 rounded-md bg-[#FBE51D] px-4 outline-none'
           disabled={
             !id || statusBooking !== BookingStatusPost.NOT_YET_HANDED_OVER
           }
         >
           Cập nhật đơn hàng
         </Button>
-
         {billPartner && (
           <Button
             onClick={handleGeneratorBillPartner}
+            type='primary'
             disabled={!id}
-            className='h-8 rounded-md bg-[#FBE51D] px-4 text-[#000] outline-none hover:outline-none'
             icon={<PrinterOutlined />}
+            className='h-8 rounded-md bg-[#FBE51D] px-4 outline-none'
           >
             In bưu đối tác
           </Button>
         )}
         <Button
           onClick={updateStatus}
-          className='h-8 rounded-md bg-[#FBE51D] px-4 text-[#000] outline-none hover:outline-none'
+          type='primary'
           disabled={statusBooking !== BookingStatusPost.NOT_YET_HANDED_OVER}
+          className='h-8 rounded-md bg-[#FBE51D] px-4 outline-none'
         >
           Xác nhận đơn hàng
         </Button>
         <Button
           onClick={handleGenerataeBill}
+          type='primary'
           disabled={!id}
-          className='h-8 rounded-md bg-[#FBE51D] px-4 text-[#000] outline-none hover:outline-none'
           icon={<PrinterOutlined />}
+          className='h-8 rounded-md bg-[#FBE51D] px-4 outline-none'
         >
           In Bill
         </Button>
         <Button
           onClick={handleGeneratorInvoice}
+          type='primary'
           disabled={!id || !isInvoice}
-          className='h-8 rounded-md bg-[#FBE51D] px-4 text-[#000] outline-none hover:outline-none'
           icon={<PrinterOutlined />}
+          className='h-8 rounded-md bg-[#FBE51D] px-4 outline-none'
         >
           In Invoice
         </Button>
         <Button
           onClick={() => setIsInvoice(!isInvoice)}
-          className='h-8 rounded-md bg-[#FBE51D] px-4 text-[#000] outline-none hover:outline-none'
+          type='primary'
+          className='h-8 rounded-md bg-[#FBE51D] px-4 outline-none'
           disabled={
             statusBooking === BookingStatusPost.DONE ||
             statusBooking === BookingStatusPost.CANCEL ||
@@ -676,17 +682,19 @@ const CreateBookingContainer = () => {
         </Button>
         <Button
           onClick={handleNewForm}
-          className='h-8 rounded-md bg-[#FBE51D] px-4 text-[#000] outline-none hover:outline-none'
+          type='primary'
+          className='h-8 rounded-md bg-[#FBE51D] px-4 outline-none'
         >
           Tạo bookings mới
         </Button>
 
         <Button
           onClick={handleGenSmallBill}
-          className='h-8 rounded-md bg-[#FBE51D] px-4 text-[#000] outline-none hover:outline-none'
+          type='primary'
           disabled={!id}
           loading={generateSmallBillLoading}
           icon={<PrinterOutlined />}
+          className='h-8 rounded-md bg-[#FBE51D] px-4 outline-none'
         >
           In bưu nhỏ
         </Button>
@@ -694,24 +702,22 @@ const CreateBookingContainer = () => {
 
       <Tabs type='card'>
         <Tabs.TabPane tab='Booking' key='Booking'>
-          <div>
-            <TabsBooking
-              form={form}
-              userData={userData}
-              addressCustome={addressCustome}
-              handleDeleteRow={handleDeleteRow}
-              detailsBooking={detailsBooking}
-              handleAddBookingDetails={handleAddBookingDetails}
-              handleUpdateBookingDetails={handleUpdateBookingDetails}
-              handleChangeInfoSender={handleChangeInfoSender}
-              handleChangeInfoRecei={handleChangeInfoRecei}
-              serivcesSelected={selected}
-              handleServicesSelected={onSelect}
-              value={value}
-              handleSetValue={handleSetValue}
-              handleSetBillPartner={(e) => setBillPartner(e)}
-            />
-          </div>
+          <TabsBooking
+            form={form}
+            userData={userData}
+            addressCustome={addressCustome}
+            handleDeleteRow={handleDeleteRow}
+            detailsBooking={detailsBooking}
+            handleAddBookingDetails={handleAddBookingDetails}
+            handleUpdateBookingDetails={handleUpdateBookingDetails}
+            handleChangeInfoSender={handleChangeInfoSender}
+            handleChangeInfoRecei={handleChangeInfoRecei}
+            serivcesSelected={selected}
+            handleServicesSelected={onSelect}
+            value={value}
+            handleSetValue={handleSetValue}
+            handleSetBillPartner={(e) => setBillPartner(e)}
+          />
         </Tabs.TabPane>
         <Tabs.TabPane tab='Invoice' key='invoice' disabled={!isInvoice}>
           <InVoice
