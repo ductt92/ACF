@@ -141,7 +141,7 @@ const BannerContainer = () => {
         <Divider className='border-t-1 m-0 border-[#000] bg-[#000]' />
         <div className='w-full] h-[60px]'>
           <div className='flex h-full w-full flex-row items-center justify-between p-4'>
-            <div className='flex flex-1 flex-row items-center justify-between p-4'>
+            <div className='flex flex-1 flex-row items-center justify-around p-4'>
               {isLogin
                 ? dataMenuManager.map((v) => (
                     <ItemMenu key={v.href} value={v} />

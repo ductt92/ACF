@@ -1,13 +1,13 @@
 import React from 'react';
 
-import ManageContainer from '@/container/MangerContainer';
+import HomeManager from '@/container/HomeManager';
 
 import HomeLayout from '@/layout/HomeLayout';
 
 const ManagePage = () => {
   return (
     <div>
-      <ManageContainer />
+      <HomeManager />
     </div>
   );
 };
