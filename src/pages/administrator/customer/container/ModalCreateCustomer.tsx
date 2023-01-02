@@ -134,11 +134,6 @@ const ModalCreateCustomer = ({ onClose }: IProps) => {
       className='top-[calc(5vh)] w-[calc(60vw)]'
     >
       <div>
-        <p className='text-center text-[24px] font-medium'>
-          Tạo mới khách hàng
-        </p>
-      </div>
-      <div>
         <Tabs type='card'>
           <Tabs.TabPane tab='Thông tin chung' key='infoCustomer'>
             <InfoCustomer form={form} />

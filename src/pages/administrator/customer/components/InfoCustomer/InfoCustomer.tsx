@@ -112,6 +112,7 @@ const InfoCustomer = ({ form }: { form: FormInstance }) => {
               label='Tên khách hàng'
               required
               placeholder='Nhập tên khách hàng'
+              isHorizal
             />
           </Form.Item>
 
@@ -119,6 +120,7 @@ const InfoCustomer = ({ form }: { form: FormInstance }) => {
             <VInput
               label='Tên khách hàng(Tiếng Anh)'
               placeholder='Nhập tên khách hàng (Tiếng Anh)'
+              isHorizal
             />
           </Form.Item>
 
@@ -131,7 +133,7 @@ const InfoCustomer = ({ form }: { form: FormInstance }) => {
               },
             ]}
           >
-            <VSelect label='Công ty quản lý khách hàng' required>
+            <VSelect label='Công ty quản lý khách hàng' required isHorizal>
               {OpitionCompanies?.map((v: any) => (
                 <Option value={v.value} key={v.value}>
                   {v.label}
@@ -146,7 +148,7 @@ const InfoCustomer = ({ form }: { form: FormInstance }) => {
               { required: true, message: 'Vui lòng chọn thông tin đơn vị' },
             ]}
           >
-            <VSelect label='Thông tin đơn vị' required showSearch>
+            <VSelect label='Thông tin đơn vị' required showSearch isHorizal>
               {OpitionUnits?.map((v: any) => (
                 <Option value={v.value} key={v.value}>
                   {v.label}
@@ -156,7 +158,7 @@ const InfoCustomer = ({ form }: { form: FormInstance }) => {
           </Form.Item>
 
           <Form.Item name='customerGroup'>
-            <VSelect label='Nhóm khách hàng' required>
+            <VSelect label='Nhóm khách hàng' required isHorizal>
               {ECustomerGroupOpition.map((v) => (
                 <Option value={v.value} key={v.value}>
                   {v.label}
@@ -173,6 +175,7 @@ const InfoCustomer = ({ form }: { form: FormInstance }) => {
               label='Địa chỉ chi tiết'
               required
               placeholder='Nhập địa chỉ chi tiết'
+              isHorizal
             />
           </Form.Item>
 
@@ -180,7 +183,12 @@ const InfoCustomer = ({ form }: { form: FormInstance }) => {
             name='commune'
             rules={[{ required: true, message: 'Vui lòng xã/phường' }]}
           >
-            <VInput label='Xã/Phường' required placeholder='Nhập xã/phường' />
+            <VInput
+              label='Xã/Phường'
+              required
+              placeholder='Nhập xã/phường'
+              isHorizal
+            />
           </Form.Item>
 
           <Form.Item
@@ -189,6 +197,7 @@ const InfoCustomer = ({ form }: { form: FormInstance }) => {
           >
             <VInput
               label='Quận/Huyện '
+              isHorizal
               required
               placeholder='Nhập quận/huyện '
             />
@@ -200,6 +209,7 @@ const InfoCustomer = ({ form }: { form: FormInstance }) => {
             <VInput
               label='Tỉnh/Thành phố'
               required
+              isHorizal
               placeholder='Nhập Tỉnh/Thành phố '
             />
           </Form.Item>
@@ -207,7 +217,12 @@ const InfoCustomer = ({ form }: { form: FormInstance }) => {
             name='country'
             rules={[{ required: true, message: 'Vui lòng Quốc gia ' }]}
           >
-            <VInput label='Quốc gia' required placeholder='Nhập Quốc gia ' />
+            <VInput
+              label='Quốc gia'
+              required
+              placeholder='Nhập Quốc gia '
+              isHorizal
+            />
           </Form.Item>
           <Form.Item
             name='identifierType'
@@ -218,7 +233,7 @@ const InfoCustomer = ({ form }: { form: FormInstance }) => {
               },
             ]}
           >
-            <VSelect label='Loại mã định danh' required>
+            <VSelect label='Loại mã định danh' required isHorizal>
               {IdentifierOpition.map((v) => (
                 <Option value={v.value} key={v.value}>
                   {v.label}
@@ -236,7 +251,7 @@ const InfoCustomer = ({ form }: { form: FormInstance }) => {
               },
             ]}
           >
-            <VInput label='Mã định danh' required />
+            <VInput label='Mã định danh' required isHorizal />
           </Form.Item>
 
           <Form.Item
@@ -252,6 +267,7 @@ const InfoCustomer = ({ form }: { form: FormInstance }) => {
               label='Người liên hệ của công ty'
               required
               placeholder='Nhập Người liên hệ của công ty'
+              isHorizal
             />
           </Form.Item>
           <Form.Item
@@ -267,6 +283,7 @@ const InfoCustomer = ({ form }: { form: FormInstance }) => {
               label='SĐT cố định'
               required
               placeholder='Nhập SĐT cố định'
+              isHorizal
             />
           </Form.Item>
 
@@ -283,15 +300,20 @@ const InfoCustomer = ({ form }: { form: FormInstance }) => {
               label='Số di dộng'
               required
               placeholder='Nhập số di động '
+              isHorizal
             />
           </Form.Item>
 
           <Form.Item name='fax'>
-            <VInput label='Số Fax' placeholder='Nhập số fax ' />
+            <VInput label='Số Fax' placeholder='Nhập số fax ' isHorizal />
           </Form.Item>
 
           <Form.Item name='website'>
-            <VInput label='Website' placeholder='Nhập địa chỉ website ' />
+            <VInput
+              label='Website'
+              placeholder='Nhập địa chỉ website '
+              isHorizal
+            />
           </Form.Item>
 
           <Form.Item
@@ -303,7 +325,12 @@ const InfoCustomer = ({ form }: { form: FormInstance }) => {
               },
             ]}
           >
-            <VInput label='Mã vùng' required placeholder='Nhập mã vùng' />
+            <VInput
+              label='Mã vùng'
+              required
+              placeholder='Nhập mã vùng'
+              isHorizal
+            />
           </Form.Item>
           <Form.Item
             name='email'
@@ -314,7 +341,12 @@ const InfoCustomer = ({ form }: { form: FormInstance }) => {
               },
             ]}
           >
-            <VInput label='Email' required placeholder='Nhập mã email' />
+            <VInput
+              label='Email'
+              required
+              placeholder='Nhập mã email'
+              isHorizal
+            />
           </Form.Item>
           <Form.Item
             name='typeCustomer'
@@ -329,6 +361,7 @@ const InfoCustomer = ({ form }: { form: FormInstance }) => {
               label='Loại khách hàng'
               required
               placeholder='Nhập  Loại khách hàng'
+              isHorizal
             >
               {OpitionCustomerType.map((v) => (
                 <Option value={v.value} key={v.value}>
@@ -352,6 +385,7 @@ const InfoCustomer = ({ form }: { form: FormInstance }) => {
               required
               mode='multiple'
               placeholder='Nhập loại Dịch vụ sử dụng'
+              isHorizal
             >
               {OpitionServices?.map((v: OpitionType) => (
                 <Option value={v.value} key={v.value}>
@@ -374,6 +408,7 @@ const InfoCustomer = ({ form }: { form: FormInstance }) => {
               label='Loại khách hàng vào mạng'
               required
               placeholder='Nhập Loại khách hàng vào mạng'
+              isHorizal
             >
               {OpitionNetWorkCustomerType.map((v) => (
                 <Option value={v.value} key={v.value}>
@@ -383,13 +418,17 @@ const InfoCustomer = ({ form }: { form: FormInstance }) => {
             </VSelect>
           </Form.Item>
           <Form.Item name='postCode'>
-            <VInput label='Mã bưu chính' placeholder='Nhập Mã bưu chính' />
+            <VInput
+              label='Mã bưu chính'
+              placeholder='Nhập Mã bưu chính'
+              isHorizal
+            />
           </Form.Item>
           <Form.Item name='state'>
-            <VInput label='Tiểu bang' placeholder='Nhập Tiểu bang' />
+            <VInput label='Tiểu bang' placeholder='Nhập Tiểu bang' isHorizal />
           </Form.Item>
           <Form.Item name='note'>
-            <VInput label='Ghi chú' placeholder='Nhập ghi chú' />
+            <VInput label='Ghi chú' placeholder='Nhập ghi chú' isHorizal />
           </Form.Item>
         </div>
       </div>

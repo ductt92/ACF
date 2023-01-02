@@ -341,7 +341,6 @@ const ViewBookingDetails = ({ data }: { data: any }) => {
           type='primary'
           disabled={!data?.booking?.id}
           icon={<PrinterOutlined />}
-          className='h-8 rounded-md bg-[#FBE51D] px-4 outline-none'
         >
           In Bill
         </Button>
@@ -352,7 +351,6 @@ const ViewBookingDetails = ({ data }: { data: any }) => {
           loading={generateSmallBillLoading}
           disabled={!data?.booking?.id || !data?.booking?.isInvoice}
           icon={<PrinterOutlined />}
-          className='h-8 rounded-md bg-[#FBE51D] px-4 outline-none'
         >
           In Invoice
         </Button>
@@ -363,7 +361,6 @@ const ViewBookingDetails = ({ data }: { data: any }) => {
             type='primary'
             disabled={!data?.booking?.id}
             icon={<PrinterOutlined />}
-            className='h-8 rounded-md bg-[#FBE51D] px-4 outline-none'
           >
             In bưu đối tác
           </Button>
@@ -375,7 +372,6 @@ const ViewBookingDetails = ({ data }: { data: any }) => {
             type='primary'
             disabled={!data?.booking?.id}
             icon={<PrinterOutlined />}
-            className='h-8 rounded-md bg-[#FBE51D] px-4 outline-none'
           >
             In Invoice đối tác
           </Button>
@@ -385,7 +381,6 @@ const ViewBookingDetails = ({ data }: { data: any }) => {
           type='primary'
           loading={generateSmallBillLoading}
           icon={<PrinterOutlined />}
-          className='h-8 rounded-md bg-[#FBE51D] px-4 outline-none'
         >
           In bưu nhỏ
         </Button>
@@ -398,7 +393,6 @@ const ViewBookingDetails = ({ data }: { data: any }) => {
               type='primary'
               loading={generateSmallBillLoading}
               icon={<PrinterOutlined />}
-              className='h-8 rounded-md bg-[#FBE51D] px-4 outline-none'
             >
               Xác nhận đã xử lý
             </Button>

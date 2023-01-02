@@ -80,6 +80,7 @@ const ModalCreateContract = ({
                   label='Mã hợp đồng/Mã phụ lục hợp đồng'
                   placeholder='Nhập Mã hợp đồng/Mã phụ lục hợp đồng'
                   required
+                  isHorizal
                 />
               </Form.Item>
 
@@ -96,6 +97,7 @@ const ModalCreateContract = ({
                   label='Tên hợp đồng/Tên phụ lục hợp đồng'
                   placeholder='Nhập Tên hợp đồng/Tên phụ lục hợp đồng'
                   required
+                  isHorizal
                 />
               </Form.Item>
 
@@ -112,6 +114,7 @@ const ModalCreateContract = ({
                   label='Dịch vụ sử dụng'
                   required
                   placeholder='Chọn loại dịch vụ sử dụng'
+                  isHorizal
                 >
                   {opitionServices?.map((v) => (
                     <Option value={v.value} key={v.value}>
@@ -134,6 +137,7 @@ const ModalCreateContract = ({
                   label='Loại phụ lục hợp đồng'
                   required
                   placeholder='Chọn loại phụ lục hợp đồng'
+                  isHorizal
                 >
                   {opitionTypeContract.map((v) => (
                     <Option value={v.value} key={v.value}>
@@ -157,6 +161,7 @@ const ModalCreateContract = ({
                   label='Lịch thanh toán công nợ kể từ ngày xuất hóa đơn'
                   placeholder='Lịch thanh toán công nợ kể từ ngày xuất hóa đơn'
                   required
+                  isHorizal
                 />
               </Form.Item>
 
@@ -182,6 +187,7 @@ const ModalCreateContract = ({
                 <VInput
                   label='Ghi chú hợp đồng'
                   placeholder='Nhập ghi chú hợp đồng'
+                  isHorizal
                 />
               </Form.Item>
 
@@ -216,7 +222,7 @@ const ModalCreateContract = ({
                     },
                   ]}
                 >
-                  <VSelect label='Nhân viên thẩm định' required>
+                  <VSelect label='Nhân viên thẩm định' required isHorizal>
                     {opitionStaff?.map((v: any) => (
                       <Option value={v.value} key={v.value}>
                         {v.label}

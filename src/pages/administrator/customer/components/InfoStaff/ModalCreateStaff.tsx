@@ -28,14 +28,7 @@ const ModalCreateStaff = ({
     label: value,
   }));
   const renderHeader = () => {
-    return (
-      <div
-        className='bg-[#FBE51D] text-center text-[24px]
-      font-bold'
-      >
-        {isUpdate ? 'Cập nhật nhân viên' : 'Thêm mới nhân viên'}
-      </div>
-    );
+    return <div>{isUpdate ? 'Cập nhật nhân viên' : 'Thêm mới nhân viên'}</div>;
   };
   return (
     <Modal
@@ -59,7 +52,7 @@ const ModalCreateStaff = ({
                 },
               ]}
             >
-              <VSelect label='Tên nhân viên' required>
+              <VSelect label='Tên nhân viên' required isHorizal>
                 {opitonStaff?.map((v: OpitionType) => (
                   <Option value={v.value} key={v.value}>
                     {v.label}
@@ -77,7 +70,7 @@ const ModalCreateStaff = ({
                 },
               ]}
             >
-              <VSelect label=' Loại nhân viên' required>
+              <VSelect label=' Loại nhân viên' required isHorizal>
                 {typeStaffOption.map((v: OpitionType) => (
                   <Option value={v.value} key={v.value}>
                     {v.label}

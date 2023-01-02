@@ -69,7 +69,7 @@ const TabsDetailsInvoice = ({
             <Divider className='bg-yellow' />
 
             <Form.Item name='typeItemInvoice'>
-              <VSelect label='Loại hàng hóa' required disabled>
+              <VSelect label='Loại hàng hóa' required disabled isHorizal>
                 {OpitionInvoiceItemType.map((v) => (
                   <Option value={v.value} key={v.value}>
                     {v.label}
@@ -79,7 +79,7 @@ const TabsDetailsInvoice = ({
             </Form.Item>
 
             <Form.Item name='invoiceType'>
-              <VSelect label='Loại hóa đơn' required disabled>
+              <VSelect label='Loại hóa đơn' required disabled isHorizal>
                 {OpitionInvoiceType.map((v) => (
                   <Option value={v.value} key={v.value}>
                     {v.label}
@@ -93,6 +93,7 @@ const TabsDetailsInvoice = ({
                 label='Thông tin người gửi'
                 disabled
                 className='h-[130px]'
+                isHorizal
               />
             </Form.Item>
 
@@ -101,6 +102,7 @@ const TabsDetailsInvoice = ({
                 label='Thông tin người nhận '
                 disabled
                 className='h-[130px]'
+                isHorizal
               />
             </Form.Item>
 
@@ -110,40 +112,56 @@ const TabsDetailsInvoice = ({
                 label='Ngày invoice'
                 placeholder='Nhập ngày invoice'
                 required
+                isHorizal
                 disabled
               />
             </Form.Item>
 
             <Form.Item name='invoiceNumber'>
-              <VInput label='Số invoice' disabled />
+              <VInput label='Số invoice' disabled isHorizal />
             </Form.Item>
             <Form.Item name='importProceduresPerson'>
               <VTextArea
                 label='Thông tin người làm thủ tục nhập khẩu'
                 disabled
+                isHorizal
               />
             </Form.Item>
 
             <Form.Item name='serviceId'>
-              <VInput label='Dịch vụ sử dụng' disabled />
+              <VInput label='Dịch vụ sử dụng' disabled isHorizal />
             </Form.Item>
 
             <Form.Item name='totalNetWeight'>
-              <VInputNumber label='Tổng trọng lượng thực (Kg)' disabled />
+              <VInputNumber
+                label='Tổng trọng lượng thực (Kg)'
+                disabled
+                isHorizal
+              />
             </Form.Item>
             <Form.Item name='totalBulkyWeight'>
-              <VInputNumber label='Tổng trọng lượng cồng kềnh (kg)' disabled />
+              <VInputNumber
+                label='Tổng trọng lượng cồng kềnh (kg)'
+                disabled
+                isHorizal
+              />
             </Form.Item>
 
             <Form.Item name='goodsSize'>
-              <VInput label='Kích thước hàng hóa (cm)' disabled />
+              <VInput label='Kích thước hàng hóa (cm)' disabled isHorizal />
             </Form.Item>
 
             <Form.Item name='totalBaleNumber'>
-              <VInputNumber label='Tổng số kiện' disabled />
+              <VInputNumber label='Tổng số kiện' disabled isHorizal />
             </Form.Item>
             <Form.Item name='currencyId'>
-              <VSelect label='Loại tiền tệ' showSearch required disabled>
+              <VSelect
+                label='Loại tiền tệ'
+                showSearch
+                required
+                disabled
+                isHorizal
+              >
                 {OpitionCurrencyUnit?.map((v: any) => (
                   <Option value={v.value} key={v.value}>
                     {v.label}
@@ -153,7 +171,7 @@ const TabsDetailsInvoice = ({
             </Form.Item>
 
             <Form.Item name='reasonExport'>
-              <VInput label='Lý do xuất khẩu' required disabled />
+              <VInput label='Lý do xuất khẩu' required disabled isHorizal />
             </Form.Item>
           </div>
 

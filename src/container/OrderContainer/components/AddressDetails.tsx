@@ -14,39 +14,49 @@ const AddressDetails = ({ form }: { form: FormInstance }) => {
         <Divider className='bg-yellow' />
         <div className='grid grid-cols-2 gap-x-6'>
           <Form.Item name='senderNameVi'>
-            <VInput label='Tên công ty gửi (Tiếng Việt)' required disabled />
+            <VInput
+              label='Tên công ty gửi (Tiếng Việt)'
+              required
+              disabled
+              isHorizal
+            />
           </Form.Item>
 
           <Form.Item name='senderNameEn'>
-            <VInput label='Tên công ty gửi (Tiếng Anh)' disabled />
+            <VInput label='Tên công ty gửi (Tiếng Anh)' disabled isHorizal />
           </Form.Item>
 
           <Form.Item name='senderAddressVi'>
-            <VInput label='Địa chỉ chi tiết (Tiếng Việt)' required disabled />
+            <VInput
+              label='Địa chỉ chi tiết (Tiếng Việt)'
+              required
+              disabled
+              isHorizal
+            />
           </Form.Item>
 
           <Form.Item name='senderAddressEn'>
-            <VInput label='Địa chỉ chi tiết (Tiếng Anh)' disabled />
+            <VInput label='Địa chỉ chi tiết (Tiếng Anh)' disabled isHorizal />
           </Form.Item>
 
           <Form.Item name='senderContactPerson'>
-            <VInput label='Tên người gửi hàng' disabled />
+            <VInput label='Tên người gửi hàng' disabled isHorizal />
           </Form.Item>
 
           <Form.Item name='senderDepartment'>
-            <VInput label='Phòng ban gửi' disabled />
+            <VInput label='Phòng ban gửi' disabled isHorizal />
           </Form.Item>
 
           <Form.Item name='senderPhoneNumber'>
-            <VInput label='Số điện thoại gửi' required disabled />
+            <VInput label='Số điện thoại gửi' required disabled isHorizal />
           </Form.Item>
 
           <Form.Item name='senderProvince'>
-            <VInput label='Tỉnh/Thành phố' disabled />
+            <VInput label='Tỉnh/Thành phố' disabled isHorizal />
           </Form.Item>
 
           <Form.Item name='senderCountry'>
-            <VSelect label='Quốc gia' required disabled>
+            <VSelect label='Quốc gia' required disabled isHorizal>
               {countries.map((v) => (
                 <Option value={v.value} key={v.value}>
                   {v.label}
@@ -56,11 +66,11 @@ const AddressDetails = ({ form }: { form: FormInstance }) => {
           </Form.Item>
 
           <Form.Item name='senderPostalCode'>
-            <VInput label='Mã bưu chính (postcode)' disabled />
+            <VInput label='Mã bưu chính (postcode)' disabled isHorizal />
           </Form.Item>
 
           <Form.Item name='senderNote'>
-            <VInput label='Ghi chú' disabled />
+            <VInput label='Ghi chú' disabled isHorizal />
           </Form.Item>
         </div>
 
@@ -69,22 +79,32 @@ const AddressDetails = ({ form }: { form: FormInstance }) => {
 
         <div className='grid grid-cols-2 gap-x-6'>
           <Form.Item name='receiverName'>
-            <VInput label='Tên công ty nhận' required disabled />
+            <VInput label='Tên công ty nhận' required disabled isHorizal />
           </Form.Item>
           <Form.Item name='receiverAddress'>
-            <VInput label='Địa chỉ nhận hàng chi tiết' required disabled />
+            <VInput
+              label='Địa chỉ nhận hàng chi tiết'
+              required
+              disabled
+              isHorizal
+            />
           </Form.Item>
 
           <Form.Item name='receiverProvince'>
-            <VInput label='Thành phố' disabled />
+            <VInput label='Thành phố' disabled isHorizal />
           </Form.Item>
 
           <Form.Item name='receiverPostalCode'>
-            <VInput label='Mã bưu chính (postcode)' required disabled />
+            <VInput
+              label='Mã bưu chính (postcode)'
+              required
+              disabled
+              isHorizal
+            />
           </Form.Item>
 
           <Form.Item name='receiverCountry'>
-            <VSelect label='Quốc gia' required showSearch disabled>
+            <VSelect label='Quốc gia' required showSearch disabled isHorizal>
               {countries.map((v) => (
                 <Option value={v.value} key={v.value}>
                   {v.label}
@@ -94,18 +114,23 @@ const AddressDetails = ({ form }: { form: FormInstance }) => {
           </Form.Item>
 
           <Form.Item name='receiverContactPerson'>
-            <VInput label='Người nhận hàng' required disabled />
+            <VInput label='Người nhận hàng' required disabled isHorizal />
           </Form.Item>
 
           <Form.Item name='receiverPhoneNumber'>
-            <VInput label='Số điện thoại người nhận' required disabled />
+            <VInput
+              label='Số điện thoại người nhận'
+              required
+              disabled
+              isHorizal
+            />
           </Form.Item>
 
           <Form.Item name='receiverDepartment'>
-            <VInput label='Phòng ban nhận hàng' disabled />
+            <VInput label='Phòng ban nhận hàng' disabled isHorizal />
           </Form.Item>
           <Form.Item name='receiverNote'>
-            <VInput label='Ghi chú' disabled />
+            <VInput label='Ghi chú' disabled isHorizal />
           </Form.Item>
         </div>
       </Form>

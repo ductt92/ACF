@@ -84,6 +84,7 @@ const ModalCreateOrdersCode = ({
                   label='Dịch vụ yêu cầu'
                   required
                   onChange={handleChangeServices}
+                  isHorizal
                 >
                   {opitonServices?.map((v: OpitionType) => (
                     <Option value={v.value} key={v.value}>
@@ -115,6 +116,7 @@ const ModalCreateOrdersCode = ({
                   label='Doanh thu tiềm năng từ (triệu đồng)'
                   placeholder='Nhập Doanh thu tiềm năng từ'
                   required
+                  isHorizal
                 />
               </Form.Item>
 
@@ -132,14 +134,19 @@ const ModalCreateOrdersCode = ({
                   label='Doanh thu tiềm năng đến (triệu đồng)'
                   placeholder='Nhập Doanh thu tiềm năng đến (triệu đồng)'
                   required
+                  isHorizal
                 />
               </Form.Item>
 
               <Form.Item name='exchangeRate'>
-                <VInputNumber label='Tỷ giá' placeholder='Nhập Tỷ giá' />
+                <VInputNumber
+                  label='Tỷ giá'
+                  placeholder='Nhập Tỷ giá'
+                  isHorizal
+                />
               </Form.Item>
               <Form.Item name='notePriceList'>
-                <VInput label='Ghi chú' placeholder='Nhập ghi chú' />
+                <VInput label='Ghi chú' placeholder='Nhập ghi chú' isHorizal />
               </Form.Item>
               <Form.Item
                 name='surcharge'
@@ -154,6 +161,7 @@ const ModalCreateOrdersCode = ({
                   label='Phụ phí xăng dầu (%)'
                   placeholder='Nhập phụ phí xăng dầu'
                   required
+                  isHorizal
                 />
               </Form.Item>
               <Form.Item name='files' className='space-y-1'>
@@ -169,6 +177,7 @@ const ModalCreateOrdersCode = ({
                   <VSelect
                     label='Mã bảng giá cố định'
                     onChange={handleChangeOtherPrice}
+                    isHorizal
                   >
                     {opitionFixedPriceCode.map((v) => (
                       <Option value={v.value} key={v.value}>
@@ -180,12 +189,15 @@ const ModalCreateOrdersCode = ({
               )}
               {otherPrice === 'OTHER_PRICE' && dataZone?.length <= 0 && (
                 <Form.Item name='otherPrice'>
-                  <VInput label='Giá khác' />
+                  <VInput label='Giá khác' isHorizal />
                 </Form.Item>
               )}
               {otherPrice === 'OTHER_PRICE' && dataZone?.length <= 0 && (
                 <Form.Item name='discountRate'>
-                  <VInput label='Lợi Nhuận gộp (Doanh thu/Chi phí) cam kết/Tháng (Theo hóa đơn) đạt tỷ lệ tối thiểu (Đánh tỷ lệ %)' />
+                  <VInput
+                    label='Lợi Nhuận gộp (Doanh thu/Chi phí) cam kết/Tháng (Theo hóa đơn) đạt tỷ lệ tối thiểu (Đánh tỷ lệ %)'
+                    isHorizal
+                  />
                 </Form.Item>
               )}
             </div>
@@ -209,6 +221,7 @@ const ModalCreateOrdersCode = ({
                           <VInput
                             label={`Nhập Tỷ lệ giảm giá (Đánh tỷ lệ %) ${dataZone?.[key]?.name} `}
                             required
+                            isHorizal
                           />
                         </Form.Item>
                       </div>

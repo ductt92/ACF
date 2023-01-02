@@ -166,11 +166,11 @@ const General = ({
         <div className='grid grid-cols-2 gap-x-6'>
           <div className='grid grid-cols-2 gap-x-6'>
             <Form.Item name='partnerBillCode'>
-              <VInput label='Mã bưu đối tác' />
+              <VInput label='Mã bưu đối tác' isHorizal />
             </Form.Item>
 
             <Form.Item name='partnerService'>
-              <VSelect label='Dịch vụ đối tác'>
+              <VSelect label='Dịch vụ đối tác' isHorizal>
                 {OpitionPartServices?.map((v: any) => (
                   <Option key={v.value}>{v.label}</Option>
                 ))}
@@ -187,7 +187,7 @@ const General = ({
               },
             ]}
           >
-            <VSelect label='Dịch vụ' required disabled>
+            <VSelect label='Dịch vụ' required disabled isHorizal>
               {OpitionServiceBooking?.map((v: any) => (
                 <Option key={v.value}>{v.label}</Option>
               ))}
@@ -195,7 +195,7 @@ const General = ({
           </Form.Item>
 
           <Form.Item name='deliveryConditionId'>
-            <VSelect label='Điều kiện giao hàng' required disabled>
+            <VSelect label='Điều kiện giao hàng' required disabled isHorizal>
               {OpitionDeliveryConditions?.map((v: any) => (
                 <Option value={v.value} key={v.value}>
                   {v.label}
@@ -209,6 +209,7 @@ const General = ({
               label='Loại booking (Chứng từ, hàng hóa)'
               required
               disabled
+              isHorizal
             >
               {OpitionType.map((v) => (
                 <Option key={v.value}>{v.label}</Option>
@@ -223,6 +224,7 @@ const General = ({
                 format={FORMAT_DATE_DD_MM_YYYY}
                 required
                 disabled
+                isHorizal
               />
             </Form.Item>
 
@@ -232,12 +234,13 @@ const General = ({
                 label='Giờ dự kiến lấy hàng'
                 required
                 disabled
+                isHorizal
               />
             </Form.Item>
           </div>
 
           <Form.Item name='note'>
-            <VInput label='Note' disabled />
+            <VInput label='Note' disabled isHorizal />
           </Form.Item>
         </div>
 
@@ -246,7 +249,7 @@ const General = ({
 
         <div className='grid grid-cols-2 gap-x-6'>
           <Form.Item name='typeOfPaymentId'>
-            <VSelect label='Loại hình thanh toán' required disabled>
+            <VSelect label='Loại hình thanh toán' required disabled isHorizal>
               {OpitionTypePayment?.map((v: any) => (
                 <Option value={v.value} key={v.value}>
                   {v.label}
@@ -265,7 +268,7 @@ const General = ({
           {value === 2 && (
             <div className='grid grid-cols-2 gap-x-6'>
               <Form.Item name='isCustomerCreateDeclaration'>
-                <VSelect label='Loại mở tờ khai' required disabled>
+                <VSelect label='Loại mở tờ khai' required disabled isHorizal>
                   <Option value={false}>ACF mở tờ khai hải quan</Option>
                   <Option value={true}>Khách hàng mở tờ khai hải quan</Option>
                 </VSelect>
