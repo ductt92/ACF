@@ -927,7 +927,7 @@ export const columsOrdersCode = ({
               <div className='grid grid-cols-2'>
                 <p className='m-0 p-0'> {v?.name}</p>
                 <p className='m-0 p-0'>
-                  {record?.otherPrices[index].discountRate}%
+                  {record?.otherPrices[index]?.discountRate}%
                 </p>
               </div>
             ))}

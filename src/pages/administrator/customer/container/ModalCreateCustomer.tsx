@@ -124,6 +124,7 @@ const ModalCreateCustomer = ({ onClose }: IProps) => {
       </div>
     );
   };
+
   return (
     <Modal
       footer={null}

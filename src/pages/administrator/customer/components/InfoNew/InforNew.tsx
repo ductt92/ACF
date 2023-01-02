@@ -83,13 +83,7 @@ const InFoNew = ({ form }: InFoNew) => {
                   isHorizal
                 />
               </Form.Item>
-              <Form.Item name='lkdRate'>
-                <VInput
-                  label='Tỷ lệ LKD/Giá bán gốc chưa phụ phí'
-                  placeholder='Nhập tỷ lệ LKD/Giá bán gốc chưa phụ phí'
-                  isHorizal
-                />
-              </Form.Item>
+
               <Form.Item name='beneficiaryNote'>
                 <VInput label='Ghi chú' placeholder='Nhập Ghi chú' isHorizal />
               </Form.Item>

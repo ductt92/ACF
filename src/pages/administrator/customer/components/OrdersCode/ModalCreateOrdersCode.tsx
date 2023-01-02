@@ -164,6 +164,14 @@ const ModalCreateOrdersCode = ({
                   isHorizal
                 />
               </Form.Item>
+
+              <Form.Item name='lkdRate'>
+                <VInput
+                  label='Tỷ lệ LKD/Giá bán gốc chưa phụ phí'
+                  placeholder='Nhập tỷ lệ LKD/Giá bán gốc chưa phụ phí'
+                  isHorizal
+                />
+              </Form.Item>
               <Form.Item name='files' className='space-y-1'>
                 <p className='m-0 p-0'>File</p>
                 <FileUpload
