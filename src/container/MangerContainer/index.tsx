@@ -93,13 +93,13 @@ const ManageContainer = () => {
   };
 
   return (
-    <div className='flex flex-row py-4'>
-      <div className='w-[236px]'>
+    <div className='flex flex-row py-4 sm:flex-col'>
+      <div className='w-[236px] sm:hidden'>
         <div className='h-full w-full border-[1px] border-[#000]'>
           <div className='flex h-8 items-center justify-center bg-[#FBE51D] text-center text-[16px] text-[#fff]'>
             Theo trạng thái đơn hàng
           </div>
-          <div className='flex flex-col gap-2 border-b-[1px] border-[#000] p-4'>
+          <div className='flex flex-col gap-2 border-b-[1px] border-[#000] p-4 '>
             <Button
               className='w-full border-[#000] bg-[#CCCCCC]'
               onClick={() =>
@@ -158,12 +158,74 @@ const ManageContainer = () => {
           </div>
         </div>
       </div>
-      <div className='w-[calc(100vw-236px)] gap-4'>
+
+      {/* Mobile */}
+
+      <div className='grid grid-cols-2 gap-4 p-4'>
+        <Button
+          className='w-full border-[#000] bg-[#CCCCCC]'
+          onClick={() => handleSetStatus(BookingStatusPost.NOT_YET_HANDED_OVER)}
+        >
+          Chưa xác nhận
+        </Button>
+        <Button
+          className='w-full border-[#000] bg-[#CCCCCC]'
+          onClick={() => handleSetStatus(BookingStatusPost.HANDED_OVER)}
+        >
+          Đã xác nhận
+        </Button>
+        <Button
+          className='w-full border-[#000] bg-[#CCCCCC]'
+          onClick={() => handleSetStatus(BookingStatusPost.DONE)}
+        >
+          Đã lấy hàng
+        </Button>
+        <Button
+          className='w-full border-[#000] bg-[#CCCCCC]'
+          onClick={() => handleSetStatus(BookingStatusPost.CANCEL)}
+        >
+          Đã hủy
+        </Button>
+      </div>
+
+      <div className='grid grid-cols-2 items-center gap-4 p-4'>
+        <div>
+          <div className='text-center'>Từ ngày</div>
+          <DatePicker
+            format='DD-MM-YYYY'
+            className='w-full'
+            placeholder='Chọn ngày'
+            onChange={(e) => handleFilterDate('createBookingFrom', e)}
+          />
+        </div>
+        <div>
+          <div className='text-center'>Đến ngày</div>
+          <DatePicker
+            format='DD-MM-YYYY'
+            className='w-full'
+            placeholder='Chọn ngày'
+            onChange={(e) => handleFilterDate('createBookingTo', e)}
+          />
+        </div>
+      </div>
+      <div className='my-4 flex flex-row items-center justify-center'>
+        <Button
+          className=' w-[125px] rounded-md bg-[#FBE51D]'
+          onClick={handleGenerateExcelBooking}
+        >
+          <div className=' flex flex-row items-center justify-center gap-2'>
+            <ExcelIcon width={20} height={20} />
+            <span> Xuất excel</span>
+          </div>
+        </Button>
+      </div>
+
+      <div className='w-[calc(100vw-236px)] gap-4 sm:w-full'>
         <div className='flex w-full justify-center gap-4 px-6'>
           <Input
             placeholder='Tìm kiếm đơn hàng ...'
             prefix={<SearchOutlined />}
-            className='mb-4 mr-4 w-[350px]'
+            className='mb-4 mr-4 w-[350px] sm:mr-0'
             onChange={(event: ChangeEvent<HTMLInputElement>) =>
               handleSearch(event.target.value)
             }

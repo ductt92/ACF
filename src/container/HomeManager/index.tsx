@@ -13,13 +13,13 @@ const HomeManager = () => {
   );
   return (
     <Spin spinning={isFetching || isLoading}>
-      <div className='mx-auto w-[1234px] bg-pussy-color p-4'>
+      <div className='mx-auto w-[1234px] bg-pussy-color p-4 sm:w-full'>
         <TableView
           data={data?.bookingNotYetHandedOver || []}
           title='Đơn hàng chưa xác nhận '
         />
       </div>
-      <div className='mx-auto w-[1234px] bg-pussy-color p-4'>
+      <div className='mx-auto w-[1234px] bg-pussy-color p-4 sm:w-full'>
         <TableView
           data={data?.bookingNotYetHandedOver || []}
           title='Đơn hàng chưa xác nhận '

@@ -58,30 +58,40 @@ const BannerContainer = () => {
   const rendeDrawerHeader = () => {
     return (
       <div>
-        <div className=' flex flex-row items-center justify-between'>
-          <img
-            src='/images/acf-logo.svg'
-            alt='logo'
-            className='h-[108px] w-[284px] cursor-pointer sm:h-[70px] sm:w-[179px]'
-            onClick={() => router.push('/')}
-          />
-          <CloseOutlined onClick={() => setOpen(false)} />
+        <div className='relative'>
+          <div className=' flex flex-row items-center justify-around gap-4 bg-[#FBE51D]'>
+            <img
+              src='/images/acf-logo.svg'
+              alt='logo'
+              className='h-[108px] w-[284px] cursor-pointer sm:h-[70px] sm:w-[179px]'
+              onClick={() => router.push('/')}
+            />
+            <div className='absolute right-3'>
+              <CloseOutlined
+                onClick={() => setOpen(false)}
+                className='text-6'
+              />
+            </div>
+          </div>
         </div>
-        {isLogin ? (
-          <button
-            className='h-[50px] w-[130px] rounded-sm font-bold text-[red] shadow-2xl outline-0'
-            onClick={handleOpenLogout}
-          >
-            Đăng xuất
-          </button>
-        ) : (
-          <button
-            className='h-[50px] w-[130px] font-bold text-[red] shadow-2xl outline-0'
-            onClick={() => router.push('/register')}
-          >
-            {t('Register')}
-          </button>
-        )}
+
+        <div className='p-4 text-center'>
+          {isLogin ? (
+            <button
+              className='text-4 h-[33px] w-[130px] rounded-sm border-[1px] border-[#000]  font-bold shadow-2xl outline-0'
+              onClick={handleOpenLogout}
+            >
+              Đăng xuất
+            </button>
+          ) : (
+            <button
+              className='h-[50px] w-[130px] font-bold text-[red] shadow-2xl outline-0'
+              onClick={() => router.push('/register')}
+            >
+              {t('Register')}
+            </button>
+          )}
+        </div>
       </div>
     );
   };
