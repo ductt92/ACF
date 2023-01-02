@@ -36,6 +36,13 @@ const EmployeeContainer = () => {
     setQueries((prev) => ({ ...prev, search: value }));
   }, 500);
 
+  const handlePagination = (pagination: { current?: number }) => {
+    setQueries((prev) => ({
+      ...prev,
+      page: pagination.current || 0,
+    }));
+  };
+
   return (
     <div className='gap-4'>
       <div className=' gap-4'>
@@ -56,6 +63,7 @@ const EmployeeContainer = () => {
           columns={EMPLOYEE_COLUMNS}
           className='cursor-pointer'
           dataSource={dataUser?.data}
+          onChange={handlePagination}
           pagination={{
             current: dataUser?.pagination?.currentPage,
             total: dataUser?.pagination?.totalCount,

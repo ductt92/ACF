@@ -742,7 +742,7 @@ export const columnsContract = ({
       ),
     },
     {
-      title: 'Loại phụ lục hợp đồng',
+      title: 'Loại hợp đồng/ Loại phụ lục hợp đồng',
       dataIndex: 'typeContract',
       key: 'typeContract',
       align: 'center',

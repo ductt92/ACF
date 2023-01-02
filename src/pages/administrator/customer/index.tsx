@@ -39,6 +39,13 @@ const CustomerPage = () => {
     setQueries((prev) => ({ ...prev, search: value }));
   }, 500);
 
+  const handlePagination = (pagination: { current?: number }) => {
+    setQueries((prev) => ({
+      ...prev,
+      page: pagination.current || 0,
+    }));
+  };
+
   return (
     <div>
       <div className='gap-4'>
@@ -60,6 +67,7 @@ const CustomerPage = () => {
             columns={CUSTOMER_COLUMNS}
             className='cursor-pointer'
             dataSource={dataCustomer?.data}
+            onChange={handlePagination}
             pagination={{
               current: dataCustomer?.pagination?.currentPage,
               total: dataCustomer?.pagination?.totalCount,

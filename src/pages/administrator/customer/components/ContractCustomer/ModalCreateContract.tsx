@@ -129,14 +129,15 @@ const ModalCreateContract = ({
                 rules={[
                   {
                     required: true,
-                    message: 'Vui lòng chọn loại phụ lục hợp đồng',
+                    message:
+                      'Vui lòng chọn Loại hợp đồng/ Loại phụ lục hợp đồng',
                   },
                 ]}
               >
                 <VSelect
-                  label='Loại phụ lục hợp đồng'
+                  label='Loại hợp đồng/ Loại phụ lục hợp đồng'
                   required
-                  placeholder='Chọn loại phụ lục hợp đồng'
+                  placeholder='Chọn Loại hợp đồng/ Loại phụ lục hợp đồng'
                   isHorizal
                 >
                   {opitionTypeContract.map((v) => (
@@ -170,7 +171,8 @@ const ModalCreateContract = ({
                 rules={[
                   {
                     required: true,
-                    message: 'Vui lòng chọn thời hạn phụ lục hợp đồng',
+                    message:
+                      'Vui lòng chọn thời gian hợp đồng/ thời hạn phụ lục hợp đồng',
                   },
                 ]}
               >
@@ -178,15 +180,15 @@ const ModalCreateContract = ({
                   placeholder={['Ngày bắt đầu', 'Ngày kết thúc']}
                   className='w-full'
                   format='DD/MM/YYYY'
-                  label='Thời hạn phụ lục hợp đồng'
+                  label=' Thời gian hợp đồng/ Thời hạn phụ lục hợp đồng'
                   required
                 />
               </Form.Item>
 
               <Form.Item name='noteContract'>
                 <VInput
-                  label='Ghi chú hợp đồng'
-                  placeholder='Nhập ghi chú hợp đồng'
+                  label='Ghi chú hợp đồng/ Ghi chú phụ lục hợp đồng'
+                  placeholder='Nhập Ghi chú hợp đồng/ Ghi chú phụ lục hợp đồng'
                   isHorizal
                 />
               </Form.Item>
