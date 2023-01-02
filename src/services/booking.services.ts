@@ -296,3 +296,11 @@ export const cancelBill = async (id: string) => {
   );
   return cancelBillOrder;
 };
+
+export const myBookingHome = async () => {
+  const myBookingHome = await HttpRequest.get(`booking/my-booking-home`);
+  return myBookingHome as unknown as {
+    bookingNotYetHandedOver: Array<any>;
+    bookingHandedOver: Array<any>;
+  };
+};

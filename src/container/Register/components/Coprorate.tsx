@@ -43,11 +43,7 @@ const Coprorate = () => {
             <Form.Item
               name='fullName'
               label={t('CompanyName')}
-              rules={[
-                {
-                  required: true,
-                },
-              ]}
+              rules={[{ required: true, message: 'Vui lòng nhập tên công ty' }]}
             >
               <Input placeholder='Cong ty TNHH' />
             </Form.Item>
@@ -59,6 +55,7 @@ const Coprorate = () => {
               rules={[
                 {
                   required: true,
+                  message: 'Vui lòng nhập địa chỉ công ty',
                 },
               ]}
             >
@@ -72,6 +69,7 @@ const Coprorate = () => {
               rules={[
                 {
                   required: true,
+                  message: 'Vui lòng nhập sddt công ty',
                 },
               ]}
             >
@@ -85,6 +83,7 @@ const Coprorate = () => {
               rules={[
                 {
                   required: true,
+                  message: 'Vui lòng nhập tax code',
                 },
               ]}
             >
@@ -103,6 +102,7 @@ const Coprorate = () => {
               rules={[
                 {
                   required: true,
+                  message: 'Vui lòng nhập tên',
                 },
               ]}
             >
@@ -116,6 +116,7 @@ const Coprorate = () => {
               rules={[
                 {
                   required: true,
+                  message: 'Vui lòng nhập sđt',
                 },
               ]}
             >
@@ -129,6 +130,7 @@ const Coprorate = () => {
               rules={[
                 {
                   required: true,
+                  message: 'Vui lòng nhập chức danh',
                 },
               ]}
             >
@@ -142,6 +144,7 @@ const Coprorate = () => {
               rules={[
                 {
                   required: true,
+                  message: 'Vui lòng nhập email',
                 },
               ]}
             >

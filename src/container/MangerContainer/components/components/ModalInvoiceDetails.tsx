@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { CloseOutlined } from '@ant-design/icons';
 import { Button, Form, Modal, Select } from 'antd';
 import React from 'react';
 
@@ -43,19 +44,30 @@ const ModalInvoiceDetails = ({
     handleAddInvoiceDetails(resForm);
   };
 
+  const renderHeader = () => {
+    return (
+      <div
+        className='bg-[#FBE51D] text-center text-[24px]
+      font-bold'
+      >
+        Chi tiết Invoice
+      </div>
+    );
+  };
+
   return (
     <Modal
       footer={null}
       visible={isOpen}
+      title={renderHeader()}
+      closeIcon={<CloseOutlined className='text-[24px]' />}
       onCancel={() => onClose(false)}
-      className='top-[calc(5vh)] w-[calc(50vw)]'
+      className='top-[calc(5vh)] w-[calc(70vw)] sm:top-0 sm:w-screen'
     >
       <div>
-        <p className='text-center text-[24px] font-bold'>Chi tiết Invoice</p>
-
         <Form form={invoiceDetailsForm}>
-          <div className='h-[calc(70vh)] overflow-y-auto p-5'>
-            <div className='grid grid-cols-2 gap-x-6'>
+          <div className=' overflow-y-auto p-5'>
+            <div className='grid grid-cols-2 gap-x-6 sm:grid-cols-1'>
               <Form.Item
                 name='goodsName'
                 className='w-full'
@@ -66,7 +78,7 @@ const ModalInvoiceDetails = ({
                   },
                 ]}
               >
-                <VInput label='Tên hàng hóa (Tiếng Anh)' required />
+                <VInput label='Tên hàng hóa (Tiếng Anh)' required isHorizal />
               </Form.Item>
 
               <Form.Item
@@ -79,93 +91,105 @@ const ModalInvoiceDetails = ({
                   },
                 ]}
               >
-                <VInput label='Mô tả hàng hóa' required />
+                <VInput label='Mô tả hàng hóa' required isHorizal />
               </Form.Item>
+              <div className='grid grid-cols-2 gap-4'>
+                <Form.Item
+                  name='originOfGoods'
+                  rules={[
+                    {
+                      required: true,
+                      message: 'Vui lòng chọn xuất xứ',
+                    },
+                  ]}
+                >
+                  <VSelect
+                    label='Xuất xứ hàng hóa'
+                    required
+                    showSearch
+                    isHorizal
+                  >
+                    {countries.map((v) => (
+                      <Option value={v.value} key={v.value}>
+                        {v.label}
+                      </Option>
+                    ))}
+                  </VSelect>
+                </Form.Item>
+                <Form.Item
+                  name='quantity'
+                  rules={[
+                    {
+                      required: true,
+                      message: 'Vui lòng nhập số lượng hàng hóa',
+                    },
+                  ]}
+                >
+                  <VInputNumber
+                    label='Số lượng'
+                    required
+                    onChange={handleChange}
+                    isHorizal
+                  />
+                </Form.Item>
+              </div>
 
-              <Form.Item
-                name='quantity'
-                rules={[
-                  {
-                    required: true,
-                    message: 'Vui lòng nhập số lượng hàng hóa',
-                  },
-                ]}
-              >
-                <VInputNumber
-                  label='Số lượng'
-                  required
-                  onChange={handleChange}
-                />
-              </Form.Item>
+              <div className='grid grid-cols-2 gap-4'>
+                <Form.Item name='unitOfMeasure'>
+                  <VSelect label='Đơn vị tính' required isHorizal>
+                    {OpitionUnitOfMeasure.map((v) => (
+                      <Select.Option value={v.value} key={v.value}>
+                        {v.label}
+                      </Select.Option>
+                    ))}
+                  </VSelect>
+                </Form.Item>
 
-              <Form.Item name='unitOfMeasure'>
-                <VSelect label='Đơn vị tính' required>
-                  {OpitionUnitOfMeasure.map((v) => (
-                    <Select.Option value={v.value} key={v.value}>
-                      {v.label}
-                    </Select.Option>
-                  ))}
-                </VSelect>
-              </Form.Item>
+                <Form.Item
+                  name='price'
+                  rules={[
+                    {
+                      required: true,
+                      message: 'Vui lòng nhập Giá',
+                    },
+                  ]}
+                >
+                  <VInputNumber
+                    label='Đơn Giá'
+                    required
+                    isHorizal
+                    onChange={handleChange}
+                  />
+                </Form.Item>
+              </div>
 
-              <Form.Item
-                name='price'
-                rules={[
-                  {
-                    required: true,
-                    message: 'Vui lòng nhập Giá',
-                  },
-                ]}
-              >
-                <VInputNumber
-                  label='Đơn Giá'
-                  required
-                  onChange={handleChange}
-                />
-              </Form.Item>
-
-              <Form.Item name='totalMoney'>
-                <VInputNumber label='Thành tiền' disabled />
-              </Form.Item>
-
-              <Form.Item
-                name='weight'
-                rules={[
-                  {
-                    required: true,
-                    message: 'Vui lòng nhập cân nặng',
-                  },
-                ]}
-              >
-                <VInputNumber label='Cân nặng' required />
-              </Form.Item>
               <Form.Item name='HSCode'>
-                <VInput label='HS Code' />
+                <VInput label='HS Code' isHorizal />
               </Form.Item>
-            </div>
 
-            <Form.Item
-              name='originOfGoods'
-              rules={[
-                {
-                  required: true,
-                  message: 'Vui lòng chọn xuất xứ',
-                },
-              ]}
-            >
-              <VSelect label='Xuất xứ hàng hóa' required showSearch>
-                {countries.map((v) => (
-                  <Option value={v.value} key={v.value}>
-                    {v.label}
-                  </Option>
-                ))}
-              </VSelect>
-            </Form.Item>
+              <div className='grid grid-cols-2 gap-4'>
+                <Form.Item
+                  name='weight'
+                  rules={[
+                    {
+                      required: true,
+                      message: 'Vui lòng nhập cân nặng',
+                    },
+                  ]}
+                >
+                  <VInputNumber label='Cân nặng' required isHorizal />
+                </Form.Item>
+
+                <Form.Item name='totalMoney'>
+                  <VInputNumber label='Thành tiền' disabled isHorizal />
+                </Form.Item>
+              </div>
+            </div>
           </div>
 
-          <div className='mt-4 flex justify-start'>
+          <div className='mt-4 flex justify-end'>
             <Button
-              type='primary'
+              className='h-8 rounded-md bg-[#FBE51D] px-4 outline-none'
               onClick={() => {
                 handleDetails(invoiceDetailsForm);
                 onClose(false);

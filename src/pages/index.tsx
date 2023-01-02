@@ -38,18 +38,6 @@ function HomePage() {
           <CustomerRequest />
         </div>
       </div>
-      {/* <div className='m-auto flex w-[1170px] flex-row gap-8 py-10 sm:w-full sm:flex-col sm:gap-0 lg:w-full lg:px-[15px]'>
-        {dataMockDetails.map((v, key) => (
-          <CardDetails
-            key={key}
-            title={v.title}
-            index={key}
-            describe={v.describe}
-            src={v.src}
-            slug={v.slug}
-          />
-        ))}
-      </div> */}
     </>
   );
 }

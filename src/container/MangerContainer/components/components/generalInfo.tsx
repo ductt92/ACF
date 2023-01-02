@@ -2,7 +2,6 @@
 import { SearchOutlined } from '@ant-design/icons';
 import {
   Button,
-  Divider,
   Form,
   FormInstance,
   Input,
@@ -187,62 +186,65 @@ const GeneralInfomation = ({
   };
 
   return (
-    <div className='mb-20 h-full'>
-      <Form form={form}>
-        <p className='m-0 p-0 font-bold'>1.Thông tin chung </p>
-        <Divider className='bg-yellow' />
-        <div className='grid grid-cols-2 gap-x-6'>
-          <Form.Item
-            name='serviceBookingId'
-            rules={[
-              {
-                required: true,
-                message: 'Vui lòng chọn loại dịch vụ',
-              },
-            ]}
-          >
-            <VSelect label='Dịch vụ' required onChange={handleServicesSelected}>
-              {OpitionServiceBooking?.map((v: any) => (
-                <Option key={v.value}>{v.label}</Option>
-              ))}
-            </VSelect>
-          </Form.Item>
+    <div className='h-full'>
+      <Form form={form} className='gap-4'>
+        <div className='m-auto mb-[18px] w-[1200px]  rounded-md bg-pussy-color  p-4 sm:w-full'>
+          <p className='m-0 mb-[20px] p-0 font-bold'>Thông tin chung</p>
+          <div className='grid grid-cols-2 gap-x-6 px-[86px]  sm:grid-cols-1 sm:px-2'>
+            <Form.Item
+              name='serviceBookingId'
+              rules={[
+                {
+                  required: true,
+                  message: 'Vui lòng chọn loại dịch vụ',
+                },
+              ]}
+            >
+              <VSelect
+                label='Dịch vụ'
+                required
+                onChange={handleServicesSelected}
+              >
+                {OpitionServiceBooking?.map((v: any) => (
+                  <Option key={v.value}>{v.label}</Option>
+                ))}
+              </VSelect>
+            </Form.Item>
 
-          <Form.Item
-            name='deliveryConditionId'
-            rules={[
-              {
-                required: true,
-                message: 'Vui lòng chọn điều kiện giao hàng',
-              },
-            ]}
-          >
-            <VSelect label='Điều kiện giao hàng' required>
-              {OpitionDeliveryConditions?.map((v: any) => (
-                <Option value={v.value} key={v.value}>
-                  {v.label}
-                </Option>
-              ))}
-            </VSelect>
-          </Form.Item>
+            <Form.Item
+              name='deliveryConditionId'
+              rules={[
+                {
+                  required: true,
+                  message: 'Vui lòng chọn điều kiện giao hàng',
+                },
+              ]}
+            >
+              <VSelect label='Điều kiện giao hàng' required>
+                {OpitionDeliveryConditions?.map((v: any) => (
+                  <Option value={v.value} key={v.value}>
+                    {v.label}
+                  </Option>
+                ))}
+              </VSelect>
+            </Form.Item>
 
-          <Form.Item
-            name='type'
-            rules={[
-              {
-                required: true,
-                message: 'Vui lòng chọn loại booking (Chứng từ, hàng hóa)',
-              },
-            ]}
-          >
-            <VSelect label='Loại booking (Chứng từ, hàng hóa)' required>
-              {OpitionType.map((v) => (
-                <Option key={v.value}>{v.label}</Option>
-              ))}
-            </VSelect>
-          </Form.Item>
+            <Form.Item
+              name='type'
+              rules={[
+                {
+                  required: true,
+                  message: 'Vui lòng chọn loại booking (Chứng từ, hàng hóa)',
+                },
+              ]}
+            >
+              <VSelect label='Loại booking (Chứng từ, hàng hóa)' required>
+                {OpitionType.map((v) => (
+                  <Option key={v.value}>{v.label}</Option>
+                ))}
+              </VSelect>
+            </Form.Item>
 
-          <div className='grid grid-cols-2 gap-x-6'>
             <Form.Item
               name='estimatedDate'
               rules={[
@@ -279,132 +281,136 @@ const GeneralInfomation = ({
                 required
               />
             </Form.Item>
+            <Form.Item name='note'>
+              <VInput label='Ghi chú' />
+            </Form.Item>
           </div>
-
-          <Form.Item name='note'>
-            <VInput label='Ghi chú' />
-          </Form.Item>
         </div>
 
-        <p className='m-0 p-0 font-bold'>2.Hình thức thanh toán </p>
-        <Divider className='bg-yellow' />
+        <div className='m-auto mb-[18px] w-[1200px] rounded-md bg-pussy-color p-4 sm:w-full'>
+          <p className='m-0 p-0 font-bold'>Hình thức thanh toán </p>
 
-        <div className='grid grid-cols-2 gap-x-6'>
-          <Form.Item
-            name='typeOfPaymentId'
-            rules={[
-              {
-                required: true,
-                message: 'Vui lòng chọn loại thanh toán',
-              },
-            ]}
-          >
-            <VSelect label='Loại hình thanh toán' required>
-              {OpitionTypePayment?.map((v: any) => (
-                <Option value={v.value} key={v.value}>
-                  {v.label}
-                </Option>
-              ))}
-            </VSelect>
-          </Form.Item>
-          {/* Chi Tiết booking */}
-        </div>
-        <p className='m-0 p-0 font-bold'>3.Tờ khai hải quan</p>
-        <div className='flex flex-col gap-4'>
-          <Radio.Group onChange={onChange} value={value}>
-            <Radio value={1}>Không</Radio>
-            <Radio value={2}>Có</Radio>
-          </Radio.Group>
-          {value === 2 && (
-            <div className='grid grid-cols-2 gap-x-6'>
-              <Form.Item
-                name='isCustomerCreateDeclaration'
-                rules={[
-                  {
-                    required: true,
-                    message: 'Vui lòng chọn loại mở tờ khai',
-                  },
-                ]}
-              >
-                <VSelect label='Loại mở tờ khai' required>
-                  <Option value={false}>ACF mở tờ khai hải quan</Option>
-                  <Option value={true}>Khách hàng mở tờ khai hải quan</Option>
-                </VSelect>
-              </Form.Item>
-              <Form.Item
-                name='customsDeclarationNumber'
-                rules={[
-                  {
-                    required: true,
-                    message: 'Vui lòng nhập số tờ khai hải quan',
-                  },
-                ]}
-              >
-                <VInput label='Số tờ khai hải quan' required />
-              </Form.Item>
-            </div>
-          )}
-        </div>
-        <Divider className='bg-yellow' />
-
-        <p className='m-0 p-0 font-bold'>4.Chi tiết booking </p>
-        <Divider className='bg-yellow' />
-
-        <div>
-          <div className='flex flex-row pb-6'>
-            <Input
-              placeholder='Tìm kiếm đơn hàng...'
-              prefix={<SearchOutlined />}
-              className='mb-4 mr-4 w-[350px]'
-            />
-            <Button
-              type='primary'
-              onClick={() => setIsCreate(true)}
-              disabled={!serivcesSelected}
+          <div className='grid gap-x-6 px-[86px] sm:grid-cols-1 sm:px-2 '>
+            <Form.Item
+              name='typeOfPaymentId'
+              className='py-4'
+              rules={[
+                {
+                  required: true,
+                  message: 'Vui lòng chọn loại thanh toán',
+                },
+              ]}
             >
-              Thêm hàng hóa
-            </Button>
+              <VSelect label='Loại hình thanh toán' required>
+                {OpitionTypePayment?.map((v: any) => (
+                  <Option value={v.value} key={v.value}>
+                    {v.label}
+                  </Option>
+                ))}
+              </VSelect>
+            </Form.Item>
+            {/* Chi Tiết booking */}
           </div>
+        </div>
 
-          <Table
-            columns={renderBookingDetails(
-              OpitionCommoditiesTypeId,
-              OpitionShippingType,
-              handleDeleteRow,
-              handleUpdateBooking
+        <div className='m-auto mb-[18px] w-[1200px] rounded-md bg-pussy-color p-4 sm:w-full'>
+          <p className='m-0 p-0 font-bold'>Tờ khai hải quan</p>
+          <div className='flex flex-col gap-4'>
+            <Radio.Group onChange={onChange} value={value}>
+              <Radio value={1}>Không</Radio>
+              <Radio value={2}>Có</Radio>
+            </Radio.Group>
+            {value === 2 && (
+              <div className='grid grid-cols-2 gap-x-6'>
+                <Form.Item
+                  name='isCustomerCreateDeclaration'
+                  rules={[
+                    {
+                      required: true,
+                      message: 'Vui lòng chọn loại mở tờ khai',
+                    },
+                  ]}
+                >
+                  <VSelect label='Loại mở tờ khai' required>
+                    <Option value={false}>ACF mở tờ khai hải quan</Option>
+                    <Option value={true}>Khách hàng mở tờ khai hải quan</Option>
+                  </VSelect>
+                </Form.Item>
+                <Form.Item
+                  name='customsDeclarationNumber'
+                  rules={[
+                    {
+                      required: true,
+                      message: 'Vui lòng nhập số tờ khai hải quan',
+                    },
+                  ]}
+                >
+                  <VInput label='Số tờ khai hải quan' required />
+                </Form.Item>
+              </div>
             )}
-            rowKey='key'
-            scroll={{ y: 450, x: 500 }}
-            className='cursor-pointer'
-            dataSource={dataDetails}
-            pagination={{
-              showSizeChanger: false,
-            }}
-            bordered
-          />
+          </div>
+        </div>
 
-          {isCreate && (
-            <ModalBookingDetails
-              isOpen={isCreate}
-              services={serivcesSelected}
-              listServices={OpitionServiceBooking}
-              onClose={() => setIsCreate(false)}
-              handleAddBookingDetails={handleAddBooking}
-            />
-          )}
-          {isEdit && (
-            <ModalUpdateBookingDetails
-              isOpen={isEdit}
-              services={serivcesSelected}
-              listServices={OpitionServiceBooking}
-              onClose={() => setIsEdit(false)}
-              handleUpdateBookingDetails={(e) => {
-                handleUpdateBookingDetails(e);
-                setIsEdit(false);
+        <div className='m-auto mb-[18px] w-[1200px] rounded-md bg-pussy-color p-4 sm:w-full'>
+          <p className='m-0 mb-[20px] p-0 font-bold'>Chi tiết booking </p>
+
+          <div className='p-4'>
+            <div className='flex flex-row pb-6'>
+              <Input
+                placeholder='Tìm kiếm đơn hàng...'
+                prefix={<SearchOutlined />}
+                className='mb-4 mr-4 w-[350px]'
+              />
+              <Button
+                onClick={() => setIsCreate(true)}
+                disabled={!serivcesSelected}
+                className='h-8 rounded-md bg-[#FBE51D] px-4 outline-none'
+              >
+                Thêm hàng hóa
+              </Button>
+            </div>
+
+            <Table
+              columns={renderBookingDetails(
+                OpitionCommoditiesTypeId,
+                OpitionShippingType,
+                handleDeleteRow,
+                handleUpdateBooking
+              )}
+              rowKey='key'
+              scroll={{ y: 450, x: 500 }}
+              className='cursor-pointer'
+              dataSource={dataDetails}
+              pagination={{
+                showSizeChanger: false,
               }}
-              value={detailsBooking}
+              bordered
             />
-          )}
+
+            {isCreate && (
+              <ModalBookingDetails
+                isOpen={isCreate}
+                services={serivcesSelected}
+                listServices={OpitionServiceBooking}
+                onClose={() => setIsCreate(false)}
+                handleAddBookingDetails={handleAddBooking}
+              />
+            )}
+            {isEdit && (
+              <ModalUpdateBookingDetails
+                isOpen={isEdit}
+                services={serivcesSelected}
+                listServices={OpitionServiceBooking}
+                onClose={() => setIsEdit(false)}
+                handleUpdateBookingDetails={(e) => {
+                  handleUpdateBookingDetails(e);
+                  setIsEdit(false);
+                }}
+                value={detailsBooking}
+              />
+            )}
+          </div>
         </div>
       </Form>
     </div>

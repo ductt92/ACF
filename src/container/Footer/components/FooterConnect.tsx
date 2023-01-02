@@ -15,7 +15,7 @@ const FooterConnect = () => {
         {t('Connect')}
       </h4>
       {dataFooterContact.map((value, index) => (
-        <div key={index} style={{ fontFamily: 'Roboto' }}>
+        <div key={index}>
           <h5 className='pt-[17px] pb-[10px] text-[16px] font-normal text-white'>
             {value.city}
           </h5>

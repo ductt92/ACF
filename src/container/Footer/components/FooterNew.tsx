@@ -17,11 +17,7 @@ const FooterNew = () => {
       </h4>
       <ul className='float-left h-[135px] w-full pt-[20px]'>
         {dataFooterNew.map((value, index) => (
-          <div
-            key={index}
-            className='flex items-center'
-            style={{ fontFamily: 'Roboto' }}
-          >
+          <div key={index} className='flex items-center'>
             <li className='item-content mb-[3px] flex w-full'>
               <div style={{ height: '9px', width: '5', marginRight: '10px' }}>
                 <Image

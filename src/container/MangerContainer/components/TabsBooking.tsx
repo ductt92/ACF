@@ -5,7 +5,6 @@ import React from 'react';
 
 import { AddressCustomer, DetailsBookingPost } from '@/contants/types';
 
-import AddOnServices from './components/addOnServices';
 import Address from './components/address';
 import GeneralInfomation from './components/generalInfo';
 
@@ -68,10 +67,6 @@ const TabsBooking = ({
             handleChangeInfoRecei={handleChangeInfoRecei}
             addressCustome={addressCustome}
           />
-        </Tabs.TabPane>
-
-        <Tabs.TabPane tab='Dịch vụ gia tăng' key='tabs-3'>
-          <AddOnServices />
         </Tabs.TabPane>
       </Tabs>
     </div>

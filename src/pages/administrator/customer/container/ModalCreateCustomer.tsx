@@ -1,5 +1,6 @@
 /* eslint-disable unused-imports/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { CloseOutlined } from '@ant-design/icons';
 import { Button, Form, Modal, notification, Tabs } from 'antd';
 import moment from 'moment';
 import React, { useEffect, useState } from 'react';
@@ -113,10 +114,21 @@ const ModalCreateCustomer = ({ onClose }: IProps) => {
   const handleUpdateOrder = (data: any) => {
     setDetailsOrder(data);
   };
-
+  const renderHeader = () => {
+    return (
+      <div
+        className='bg-[#FBE51D] text-center text-[24px]
+      font-bold'
+      >
+        Tạo mới khách hàng
+      </div>
+    );
+  };
   return (
     <Modal
       footer={null}
+      title={renderHeader()}
+      closeIcon={<CloseOutlined className='text-[24px]' />}
       visible={true}
       onCancel={() => onClose(false)}
       className='top-[calc(5vh)] w-[calc(60vw)]'

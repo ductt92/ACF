@@ -2,6 +2,8 @@ import { Button, Form, FormInstance, Modal, Select } from 'antd';
 import React from 'react';
 const { Option } = Select;
 
+import { CloseOutlined } from '@ant-design/icons';
+
 import VSelect from '@/components/common/VSelect';
 
 import { ETypeStaff, OpitionType } from '@/contants/types';
@@ -25,20 +27,28 @@ const ModalCreateStaff = ({
     value: key,
     label: value,
   }));
-
+  const renderHeader = () => {
+    return (
+      <div
+        className='bg-[#FBE51D] text-center text-[24px]
+      font-bold'
+      >
+        {isUpdate ? 'Cập nhật nhân viên' : 'Thêm mới nhân viên'}
+      </div>
+    );
+  };
   return (
     <Modal
       footer={null}
       visible={isOpen || isUpdate}
+      closeIcon={<CloseOutlined className='text-[24px]' />}
+      title={renderHeader()}
       onCancel={handleClose}
       destroyOnClose
       className='top-[calc(5vh)] w-[calc(40vw)]'
     >
       <Form form={form}>
         <div className='h-[calc(70vh)] '>
-          <p className='text-center text-xl'>
-            {isUpdate ? 'Cập nhật nhân viên' : 'Thêm mới nhân viên'}
-          </p>
           <div className='grid grid-cols-2 gap-x-6'>
             <Form.Item
               name='staffId'

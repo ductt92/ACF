@@ -3,6 +3,8 @@ import { Button, Form, FormInstance, Modal, Select, Spin } from 'antd';
 import React, { useEffect } from 'react';
 const { Option } = Select;
 
+import { CloseOutlined } from '@ant-design/icons';
+
 import VInput from '@/components/common/VInput';
 import VInputNumber from '@/components/common/VInputNumber';
 import VRangePicker from '@/components/common/VRangeDate';
@@ -47,10 +49,23 @@ const ModalCreateOrdersCode = ({
   useEffect(() => {
     if (otherPrice === 'OTHER_PRICE' && !isUpdate) handleSetForm(dataZone);
   }, [dataZone, handleSetForm, isUpdate, otherPrice]);
+
+  const renderHeader = () => {
+    return (
+      <div
+        className='bg-[#FBE51D] text-center text-[24px]
+      font-bold'
+      >
+        {isUpdate ? 'Cập nhật bảng giá' : 'Thêm mới bảng giá'}
+      </div>
+    );
+  };
   return (
     <Modal
       footer={null}
       visible={isOpen || isUpdate}
+      title={renderHeader()}
+      closeIcon={<CloseOutlined className='text-[24px]' />}
       onCancel={handleClose}
       destroyOnClose
       className='top-[calc(5vh)] w-[calc(40vw)]'
@@ -58,9 +73,6 @@ const ModalCreateOrdersCode = ({
       <Form form={form}>
         <Spin spinning={false}>
           <div className='h-[calc(70vh)] overflow-y-auto p-4'>
-            <p className='text-center text-xl'>
-              {isUpdate ? 'Cập nhật bảng giá' : 'Thêm mới bảng giá'}
-            </p>
             <div className='grid grid-cols-2 gap-x-6'>
               <Form.Item
                 name='serviceRequestId'

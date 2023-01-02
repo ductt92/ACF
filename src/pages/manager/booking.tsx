@@ -2,15 +2,11 @@ import React from 'react';
 
 import ManageContainer from '@/container/MangerContainer';
 
-import NewLayout from '@/layout/NewLayout';
+import HomeLayout from '@/layout/HomeLayout';
 
 const BookingContainer = () => {
-  return (
-    <div>
-      <ManageContainer />
-    </div>
-  );
+  return <ManageContainer />;
 };
-BookingContainer.Layout = NewLayout;
+BookingContainer.Layout = HomeLayout;
 
 export default BookingContainer;

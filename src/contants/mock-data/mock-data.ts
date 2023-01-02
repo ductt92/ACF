@@ -40,6 +40,22 @@ export const DATA_MOCK_DETAIL_EN = [
   },
 ];
 
+export const dataMenuManager = [
+  {
+    title: 'Trang Chủ',
+    href: '/manager',
+  },
+  {
+    title: 'Quản lý booking',
+    href: '/manager/booking',
+  },
+
+  {
+    title: 'Tạo booking',
+    href: '/manager/create-booking',
+  },
+];
+
 export const DATA_MOCK_MENU_VI = [
   {
     title: 'Dịch vụ sản phẩm',

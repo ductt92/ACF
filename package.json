@@ -27,6 +27,7 @@
     "antd": "^4.20.1",
     "axios": "^0.27.2",
     "clsx": "^1.1.1",
+    "hamburger-react": "^2.5.0",
     "lodash": "^4.17.21",
     "next": "^12.1.5",
     "next-translate": "^1.4.0",

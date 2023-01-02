@@ -1,3 +1,4 @@
+import { CloseOutlined } from '@ant-design/icons';
 import { Button, Form, Modal, notification, Select } from 'antd';
 import dayjs from 'dayjs';
 import React, { useMemo } from 'react';
@@ -83,17 +84,26 @@ const ModalCreateEmployee = ({ onClose }: IProps) => {
     value: key,
     label: value,
   }));
+  const renderHeader = () => {
+    return (
+      <div
+        className='bg-[#FBE51D] text-center text-[24px]
+      font-bold'
+      >
+        Tạo mới nhân viên
+      </div>
+    );
+  };
 
   return (
     <Modal
       footer={null}
+      title={renderHeader()}
       visible={true}
       onCancel={() => onClose(false)}
+      closeIcon={<CloseOutlined className='text-[24px]' />}
       className='top-[calc(5vh)] w-[calc(40vw)]'
     >
-      <div>
-        <p className='text-center text-[24px] font-medium'>Tạo mới nhân viên</p>
-      </div>
       <div>
         <Form form={form}>
           <div className='h-[calc(70vh)] overflow-y-auto p-4'>

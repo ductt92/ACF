@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { CloseOutlined } from '@ant-design/icons';
 import { Button, Form, FormInstance, Modal, Radio, Select, Spin } from 'antd';
 import React from 'react';
 
@@ -40,20 +41,29 @@ const ModalCreateContract = ({
   handleSetFileList,
   fileList,
 }: ModalCreateContract) => {
+  const renderHeader = () => {
+    return (
+      <div
+        className='bg-[#FBE51D] text-center text-[24px]
+      font-bold'
+      >
+        {isUpdate
+          ? 'Cập nhật thông tin hợp đồng'
+          : 'Tạo mới thông tin hợp đồng'}
+      </div>
+    );
+  };
   return (
     <Modal
       footer={null}
       destroyOnClose={true}
       visible={isOpen || isUpdate}
+      title={renderHeader()}
+      closeIcon={<CloseOutlined className='text-[24px]' />}
       onCancel={onClose}
       className='top-[calc(5vh)] w-[calc(45vw)]'
     >
       <Spin spinning={false}>
-        <p className='text-center text-2xl'>
-          {isUpdate
-            ? 'Cập nhật thông tin hợp đồng'
-            : 'Tạo mới thông tin hợp đồng'}
-        </p>
         <Form form={form} name='contractFrom'>
           <div className='h-[calc(70vh)] overflow-y-auto p-4'>
             <div className='grid grid-cols-2 gap-x-6'>
