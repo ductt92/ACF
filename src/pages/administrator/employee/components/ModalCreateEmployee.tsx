@@ -115,6 +115,7 @@ const ModalCreateEmployee = ({ onClose }: IProps) => {
                 <VInput
                   label='Tên nhân viên'
                   required
+                  isHorizal
                   placeholder='Nhập vị tên nhân viên'
                 />
               </Form.Item>
@@ -123,7 +124,12 @@ const ModalCreateEmployee = ({ onClose }: IProps) => {
                 name='placeOfBirth'
                 rules={[{ required: true, message: 'Vui lòng nhập nơi sinh' }]}
               >
-                <VInput label='Nơi Sinh' placeholder='Nhập nơi sinh' required />
+                <VInput
+                  label='Nơi Sinh'
+                  placeholder='Nhập nơi sinh'
+                  required
+                  isHorizal
+                />
               </Form.Item>
 
               <Form.Item name='position'>
@@ -131,6 +137,7 @@ const ModalCreateEmployee = ({ onClose }: IProps) => {
                   label='Vị trí làm việc'
                   placeholder='Nhập vị trí làm việc'
                   required
+                  isHorizal
                 />
               </Form.Item>
 
@@ -142,6 +149,7 @@ const ModalCreateEmployee = ({ onClose }: IProps) => {
                   label='Giới tính'
                   placeholder='Chọn giới tính'
                   required
+                  isHorizal
                 >
                   {OpitionGender.map((v, k) => (
                     <Option key={k} value={v.value}>
@@ -159,6 +167,7 @@ const ModalCreateEmployee = ({ onClose }: IProps) => {
                   label='Trình độ học vấn'
                   placeholder='Chọn trình độ học vấn'
                   required
+                  isHorizal
                 >
                   {OpitionLevel.map((v, k) => (
                     <Option key={k} value={v.value}>
@@ -177,6 +186,7 @@ const ModalCreateEmployee = ({ onClose }: IProps) => {
                   label='Ngày sinh'
                   placeholder='Chọn ngày sinh'
                   required
+                  isHorizal
                 />
               </Form.Item>
 
@@ -188,6 +198,7 @@ const ModalCreateEmployee = ({ onClose }: IProps) => {
                   label='Tạm trú'
                   placeholder='Nhập địa chỉ tạm trú'
                   required
+                  isHorizal
                 />
               </Form.Item>
               <Form.Item
@@ -198,6 +209,7 @@ const ModalCreateEmployee = ({ onClose }: IProps) => {
                   label='Thường trú '
                   placeholder='Nhập địa chỉ thường trú'
                   required
+                  isHorizal
                 />
               </Form.Item>
 
@@ -205,14 +217,24 @@ const ModalCreateEmployee = ({ onClose }: IProps) => {
                 name='ethnic'
                 rules={[{ required: true, message: 'Vui lòng nhập' }]}
               >
-                <VInput label='Dân tộc' placeholder='Nhập dân tộc' required />
+                <VInput
+                  label='Dân tộc'
+                  placeholder='Nhập dân tộc'
+                  required
+                  isHorizal
+                />
               </Form.Item>
 
               <Form.Item
                 name='religion'
                 rules={[{ required: true, message: 'Vui lòng nhập' }]}
               >
-                <VInput label='Tôn giáo' placeholder='Nhập tôn giáo' required />
+                <VInput
+                  label='Tôn giáo'
+                  placeholder='Nhập tôn giáo'
+                  required
+                  isHorizal
+                />
               </Form.Item>
 
               <Form.Item
@@ -223,6 +245,7 @@ const ModalCreateEmployee = ({ onClose }: IProps) => {
                   label='Quốc tịch'
                   placeholder='Nhập quốc tịch'
                   required
+                  isHorizal
                 />
               </Form.Item>
 
@@ -234,6 +257,7 @@ const ModalCreateEmployee = ({ onClose }: IProps) => {
                   label='Tình trạng hôn nhân'
                   placeholder='Chọn tình trạng hôn nhân'
                   required
+                  isHorizal
                 >
                   {OpitionMatarial.map((v, k) => (
                     <Option key={k} value={v.value}>
@@ -247,6 +271,7 @@ const ModalCreateEmployee = ({ onClose }: IProps) => {
                 <VInput
                   label='Thành phần'
                   placeholder='Nhập Thành phần (vd : công nhân viên)'
+                  isHorizal
                 />
               </Form.Item>
               <Form.Item
@@ -267,6 +292,7 @@ const ModalCreateEmployee = ({ onClose }: IProps) => {
                   placeholder='Nhập email'
                   required
                   type='email'
+                  isHorizal
                 />
               </Form.Item>
 
@@ -274,7 +300,7 @@ const ModalCreateEmployee = ({ onClose }: IProps) => {
                 name='phoneNumber'
                 rules={[{ required: true, message: 'Vui lòng nhập SĐT' }]}
               >
-                <VInput label='SĐT' placeholder='Nhập SĐT' required />
+                <VInput label='SĐT' placeholder='Nhập SĐT' required isHorizal />
               </Form.Item>
 
               <Form.Item
@@ -290,6 +316,7 @@ const ModalCreateEmployee = ({ onClose }: IProps) => {
                   label='Mã vùng điện thoại của nước sở tại'
                   placeholder='Nhập Mã vùng điện thoại của nước sở tại'
                   required
+                  isHorizal
                 />
               </Form.Item>
 
@@ -297,7 +324,12 @@ const ModalCreateEmployee = ({ onClose }: IProps) => {
                 name='peopleId'
                 rules={[{ required: true, message: 'Vui lòng nhập CMT/CCCD' }]}
               >
-                <VInput label='CMT/CCCD' placeholder='Nhập CMT/CCCD' required />
+                <VInput
+                  label='CMT/CCCD'
+                  placeholder='Nhập CMT/CCCD'
+                  required
+                  isHorizal
+                />
               </Form.Item>
 
               <Form.Item
@@ -314,6 +346,7 @@ const ModalCreateEmployee = ({ onClose }: IProps) => {
                   label='Ngày phát hành CMT/CCCD'
                   placeholder='Nhập Ngày phát hành CMT/CCCD'
                   required
+                  isHorizal
                 />
               </Form.Item>
 
@@ -327,6 +360,7 @@ const ModalCreateEmployee = ({ onClose }: IProps) => {
                   label='Nơi cấp CMT/CCCD'
                   placeholder='Nhập Nơi cấp CMT/CCCD'
                   required
+                  isHorizal
                 />
               </Form.Item>
 
@@ -345,6 +379,7 @@ const ModalCreateEmployee = ({ onClose }: IProps) => {
                   label='Khu vực làm việc của nhân viên. Chọn theo các thông tin đơn vị của trường quản lý khách hàng'
                   placeholder='Nhập Khu vực làm việc của nhân viên. Chọn theo các thông tin đơn vị của trường quản lý khách hàng'
                   required
+                  isHorizal
                 >
                   {OpitionUnits?.map((v: OpitionType) => (
                     <Option key={v.value} value={v.value}>
@@ -354,29 +389,38 @@ const ModalCreateEmployee = ({ onClose }: IProps) => {
                 </VSelect>
               </Form.Item>
               <Form.Item name='taxCode'>
-                <VInput label='MST' placeholder='Nhập MST' />
+                <VInput label='MST' placeholder='Nhập MST' isHorizal />
               </Form.Item>
 
               <Form.Item name='bankCode'>
-                <VInput label='Ngân hàng' placeholder='Nhập Ngân hàng' />
+                <VInput
+                  label='Ngân hàng'
+                  placeholder='Nhập Ngân hàng'
+                  isHorizal
+                />
               </Form.Item>
 
               <Form.Item name='bankAccountNumber'>
-                <VInput label='Số thẻ NH' placeholder='Nhập Số thẻ NH' />
+                <VInput
+                  label='Số thẻ NH'
+                  placeholder='Nhập Số thẻ NH'
+                  isHorizal
+                />
               </Form.Item>
 
               <Form.Item name='socialInsuranceId'>
-                <VInput label='Mã BHXH' placeholder='Nhập Mã BHXH' />
+                <VInput label='Mã BHXH' placeholder='Nhập Mã BHXH' isHorizal />
               </Form.Item>
 
               <Form.Item name='healthInsuranceId'>
-                <VInput label='Mã BHYT' placeholder='Nhập Mã BHYT' />
+                <VInput label='Mã BHYT' placeholder='Nhập Mã BHYT' isHorizal />
               </Form.Item>
 
               <Form.Item name='unionBookNumber'>
                 <VInput
                   label='Số sổ công đoàn'
                   placeholder='Nhập Số sổ công đoàn'
+                  isHorizal
                 />
               </Form.Item>
               <Form.Item name='insuranceParticipationDate'>
@@ -384,6 +428,7 @@ const ModalCreateEmployee = ({ onClose }: IProps) => {
                   label='Ngày tham gia bảo hiểm'
                   placeholder='Nhập Ngày tham gia bảo hiểm'
                   format='DD/MM/YYYY'
+                  isHorizal
                 />
               </Form.Item>
               <Form.Item name='issueInsuranceDate'>
@@ -391,6 +436,7 @@ const ModalCreateEmployee = ({ onClose }: IProps) => {
                   label='Ngày phát hành bảo hiểm'
                   placeholder='Nhập Ngày phát hành bảo hiểm'
                   format='DD/MM/YYYY'
+                  isHorizal
                 />
               </Form.Item>
             </div>
