@@ -319,7 +319,7 @@ const ViewBookingDetails = ({ data }: { data: any }) => {
 
   const handleCancelBill = () => {
     if (data?.booking?.id) {
-      confirmBooking2(data?.booking?.id);
+      cancelBillOrder(data?.booking?.id);
     }
   };
 

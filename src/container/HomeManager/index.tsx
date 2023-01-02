@@ -15,7 +15,7 @@ const HomeManager = () => {
     <Spin spinning={isFetching || isLoading}>
       <div className='mx-auto w-[1234px] bg-pussy-color p-4 sm:w-full'>
         <TableView
-          data={data?.bookingNotYetHandedOver || []}
+          data={data?.bookingHandedOver || []}
           title='Đơn hàng đã xác nhận '
         />
       </div>

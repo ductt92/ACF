@@ -22,7 +22,7 @@ const ModalViewBooking = ({ id, onClose }: ModalViewBookingProps) => {
         className='bg-[#FBE51D] text-center text-[24px]
       font-bold'
       >
-        Chi tiết đơn hàng 2
+        Chi tiết đơn hàng
       </div>
     );
   };

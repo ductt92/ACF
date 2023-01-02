@@ -3,8 +3,8 @@
 /* eslint-disable no-console */
 /* eslint-disable unused-imports/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { PrinterOutlined } from '@ant-design/icons';
-import { Button, Form, notification, Tabs } from 'antd';
+import { PrinterOutlined, WarningOutlined } from '@ant-design/icons';
+import { Button, Form, Modal, notification, Tabs } from 'antd';
 import moment from 'moment';
 import React, { useEffect, useMemo, useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
@@ -22,6 +22,7 @@ import {
   ReceiverCustome,
 } from '@/contants/types';
 import {
+  cancelBill,
   fetchCurrentUnit,
   fetchUser,
   generateBill,
@@ -682,6 +683,22 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
     }
   };
 
+  const { mutate: cancelBillOrder } = useMutation(cancelBill, {
+    onSuccess: () => {
+      queryClient.invalidateQueries([QUERY_BOOKING.GET_BOOKING]);
+      notification.success({
+        message: 'Hủy đơn  thành công',
+        placement: 'top',
+      });
+    },
+    onError: () => {
+      notification.error({
+        message: 'Hủy đơn thất bại',
+        placement: 'top',
+      });
+    },
+  });
+
   const { mutate: genBillSmall, isLoading: generateSmallBillLoading } =
     useMutation(generateSmallBill, {
       onSuccess: () => {
@@ -730,13 +747,31 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
   const handleGenSmallBill = () => {
     genBillSmall(data?.booking?.id);
   };
+
+  const handleCancelBill = () => {
+    if (data?.booking?.id) {
+      cancelBillOrder(data?.booking?.id);
+    }
+  };
+  const handleDeleteBill = (row: any) => {
+    Modal.confirm({
+      title: 'Thông báo',
+      icon: <WarningOutlined className='text-red-700' />,
+      content: 'Bạn có chắc chắn muốn đơn hàng này không?',
+      okText: 'Đồng ý',
+      cancelText: 'Không',
+      onOk: () => handleCancelBill(),
+    });
+  };
+
+  const isDisableButton = data?.booking?.status === 'CANCEL';
   return (
     <div>
       <div className='mb-2 mt-2 flex flex-wrap gap-4 px-4'>
         <Button
           onClick={handleGenerataeBill}
           type='primary'
-          disabled={!data?.booking?.id}
+          disabled={!data?.booking?.id || isDisableButton}
           className='h-8 rounded-md bg-[#FBE51D] px-4 outline-none'
           icon={<PrinterOutlined />}
         >
@@ -747,7 +782,7 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
           <Button
             onClick={handleGeneratorBillPartner}
             type='primary'
-            disabled={!data?.booking?.id}
+            disabled={!data?.booking?.id || isDisableButton}
             icon={<PrinterOutlined />}
             className='h-8 rounded-md bg-[#FBE51D] px-4 outline-none'
           >
@@ -759,7 +794,7 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
           <Button
             onClick={handleGeneratorInvoicePartner}
             type='primary'
-            disabled={!data?.booking?.id}
+            disabled={!data?.booking?.id || isDisableButton}
             icon={<PrinterOutlined />}
             className='h-8 rounded-md bg-[#FBE51D] px-4 outline-none'
           >
@@ -770,7 +805,7 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
         <Button
           onClick={handleGenerataeInvoice}
           type='primary'
-          disabled={!data?.booking?.id || !isInvoice}
+          disabled={!data?.booking?.id || !isInvoice || isDisableButton}
           icon={<PrinterOutlined />}
           className='h-8 rounded-md bg-[#FBE51D] px-4 outline-none'
         >
@@ -779,7 +814,9 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
         <Button
           onClick={updateStatus}
           type='primary'
-          disabled={statusBooking === BookingStatusPost.HANDED_OVER}
+          disabled={
+            statusBooking === BookingStatusPost.HANDED_OVER || isDisableButton
+          }
           className='h-8 rounded-md bg-[#FBE51D] px-4 outline-none'
         >
           Xác nhận đơn hàng
@@ -791,7 +828,8 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
           disabled={
             statusBooking === BookingStatusPost.DONE ||
             statusBooking === BookingStatusPost.CANCEL ||
-            statusBooking === BookingStatusPost.HANDED_OVER
+            statusBooking === BookingStatusPost.HANDED_OVER ||
+            isDisableButton
           }
         >
           {isInvoice ? 'Không Invoice' : 'Có Invoice'}
@@ -803,6 +841,7 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
           className='h-8 rounded-md bg-[#FBE51D] px-4 outline-none'
           loading={generateSmallBillLoading}
           icon={<PrinterOutlined />}
+          disabled={isDisableButton}
         >
           In bưu nhỏ
         </Button>
@@ -844,14 +883,24 @@ const Viewbooking = ({ data }: ViewBookingProps) => {
           </Tabs.TabPane>
         </Tabs>
       </div>
-
-      <Button
-        type='primary'
-        onClick={onSubmit}
-        className='mt-5 mb-5 h-8 rounded-md bg-[#FBE51D] px-4 outline-none'
-      >
-        Cập nhật đơn Hàng
-      </Button>
+      <div className='flex flex-row gap-4'>
+        <Button
+          type='primary'
+          onClick={onSubmit}
+          className='mt-5 mb-5 h-8 rounded-md bg-[#FBE51D] px-4 outline-none'
+        >
+          Cập nhật đơn Hàng
+        </Button>
+        {data?.booking?.status === 'NOT_YET_HANDED_OVER' && (
+          <Button
+            type='primary'
+            onClick={handleDeleteBill}
+            className='mt-5 mb-5 h-8 rounded-md bg-[#FBE51D] px-4 outline-none'
+          >
+            Hủy đơn hàng
+          </Button>
+        )}
+      </div>
     </div>
   );
 };

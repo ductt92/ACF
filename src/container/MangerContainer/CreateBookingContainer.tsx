@@ -574,6 +574,7 @@ const CreateBookingContainer = () => {
     setId(undefined);
     setDetailsBooking([]);
     setDetailsInvoice([]);
+    setIsInvoice(true);
 
     const custome = {
       senderNameVi: userData?.fullName || '',
