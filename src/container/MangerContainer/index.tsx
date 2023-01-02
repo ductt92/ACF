@@ -161,7 +161,7 @@ const ManageContainer = () => {
 
       {/* Mobile */}
 
-      <div className='grid grid-cols-2 gap-4 p-4'>
+      <div className='hidden grid-cols-2 gap-4 p-4 sm:grid'>
         <Button
           className='w-full border-[#000] bg-[#CCCCCC]'
           onClick={() => handleSetStatus(BookingStatusPost.NOT_YET_HANDED_OVER)}
@@ -188,7 +188,7 @@ const ManageContainer = () => {
         </Button>
       </div>
 
-      <div className='grid grid-cols-2 items-center gap-4 p-4'>
+      <div className='hidden grid-cols-2 items-center gap-4 p-4 sm:grid'>
         <div>
           <div className='text-center'>Từ ngày</div>
           <DatePicker
@@ -208,7 +208,7 @@ const ManageContainer = () => {
           />
         </div>
       </div>
-      <div className='my-4 flex flex-row items-center justify-center'>
+      <div className='my-4 hidden flex-row items-center justify-center sm:flex'>
         <Button
           className=' w-[125px] rounded-md bg-[#FBE51D]'
           onClick={handleGenerateExcelBooking}
