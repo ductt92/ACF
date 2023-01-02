@@ -171,13 +171,16 @@ const TabsDetailsInvoice = ({
             </Form.Item>
 
             <Form.Item name='reasonExport'>
-              <VInput label='Lý do xuất khẩu' required disabled isHorizal />
+              <VInput
+                label='Lý do xuất khẩu (Tiếng anh)'
+                required
+                disabled
+                isHorizal
+              />
             </Form.Item>
           </div>
 
-          <p className='m-0 p-0 font-bold'>
-            2.Chi tiết Booking Express Invoice{' '}
-          </p>
+          <p className='m-0 p-0 font-bold'>2.Chi tiết Invoice </p>
           <Divider className='bg-yellow' />
 
           <div>

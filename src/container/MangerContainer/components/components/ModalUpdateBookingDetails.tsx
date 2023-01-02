@@ -148,7 +148,7 @@ const ModalUpdateBookingDetails = ({
         className='bg-[#FBE51D] text-center text-[24px]
       font-bold'
       >
-        Chi tiết đơn hàng
+        Chỉnh sửa chi tiết đơn hàng trên từng kiện hàng
       </div>
     );
   };
@@ -163,6 +163,11 @@ const ModalUpdateBookingDetails = ({
       className='top-[calc(5vh)] w-[calc(70vw)]'
     >
       <div>
+        <p className='p-5 font-bold'>
+          Note: Nếu các kiện hàng giống nhau về kích thước thì khai chung 1 kiện
+          hàng -nếu các kiện hàng không giống nhau về kích thước thì khai từng
+          kiện hàng
+        </p>
         <Form form={detailsBookingForm}>
           <div className=' overflow-y-auto p-5'>
             <div className='grid grid-cols-2 gap-x-6'>

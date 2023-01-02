@@ -16,7 +16,7 @@ const HomeManager = () => {
       <div className='mx-auto w-[1234px] bg-pussy-color p-4 sm:w-full'>
         <TableView
           data={data?.bookingNotYetHandedOver || []}
-          title='Đơn hàng chưa xác nhận '
+          title='Đơn hàng đã xác nhận '
         />
       </div>
       <div className='mx-auto w-[1234px] bg-pussy-color p-4 sm:w-full'>

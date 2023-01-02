@@ -66,7 +66,7 @@ const Address = ({
     <div className='mb-24'>
       <Form
         form={form}
-        className=' flex flex-row items-stretch justify-center gap-4 sm:flex-col'
+        className=' mx-auto flex w-[1240px] flex-row items-stretch justify-center sm:w-full sm:flex-col'
       >
         <div className='mx-auto w-[605px] rounded-[16px] bg-pussy-color p-[32px] sm:w-full sm:rounded-none'>
           <p className='m-0 mb-[32px] p-0 font-bold'>Địa chỉ người gửi</p>

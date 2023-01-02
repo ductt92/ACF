@@ -131,7 +131,7 @@ const ManageContainer = () => {
           <div className='flex h-8 items-center justify-center bg-[#FBE51D] text-center text-[16px] text-[#fff]'>
             Theo thời gian tạo Booking
           </div>
-          <div className='flex flex-col items-center gap-2'>
+          <div className='flex flex-col items-center gap-2 pb-4'>
             <div className='text-center'>Từ ngày</div>
             <DatePicker
               format='DD-MM-YYYY'
@@ -150,7 +150,7 @@ const ManageContainer = () => {
               className='mt-9 w-[125px] rounded-md bg-[#FBE51D]'
               onClick={handleGenerateExcelBooking}
             >
-              <div className='flex flex-row items-center justify-center gap-2'>
+              <div className='mb-4 flex flex-row items-center justify-center gap-2'>
                 <ExcelIcon width={20} height={20} />
                 <span> Xuất excel</span>
               </div>

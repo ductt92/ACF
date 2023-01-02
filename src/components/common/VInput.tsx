@@ -16,7 +16,7 @@ export default function VInput({
   return isHorizal ? (
     <div className='space-y-1'>
       <span className='text-sm font-medium'>
-        {label} {required && <span className='text-red-700'>*</span>} :
+        {label} {required && <span className='text-red-700'>*</span>}:
       </span>
       <Input {...rest} />
     </div>

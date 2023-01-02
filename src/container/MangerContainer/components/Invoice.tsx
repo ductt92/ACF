@@ -311,7 +311,7 @@ const InVoice = ({
 
         <div className='m-auto mb-[18px] w-[1200px] rounded-md bg-pussy-color p-4 sm:w-full'>
           <p className='m-0 mb-[20px] p-0 text-xl font-bold'>
-            Chi tiết Booking Express Invoice
+            Chi tiết Invoice
           </p>
 
           <div className='p-4'>
