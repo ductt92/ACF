@@ -84,12 +84,20 @@ const BannerContainer = () => {
               Đăng xuất
             </button>
           ) : (
-            <button
-              className='h-[50px] w-[130px] font-bold text-[red] shadow-2xl outline-0'
-              onClick={() => router.push('/register')}
-            >
-              {t('Register')}
-            </button>
+            <div className='flex flex-row items-center justify-center gap-4'>
+              <button
+                className='h-[50px] w-[130px] font-bold text-[red] shadow-2xl outline-0'
+                onClick={() => router.push('/register')}
+              >
+                {t('Register')}
+              </button>
+              <button
+                className='h-[50px] w-[130px] font-bold text-[red] shadow-2xl outline-0'
+                onClick={() => router.push('/login-home')}
+              >
+                {t('Login')}
+              </button>
+            </div>
           )}
         </div>
       </div>
@@ -167,12 +175,14 @@ const BannerContainer = () => {
                   Đăng xuất
                 </button>
               ) : (
-                <button
-                  className='h-[50px] w-[130px] bg-[#FBE51D] font-bold text-[red] shadow-2xl outline-0'
-                  onClick={() => router.push('/register')}
-                >
-                  {t('Register')}
-                </button>
+                <div>
+                  <button
+                    className='h-[50px] w-[130px] bg-[#FBE51D] font-bold text-[red] shadow-2xl outline-0'
+                    onClick={() => router.push('/register')}
+                  >
+                    {t('Register')}
+                  </button>
+                </div>
               )}
             </div>
           </div>
@@ -217,11 +227,14 @@ const BannerContainer = () => {
                   </div>
                 ))
               : dataMenu.map((v) => (
-                  <ItemMenu
-                    key={v.href}
-                    value={v}
-                    handleAction={() => setOpen(false)}
-                  />
+                  <div key={v.href} className='flex flex-col'>
+                    <ItemMenu
+                      key={v.href}
+                      value={v}
+                      handleAction={() => setOpen(false)}
+                    />{' '}
+                    <Divider />
+                  </div>
                 ))}
           </div>
         </Drawer>

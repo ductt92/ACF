@@ -921,7 +921,7 @@ export const columsOrdersCode = ({
       render: (otherPrice: Array<any>, record: any) => {
         return dataZone &&
           dataZone?.length > 0 &&
-          record?.otherPrices.length > 0 ? (
+          record?.otherPrices?.length > 0 ? (
           <div>
             {dataZone.map((v, index) => (
               <div className='grid grid-cols-2'>
