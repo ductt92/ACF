@@ -180,7 +180,7 @@ export const generateExcelBooking = ({
 };
 
 export const generateBillPatner = (id: string) => {
-  return HttpRequest.get('booking/generate-partner-bill', {
+  return HttpRequest.get('booking/generate-partner-bill-v2', {
     params: { bookingId: id },
   }).then((res) => {
     const blob = new Blob([new Uint8Array(res.data)]);
@@ -215,7 +215,7 @@ export const generateOrderCode = (id: string) => {
   );
 };
 export const generateInvoice = (id: string) => {
-  return HttpRequest.get('booking/generate-bill-invoice', {
+  return HttpRequest.get('booking/generate-bill-invoice-v2', {
     params: { bookingId: id },
   }).then((res) => {
     const blob = new Blob([new Uint8Array(res.data)]);
