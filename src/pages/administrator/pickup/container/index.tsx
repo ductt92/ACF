@@ -24,8 +24,8 @@ import { fetchServicesBooking } from '@/services/booking.services';
 import CheckPoint from './Checkpoint';
 import InfoCheckpoint from './InfoCheckPoint';
 import ModalCreatInfo from './InfoCheckPoint/ModalInfo/ModalCreate';
-import { rendeColumsPickup } from '../contants/columns.contants';
-import { QUERY_KEY } from '../contants/query-key';
+import { rendeColumsPickup } from '../../../../utils/contants/columns.contants';
+import { QUERY_KEY } from '../../../../utils/contants/query-key';
 import {
   BookingDetailPU,
   getDelivery,
@@ -35,7 +35,7 @@ import {
   pathPU,
   postPu,
   QUERY,
-} from '../contants/services';
+} from '../../../../utils/contants/services';
 
 const QUERY_PARAMS: QUERY = {
   page: 1,
@@ -339,7 +339,6 @@ const PickUpContainer = () => {
     const res = infoCheckPoint.map((x, index) => {
       if (idKey === index) {
         const { bulkyWeight, ...resetForm } = form;
-        console.log('s');
         return resetForm;
       } else {
         return x;
@@ -358,7 +357,6 @@ const PickUpContainer = () => {
     loadingPu ||
     loadingPuById ||
     fetchingPuById;
-  console.log(infoCheckPoint);
   return (
     <Spin spinning={spinning}>
       <div className='flex flex-col gap-4'>

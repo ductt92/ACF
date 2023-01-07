@@ -2,8 +2,8 @@
 import { Button, Table } from 'antd';
 import React from 'react';
 
-import { renderColumsInfoItem } from '../../contants/columns.contants';
-import { BookingDetailPU } from '../../contants/services';
+import { renderColumsInfoItem } from '../../../../../utils/contants/columns.contants';
+import { BookingDetailPU } from '../../../../../utils/contants/services';
 
 type InfoCheckpoint = {
   data: Array<BookingDetailPU>;
