@@ -1,4 +1,10 @@
-import { TeamOutlined, UnorderedListOutlined } from '@ant-design/icons';
+import {
+  ApartmentOutlined,
+  ShoppingCartOutlined,
+  SisternodeOutlined,
+  TeamOutlined,
+  UnorderedListOutlined,
+} from '@ant-design/icons';
 
 interface IRoutes {
   path: string;
@@ -21,6 +27,21 @@ export const routes: IRoutes[] = [
     title: 'Đơn hàng',
     path: `/order`,
     icons: <UnorderedListOutlined className='-translate-x-1 text-xl' />,
+  },
+  {
+    title: 'Pickup',
+    path: `/pickup`,
+    icons: <ShoppingCartOutlined className='-translate-x-1 text-xl' />,
+  },
+  {
+    title: 'Vận hành',
+    path: `/operate`,
+    icons: <SisternodeOutlined className='-translate-x-1 text-xl' />,
+  },
+  {
+    title: 'Kết nối',
+    path: `/connect`,
+    icons: <ApartmentOutlined className='-translate-x-1 text-xl' />,
   },
 ];
 
