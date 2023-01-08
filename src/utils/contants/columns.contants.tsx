@@ -6,12 +6,6 @@ import {
 } from '@ant-design/icons';
 import { Modal } from 'antd';
 import { ColumnsType } from 'antd/lib/table';
-// OpitionServiceBooking
-
-// Đã lấy hàng từ khách : status = 1
-// - Đã xác nhận xử lý đơn hàng : status = 2
-// - Đã chuyển bộ phận OP : status = 3
-// - OP xác nhận đơn hàng : status = 4
 
 const renderPubStatus = (status: number) => {
   switch (status) {
@@ -189,4 +183,72 @@ export const renderColumsInfoItem = ({
     },
   ];
   return InfoCheckPointColums;
+};
+
+export const renderColumnsOperate = () => {
+  const ColumnsOperate: ColumnsType<any> = [
+    {
+      title: 'Stt',
+      dataIndex: 'calculationUnit',
+      key: 'calculationUnit',
+      align: 'center',
+      width: 60,
+      render: (text, record, index) => index + 1,
+    },
+    {
+      title: 'Mã bill',
+      dataIndex: 'booking_code',
+      key: 'booking_code',
+      align: 'center',
+      width: 60,
+    },
+
+    {
+      title: 'Mã khách hàng',
+      dataIndex: 'customer_code',
+      key: 'customer_code',
+      align: 'center',
+      width: 100,
+    },
+    {
+      title: 'Tên khách hàng ',
+      dataIndex: 'customer_full_name',
+      key: 'customer_full_name',
+      align: 'center',
+      width: 100,
+    },
+    {
+      title: 'Thông tin nơi đến',
+      dataIndex: 'booking_address',
+      key: 'booking_address',
+      align: 'center',
+      width: 180,
+    },
+    {
+      title: 'Tổng TL thực',
+      dataIndex: 'weight',
+      key: 'weight',
+      align: 'center',
+      width: 100,
+    },
+    {
+      title: 'Tổng TL Cồng kềnh',
+      dataIndex: 'bulky_weight',
+      key: 'bulky_weight',
+      align: 'center',
+      width: 100,
+    },
+    {
+      title: 'Tổng TL chốt cước',
+      dataIndex: 'bulky_weight',
+      key: 'bulky_weight_2',
+      align: 'center',
+      width: 100,
+      render: (text, record) => (
+        <span>{Math.max(record?.weight, record?.bulky_weight)}</span>
+      ),
+    },
+  ];
+
+  return ColumnsOperate;
 };

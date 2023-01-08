@@ -28,6 +28,36 @@ export type ResponseType = {
   booking_detail: [BookingDetailPU];
 };
 
+export type resPUDelivery = {
+  data: Array<Delivery>;
+  pagination: {
+    currentPage: number;
+    pageSize: number;
+    totalPage: number;
+    totalCount: number;
+  };
+};
+
+export type Delivery = {
+  id: string;
+  type: BookingType;
+  service_booking_id: string;
+  content_detail: string;
+  customs_declaration_number: string;
+  note: string;
+  booking_id: string;
+  status: number;
+  booking_code: string;
+  booking_address: string;
+  customer_code: string;
+  customer_full_name: string;
+  weight: number;
+  bulky_weight: number;
+  quantity: number;
+  staff_code: string;
+  staff_full_name: string;
+};
+
 export type responsePU = {
   data: Array<PU>;
   pagination: {
@@ -71,6 +101,15 @@ export const getDelivery = (search?: string) => {
   }
 };
 
+export const getDeliverySearchPu = (search?: string) => {
+  if (search) {
+    const delivery = HttpRequest.get(
+      `https://api.acf.vn/pu-deliveries/delivery-op?search=${search} `
+    );
+    return delivery as unknown as Delivery;
+  }
+};
+
 export const getPU = ({
   orderBy = 'createdAt_DESC',
   search,
@@ -86,6 +125,23 @@ export const getPU = ({
     },
   });
   return delivery as unknown as responsePU;
+};
+
+export const getPUDelivery = ({
+  orderBy = 'createdAt_DESC',
+  search,
+  page,
+  pageSize,
+}: QUERY) => {
+  const delivery = HttpRequest.get(`pu-deliveries/delivery`, {
+    params: {
+      orderBy,
+      search,
+      page,
+      pageSize,
+    },
+  });
+  return delivery as unknown as resPUDelivery;
 };
 
 export const pathPU = ({ id, data }: { id: string; data: any }) => {
@@ -106,6 +162,22 @@ export const getPUId = async ({
 }) => {
   if (id) {
     const delivery = await HttpRequest.get(`pu-deliveries/${id}`);
+    handleCallBack(delivery);
+    return delivery;
+  }
+};
+
+export const getPUIdDelivery = async ({
+  id,
+  handleCallBack,
+}: {
+  id?: string;
+  handleCallBack: (data: any) => void;
+}) => {
+  if (id) {
+    const delivery = await HttpRequest.get(
+      `pu-deliveries/delivery-op?id=${id}`
+    );
     handleCallBack(delivery);
     return delivery;
   }

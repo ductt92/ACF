@@ -135,7 +135,8 @@ const ViewBookingDetails = ({ data }: { data: any }) => {
         partnerService: res?.partnerService,
         manufacture: res?.manufacture,
         partnerBillCodeDomestic: res?.partnerBillCodeDomestic,
-        partnerServiceDomestic: res?.partnerServiceDomestic,
+        partnerServiceDomestic:
+          res?.partnerServiceDomestic?.value || res?.partnerServiceDomestic,
         manufactureDomestic: res?.manufactureDomestic,
         partnerBillCodeForeign: res?.partnerBillCodeForeign,
         partnerServiceForeign: res?.partnerServiceForeign,
