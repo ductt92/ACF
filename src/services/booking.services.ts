@@ -132,6 +132,11 @@ export const fetchServicePartnerService = () => {
   const users = HttpRequest.get(`/service/partner-service`);
   return users;
 };
+
+export const fetchServicePartnerServiceByZone = (zone: string) => {
+  const zoneServices = HttpRequest.get(`/service/partner-service?zone=${zone}`);
+  return zoneServices;
+};
 export const fetchShippingType = () => {
   const users = HttpRequest.get(`shipping-item`);
   return users;
@@ -180,7 +185,7 @@ export const generateExcelBooking = ({
 };
 
 export const generateBillPatner = (id: string) => {
-  return HttpRequest.get('booking/generate-partner-bill-v2', {
+  return HttpRequest.get('booking/generate-partner-bill', {
     params: { bookingId: id },
   }).then((res) => {
     const blob = new Blob([new Uint8Array(res.data)]);
@@ -215,7 +220,7 @@ export const generateOrderCode = (id: string) => {
   );
 };
 export const generateInvoice = (id: string) => {
-  return HttpRequest.get('booking/generate-bill-invoice-v2', {
+  return HttpRequest.get('booking/generate-bill-invoice', {
     params: { bookingId: id },
   }).then((res) => {
     const blob = new Blob([new Uint8Array(res.data)]);

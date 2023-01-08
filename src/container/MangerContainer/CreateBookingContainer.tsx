@@ -616,7 +616,6 @@ const CreateBookingContainer = () => {
       <div className='my-5 flex flex-wrap items-center justify-center gap-4'>
         <Button
           onClick={onSubmit}
-          type='primary'
           disabled={id ? true : false}
           className='h-8 rounded-md bg-[#FBE51D] px-4 outline-none'
         >
@@ -624,7 +623,6 @@ const CreateBookingContainer = () => {
         </Button>
         <Button
           onClick={onSubmit}
-          type='primary'
           className='h-8 rounded-md bg-[#FBE51D] px-4 outline-none'
           disabled={
             !id || statusBooking !== BookingStatusPost.NOT_YET_HANDED_OVER
@@ -635,7 +633,6 @@ const CreateBookingContainer = () => {
         {billPartner && (
           <Button
             onClick={handleGeneratorBillPartner}
-            type='primary'
             disabled={!id}
             icon={<PrinterOutlined />}
             className='h-8 rounded-md bg-[#FBE51D] px-4 outline-none'
@@ -645,7 +642,6 @@ const CreateBookingContainer = () => {
         )}
         <Button
           onClick={updateStatus}
-          type='primary'
           disabled={statusBooking !== BookingStatusPost.NOT_YET_HANDED_OVER}
           className='h-8 rounded-md bg-[#FBE51D] px-4 outline-none'
         >
@@ -653,7 +649,6 @@ const CreateBookingContainer = () => {
         </Button>
         <Button
           onClick={handleGenerataeBill}
-          type='primary'
           disabled={!id}
           icon={<PrinterOutlined />}
           className='h-8 rounded-md bg-[#FBE51D] px-4 outline-none'
@@ -662,7 +657,6 @@ const CreateBookingContainer = () => {
         </Button>
         <Button
           onClick={handleGeneratorInvoice}
-          type='primary'
           disabled={!id || !isInvoice}
           icon={<PrinterOutlined />}
           className='h-8 rounded-md bg-[#FBE51D] px-4 outline-none'
@@ -671,7 +665,6 @@ const CreateBookingContainer = () => {
         </Button>
         <Button
           onClick={() => setIsInvoice(!isInvoice)}
-          type='primary'
           className='h-8 rounded-md bg-[#FBE51D] px-4 outline-none'
           disabled={
             statusBooking === BookingStatusPost.DONE ||
@@ -683,7 +676,6 @@ const CreateBookingContainer = () => {
         </Button>
         <Button
           onClick={handleNewForm}
-          type='primary'
           className='h-8 rounded-md bg-[#FBE51D] px-4 outline-none'
         >
           Tạo bookings mới
@@ -691,7 +683,6 @@ const CreateBookingContainer = () => {
 
         <Button
           onClick={handleGenSmallBill}
-          type='primary'
           disabled={!id}
           loading={generateSmallBillLoading}
           icon={<PrinterOutlined />}

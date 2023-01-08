@@ -6,6 +6,7 @@ import { DetailsBookingPost } from '@/contants/types';
 
 import AddressDetails from './AddressDetails';
 import General from './General';
+import ProcessingInfomation from './ProcessingInfomation';
 
 const TabsDetailsBooking = ({
   form,
@@ -24,6 +25,9 @@ const TabsDetailsBooking = ({
         </Tabs.TabPane>
         <Tabs.TabPane tab='Địa chỉ' key='address'>
           <AddressDetails form={form} />
+        </Tabs.TabPane>
+        <Tabs.TabPane tab='Thông tin xử lý' key='Processing'>
+          <ProcessingInfomation form={form} />
         </Tabs.TabPane>
       </Tabs>
     </div>

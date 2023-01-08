@@ -19,6 +19,7 @@ import {
   cancelBill,
   confirmBooking,
   fetchCurrentUnit,
+  fetchServicePartnerServiceByZone,
   fetchServicesBooking,
   generateBill,
   generateBillPatner,
@@ -77,6 +78,45 @@ const ViewBookingDetails = ({ data }: { data: any }) => {
     },
   });
 
+  const { data: PartnerServicesDOMESTIC } = useQuery(
+    ['fetchServicePartnerServiceDOMESTIC'],
+    () => fetchServicePartnerServiceByZone('DOMESTIC')
+  );
+  const { data: PartnerServicesFOREIGN } = useQuery(
+    ['fetchServicePartnerServiceFOREIGN'],
+    () => fetchServicePartnerServiceByZone('FOREIGN')
+  );
+
+  const OpitionPartServicesDOMESTIC = useMemo(() => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    //  @ts-ignore
+    if (PartnerServicesDOMESTIC?.length < 0) {
+      return [];
+    } else {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      //  @ts-ignore
+      return PartnerServicesDOMESTIC?.map((v) => ({
+        value: v.id,
+        label: v.name,
+      }));
+    }
+  }, [PartnerServicesDOMESTIC]);
+
+  const OpitionPartServicesFOREIGN = useMemo(() => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    //  @ts-ignore
+    if (PartnerServicesFOREIGN?.length < 0) {
+      return [];
+    } else {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      //  @ts-ignore
+      return PartnerServicesFOREIGN?.map((v) => ({
+        value: v.id,
+        label: v.name,
+      }));
+    }
+  }, [PartnerServicesFOREIGN]);
+
   const handleGeneratorInvoicePartner = () => {
     if (data?.booking?.id) {
       genInvoicePartner(data.booking.id);
@@ -88,11 +128,30 @@ const ViewBookingDetails = ({ data }: { data: any }) => {
   };
   const onSubmit = async () => {
     const res = await viewBooking.validateFields();
+
     if (res.partnerBillCode) {
+      const newRes = {
+        partnerBillCode: res?.partnerBillCode,
+        partnerService: res?.partnerService,
+        manufacture: res?.manufacture,
+        partnerBillCodeDomestic: res?.partnerBillCodeDomestic,
+        partnerServiceDomestic:
+          res?.partnerServiceDomestic?.value || res?.partnerServiceDomestic,
+        manufactureDomestic: res?.manufactureDomestic,
+        partnerBillCodeForeign: res?.partnerBillCodeForeign,
+        partnerServiceForeign: res?.partnerServiceForeign,
+        manufactureForeign: res?.manufactureForeign,
+        valueAddedService1: res?.valueAddedService1,
+        valueAddedService2: res?.valueAddedService2,
+        valueAddedService3: res?.valueAddedService3,
+        dhl: res?.dhl,
+        fedex: res?.fedex,
+        ups: res?.ups,
+      };
+
       handleSubmit({
         id: data?.booking?.id,
-        partnerBillCode: res.partnerBillCode,
-        partnerService: res.partnerService,
+        data: newRes,
         handleSetBillCode,
       });
     } else {
@@ -165,10 +224,17 @@ const ViewBookingDetails = ({ data }: { data: any }) => {
     const invoiceType = OpitionInvoiceType.find(
       (x) => x.value === data?.invoice?.invoiceType
     );
+    const partnerServiceDomestic = OpitionPartServicesDOMESTIC?.find(
+      (x: OpitionType) => x.value === data?.booking?.partnerServiceDomestic
+    );
+    const partnerBillCodeForeign = OpitionPartServicesFOREIGN?.find(
+      (x: OpitionType) => x.value === data?.booking?.partnerBillCodeForeign
+    );
 
     const currencyId = OpitionCurrencyUnit?.find(
       (x: OpitionType) => x.value === data?.invoice?.currencyId
     );
+
     viewBooking.setFieldsValue({
       ...data?.booking,
       ...data?.invoice,
@@ -185,6 +251,8 @@ const ViewBookingDetails = ({ data }: { data: any }) => {
       totalBulkyWeight: data?.invoice?.totalBulkyWeight,
       goodsSize: data?.invoice?.goodsSize,
       totalBaleNumber: data?.invoice?.totalBaleNumber,
+      partnerServiceDomestic,
+      partnerBillCodeForeign,
       serviceId:
         OpitionServiceBooking?.filter(
           (x: any) => x.value === data?.invoice?.serviceId
@@ -419,7 +487,7 @@ const ViewBookingDetails = ({ data }: { data: any }) => {
 
       <div className='flex flex-row gap-4'>
         <Button className='mt-5' type='primary' onClick={onSubmit}>
-          Cập nhật bưu đối tác
+          Cập nhật đơn hàng
         </Button>
         <Button
           className='mt-5'
