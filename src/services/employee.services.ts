@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { IStaff } from '@/contants/types';
 import HttpRequest from '@/utils/Http-request';
 
@@ -33,18 +34,16 @@ export const createStaffs = async (data: Partial<IStaff>) => {
 
 export const updatePartnerBillCode = async ({
   id,
-  partnerBillCode,
   handleSetBillCode,
-  partnerService,
+  data,
 }: {
   id: string;
-  partnerBillCode: string;
-  partnerService: string;
+  data: any;
   handleSetBillCode: (bill: string) => void;
 }) => {
   const updatePartnerBillCode = await HttpRequest.patch(
     `booking/update-partner-bill-code/${id}`,
-    { partnerBillCode, partnerService }
+    { ...data }
   );
   if (updatePartnerBillCode) {
     handleSetBillCode(id);

@@ -9,25 +9,25 @@ type InfoCheckpoint = {
   data: Array<BookingDetailPU>;
   handleDelete: (id: any) => void;
   handleOpenCreate: () => void;
-  isDisable: boolean;
   handleUpdatePickUp: () => void;
   handleUpdate: (data: any) => void;
+  status: any;
 };
 
 const InfoCheckpoint = ({
   data,
-  isDisable,
   handleDelete,
   handleOpenCreate,
   handleUpdatePickUp,
   handleUpdate,
+  status,
 }: InfoCheckpoint) => {
   return (
     <div className='flex flex-col'>
       <Table
         columns={renderColumsInfoItem({
           handleDelete,
-          isDisable,
+          isDisable: status === 2,
           handleUpdate,
         })}
         rowKey='key'
@@ -40,13 +40,13 @@ const InfoCheckpoint = ({
         <Button
           className='h-8 rounded-md bg-[#FBE51D] px-4 outline-none'
           onClick={handleOpenCreate}
-          disabled={isDisable}
+          disabled={status === 2}
         >
           Thêm mới kiện hàng
         </Button>
         <Button
           className='h-8 rounded-md bg-[#FBE51D] px-4 outline-none'
-          disabled={isDisable}
+          disabled={status !== 1}
           onClick={handleUpdatePickUp}
         >
           Xác nhận đã xử lý đơn hàng

@@ -54,7 +54,6 @@ const PickUpContainer = () => {
 
   const [queries, setQueries] = useState<QUERY>(QUERY_PARAMS);
 
-  const [isDisable, setIsDisable] = useState<boolean>(true);
   const [id, setId] = useState<any>();
   const [bookingId, setBookingId] = useState<any>();
 
@@ -185,9 +184,6 @@ const PickUpContainer = () => {
     setBookingId(value?.booking_id);
     setId(value?.pu_delivery_id);
     setStatus(value?.status || 0);
-    setIsDisable(
-      Boolean(value?.pu_delivery_id) && Boolean(value?.status !== 1)
-    );
   };
 
   const handleDelete = (id: any) => {
@@ -205,7 +201,6 @@ const PickUpContainer = () => {
       booking_customs_declaration_number: data?.customs_declaration_number,
       booking_note: data?.note,
     });
-    setIsDisable(Boolean(data?.status !== 1));
     setStatus(data?.status || 0);
     setInfoCheckPoint(
       data?.details?.map((v: any) => ({
@@ -252,7 +247,6 @@ const PickUpContainer = () => {
       handleSelect('');
       setId(undefined);
       handleSearch('');
-      setIsDisable(true);
     }
   };
 
@@ -408,7 +402,7 @@ const PickUpContainer = () => {
             <Button
               className='h-8 rounded-md bg-[#FBE51D] px-4 outline-none'
               onClick={handleConfirm}
-              disabled={isDisable}
+              disabled={status !== null}
             >
               Xác nhận đã lấy hàng từ khách hàng
             </Button>
@@ -416,7 +410,7 @@ const PickUpContainer = () => {
           <Col xs={10}>
             <InfoCheckpoint
               data={infoCheckPoint}
-              isDisable={isDisable}
+              status={status}
               handleDelete={handleDelete}
               handleOpenCreate={handleOpenModal}
               handleUpdatePickUp={updatePickUp}
@@ -425,15 +419,14 @@ const PickUpContainer = () => {
           </Col>
         </Row>
 
-        {open ||
-          (isUpdate && (
-            <ModalCreatInfo
-              isUpdate={isUpdate}
-              form={infoForm}
-              handleAddItem={isUpdate ? handleUpdateItem : handleAddItem}
-              handleCancel={isUpdate ? () => setIsUpdate(false) : handleClose}
-            />
-          ))}
+        {(open || isUpdate) && (
+          <ModalCreatInfo
+            isUpdate={isUpdate}
+            form={infoForm}
+            handleAddItem={isUpdate ? handleUpdateItem : handleAddItem}
+            handleCancel={isUpdate ? () => setIsUpdate(false) : handleClose}
+          />
+        )}
       </div>
     </Spin>
   );

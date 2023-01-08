@@ -14,7 +14,6 @@ import { BookingType, DetailsBookingPost } from '@/contants/types';
 import {
   fetchCommoditiesTypeId,
   fetchDeliveryCondition,
-  fetchServicePartnerService,
   fetchServicesBooking,
   fetchShippingType,
   fetchTypeOfPayment,
@@ -38,10 +37,6 @@ const General = ({
     ['DataCommoditiesTypeId', {}],
     () => fetchCommoditiesTypeId()
   );
-  const { data: PartnerServices } = useQuery(
-    ['fetchServicePartnerService', {}],
-    () => fetchServicePartnerService()
-  );
 
   const { data: DataShippingType } = useQuery(['DataShippingType', {}], () =>
     fetchShippingType()
@@ -61,20 +56,6 @@ const General = ({
       }));
     }
   }, [DataShippingType]);
-  const OpitionPartServices = useMemo(() => {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    //  @ts-ignore
-    if (PartnerServices?.length < 0) {
-      return [];
-    } else {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      //  @ts-ignore
-      return PartnerServices?.map((v) => ({
-        value: v.id,
-        label: v.name,
-      }));
-    }
-  }, [PartnerServices]);
 
   const OpitionCommoditiesTypeId = useMemo(() => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -164,20 +145,6 @@ const General = ({
         <p className='m-0 p-0 font-bold'>1.Thông tin chung </p>
         <Divider className='bg-yellow' />
         <div className='grid grid-cols-2 gap-x-6'>
-          <div className='grid grid-cols-2 gap-x-6'>
-            <Form.Item name='partnerBillCode'>
-              <VInput label='Mã bưu đối tác' isHorizal />
-            </Form.Item>
-
-            <Form.Item name='partnerService'>
-              <VSelect label='Dịch vụ đối tác' isHorizal>
-                {OpitionPartServices?.map((v: any) => (
-                  <Option key={v.value}>{v.label}</Option>
-                ))}
-              </VSelect>
-            </Form.Item>
-          </div>
-
           <Form.Item
             name='serviceBookingId'
             rules={[
