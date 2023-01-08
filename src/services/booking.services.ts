@@ -143,7 +143,7 @@ export const fetchShippingType = () => {
 };
 
 export const generateBill = (id: string) => {
-  return HttpRequest.get('booking/generate-bill-v2', {
+  return HttpRequest.get('booking/generate-bill', {
     params: { bookingId: id },
   }).then((res) => {
     const blob = new Blob([new Uint8Array(res.data)]);
@@ -155,7 +155,7 @@ export const generateBill = (id: string) => {
 };
 
 export const generateInvoicePatner = (id: string) => {
-  return HttpRequest.get('booking/generate-partner-bill-invoice-v2', {
+  return HttpRequest.get('booking/generate-partner-bill-invoice', {
     params: { bookingId: id },
   }).then((res) => {
     const blob = new Blob([new Uint8Array(res.data)]);
@@ -185,7 +185,7 @@ export const generateExcelBooking = ({
 };
 
 export const generateBillPatner = (id: string) => {
-  return HttpRequest.get('booking/generate-partner-bill-v2', {
+  return HttpRequest.get('booking/generate-partner-bill', {
     params: { bookingId: id },
   }).then((res) => {
     const blob = new Blob([new Uint8Array(res.data)]);
@@ -220,7 +220,7 @@ export const generateOrderCode = (id: string) => {
   );
 };
 export const generateInvoice = (id: string) => {
-  return HttpRequest.get('booking/generate-bill-invoice-v2', {
+  return HttpRequest.get('booking/generate-bill-invoice', {
     params: { bookingId: id },
   }).then((res) => {
     const blob = new Blob([new Uint8Array(res.data)]);
