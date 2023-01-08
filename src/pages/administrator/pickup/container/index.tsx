@@ -269,7 +269,7 @@ const PickUpContainer = () => {
   };
 
   const updatePickUp = async () => {
-    if (id) {
+    if (id || bookingId) {
       const res = await form.validateFields();
       const customData = {
         details: infoCheckPoint.map(
@@ -292,7 +292,7 @@ const PickUpContainer = () => {
         note: res.booking_note,
       };
       updatePu({
-        id,
+        id: id || bookingId,
         data: customData,
       });
     }
@@ -339,7 +339,6 @@ const PickUpContainer = () => {
       }
     });
 
-    console.log(res, 'ress');
     setInfoCheckPoint(res);
     setIdKey(undefined);
     setIsUpdate(false);
