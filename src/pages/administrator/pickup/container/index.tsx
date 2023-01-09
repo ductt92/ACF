@@ -401,7 +401,7 @@ const PickUpContainer = () => {
             <Button
               className='h-8 rounded-md bg-[#FBE51D] px-4 outline-none'
               onClick={handleConfirm}
-              disabled={status !== null}
+              disabled={status !== 0}
             >
               Xác nhận đã lấy hàng từ khách hàng
             </Button>
