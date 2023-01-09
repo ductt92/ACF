@@ -4,13 +4,15 @@ import {
   Button,
   Col,
   Form,
+  notification,
   Row,
   Select,
   Spin,
   Table,
 } from 'antd';
+import { useRouter } from 'next/router';
 import React, { useMemo, useState } from 'react';
-import { useQuery } from 'react-query';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 
 import VInput from '@/components/common/VInput';
 import VSelect from '@/components/common/VSelect';
@@ -24,13 +26,12 @@ import {
 import { renderColumnsOperate } from '@/utils/contants/columns.contants';
 import { QUERY_KEY } from '@/utils/contants/query-key';
 import {
+  getDeliveryConfirm,
   getDeliverySearchPu,
   getPUDelivery,
   getPUIdDelivery,
   QUERY,
 } from '@/utils/contants/services';
-
-// const { Panel } = Collapse;
 
 const QUERY_PARAMS: QUERY = {
   page: 1,
@@ -42,6 +43,9 @@ const QUERY_PARAMS: QUERY = {
 const { Option } = Select;
 const OperateContainer = () => {
   const [queries, setQueries] = useState<QUERY>(QUERY_PARAMS);
+
+  const router = useRouter();
+
   const [form] = Form.useForm();
 
   const [search, setSearch] = useState<any>();
@@ -49,6 +53,12 @@ const OperateContainer = () => {
   const [idRowClick, setIdRowClick] = useState();
 
   const [invoice, setInvoice] = useState(false);
+
+  const [status, setStatus] = useState();
+
+  const [idBooking, setIdBooking] = useState<any>();
+
+  const queryClient = useQueryClient();
 
   const {
     data,
@@ -62,7 +72,21 @@ const OperateContainer = () => {
     isLoading,
     isFetching,
   } = useQuery([QUERY_KEY.GET_DELIVERY, queries], () => getPUDelivery(queries));
-
+  const { mutate: confirm } = useMutation(getDeliveryConfirm, {
+    onSuccess: () => {
+      queryClient.invalidateQueries([QUERY_KEY.GET_DELIVERY]);
+      notification.success({
+        message: 'Cập nhật thành công',
+        placement: 'top',
+      });
+    },
+    onError: () => {
+      notification.error({
+        message: 'Cập nhật thất bại',
+        placement: 'top',
+      });
+    },
+  });
   const OpitionInvoiceItemType = Object.entries(BookingType).map(
     ([key, value]) => ({
       value: key,
@@ -135,7 +159,7 @@ const OperateContainer = () => {
 
   const handleSelect = (e: any) => {
     const value = options.find((f) => f.booking_code === e);
-
+    setIdBooking(value?.id || undefined);
     form.setFieldsValue({
       ...value,
       type: OpitionInvoiceItemType.find((x) => x.value === value?.type),
@@ -143,24 +167,45 @@ const OperateContainer = () => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     //  @ts-ignore
     setInvoice(Boolean(value?.booking_is_invoice));
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    //  @ts-ignore
+    setStatus(value?.status);
   };
 
   const handleCallBackGet = (data: any) => {
     form.setFieldsValue({
       ...data,
-
       type:
         data?.type && OpitionInvoiceItemType.find((x) => x.value === data.type),
     });
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     //  @ts-ignore
     setInvoice(Boolean(data?.booking_is_invoice));
+    setStatus(data?.status);
+    setIdBooking(data?.id);
   };
   const { isLoading: loadingPuById, isFetching: fetchingPuById } = useQuery(
     [QUERY_KEY.GET_DATA, idRowClick],
     () => getPUIdDelivery({ id: idRowClick, handleCallBack: handleCallBackGet })
   );
 
+  const handleSubmit = async () => {
+    if (idBooking) {
+      const res = await form.validateFields();
+      const newREs = {
+        type: res.type.value,
+        serviceBookingId: res.service_booking_id,
+        customsDeclarationNumber: res.customs_declaration_number,
+        note: res.note,
+        bookingPartnerBillCode: res.booking_partner_bill_code,
+        bookingPartnerService:
+          res.booking_partner_service?.value || res.booking_partner_service,
+        contentDetailInvoice: res.content_detail_invoice,
+        informationReceiverAddress: res.information_receiver_address,
+      };
+      confirm({ id: idBooking, data: newREs });
+    }
+  };
   return (
     <Spin
       spinning={
@@ -208,7 +253,15 @@ const OperateContainer = () => {
                 onSelect={(e: any) => handleSelect(e)}
               />
             </Col>
-            <Col xs={12}></Col>
+            <Col
+              xs={12}
+              className='text-right'
+              onClick={() => router.push('operate/operate-statistic')}
+            >
+              <Button className='h-8 rounded-md bg-[#FBE51D] px-4 outline-none'>
+                Tiếp tục
+              </Button>
+            </Col>
           </Row>
         </div>
         <div className='w-full'>
@@ -327,23 +380,18 @@ const OperateContainer = () => {
             </Row>
           </Form>
         </div>
+        <div className='text-right'>
+          <Button
+            onClick={handleSubmit}
+            className='h-8 rounded-md bg-[#FBE51D] px-4 outline-none'
+            disabled={status !== 3 || !idBooking}
+          >
+            Xác nhận
+          </Button>
+        </div>
       </div>
     </Spin>
   );
 };
 
 export default OperateContainer;
-
-{
-  /* <Collapse bordered={true} defaultActiveKey={['1']}>
-        <Panel header='This is panel header 1' key='1'>
-          <div>dsads</div>
-        </Panel>
-        <Panel header='This is panel header 2' key='2'>
-          <div>dsa</div>
-        </Panel>
-        <Panel header='This is panel header 3' key='3'>
-          <div>dsads</div>
-        </Panel>
-      </Collapse> */
-}

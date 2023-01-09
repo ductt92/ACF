@@ -100,14 +100,25 @@ export const getDelivery = (search?: string) => {
     return delivery as unknown as Array<ResponseType>;
   }
 };
+export const getStatisticalDelivery = () => {
+  const delivery = HttpRequest.get(`pu-deliveries/statistical-delivery`);
+  return delivery as unknown as Array<ResponseType>;
+};
 
 export const getDeliverySearchPu = (search?: string) => {
   if (search) {
     const delivery = HttpRequest.get(
-      `https://api.acf.vn/pu-deliveries/delivery-op?search=${search} `
+      `pu-deliveries/delivery-op?search=${search} `
     );
     return delivery as unknown as Delivery;
   }
+};
+
+export const getDeliveryConfirm = ({ id, data }: { id: string; data: any }) => {
+  const delivery = HttpRequest.patch(`pu-deliveries/op-confirm-booking/${id}`, {
+    ...data,
+  });
+  return delivery;
 };
 
 export const getPU = ({

@@ -252,3 +252,45 @@ export const renderColumnsOperate = () => {
 
   return ColumnsOperate;
 };
+
+export const renderStatis = () => {
+  const ColumnsOperate: ColumnsType<any> = [
+    {
+      title: 'Stt',
+      dataIndex: 'calculationUnit',
+      key: 'calculationUnit',
+      align: 'center',
+      width: 60,
+      render: (text, record, index) => index + 1,
+    },
+    {
+      title: 'Mã Bill ACF',
+      dataIndex: 'booking_code',
+      key: 'booking_code',
+      align: 'center',
+      width: 80,
+    },
+    {
+      title: 'Mã Bill đối tác',
+      dataIndex: 'booking_partner_service',
+      key: 'booking_partner_service',
+      align: 'center',
+      width: 100,
+    },
+    {
+      title: 'Tên khách hàng',
+      dataIndex: 'customer_full_name',
+      key: 'customer_full_name',
+      align: 'center',
+      width: 100,
+    },
+    {
+      title: 'Thông tin nơi đến',
+      dataIndex: 'customer_full_name',
+      key: 'customer_full_name',
+      align: 'center',
+      width: 100,
+    },
+  ];
+  return ColumnsOperate;
+};
