@@ -150,12 +150,7 @@ const OperateContainer = () => {
       ...data,
 
       type:
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        //  @ts-ignore
-        value?.type &&
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        //  @ts-ignore
-        OpitionInvoiceItemType.find((x) => x.value === value.type),
+        data?.type && OpitionInvoiceItemType.find((x) => x.value === data.type),
     });
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     //  @ts-ignore
