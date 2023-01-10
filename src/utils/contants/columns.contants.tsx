@@ -7,6 +7,8 @@ import {
 import { Modal } from 'antd';
 import { ColumnsType } from 'antd/lib/table';
 
+import { OpitionType } from '@/contants/types';
+
 const renderPubStatus = (status: number) => {
   switch (status) {
     case 1:
@@ -253,7 +255,13 @@ export const renderColumnsOperate = () => {
   return ColumnsOperate;
 };
 
-export const renderStatis = () => {
+export const renderStatis = ({
+  optionServices,
+  opitionServicesPartner,
+}: {
+  optionServices: Array<OpitionType>;
+  opitionServicesPartner: Array<OpitionType>;
+}) => {
   const ColumnsOperate: ColumnsType<any> = [
     {
       title: 'Stt',
@@ -268,12 +276,12 @@ export const renderStatis = () => {
       dataIndex: 'booking_code',
       key: 'booking_code',
       align: 'center',
-      width: 80,
+      width: 60,
     },
     {
       title: 'Mã Bill đối tác',
-      dataIndex: 'booking_partner_service',
-      key: 'booking_partner_service',
+      dataIndex: 'booking_partner_bill_code',
+      key: 'booking_partner_bill_code',
       align: 'center',
       width: 100,
     },
@@ -286,10 +294,137 @@ export const renderStatis = () => {
     },
     {
       title: 'Thông tin nơi đến',
-      dataIndex: 'customer_full_name',
-      key: 'customer_full_name',
+      dataIndex: 'information_receiver_address',
+      key: 'information_receiver_address',
       align: 'center',
       width: 100,
+    },
+    {
+      title: 'Số kiện',
+      dataIndex: 'quantity',
+      key: 'quantity',
+      align: 'center',
+      width: 100,
+    },
+    {
+      title: 'Tổng TL thực ',
+      dataIndex: 'weight',
+      key: 'weight',
+      align: 'center',
+      width: 100,
+    },
+    {
+      title: 'Tổng TL cồng kềnh ',
+      dataIndex: 'bulky_weight',
+      key: 'bulky_weight',
+      align: 'center',
+      width: 100,
+    },
+    {
+      title: 'Tổng TL chốt cước ',
+      dataIndex: 'bulky_weight',
+      key: 'bulky_weight',
+      align: 'center',
+      width: 100,
+      render: (text, record) => (
+        <span>{Math.max(record?.weight, record?.bulky_weight)}</span>
+      ),
+    },
+    {
+      title: 'Dịch vụ',
+      dataIndex: 'service_booking_id',
+      key: 'service_booking_id',
+      align: 'center',
+      width: 100,
+      render: (text) => (
+        <span>{optionServices?.find((x) => x.value === text)?.label}</span>
+      ),
+    },
+    {
+      title: 'Dịch vụ đối tác',
+      dataIndex: 'booking_partner_service',
+      key: 'booking_partner_service',
+      align: 'center',
+      width: 100,
+      render: (text) => (
+        <span>
+          {opitionServicesPartner?.find((x) => x.value === text)?.label}
+        </span>
+      ),
+    },
+  ];
+  return ColumnsOperate;
+};
+export const renderSumStauts = ({
+  opitionPartner,
+  opitionType,
+}: {
+  opitionPartner: Array<OpitionType>;
+  opitionType: Array<OpitionType>;
+}) => {
+  const ColumnsOperate: ColumnsType<any> = [
+    {
+      title: 'Stt',
+      dataIndex: 'calculationUnit',
+      key: 'calculationUnit',
+      align: 'center',
+      width: 60,
+      render: (text, record, index) => index + 1,
+    },
+    {
+      title: 'Dịch vụ đối tác',
+      dataIndex: 'booking_partner_service',
+      key: 'booking_partner_service',
+      align: 'center',
+      width: 60,
+      render: (text) => (
+        <span>{opitionPartner?.find((x) => x.value === text)?.label}</span>
+      ),
+    },
+    {
+      title: 'Mã bill ACF',
+      dataIndex: 'booking_code',
+      key: 'booking_code',
+      align: 'center',
+      width: 60,
+    },
+    {
+      title: 'Mã Bill đối tác',
+      dataIndex: 'booking_partner_bill_code',
+      key: 'booking_partner_bill_code',
+      align: 'center',
+      width: 60,
+    },
+    {
+      title: 'Loại hàng hóa',
+      dataIndex: 'type',
+      key: 'type',
+      align: 'center',
+      width: 60,
+      render: (text) => (
+        <span>{opitionType?.find((x) => x.value === text)?.label}</span>
+      ),
+    },
+    {
+      title: 'Số Invoice',
+      dataIndex: 'invoice_number',
+      key: 'invoice_number',
+      align: 'center',
+      width: 60,
+    },
+    {
+      title: 'Số kiện ',
+      dataIndex: 'quantity',
+      key: 'quantity',
+      align: 'center',
+      width: 60,
+    },
+    {
+      title: 'Trọng lượng',
+      dataIndex: 'weight',
+      key: 'weight',
+      align: 'center',
+      width: 60,
     },
   ];
   return ColumnsOperate;
