@@ -105,6 +105,12 @@ export const getStatisticalDelivery = () => {
   return delivery as unknown as Array<ResponseType>;
 };
 
+export const connectPartner = async (id: string) => {
+  const deliveries = await HttpRequest.get(
+    `pu-deliveries/booking-connect-partner/${id}`
+  );
+  return deliveries as unknown as Array<any>;
+};
 export const getDeliverySearchPu = (search?: string) => {
   if (search) {
     const delivery = HttpRequest.get(
