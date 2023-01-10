@@ -3,6 +3,7 @@ import { Table } from 'antd';
 import React, { useMemo } from 'react';
 import { useQuery } from 'react-query';
 
+import { BookingType, OpitionType } from '@/contants/types';
 import {
   fetchServicePartnerService,
   fetchServicesBooking,
@@ -11,7 +12,6 @@ import {
   renderStatis,
   renderSumStauts,
 } from '@/utils/contants/columns.contants';
-import { BookingType } from '@/contants/types';
 
 const ItemPanel = ({
   values,
@@ -56,13 +56,11 @@ const ItemPanel = ({
       return PartnerServices?.map((v) => ({
         value: v.id,
         label: v.name,
-      }));
+      })) as Array<OpitionType>;
     }
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    //  @ts-ignore
   }, [PartnerServices]);
 
-  const OpitionType = Object.entries(BookingType).map(([key, value]) => ({
+  const opitionType = Object.entries(BookingType).map(([key, value]) => ({
     value: key,
     label: value,
   }));
@@ -72,7 +70,10 @@ const ItemPanel = ({
       <Table
         columns={
           isSum
-            ? renderSumStauts({ opitionPartner: OpitionServicePartner,opitionType:OpitionType })
+            ? renderSumStauts({
+                opitionPartner: OpitionServicePartner,
+                opitionType: opitionType,
+              })
             : renderStatis({
                 optionServices: OpitionServiceBooking,
                 opitionServicesPartner: OpitionServicePartner,

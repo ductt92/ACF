@@ -259,8 +259,8 @@ export const renderStatis = ({
   optionServices,
   opitionServicesPartner,
 }: {
-  optionServices: Array<OpitionType>;
-  opitionServicesPartner: Array<OpitionType>;
+  optionServices: Array<any>;
+  opitionServicesPartner: Array<any>;
 }) => {
   const ColumnsOperate: ColumnsType<any> = [
     {
@@ -378,7 +378,9 @@ export const renderSumStauts = ({
       align: 'center',
       width: 60,
       render: (text) => (
-        <span>{opitionPartner?.find((x) => x.value === text)?.label}</span>
+        <span>
+          {opitionPartner?.find((x: OpitionType) => x.value === text)?.label}
+        </span>
       ),
     },
     {
