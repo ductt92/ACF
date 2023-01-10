@@ -30,7 +30,7 @@ const OperateStatisContainer = () => {
           <div className='w-[120px] text-center'>
             <Button
               className='h-8 rounded-md bg-[#FBE51D] px-4 outline-none'
-              onClick={() => router.push(`connect/${v.id}`)}
+              onClick={() => router.push(`/administrator/connect/${v.id}`)}
             >
               Tiếp
             </Button>

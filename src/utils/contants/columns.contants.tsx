@@ -429,3 +429,30 @@ export const renderSumStauts = ({
   ];
   return ColumnsOperate;
 };
+
+export const renderColumsn = () => {
+  const ColumnsOperate: ColumnsType<any> = [
+    {
+      title: 'Người giửi',
+      dataIndex: 'sender',
+      key: 'sender',
+      align: 'center',
+      width: 60,
+    },
+    {
+      title: 'Người nhận',
+      dataIndex: 'receiver',
+      key: 'receiver',
+      align: 'center',
+      width: 60,
+    },
+    {
+      title: 'Thông tin hàng hóa',
+      dataIndex: 'goods_information',
+      key: 'goods_information',
+      align: 'center',
+      width: 60,
+    },
+  ];
+  return ColumnsOperate;
+};

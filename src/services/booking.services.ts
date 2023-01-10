@@ -129,13 +129,13 @@ export const fetchCommoditiesTypeId = () => {
 };
 
 export const fetchServicePartnerService = () => {
-  const users = HttpRequest.get(`/service/partner-service`);
-  return users;
+  const users = HttpRequest.get(`service/partner-service`);
+  return users as unknown as Array<any>;
 };
 
 export const fetchServicePartnerServiceByZone = (zone: string) => {
-  const zoneServices = HttpRequest.get(`/service/partner-service?zone=${zone}`);
-  return zoneServices;
+  const zoneServices = HttpRequest.get(`service/partner-service?zone=${zone}`);
+  return zoneServices as unknown as Array<any>;
 };
 export const fetchShippingType = () => {
   const users = HttpRequest.get(`shipping-item`);
@@ -308,4 +308,20 @@ export const myBookingHome = async () => {
     bookingNotYetHandedOver: Array<any>;
     bookingHandedOver: Array<any>;
   };
+};
+
+export const exportConnect = async (data: any) => {
+  const connectBill: ArrayBufferLike = await HttpRequest.post(`connect-bill`, {
+    ...data,
+  });
+  const blob = new Blob([new Uint8Array(connectBill)]);
+  const link = document.createElement('a');
+  link.href = window.URL.createObjectURL(blob);
+  link.download = `bill-${new Date()}.xlsx`;
+  link.click();
+};
+
+export const connectPartnerServices = async () => {
+  const connectBill = await HttpRequest.get(`service/connect-partner-service`);
+  return connectBill as unknown as Array<any>;
 };
